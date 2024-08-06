@@ -26,7 +26,7 @@ function Login() {
     }
 
   return (
-    <div>
+    <div className='innerContainer'>
         아이디 : <br/>
       <input type="text" name="userid" value={userid} onChange={
         (e)=>{setUserid(e.currentTarget.value)}

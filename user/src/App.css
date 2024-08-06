@@ -44,3 +44,17 @@ textarea { color:#919191; resize:none; padding:15px; box-sizing:border-box; -web
 
 
 h1,h2,h3,h4,h5,h6 , p , span , a ,input , textarea { line-height:1.3em; }
+
+.mo { display: none; }
+.pc { display: block; }
+
+.innerContainer { max-width: 1300px; margin: 0 auto; padding: 100px 20px;  } 
+
+
+@media screen and (max-width: 1000px) {
+
+  .mo { display: block; }
+  .pc { display: none; }
+  .innerContainer { margin: 0 15px; padding: 80px 0; } 
+
+}
