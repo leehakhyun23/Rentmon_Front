@@ -16,7 +16,7 @@ function Login() {
               return alert(result.data.error+"이메일 또는 패드스워드 오류입니다.");
             }else{
               console.log(result.data);
-              navigate("/main");
+              navigate("/");
             }
        }catch(err){
             console.error(err);
