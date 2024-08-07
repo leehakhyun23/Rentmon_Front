@@ -1,0 +1,52 @@
+/* space.css */
+
+.innerContainer {
+    padding: 20px;
+  }
+  
+  .spaces {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+  }
+  
+  .space {
+    flex: 1 1 calc(33.333% - 20px);
+    background: #fff;
+    border-radius: 10px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    transition: transform 0.2s ease-in-out;
+  }
+  
+  .space:hover {
+    transform: translateY(-10px);
+  }
+  
+  .space img {
+    width: 100%;
+    height: auto;
+  }
+  
+  .space span {
+    display: block;
+    padding: 10px;
+    font-size: 16px;
+    color: #333;
+  }
+  
+  .space h3 {
+    margin: 10px;
+    font-size: 18px;
+  }
+  
+  .space ul {
+    padding: 0 10px;
+    list-style-type: none;
+  }
+  
+  .space ul li {
+    margin: 5px 0;
+    font-size: 14px;
+    color: #666;
+  }

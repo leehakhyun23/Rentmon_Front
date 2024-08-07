@@ -4,6 +4,8 @@ import { Login } from './component/member';
 import { Main } from './component/main';
 import Header from './component/headerfooter/Header';
 import SpaceList from './component/space/SpaceList';
+import SpaceDetail from './component/space/SpaceDetail';
+
 
 function App() {
   return (
@@ -14,6 +16,7 @@ function App() {
       <Route path='/' element={<Main/>} />
 
       <Route path='/spaceList' element={<SpaceList />} />
+      <Route path='/spaceDetail/:sseq' element={<SpaceDetail />} />
     </Routes>
     </>
   );
