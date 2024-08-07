@@ -1,0 +1,6 @@
+.sns-btns{
+    width:100%; margin:5px 0;border:1px solid green; padding:5px 0; display: flex;
+}
+.sns-btns button{
+    flex:1; padding:8px 0;font-weight: bold;
+}
