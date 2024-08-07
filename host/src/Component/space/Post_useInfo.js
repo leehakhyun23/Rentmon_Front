@@ -64,9 +64,7 @@ function Post_useInfo() {
 
     return (
         <div>
-            <div>
-                <span>이용안내</span>
-            </div>
+            <div>이용안내</div>
             <div>
                 <span>이용 시간</span>
                 <select
