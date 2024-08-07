@@ -1,0 +1,24 @@
+
+.loginform {
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* 가로 방향으로 가운데 정렬 */
+    min-height: 100vh; /* 화면 높이 전체를 차지하도록 설정 */
+    padding: 20px;
+}
+.logo1 {
+    margin-right: 30px; /* logo1과 logo2 사이의 간격 */
+    color: #0090DF;
+}
+
+.btns {
+    margin-top: 20px; /* 버튼과 필드 사이의 간격 */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.field{
+    width: 600px;
+    margin-top: 30px;
+}
