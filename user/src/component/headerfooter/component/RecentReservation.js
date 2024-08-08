@@ -5,7 +5,7 @@ function RecentReservation({rs}) {
     const [dateFormat, setDateFormat] = useState("");
     useEffect(()=>{
         if (rs && rs.reservedate) {
-            let datearr = rs.reservedate.split("T")[0].split("-");
+            let datearr = rs.reservedate.split(" ")[0].split("-");
             setDateFormat(datearr[0]+"년 "+Number(datearr[1])+"월 " + Number(datearr[2])+"일");
         }
     },[rs]);
@@ -16,7 +16,7 @@ function RecentReservation({rs}) {
       <h3>곧 다가오는 예약</h3>
       <div className='recentresevation-wrapper'>
         <div className='img-box'>
-            <img src={rs.savefilename} alt={rs.savefilename}/>
+            <img src={"http://localhost:8070/space_images/"+rs.savefilename} alt={rs.savefilename}/>
         </div>
         <div className='placeInfo'>
             <span>{rs.title}</span>
