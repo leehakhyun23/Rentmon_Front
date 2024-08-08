@@ -1,12 +1,11 @@
 import React from 'react';
 
-const Post = () => {
-    
+const InquiryPage = () => {
     return (
         <div>
-            sdafasdf
+            문의 목록
         </div>
     );
 };
 
-export default Post;
+export default InquiryPage;
