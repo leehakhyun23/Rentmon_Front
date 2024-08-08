@@ -2,8 +2,8 @@ import React from 'react'
 
 function SpaceFacility() {
   return (
-    <div>
-      시설안내 영역입니다. 
+    <div className="title">
+      공간 시설 안내
     </div>
   )
 }

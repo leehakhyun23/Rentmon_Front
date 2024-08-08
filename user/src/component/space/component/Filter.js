@@ -2,8 +2,8 @@ import React from 'react'
 
 function Filter() {
   return (
-    <div>
-      정렬 필터의 영역입니다. 
+    <div className="title">
+      정렬창 
     </div>
   )
 }

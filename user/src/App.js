@@ -17,6 +17,7 @@ function App() {
       <Route path='/' element={<Main/>} />
       <Route path='/spaceList' element={<SpaceList />} />
       <Route path='/spaceDetail/:sseq' element={<SpaceDetail />} />
+
     </Routes>
     <Footer />
     </>

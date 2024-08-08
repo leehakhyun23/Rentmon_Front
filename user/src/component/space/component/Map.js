@@ -18,6 +18,10 @@ function Map() {
 )
 return (
     <article>
+        <div className="title">
+            위치정보
+        </div>
+    
         <div className='subPage'>
             <div className="customer" style={{flex:"4"}}>
                 <div id='map' style={{width:"600px", height:"400px", margin:"20px"}}></div>  

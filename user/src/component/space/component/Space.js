@@ -29,8 +29,8 @@ function Space(props) {
         <div className="space">
             {<Slider {...settings} >
                 {
-                    (props.space.spaceImages) ? (
-                        props.space.spaceImages.map((image, idx) => {
+                    (props.space.spaceimages) ? (
+                        props.space.spaceimages.map((image, idx) => {
                             return (
                                 <img key={idx} src={`http://localhost:8070/space_images/${image.originame}`} alt={props.space.title} />
                             )

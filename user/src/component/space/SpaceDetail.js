@@ -7,7 +7,7 @@ import SpaceMenu from './component/SpaceMenu';
 import SpaceContent from './component/SpaceContent';
 import SpaceFacility from './component/SpaceFacility';
 import SpaceCaution from './component/SpaceCaution';
-// import Map from './component/Map';
+import Map from './component/Map';
 import SpaceChat from './component/SpaceChat';
 import Review from './component/Review';
 import Remocon from './component/Remocon';
@@ -31,7 +31,6 @@ const settings = {
 
 function SpaceDetail() {
   const [space, setSpace] = useState({});
-  const [replyList, setReplyList] = useState([]);
   const { sseq } = useParams();
 
   useEffect(
@@ -48,18 +47,16 @@ function SpaceDetail() {
 
   return (
     <div className='innerContainer'>
+      <Remocon />
       <div>
         <Space space={space} />
-
         <SpaceMenu />
         <SpaceContent />
         <SpaceFacility />
         <SpaceCaution />
+        <Map />
         <SpaceChat />
         <Review />
-      </div>
-      <div>
-        <Remocon />
       </div>
     </div>
 

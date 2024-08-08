@@ -2,8 +2,8 @@ import React from 'react'
 
 function SpaceChat() {
   return (
-    <div>
-      
+    <div className="title">
+      채팅 / 문의
     </div>
   )
 }

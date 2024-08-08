@@ -6,7 +6,7 @@ import { useNavigate } from 'react-router-dom';
 import Space from './component/Space';
 import Search from './component/Search';
 //import Map from './component/Map';
-//import Arrange from './component/Arrange';
+import Filter from './component/Filter';
 
 //import Space from './component/Space';
 
@@ -54,13 +54,10 @@ function SpaceList() {
     <div className='innerContainer'>
       <div>
 
-        <h2>검색창 2순위</h2>
+        <Search />
       
-        <h2>정렬기능 3순위</h2>
+        <Filter />
 
-        <br />
-        <br />
-        <br />
 
         <div className="spaces">
           {
