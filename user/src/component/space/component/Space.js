@@ -29,26 +29,26 @@ function Space(props) {
         <div className="space">
             {<Slider {...settings} >
                 {
-                    (space.spaceImages) ? (
-                        space.spaceImages.map((image, idx) => {
+                    (props.space.spaceImages) ? (
+                        props.space.spaceImages.map((image, idx) => {
                             return (
-                                <img key={idx} src={`http://localhost:8070/space_images/${image.originame}`} alt={space.title} />
+                                <img key={idx} src={`http://localhost:8070/space_images/${image.originame}`} alt={props.space.title} />
                             )
                         })
                     ) : (null)
                 }
             </Slider>}
-            <span onClick={() => { navigate(`/spaceDetail/${space.sseq}`) }}> {space.sseq}. {space.title}</span><br />
-            <span> 내용 = {space.content}</span><br />
-            <span> 가격 = {space.price}</span><br />
+            <span onClick={() => { navigate(`/spaceDetail/${props.space.sseq}`) }}> {props.space.sseq}. {props.space.title}</span><br />
+            <span> 내용 : {props.space.content}</span><br />
+            <span> 가격 : {props.space.price}</span><br />
             {/* 해시태그 조회 */}
             <div>
                 <h3>해시태그:</h3>
-                {space.spaceHashTags && space.spaceHashTags.length > 0 ? (
+                {props.space.spaceHashTags && props.space.spaceHashTags.length > 0 ? (
                     <ul>
-                        {space.spaceHashTags.map((hashTag, tagIdx) => (
+                        {props.space.spaceHashTags.map((hashTag, tagIdx) => (
                             <li key={tagIdx}>
-                                {hashTag.hseq}
+                                {hashTag.word}
                             </li>
                         ))}
                     </ul>

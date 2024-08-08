@@ -4,6 +4,14 @@ import { useNavigate } from 'react-router-dom';
 // import { useSelector, useDispatch } from 'react-redux';
 
 import Space from './component/Space';
+import Search from './component/Search';
+//import Map from './component/Map';
+//import Arrange from './component/Arrange';
+
+//import Space from './component/Space';
+
+
+
 
 import './style/space.css';
 
@@ -47,7 +55,7 @@ function SpaceList() {
       <div>
 
         <h2>검색창 2순위</h2>
-        <h2>지도기능 5순위</h2>
+      
         <h2>정렬기능 3순위</h2>
 
         <br />
@@ -66,12 +74,7 @@ function SpaceList() {
           }
         </div>
       </div>
-      <br />
-      <br />
-      <br />
 
-      <h2>스크롤 페이징 4순위</h2>
-      <h2>채팅창 가기, 찜하기, 신고하기</h2>
     </div>
   )
 }
