@@ -49,6 +49,7 @@ h1,h2,h3,h4,h5,h6 , p , span , a ,input , textarea { line-height:1.3em; }
 .pc { display: block; }
 
 .innerContainer { max-width: 1300px; margin: 0 auto; padding: 100px 20px;  } 
+body {margin-top: 79px;}
 
 @media screen and (max-width: 1000px) {
     body { margin-top: 62px; }
