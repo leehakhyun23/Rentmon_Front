@@ -1,11 +1,18 @@
 import axios from 'axios';
 import React, { useState } from 'react'
-import { useNavigate } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { Link, useNavigate } from 'react-router-dom';
+import { loginAction } from '../../store/UserSlice';
+import { getCookie, setCookie } from '../../util/cookieUtil';
+import jaxios from '../../util/jwtUtil';
+import "./css/login.css"
 
 function Login() {
     const [userid , setUserid] = useState("");
     const [pwd , setPwd] = useState("");
+    const [loginMessage , setLoginMessage] = useState("");
     const navigate = useNavigate();
+    const dispatch = useDispatch();
 
     let onLogin = async()=>{
        try{
@@ -14,9 +21,11 @@ function Login() {
             let result = await axios.post("/api/member/login",null,{params:{usernameWithRole,password:pwd}});
             
             if(result.data.error === "ERROR_LOGIN"){
-              return alert(result.data.error+"이메일 또는 패드스워드 오류입니다.");
+              return setLoginMessage("* 아이디 또는 비밀번호를 확인해주세요.");
             }else{
-              console.log(result.data);
+              setCookie("token",{accessToken:result.data.accessToken , refreshtoken : result.data.refreshToken},1);
+              let logindata = await jaxios.get("/api/user/getuseinfo",{params:{userid:result.data.userid}});
+              dispatch(loginAction(logindata.data));
               navigate("/");
             }
 
@@ -26,16 +35,29 @@ function Login() {
     }
 
   return (
-    <div>
-        아이디 : <br/>
-      <input type="text" name="userid" value={userid} onChange={
-        (e)=>{setUserid(e.currentTarget.value)}
-      } /><br/>
-      비밀번호 : <br/>
-      <input type="text" name="pwd"  value={pwd} onChange={
-        (e)=>{setPwd(e.currentTarget.value)}
-      }  /><br/>
-      <button onClick={onLogin}>로그인</button>
+    <div className='loginContainer'>
+      <div className='leftLogo pc'>
+          <h2>RENTMON</h2>
+      </div>
+      <div className='loginform'>
+          <div>
+            <h2>LOGIN</h2>
+            <input type="text" name="userid" value={userid} onChange={(e)=>{setUserid(e.currentTarget.value)}} placeholder="아이디" />
+            <input type="password" name="pwd"  value={pwd} onChange={(e)=>{setPwd(e.currentTarget.value)}} placeholder="비밀번호"  /><br/>
+            <div className='alertmessage'><p>{loginMessage}</p></div>
+            <button onClick={onLogin}>로그인</button>
+            <div className='joinbox'><Link to="/join">일반 회원가입</Link></div>
+            <div className='snsLogin'>
+                <span>SNS 로그인</span>
+                <div className='snsbtncontainer'>
+                  <Link to=""><img src='/img/google.png' alt='google'/></Link>
+                  <Link to=""><img src='/img/kakao.png' alt='kakao'/></Link>
+                  <Link to=""><img src='/img/naver.png' alt='naver' /></Link>
+                </div>
+            </div>
+          </div>
+      </div>
+       
     </div>
   )
 }
