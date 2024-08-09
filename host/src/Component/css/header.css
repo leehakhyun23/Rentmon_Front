@@ -19,7 +19,7 @@
     font-size: 18px;
 }
 
-.logo1 {
+.logo {
     margin-right: 30px; /* logo1과 logo2 사이의 간격 */
     color: #0090DF;
     font-size: 1.5em;
@@ -28,6 +28,7 @@
 
 .logo2 {
     color: #B1B1B1;
+    font-size: 1.5em;
 }
 
 .left {
@@ -43,5 +44,4 @@
     color: aliceblue;
     background-color: #0090DF;
     font-weight: bold;
-    margin-right: 40px;
   }

@@ -4,13 +4,13 @@ body, html {
     height: 100%;
 }
 
-.header {
+.loginheader {
     align-items: center; /* 수직 정렬 (중앙 정렬) */
     text-align: center;
     background-color: #f8f8f8; /* 배경색 (원하는 색으로 변경) */
     border-bottom: 1px solid #ddd; /* 하단 경계선 (필요시 추가) */
-    height: 50px;
-    margin-left: 30px;
+    height: 70px;
+    width: 100%;
 }
 article {
     display: flex;
@@ -31,6 +31,7 @@ article {
     color: #0090DF;
     font-size: 1.5em;
     font-weight: bold;
+    margin-top: 20px;
 }
 
 .loginForm{
@@ -53,7 +54,8 @@ article {
 }
 
 input{
-    margin: 10px 10px;
+    margin-top: 10px;
+    margin-bottom: 10px;
 }
 
 .join {
@@ -65,7 +67,8 @@ input{
   }
 
 .loginbtn{
-        margin-top: 15px;
+    margin-top: 10px;
+    margin-right: 50px;
         border-radius: 5%;
         border: none;
         width: 100%;
@@ -73,6 +76,7 @@ input{
         color: aliceblue;
         background-color: #0090DF;
         font-weight: bold;
+    cursor: pointer;
 }
 
 .jointext{

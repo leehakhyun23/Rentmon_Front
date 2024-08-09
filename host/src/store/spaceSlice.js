@@ -51,4 +51,4 @@ const spaceSlice = createSlice({
 });
 
 export const {logoutAction} = spaceSlice.actions;
-export default userSlice;
+export default spaceSlice;
