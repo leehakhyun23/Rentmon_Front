@@ -5,6 +5,9 @@ body { font-family: "Noto Sans KR", sans-serif; }
 /* reset - css */
 
 /* 초기화 스타일 reset.css */
+button{
+  cursor: pointer;
+}
 * { padding:0; margin:0; }
 html, body { width:100%; height:100%;  }
 html { overflow-y:scroll; scrollbar-width: none;  -ms-overflow-style: none; }
@@ -25,7 +28,7 @@ input[type='password'],
 input[type='submit'],
 input[type='button'],
 input[type='reset'], 
-input[type='radio'],
+/* input[type='radio'], */
 input[type='checkbox']{ padding:0 15px; color:#919191; box-sizing:border-box; -webkit-appearance:none; box-sizing:border-box; appearance:none; box-shadow:none; text-shadow:none; border-radius:0; border:2px solid #ddd; background:#fff; width:100%; height:47px; }
 
 input[type='submit'   ],

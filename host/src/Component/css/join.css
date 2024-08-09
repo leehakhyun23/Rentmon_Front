@@ -1,24 +1,53 @@
+/* body, html {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+} */
 
-.loginform {
-    display: flex;
-    flex-direction: column;
-    align-items: center; /* 가로 방향으로 가운데 정렬 */
-    min-height: 100vh; /* 화면 높이 전체를 차지하도록 설정 */
-    padding: 20px;
-}
-.logo1 {
-    margin-right: 30px; /* logo1과 logo2 사이의 간격 */
-    color: #0090DF;
+.joinheader {
+    align-items: center;
+    text-align: center;
+    background-color: #f8f8f8; 
+    border-bottom: 1px solid #ddd;
+    height: 70px;
+    width: 100%;
 }
 
-.btns {
-    margin-top: 20px; /* 버튼과 필드 사이의 간격 */
+article {
     display: flex;
     flex-direction: column;
     align-items: center;
+  }
+
+.logo1 {
+    color: #0090DF;
+    font-size: 1.5em;
+    font-weight: bold;
 }
 
-.field{
+.joinform {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    padding: 20px;
+    margin-top: 40px; 
     width: 600px;
-    margin-top: 30px;
+    height: 600px;
 }
+
+
+
+.join-btn{
+    margin-top: 10px;
+        border-radius: 5%;
+        border: none;
+        width: 600px;
+        height: 40px;
+        color: aliceblue;
+        background-color: #0090DF;
+        font-weight: bold;
+    cursor: pointer;
+}
+
+
