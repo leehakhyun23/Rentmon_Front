@@ -1,5 +1,5 @@
 import {configureStore} from '@reduxjs/toolkit';
-import userSlice from './userSlice';
+import spaceSlice from './spaceSlice';
 
 // 저장소를 세션을 이용하여 저장
 import storage from 'redux-persist/lib/storage/session';

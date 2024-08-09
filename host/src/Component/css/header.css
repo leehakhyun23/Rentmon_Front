@@ -13,8 +13,8 @@
     border-bottom: 1px solid #ddd; /* 하단 경계선 (필요시 추가) */
     align-items: center; /* 수직 정렬 (중앙 정렬) */
     padding: 10px 30px; /* 필요에 따라 여백 추가 */
-    background-color: #0090DF;
-    color : white;
+    color: #0090DF;
+    background-color : white;
     font-weight: bold;
     font-size: 18px;
 }

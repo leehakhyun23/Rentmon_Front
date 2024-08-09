@@ -8,9 +8,6 @@ import './css/main.css'
 function Main() {
   return (
     <div>
-
-        <Post_basicInfo />
-
       <Header/>
       <div className='detail'>
         공간대여
