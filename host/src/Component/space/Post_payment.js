@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import '../css/header.css';
 
 function Post_payment() {
   // 상태 관리
@@ -26,7 +27,7 @@ function Post_payment() {
 
   return (
     <div>
-      <div>예약/정산 정보</div>
+      <div className='header2'>예약/정산 정보</div>
       <div>계좌 정보를 입력해주세요</div>
       
       <div>
@@ -41,8 +42,10 @@ function Post_payment() {
         </label>
       </div>
 
-      <div> <button onClick={ ()=>{ navigate('/main') } }>이전</button>
-            <button onClick={ ()=>{ onSubmit() } }>다음</button></div>
+      <div className="but2">
+         <button className="but" onClick={ ()=>{ navigate('/Post_facility') } }>이전</button>
+          <button className="but" onClick={ ()=>{ onSubmit() } }>다음</button>
+        </div>
     </div>
   );
 }

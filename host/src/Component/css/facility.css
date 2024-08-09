@@ -1,0 +1,66 @@
+/* 체크박스 항목 컨테이너 스타일링 */
+.facility-container {
+    display: flex;
+    flex-wrap: wrap; /* 항목을 여러 줄로 배치 가능하게 함 */
+    justify-content: center; /* 항목을 가운데 정렬 */
+    gap: 15px; /* 항목 간의 간격 */
+    margin: 20px 0; /* 컨테이너의 상단 및 하단 여백 */
+}
+
+/* 체크박스를 숨기기 */
+.facility-item input[type="checkbox"] {
+    display: none;
+}
+
+/* 체크박스를 클릭 가능한 박스 형태로 스타일링 */
+.facility-item {
+    display: flex;
+    align-items: center; /* 텍스트를 수직으로 가운데 정렬 */
+    justify-content: center; /* 텍스트를 수평으로 가운데 정렬 */
+    cursor: pointer; /* 클릭 가능한 커서 */
+    border: 2px solid #ddd; /* 박스의 테두리 색상 */
+    border-radius: 4px; /* 박스의 모서리 둥글기 */
+    transition: background-color 0.2s, border-color 0.2s, box-shadow 0.2s; /* 배경색, 테두리 색상, 그림자 전환 효과 */
+    width: 180px; /* 박스의 너비 */
+    height: 60px; /* 박스의 높이 */
+    text-align: center; /* 텍스트를 가로로 가운데 정렬 */
+    box-sizing: border-box; /* 테두리와 패딩을 포함한 박스 크기 조정 */
+    position: relative; /* 자식 요소의 절대 위치를 위한 설정 */
+}
+
+/* 체크박스가 선택되었을 때의 스타일 */
+.facility-item input[type="checkbox"]:checked + span {
+    background-color: #0090DF; /* 선택된 박스의 배경색 */
+    border-color: #0090DF; /* 선택된 박스의 테두리 색상 */
+    color: white; /* 선택된 박스의 텍스트 색상 */
+}
+
+/* 체크박스 클릭 시 박스의 클릭 상태 */
+.facility-item:active {
+    background-color: #e0e0e0; /* 클릭 시 배경색 */
+}
+
+/* 체크박스가 선택된 상태에서 박스 전체 스타일 */
+.facility-item input[type="checkbox"]:checked + span::before {
+    content: ""; /* 내용이 없는 가상 요소 생성 */
+    position: absolute; /* 절대 위치 설정 */
+    top: 0; /* 상단부터 0 위치 */
+    left: 0; /* 왼쪽부터 0 위치 */
+    width: 100%; /* 너비 100% */
+    height: 100%; /* 높이 100% */
+    background-color: #0090DF; /* 선택된 박스의 불빛 효과 색상 */
+    box-shadow: 0 0 10px rgba(0, 144, 223, 0.8); /* 선택된 박스에 불빛 효과 추가 */
+    border-radius: 4px; /* 박스 모서리 둥글기 */
+    z-index: -1; /* 텍스트 위에 불빛 효과가 오도록 설정 */
+}
+
+/* 한 줄에 5개씩 배치되도록 설정 */
+.facility-item {
+    flex: 0 0 180px; /* 항목 너비를 180px로 설정 */
+    box-sizing: border-box; /* 테두리와 패딩을 포함한 박스 크기 조정 */
+}
+
+/* 마지막 항목을 첫 번째로 보이도록 설정 */
+.facility-container .last-item {
+    order: -1; /* 마지막 항목을 첫 번째로 보이도록 설정 */
+}
