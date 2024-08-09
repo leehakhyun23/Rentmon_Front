@@ -11,7 +11,7 @@ import Main from './Component/Main';
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
     <BrowserRouter>
-      
+      <App />
       
       <Routes>
         <Route path="/" element={<Main />} />

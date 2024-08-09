@@ -8,6 +8,8 @@ function SpaceManage() {
     const [error, setError] = useState(null);
     const navigate = useNavigate();
 
+    
+
     useEffect(() => {
         // 데이터 가져오기 함수
         const fetchSpaces = async () => {

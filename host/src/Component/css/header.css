@@ -6,6 +6,18 @@
     border-bottom: 1px solid #ddd; /* 하단 경계선 (필요시 추가) */
     
 }
+.header2{
+    display: flex;
+    justify-content: center; /* 수평 가운데 정렬 */
+    background-color: #f8f8f8; /* 배경색 (원하는 색으로 변경) */
+    border-bottom: 1px solid #ddd; /* 하단 경계선 (필요시 추가) */
+    align-items: center; /* 수직 정렬 (중앙 정렬) */
+    padding: 10px 30px; /* 필요에 따라 여백 추가 */
+    background-color: #0090DF;
+    color : white;
+    font-weight: bold;
+    font-size: 18px;
+}
 
 .logo1 {
     margin-right: 30px; /* logo1과 logo2 사이의 간격 */
