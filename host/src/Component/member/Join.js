@@ -37,36 +37,37 @@ function Join() {
 
 
     return (
-        <div className='loginform'>
-            <div className="logo1" style={{fontSize:"2.0rem"}}>호스트 회원가입</div>
+        <article>
+            <div className='header'>
+                <div className="logo1">호스트 회원가입</div>
+                <div className='left'>
+
+                </div>
+            </div>
+        <div className='joinform'>
             <div className='field'>
-                <label>이름 : </label>
                 <input type="text"  value={name} onChange={
                     (e)=>{ setName( e.currentTarget.value ) }
-                }/>
+                } placeholder='이름'/>
              <div className='field'>
-                <label>이메일 : </label>
                 <input type="text" value={email} onChange={
                     (e)=>{ setEmail( e.currentTarget.value ) }
-                }/>
+                } placeholder='이메일'/>
          </div>
             <div className='field'>
-                <label>전화번호 : </label>
                 <input type="text" value={phone} onChange={
                     (e)=>{ setPhone( e.currentTarget.value ) }
-                }/>
+                } placeholder='전화번호'/>
             </div>
             <div className='field'>
-                <label>비밀번호 : </label>
                 <input type="password" value={pwd} onChange={
                     (e)=>{ setPwd( e.currentTarget.value ) }
-                }/>
+                } placeholder='비밀번호'/>
             </div>
             <div className='field'>
-                <label>비밀번호 확인</label>
                 <input type="password" value={pwdChk} onChange={
                     (e)=>{ setPwdChk( e.currentTarget.value ) }
-                }/>
+                } placeholder='비밀번호 확인'/>
             </div>
        
             </div>
@@ -76,6 +77,7 @@ function Join() {
             </div>
 
         </div>
+        </article>
     )
 }
 
