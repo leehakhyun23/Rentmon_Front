@@ -1,54 +1,19 @@
-import {createSlice} from '@reduxjs/toolkit'
+import { createSlice } from '@reduxjs/toolkit';
 
 const initialState = {
-    price:'',
-    title:'',
-    subtitle:'',
-    content:'',
-    starttime:'',
-    endtime:'',
-    caution:'',
-    zipcode:'',
-    province:'',
-    town:'',
-    vilage:'',
-    addressdetail:'',
-    fnum:'',
-    hostid:'',
-    cnum:'',
-    mintime:'',
-    accessToken:'',
-    refreshToken:'',
-}
+    cnum: '', // 초기 상태에서 cnum만 설정
+};
 
 const spaceSlice = createSlice({
-    name:"space",
+    name: 'space',
     initialState,
     reducers: {
-        logoutAction:(state)=>{
-            state.price = '';
-            state.title = '';
-            state.subtitle = '';
-            state.content = '';
-            state.starttime = '';
-            state.endtime = '';
-            state.caution = '';
-            state.zipcode = '';
-            state.province='';
-            state.town='';
-            state.vilage = '';
-            state.addressdetail='';
-            state.fnum='';
-            state.hostid = '';
-            state.cnum='';
-            state.mintime='';
-            state.vilage = '';
-            state.accessToken='';
-            state.refreshToken='';
+        setCnum: (state, action) => {
+            state.cnum = action.payload; // cnum을 업데이트하는 리듀서
         },
-        
-    }
+        // 추가적인 액션 생성자는 나중에 필요할 경우 정의
+    },
 });
 
-export const {logoutAction} = spaceSlice.actions;
-export default userSlice;
+export const { setCnum } = spaceSlice.actions;
+export default spaceSlice.reducer; // default로 내보내기

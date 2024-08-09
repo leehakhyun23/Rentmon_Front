@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 import { ko } from 'date-fns/locale';
+import '../css/header.css';
 
 function Post_useInfo() {
     const navigate = useNavigate();
@@ -53,18 +54,12 @@ function Post_useInfo() {
     };
 
     const onSubmit = () => {
-        console.log('Start Time:', starttime);
-        console.log('End Time:', endtime);
-        console.log('Start Date:', startDate);
-        console.log('End Date:', endDate);
-        console.log('Monthholi Dates:', monthholi);
-        console.log('Weekholi Dates:', weekholi);
-        console.log('Dayholi Date:', dayholi);
+        navigate('/Post_facility')
     };
 
     return (
         <div>
-            <div>이용안내</div>
+            <div className='header2'>이용안내</div>
             <div>
                 <span>이용 시간</span>
                 <select
@@ -161,9 +156,9 @@ function Post_useInfo() {
                     </div>
                 )}
             </div>
-            <div>
-                <button onClick={() => navigate('/Post_basicInfo')}>이전</button>
-                <button onClick={onSubmit}>다음</button>
+            <div className="but2 ">
+                <button className="but" onClick={() => navigate('/Post_basicInfo')}>이전</button>
+                <button className="but" onClick={onSubmit}>다음</button>
             </div>
         </div>
     );
