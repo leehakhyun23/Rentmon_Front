@@ -21,3 +21,15 @@
 .loginContainer .loginform .snsbtncontainer a img {  }
 
 .alertmessage { color: #CE4B41; text-align: right; font-size: 13px; }
+
+@media screen and (max-width: 1000px) {
+    .loginContainer { display: block;  }
+    .loginContainer .leftLogo { display: none; }
+    .loginContainer .loginform  { width: 100%; padding: 60px 0; }
+    .loginContainer .loginform > div { margin:0 15px; max-width: none; }
+    .loginContainer .loginform h2 { font-size: 25px; margin-bottom: 17px;  }
+    .loginContainer .loginform .snsLogin { margin-top: 40px; }
+    .loginContainer .loginform .snsLogin span { font-size: 16px; }
+    .loginContainer .loginform > div .joinbox a { font-size: 13px;  }
+    .loginContainer .loginform .snsbtncontainer a img { width: 40px; }
+}

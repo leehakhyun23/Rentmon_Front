@@ -10,6 +10,9 @@ import Slider from 'react-slick';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 
+
+const { kakao } = window;
+
 const settings = {
     dots: false,
     arrows: false,
@@ -17,13 +20,26 @@ const settings = {
     speed: 500,
     slidesToShow: 1,
     slidesToScroll: 1
-  }
-
-function Space(props) {
+}
+function SpaceInfo(props) {
     const [space, setSpace] = useState();
     const navigate = useNavigate();
     const dispatch = useDispatch();
 
+    useEffect(
+        () => {
+            // 지도의 중심위치 설정이동
+            const container = document.getElementById('map');
+            const options = { center: new kakao.maps.LatLng(37.5718407, 126.9872086) };
+            const kakaoMap = new kakao.maps.Map(container, options);
+            // 표시지역 마킹
+            const markerPosition = new kakao.maps.LatLng(37.5718407, 126.9872086);
+            var marker = new kakao.maps.Marker({
+                position: markerPosition
+            });
+            marker.setMap(kakaoMap);
+        }, []
+    )
 
 
     return (
@@ -58,8 +74,27 @@ function Space(props) {
                 )}
             </div>
             <br /><br /><br />
+            <div className="spacetitle">
+                공간 소개
+            </div>
+            <div className="spacetitle">
+                공간 시설 안내
+            </div>
+            <div className="spacetitle">
+                이용 시 주의사항
+            </div>
+            <div className="spacetitle">
+                위치정보
+            </div>
+
+            <div className='subPage'>
+                <div className="customer" style={{ flex: "4" }}>
+                    <div id='map' style={{ width: "600px", height: "400px", margin: "20px" }}></div>
+                </div>
+            </div>
         </div>
+
     )
 }
 
-export default Space
+export default SpaceInfo
