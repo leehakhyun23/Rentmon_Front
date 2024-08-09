@@ -1,5 +1,6 @@
 import {configureStore} from '@reduxjs/toolkit';
 import spaceSlice from './spaceSlice';
+import hostSlice from "./HostSlice";
 
 // 저장소를 세션을 이용하여 저장
 import storage from 'redux-persist/lib/storage/session';
@@ -13,12 +14,13 @@ import {combineReducers} from 'redux';
 import {persistReducer} from 'redux-persist';
 
 const reducers = combineReducers({
-    space : spaceSlice.reducer
+    space : spaceSlice.reducer,
+    host : hostSlice.reducer,
 })
 const persistConfig = {
     key:'root',
     storage,
-    whitelist:['space']
+    whitelist:['space', 'host']
 }
 const persistedReducer = persistReducer(persistConfig, reducers);
 //---------------------------------------------------

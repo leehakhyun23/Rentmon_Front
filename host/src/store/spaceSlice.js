@@ -15,5 +15,6 @@ const spaceSlice = createSlice({
     },
 });
 
-export const { setCnum } = spaceSlice.actions;
-export default spaceSlice.reducer; // default로 내보내기
+
+export const {logoutAction} = spaceSlice.actions;
+export default spaceSlice;

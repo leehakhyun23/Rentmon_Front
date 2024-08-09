@@ -8,16 +8,31 @@ import 'swiper/css/free-mode';
 import 'swiper/css/pagination';
 import { Link } from 'react-router-dom';
 
-function MyInfo() {
+function MyInfo({user}) {
+  
+  function gradeText(n){
+    if(n===1)return "브론즈"
+    if(n===2)return "실버"
+    if(n===3)return "골드"
+    if(n===4)return "플레티넘"
+    if(n===5)return "다이아몬즈"
+  }
+  function gradeimg(n){
+    if(n===1)return "bronze.png"
+    if(n===2)return "silver.png"
+    if(n===3)return "gold.png"
+    if(n===4)return "platinum.png"
+    if(n===5)return "diamond.png"
+  }
   
   return (
     <div className='myInfo'>
       <h3>내 정보</h3>
       <div className='myGrade'>
-        <img src='/img/bronze.png' alt='bronze.png'/>
+        <img src={'/img/'+gradeimg(user.gnum.gnum)} alt='bronze.png'/>
         <div>
-            <span>브론즈</span>
-            <p>실버까지 대여 1회 남았습니다.</p>
+            <span>{gradeText(user.gnum.gnum)}</span>
+            <p>{(user.gnum<4)&&(`다음 단계는 ${gradeText(user.gnum+1)} 입니다.`)}</p>
         </div>
       </div>
       <div className='mypagemenu'>
