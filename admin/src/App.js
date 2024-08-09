@@ -1,24 +1,23 @@
-import logo from './logo.svg';
-import './App.css';
+import { Route, Routes } from 'react-router-dom';
+import MainPage from './components/MainPage';
+import UserPage from './components/member/UserPage';
+import HostPage from './components/member/HostPage';
+import InquiryPage from './components/inquiry/InquiryPage';
+import DeclarationPage from './components/declaration/DeclarationPage';
+import InquiryView from './components/inquiry/InquiryView';
+import DeclarationView from './components/declaration/DeclarationView';
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Routes>
+      <Route index element={<MainPage />} />
+      <Route path='/userpage' element={<UserPage />} />
+      <Route path='/hostpage' element={<HostPage />} />
+      <Route path='/inquiry' element={<InquiryPage />} />
+      <Route path='/inquiryview' element={<InquiryView />} />
+      <Route path='/declaration' element={<DeclarationPage />} />
+      <Route path='/declarationview/:dseq' element={<DeclarationView />} />
+    </Routes>
   );
 }
 
