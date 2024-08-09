@@ -75,3 +75,4 @@ input[type='password']:focus { outline:1.5px solid #0090DF; }
 .scrollbar::-webkit-scrollbar-track {
     background: rgba(0, 0, 0, .1);  /*스크롤바 뒷 배경 색상*/
 }
+
