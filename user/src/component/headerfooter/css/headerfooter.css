@@ -152,8 +152,10 @@
 .logOn .recentresevation-container .yearContainer > div {  }
 .logOn .recentresevation-container .yearContainer > div p { color: #0090DF; font-size: 13px; }
 .logOn .recentresevation-container .yearContainer > div > div { margin-top: 5px; }
-.logOn .recentresevation-container .yearContainer > div > div img { width: 24px; margin-right: 7px; }
+.logOn .recentresevation-container .yearContainer > div > div > div { display: flex; align-items: center; }
+.logOn .recentresevation-container .yearContainer > div > div img { width: 24px;  }
 .logOn .recentresevation-container .yearContainer > div > div span { font-size: 13px; }
+.logOn .recentresevation-container .yearContainer > div > div >  span { color: #858585; font-size: 12px; }
 
 .logOn .recentresevation-container > div .gobtn { position: absolute; right: 20px; bottom: 20px; }
 @media screen and (max-width: 1000px) {

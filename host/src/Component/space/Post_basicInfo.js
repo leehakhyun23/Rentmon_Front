@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
+import '../css/header.css';
 
 function Post_basicInfo() {
     const navigate = useNavigate();
@@ -31,7 +32,7 @@ function Post_basicInfo() {
     
     return (
         <div>
-            <div>기본 정보</div>
+            <div className='header2'>기본 정보</div>
             
             <div className='field'>
                 <label>공간명</label>
