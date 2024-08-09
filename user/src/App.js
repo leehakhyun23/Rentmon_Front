@@ -6,6 +6,7 @@ import Header from './component/headerfooter/Header';
 import Footer from './component/headerfooter/Footer';
 import SpaceList from './component/space/SpaceList';
 import SpaceDetail from './component/space/SpaceDetail';
+import Getsnsuserinfo from './component/member/Getsnsuserinfo';
 
 
 function App() {
@@ -17,6 +18,7 @@ function App() {
       <Route path='/' element={<Main/>} />
       <Route path='/spaceList' element={<SpaceList />} />
       <Route path='/spaceDetail/:sseq' element={<SpaceDetail />} />
+      <Route path='/getsnsuserinfo/:userid' element={<Getsnsuserinfo/>}/>
     </Routes>
     <Footer />
     </>
