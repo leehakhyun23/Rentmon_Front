@@ -12,6 +12,8 @@ body, html {
     border-bottom: 1px solid #ddd; /* 하단 경계선 (필요시 추가) */
     height: 50px;
     position: fixed;
+    margin-left: 30px;
+
 }
 
 .logo1 {
