@@ -5,7 +5,7 @@ function Remocon() {
   const navigate = useNavigate();
 
   const handleReservationClick = () => {
-    navigate('/ReservationInsert');
+    navigate('/ReserveInsert');
   };
 
   return (

@@ -6,20 +6,21 @@ import Header from './component/headerfooter/Header';
 import Footer from './component/headerfooter/Footer';
 import SpaceList from './component/space/SpaceList';
 import SpaceDetail from './component/space/SpaceDetail';
+import ReserveInsert from './component/reservation/ReserveInsert';
 
 
 function App() {
   return (
     <>
-    <Header />
-    <Routes>
-      <Route path='/login' element={<Login />} />
-      <Route path='/' element={<Main/>} />
-      <Route path='/spaceList' element={<SpaceList />} />
-      <Route path='/spaceDetail/:sseq' element={<SpaceDetail />} />
-
-    </Routes>
-    <Footer />
+      <Header />
+      <Routes>
+        <Route path='/login' element={<Login />} />
+        <Route path='/' element={<Main />} />
+        <Route path='/spaceList' element={<SpaceList />} />
+        <Route path='/spaceDetail/:sseq' element={<SpaceDetail />} />
+        <Route path='/reserveInsert' element={<ReserveInsert />} />
+      </Routes>
+      <Footer />
     </>
   );
 }
