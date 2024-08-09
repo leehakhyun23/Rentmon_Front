@@ -4,12 +4,14 @@
     padding: 10px 30px; /* 필요에 따라 여백 추가 */
     background-color: #f8f8f8; /* 배경색 (원하는 색으로 변경) */
     border-bottom: 1px solid #ddd; /* 하단 경계선 (필요시 추가) */
-    
+    height: 50px;
 }
 
 .logo1 {
     margin-right: 30px; /* logo1과 logo2 사이의 간격 */
     color: #0090DF;
+    font-size: 1.5em;
+    font-weight: bold;
 }
 
 .logo2 {
@@ -19,3 +21,14 @@
 .left {
     margin-left: auto; /* 오른쪽으로 이동 (필요시 추가) */
 }
+
+
+.loginbtn{
+    border-radius: 5%;
+    border: none;
+    width: 130px;
+    height: 40px;
+    color: aliceblue;
+    background-color: #0090DF;
+    font-weight: bold;
+  }
