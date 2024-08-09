@@ -12,7 +12,7 @@ const requestFail = (err)=>{
 }
 
 const beforeRes = async(res)=>{
-    if(res.data.error == 'ERROR_ACCESS_TOKEN'){
+    if(res.data.error === 'ERROR_ACCESS_TOKEN'){
       const originalRequiest = res.config;
       checkToken(originalRequiest);
       return jaxios(originalRequiest);
@@ -27,12 +27,11 @@ const responseFail = (err) => {
 
 async function checkToken(config){
     const token = getCookie("token");
-
-    const res = await axios.get(`/api/member/refresh/${token.refreshtoken}`,{headers:{"Authorization":"Bearer "+token.accessToken}});
+    const res = await axios.get(`/api/member/refresh/${token.refreshToken}`,{headers:{"Authorization":"Bearer "+token.accessToken}});
 
 
     token.accessToken = res.data.accessToken;
-    token.refreshtoken = res.data.refreshtoken;
+    token.refreshToken = res.data.refreshToken;
 
     setCookie("token",JSON.stringify(token),1);
 

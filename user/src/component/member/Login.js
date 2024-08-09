@@ -2,6 +2,7 @@ import axios from 'axios';
 import React, { useState } from 'react'
 import { useDispatch } from 'react-redux';
 import { Link, useNavigate } from 'react-router-dom';
+import { recentReserveAction } from '../../store/RecentSlice';
 import { loginAction } from '../../store/UserSlice';
 import { getCookie, setCookie } from '../../util/cookieUtil';
 import jaxios from '../../util/jwtUtil';
@@ -23,9 +24,17 @@ function Login() {
             if(result.data.error === "ERROR_LOGIN"){
               return setLoginMessage("* 아이디 또는 비밀번호를 확인해주세요.");
             }else{
-              setCookie("token",{accessToken:result.data.accessToken , refreshtoken : result.data.refreshToken},1);
+              setCookie("token",{accessToken:result.data.accessToken , refreshToken : result.data.refreshToken},1);
+
+              //회원 정보 조회
               let logindata = await jaxios.get("/api/user/getuseinfo",{params:{userid:result.data.userid}});
               dispatch(loginAction(logindata.data));
+
+              //최근 예약 조회
+              let recentrerve = await jaxios.get("/api/space/getreserve",{params:{userid:userid}});
+              console.log( recentrerve.data);
+              dispatch(recentReserveAction({recentReserve: recentrerve.data}));
+
               navigate("/");
             }
 
