@@ -1,11 +1,16 @@
 import React from 'react'
+import Post_basicInfo from './space/Post_basicInfo'
 import Header from './HeaderFooter/Header'
 import './css/main.css'
+
 
 
 function Main() {
   return (
     <div>
+
+        <Post_basicInfo />
+
       <Header/>
       <div className='detail'>
         공간대여
@@ -21,6 +26,7 @@ function Main() {
           공간 호스트 시작하기
         </button>
       </div>
+
     </div>
   )
 }
