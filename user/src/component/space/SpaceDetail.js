@@ -40,7 +40,7 @@ function SpaceDetail() {
 
   return (
     <div className='innerContainer'>
-      <Remocon />
+      <Remocon space={space} />
       <div>
       <SpaceMenu />
 
