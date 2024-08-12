@@ -101,6 +101,7 @@ function Review(props) {
 
     try {
       await axios.post('/api/review/InsertReview' , {
+        space : props.space,
         userid:user.userid,
         rate,
         content,
