@@ -1,24 +1,29 @@
-import logo from './logo.svg';
 import './App.css';
+import { Route, Routes } from 'react-router-dom';
+import { Login } from './component/member';
+import { Main } from './component/main';
+import Header from './component/headerfooter/Header';
+import Footer from './component/headerfooter/Footer';
+import SpaceList from './component/space/SpaceList';
+import SpaceDetail from './component/space/SpaceDetail';
+import ReserveInsert from './component/reservation/ReserveInsert';
+import Getsnsuserinfo from './component/member/Getsnsuserinfo';
+
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      <Header />
+      <Routes>
+        <Route path='/login' element={<Login />} />
+        <Route path='/' element={<Main />} />
+        <Route path='/spaceList' element={<SpaceList />} />
+        <Route path='/spaceDetail/:sseq' element={<SpaceDetail />} />
+        <Route path='/reserveInsert' element={<ReserveInsert />} />
+        <Route path='/getsnsuserinfo/:userid' element={<Getsnsuserinfo/>}/>
+      </Routes>
+      <Footer />
+    </>
   );
 }
 

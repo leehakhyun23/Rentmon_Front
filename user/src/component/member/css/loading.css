@@ -1,0 +1,55 @@
+.lodingContainer {   text-align: center; min-height: 70vh; display: flex; justify-content: center; align-items: center; flex-direction: column;}
+.lodingContainer h2 { font-size: 40px; font-weight: bold; margin-top: -5%; }
+.lodingContainer p { font-size: 20px; margin-top: 20px; }
+.lodingContainer .box{ margin-top: 50px; display: inline-block; position: relative; transition: all .2s ease; }
+.lodingContainer .loader10{ position: relative; width: 25px; height: 25px; top: 50%; left: 50%; border-radius: 25px; -webkit-animation: loader10m 3s ease-in-out infinite; animation: loader10m 3s ease-in-out infinite; transform: translate(-50% , -50%); }
+
+.lodingContainer .loader10:before{ content: ""; position: absolute; top: 0px; left: -50px; height: 25px; width: 25px; border-radius: 25px; -webkit-animation: loader10g 3s ease-in-out infinite; animation: loader10g 3s ease-in-out infinite;}
+.lodingContainer .loader10:after{ content: ""; position: absolute; top: 0px; left: 50px; height: 25px; width: 25px; border-radius: 25px; -webkit-animation: loader10d 3s ease-in-out infinite; animation: loader10d 3s ease-in-out infinite; }
+
+
+  
+@-webkit-keyframes loader10g{
+    0%{background-color: rgba(0, 144, 233, .2);}
+    25%{background-color: rgba(0, 144, 233, 1);}
+    50%{background-color: rgba(0, 144, 233, .2);}
+    75%{background-color: rgba(0, 144, 233, .2);}
+    100%{background-color: rgba(0, 144, 233, .2);}
+  }
+  @keyframes loader10g{
+    0%{background-color: rgba(0, 144, 233, .2);}
+    25%{background-color: rgba(0, 144, 233, 1);}
+    50%{background-color: rgba(0, 144, 233, .2);}
+    75%{background-color: rgba(0, 144, 233, .2);}
+    100%{background-color: rgba(0, 144, 233, .2);}
+  }
+  
+  @-webkit-keyframes loader10m{
+    0%{background-color: rgba(0, 144, 233, .2);}
+    25%{background-color: rgba(0, 144, 233, .2);}
+    50%{background-color: rgba(0, 144, 233, 1);}
+    75%{background-color: rgba(0, 144, 233, .2);}
+    100%{background-color: rgba(0, 144, 233, .2);}
+  }
+  @keyframes loader10m{
+    0%{background-color: rgba(0, 144, 233, .2);}
+    25%{background-color: rgba(0, 144, 233, .2);}
+    50%{background-color: rgba(0, 144, 233, 1);}
+    75%{background-color: rgba(0, 144, 233, .2);}
+    100%{background-color: rgba(0, 144, 233, .2);}
+  }
+  
+  @-webkit-keyframes loader10d{
+    0%{background-color: rgba(0, 144, 233, .2);}
+    25%{background-color: rgba(0, 144, 233, .2);}
+    50%{background-color: rgba(0, 144, 233, .2);}
+    75%{background-color: rgba(0, 144, 233, 1);}
+    100%{background-color: rgba(0, 144, 233, .2);}
+  }
+  @keyframes loader10d{
+    0%{background-color: rgba(0, 144, 233, .2);}
+    25%{background-color: rgba(0, 144, 233, .2);}
+    50%{background-color: rgba(0, 144, 233, .2);}
+    75%{background-color: rgba(0, 144, 233, 1);}
+    100%{background-color: rgba(0, 144, 233, .2);}
+  }

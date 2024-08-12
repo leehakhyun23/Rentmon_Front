@@ -1,0 +1,191 @@
+/* 헤더 */
+.header { padding: 20px 0; background-color: #fff; width: 100%; position: fixed; top: 0; left: 0; box-shadow: 15px 0   15px rgba(0, 0, 0, 0.1); z-index: 4; }
+.header .innerContainer { display: flex; justify-content: space-between; align-items: center; padding-top: 0; padding-bottom: 0; }
+.header .innerContainer .mo {  }
+.header .innerContainer .iconbutton {  cursor: pointer;}
+.header .innerContainer .iconbutton > div {  }
+.header .innerContainer .iconbutton > div img {  }
+
+.header .innerContainer .logo {  cursor: pointer;}
+.header .innerContainer .logo h2 { font-size: 30px; font-weight: bold; color: #0090DF; }
+
+.header .innerContainer .left > div { display: flex; align-items: center; }
+.header .innerContainer .left > div .pc { margin-right: 8px; }
+.header .innerContainer .left > div .pc > div.fakeInputButton { position: relative; cursor: pointer; border-radius: 50px; overflow: hidden;  }
+.header .innerContainer .left > div .pc > div.fakeInputButton p { background: #DDF3FF; padding: 8px 14px; width: 374px; color: #868686; }
+.header .innerContainer .left > div .pc > div.fakeInputButton img { position: absolute; right: 14px; top:50%; transform: translate(0 , -50%); }
+.header .innerContainer .left > div .iconbutton { margin-left: 10px; cursor: pointer;}
+.header .innerContainer .left > div .iconbutton > div { position: relative; }
+.header .innerContainer .left > div .iconbutton:last-child > div img { position: relative; top: 1px; }
+.header .innerContainer .left > div .iconbutton > div .countbox { position: absolute; right: -10px; top: -10px; width: 17px; height: 17px; background: #0090DF; color: #fff; font-size: 13px; display: flex; align-content: center; justify-content: center; border-radius: 50%; }
+
+/* 푸터 */
+.footer { background: #EBEBEB; padding: 60px 0; }
+.footer .innerContainer { display: flex; justify-content: space-between; padding-top: 0; padding-bottom: 0; }
+.footer .innerContainer .left {  }
+.footer .innerContainer .left .logo { cursor: pointer; }
+.footer .innerContainer .left .logo h2 { font-size: 30px; font-weight: bold; }
+.footer .innerContainer .left .text { font-size: 14px; margin-top: 8px; }
+
+.footer .innerContainer .right {  }
+.footer .innerContainer .right .footer-nav {  }
+.footer .innerContainer .right .footer-nav ul { display: flex; }
+.footer .innerContainer .right .footer-nav ul li { padding:0 25px; position: relative; }
+
+.footer .innerContainer .right .footer-nav ul li:nth-child(2)::before ,
+.footer .innerContainer .right .footer-nav ul li:nth-child(2)::after {  content: ""; display: block; width: 1px; height: 8px; position: absolute; left: 0; top: 50%; transform: translate(0 , -25%); background: #858585; opacity: 0.5;}
+.footer .innerContainer .right .footer-nav ul li:nth-child(2)::before { left: auto; right: 0;}
+.footer .innerContainer .right .footer-nav ul li:last-child { padding-right: 0; }
+.footer .innerContainer .right .footer-nav ul li a { font-size: 13px; color: #000; }
+.footer .innerContainer .right p { text-align: right; margin-top: 60px; color: #626262; font-size: 13px; }
+
+@media screen and (max-width: 1000px) {
+
+    .header .innerContainer .logo h2 { font-size: 20px}
+    .header .innerContainer .logo {  position: absolute; left: 50%; top: 50%; transform: translate(-50% , -50%); }  
+
+
+    .footer .innerContainer { display: block; }
+    .footer .innerContainer .left .logo h2 { font-size: 20px; }
+
+    
+    .footer {  padding: 40px 0; }
+    .footer .innerContainer .right .footer-nav { margin-top: 30px; }
+    .footer .innerContainer .right .footer-nav ul { justify-content: center;}
+    .footer .innerContainer .right .footer-nav ul li:last-child { padding-right: 25px; }
+    .footer .innerContainer .right p { text-align: left; margin-top: 50px;}
+
+}
+
+
+/* 서치 팝업 , 마이페이지 팝업 */
+.searchpopupblack { position: fixed; width: 100%; height: 100%; background: rgba(0,0,0,0.5); z-index: 2; }
+.searchPopup-container { position: fixed; width: 100%; top: 79px; left: 0; background: #fff; z-index: 4; box-shadow: 15px  15px 15px rgba(0, 0, 0, 0.1); }
+.searchPopup-container .innerContainer { padding-top: 21px; padding-bottom: 60px; }
+.searchPopup-container .input-conatiner { position: relative; }
+.searchPopup-container .input-conatiner > input { border-radius: 50px; border: 1px solid #0090DF; font-size: 14px; height: 37px; }
+.searchPopup-container .input-conatiner > img { position: absolute; top: 50%; transform: translate(0 , -50%); right: 15px; }
+
+.searchPopup-container .title { display: flex; align-items: flex-end; margin-bottom: 15px; justify-content: space-between; }
+.searchPopup-container .title h2 { font-size: 18px; font-weight: bold;  }
+.searchPopup-container .title button { border: none; background: none; padding: 0; line-height: 1.3em; height: auto; color: #D1D1D1; margin-left: 12px; cursor: pointer; }
+
+.searchPopup-container .bottom { display: flex; margin-top: 50px; }
+.searchPopup-container .bottom > div { width: 50%; }
+.searchPopup-container .bottom .recent-search { padding-right: 100px; }
+.searchPopup-container .bottom .recent-search .list {  }
+.searchPopup-container .bottom .recent-search .list .record { display: flex; align-items: center; justify-content: space-between; margin-bottom: 10px; }
+.searchPopup-container .bottom .recent-search .list .record > div { display: flex; align-items: center; }
+.searchPopup-container .bottom .recent-search .list .record > div img { opacity: 0.3; position: relative; top: 2px;  }
+.searchPopup-container .bottom .recent-search .list .record > div a { margin-left: 5px; }
+.searchPopup-container .bottom .recent-search .list .record span { position: relative; width: 13px; height: 13px; cursor: pointer; }
+.searchPopup-container .bottom .recent-search .list .record span::before ,
+.searchPopup-container .bottom .recent-search .list .record span::after { content: ""; display: block; width: 100%; height: 1px; background: #D1D1D1; transform: rotate(45deg); position: absolute; left: 0;top: 50%; }
+.searchPopup-container .bottom .recent-search .list .record span::after { transform: rotate(-45deg); }
+
+
+.searchPopup-container .bottom .recommand-keyword {  }
+.searchPopup-container .bottom .recommand-keyword .taglist { display: flex; display: flex; gap: 10px;
+    flex-wrap: wrap; }
+.searchPopup-container .bottom .recommand-keyword .taglist a { border:1px solid #B1B1B1; color: #B1B1B1; border-radius: 50px; border-radius: 50px; font-size: 12px; padding: 5px 9px; transition: all .3s; }
+.searchPopup-container .bottom .recommand-keyword .taglist a:hover { border-color: #0090DF; color: #fff; background: #0090DF; }
+
+.searchPopup-close { position: absolute; bottom: -50px; left: 50%; transform: translate(-50% , 0); border-radius: 50%; width: 13px; height: 13px; padding: 6px; background-color: #fff; cursor: pointer; }
+.searchPopup-close span { position: relative; display: block; width: 100%; height: 100%;  transition: all .3s;  }
+.searchPopup-close span::after,
+.searchPopup-close span::before { content: ""; display: block; width: 100%; height: 1px; background: #000; transform: rotate(45deg); position: absolute; left: 0;top: 50%; }
+.searchPopup-close span::before { transform: rotate(-45deg);   }
+.searchPopup-close:hover  span { transform: rotate(180deg); }
+
+@media screen and (max-width: 1000px) {
+
+    .searchPopup-container { top: 62px; }
+    .searchPopup-container .bottom { margin-top: 30px; display: block; }
+    .searchPopup-container .bottom > div { width: 100%; padding: 0; }
+    .searchPopup-container .bottom .recent-search { margin-bottom: 46px; }
+    .searchPopup-close { bottom: -35px; }
+}
+
+/* 마이페이지 사이드바 */
+.ms-container { position: fixed; right: -100%; top: 0; height: 100%; max-width: 416px; width: calc(100% - 35px); background: #fff; z-index: 6; box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.1); transition: all .6s;  }
+
+
+
+.mypageSidebarblack { position: fixed; left: 0; top: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); z-index: 5; }
+
+.ms-container .ms-container-close { position: absolute; top: 20px   ; left: -30px; transform: translate(-50% , 0); border-radius: 50%; width: 13px; height: 13px; padding: 6px; background-color: #fff; cursor: pointer; }
+.ms-container-close span { position: relative; display: block; width: 100%; height: 100%;  transition: all .3s;  }
+.ms-container-close span::after,
+.ms-container-close span::before { content: ""; display: block; width: 100%; height: 1px; background: #000; transform: rotate(45deg); position: absolute; left: 0;top: 50%; }
+.ms-container-close span::before { transform: rotate(-45deg); }
+.ms-container-close:hover  span { transform: rotate(180deg); }
+
+/* 사이드바 - 로그오프 */
+.logOff {  display: flex; height: 100%; flex-direction: column; justify-content: space-between; }
+.logOff .logingoContainer {height: 100%; display: flex; flex-direction: column; justify-content: center; align-items: center; }
+.logOff .logingoContainer p { font-size: 15px; font-weight: bold; margin-bottom: 25px; }
+.logOff .logingoContainer a { background: #0090DF; color: #fff; padding: 15px 0; width: 236px; text-align: center; border-radius: 6px; }
+.logOff .goHost a { display: block; font-size: 15px; text-align: center; background: #0090DF; color: #fff; width: 100%; padding: 25px 0; }
+
+/* 사이드바 - 로그온 */
+.logOn {  width: 100%; height: 100%; overflow: auto; }
+/* 유저정보 */
+.logOn .userinfo { background: #0090DF; padding: 20px 20px 70px; color: #fff; display: flex; }
+.logOn .userinfo .profileImg { width: 70px; height: 70px; }
+.logOn .userinfo .profileImg img { width: 100%; height: 100%; }
+.logOn .userinfo .textbox { margin-left: 20px; margin-top: 15px; display: block; }
+.logOn .userinfo .textbox .text { font-size: 15px; }
+.logOn .userinfo .textbox p { text-decoration: underline; font-size: 13px; color: #f9f9f9; margin-top: 20px; cursor: pointer; }
+/* 최근 예약 */
+.logOn .recentresevation-container { background: #fff; margin: 0 15px; margin-top: -50px; border-radius: 16px; padding: 16px 15px; box-shadow: 0px 0px 15px rgba(0,0,0,0.1); position: relative; }
+.logOn .recentresevation-container h3 { font-size: 16px; font-weight: 600; margin-bottom: 18px; }
+.logOn .recentresevation-container .recentresevation-wrapper { display: flex; }
+.logOn .recentresevation-container .recentresevation-wrapper .img-box { border-radius: 16px; overflow: hidden; width: 131px; }
+.logOn .recentresevation-container .recentresevation-wrapper .img-box img { width: 100%; }
+
+.logOn .recentresevation-container .recentresevation-wrapper .placeInfo { margin-left: 20px; }
+.logOn .recentresevation-container .recentresevation-wrapper .placeInfo span { font-size: 15px; font-weight: 500; margin-bottom: 4px; display: block; }
+.logOn .recentresevation-container .recentresevation-wrapper .placeInfo > div { font-size: 14px; color: #999999; display: flex;  }
+.logOn .recentresevation-container .recentresevation-wrapper .placeInfo > div img { width: 13px; margin-right: 5px; }
+
+.logOn .recentresevation-container .yearContainer { margin-top: 13px;  }
+.logOn .recentresevation-container .yearContainer > div {  }
+.logOn .recentresevation-container .yearContainer > div p { color: #0090DF; font-size: 13px; }
+.logOn .recentresevation-container .yearContainer > div > div { margin-top: 5px; }
+.logOn .recentresevation-container .yearContainer > div > div > div { display: flex; align-items: center; }
+.logOn .recentresevation-container .yearContainer > div > div img { width: 24px;  }
+.logOn .recentresevation-container .yearContainer > div > div span { font-size: 13px; }
+.logOn .recentresevation-container .yearContainer > div > div >  span { color: #858585; font-size: 12px; }
+
+.logOn .recentresevation-container > div .gobtn { position: absolute; right: 20px; bottom: 20px; }
+@media screen and (max-width: 1000px) {
+    .ms-container .ms-container-close { top: 15px; left:  -18px; }
+}
+
+
+/* logOn info */
+.logOn .myInfo { margin:0 15px; padding-top: 45px;}
+.logOn .myInfo h3 { font-size: 20px; font-weight: 600; }
+.logOn .myInfo .myGrade { margin-top: 14px; display: flex; }
+.logOn .myInfo .myGrade img { width: 35px; }
+.logOn .myInfo .myGrade > div { margin-left: 20px; }
+.logOn .myInfo .myGrade > div span { font-size: 15px; }
+.logOn .myInfo .myGrade > div p { font-size: 13px; color: #B1B1B1; }
+
+.logOn .myInfo .mypagemenu { display: flex;margin-top: 28px; }
+.logOn .myInfo .mypagemenu .icon { width: 20%; display: flex; flex-direction: column; justify-content: flex-start; align-items: center; text-align: center;}
+.logOn .myInfo .mypagemenu .icon a {  }
+.logOn .myInfo .mypagemenu .icon a img {  }
+.logOn .myInfo .mypagemenu .icon a p { margin: 0 10px;  }
+
+.recentViewSpace { margin: 0 -15px; margin-top: 48px;  padding-bottom: 40px;}
+.recentViewSpace h3 { margin: 0 15px; margin-bottom: 15px; }
+.recentViewSpace > div {  padding: 0 15px; }
+.recentViewSpace img { width: 100%; }
+.recentViewSpace p { font-weight: 500; margin-top: 10px; }
+
+@media screen and (max-width: 1000px) {
+    .logOn .myInfo h3 { font-size: 16px; }
+    .logOn .myInfo .mypagemenu .icon a img { width: 40px; }
+    .logOn .myInfo .mypagemenu .icon a p { font-size: 12px;  margin: 0;}
+}
