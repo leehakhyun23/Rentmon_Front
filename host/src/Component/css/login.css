@@ -87,4 +87,5 @@ input{
     background-color: white;
     border: none;
     border-bottom: 1px solid #999999;
+    cursor: pointer;
 }
