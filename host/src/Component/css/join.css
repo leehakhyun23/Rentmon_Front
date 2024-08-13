@@ -39,11 +39,11 @@ article {
 
 
 .join-btn{
-    margin-top: 100px;
+    margin-top: 50px;
     border-radius: 5%;
     border: none;
     width: 600px;
-    height: 40px;
+    height: 45px;
     color: aliceblue;
     background-color: #0090DF;
     font-weight: bold;
@@ -52,14 +52,43 @@ article {
 
 .aa{
     width: 100%;
-    
+    color: black;
 }
+
+.aa .idbtn{
+    font-size: 15px;
+    font-weight: normal;
+    cursor: pointer;
+}
+
+.aa .email{
+    font-size: 15px;
+    font-weight: normal;
+    cursor: pointer;
+}
+
 
 .email{
     background-color: white;
     border: none;
     /* border-bottom: 1px solid #999999; */
     text-align: left;
+    cursor: pointer;
+
 }
+
+.idbtn{
+    color: black;
+    border-bottom: 1px solid black;
+    border: none;
+    float: left; /* 왼쪽으로 플로트 */
+    margin-left: 10px;
+    margin-left: 0; 
+}
+
+.joinform .field{
+    margin: 10px 10px;
+}
+
 
 
