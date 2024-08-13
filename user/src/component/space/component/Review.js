@@ -14,7 +14,7 @@ function Review(props) {
   const [rate, setRate] = useState(0);
   const [content, setContent] = useState("");
   const [images, setImages] = useState([]);
-  const [reviews, setReviews] = useState([]);
+  const [reviewList, setReviewList] = useState([]);
   const [showForm, setShowForm] = useState(false); // 입력 폼 표시 여부 상태
 
   // 멀티이미지 입력 및 입력스타일
@@ -47,6 +47,15 @@ function Review(props) {
     justifyContent: "space-between",
     border: "1px solid black",
   }
+
+  useEffect(async ()=>{
+    try{
+      const result = await axios.get(`/api/review/getReviews`, {params:{sseq:space.sseq}})
+      setReviewList(result.data);
+      console.log(reviewList);
+    }catch(err){console.error()};
+  }, []);
+
 
   useEffect(() => {
     console.log(images);
@@ -99,9 +108,10 @@ function Review(props) {
   async function onSubmit() {
     if (!content) { return alert("리뷰를 작성하세요"); }
 
+    console.log(props.space.sseq);
     try {
       await axios.post('/api/review/InsertReview' , {
-        space : props.space,
+        sseq : props.space.sseq,
         userid:user.userid,
         rate,
         content,
@@ -209,7 +219,7 @@ function Review(props) {
       </div>
 
       <div>
-        {reviews.map((review, index) => (
+        {reviewList.map((review, index) => (
           <div key={index} className="review">
             <div className="review-header">
               <span className="review-username">{review.userName}</span>
