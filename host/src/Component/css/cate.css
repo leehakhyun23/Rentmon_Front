@@ -1,0 +1,92 @@
+/* Parent container for radio buttons */
+.radio-group {
+    display: flex;
+    flex-wrap: wrap; /* Allow items to wrap onto the next line if needed */
+    justify-content: center; /* Center items horizontally */
+    gap: 10px; /* Space between items */
+    margin-top: 20px; /* Space above the group */
+}
+
+/* Hide the original radio button */
+.radio-input {
+    display: none;
+}
+
+/* Style the label as a clickable box */
+.radio-label {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    padding: 10px;
+    border: 2px solid #ddd;
+    border-radius: 4px;
+    transition: background-color 0.2s, border-color 0.2s;
+    /* Adjust size */
+    width: calc(33.33% - 20px); /* 3 items per row, with gaps considered */
+    height: 40px; /* Adjust height */
+    text-align: center; /* Center text horizontally */
+    box-sizing: border-box; /* Ensure padding and border are included in width/height */
+}
+
+/* Highlight the selected option */
+.radio-label.selected {
+    background-color: #007bff;
+    border-color: #007bff;
+    color: white;
+}
+
+/* Style the box inside the label */
+.radio-box {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%; /* Make sure text is centered vertically */
+    width: 100%; /* Make sure text is centered horizontally */
+}
+
+/* Add hover effect */
+.radio-label:hover {
+    background-color: #f0f0f0;
+}
+
+/* .content 스타일링 */
+.content {
+    background-color: #ffffff; /* 배경색 */
+    padding: 20px; /* 내부 여백 */
+    margin: 20px auto; /* 자동 중앙 정렬 및 외부 여백 */
+    max-width: 800px; /* 최대 너비 */
+    border-radius: 8px; /* 모서리 둥글기 */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* 그림자 효과 */
+    font-family: 'Arial', sans-serif; /* 글꼴 설정 */
+    color: #333; /* 텍스트 색상 */
+    line-height: 1.6; /* 줄 간격 */
+    font-size: large;
+}
+
+/* 콘텐츠 내 제목 스타일링 */
+.content h1, .content h2, .content h3, .content h4, .content h5, .content h6 {
+    color: #222; /* 제목 색상 */
+    margin-bottom: 16px; /* 제목 아래 여백 */
+}
+
+/* 문단 스타일링 */
+.content p {
+    margin-bottom: 16px; /* 문단 아래 여백 */
+}
+
+/* 목록 스타일링 */
+.content ul, .content ol {
+    margin-bottom: 16px; /* 목록 아래 여백 */
+    padding-left: 20px; /* 목록 왼쪽 여백 */
+}
+
+/* 링크 스타일링 */
+.content a {
+    color: #007bff; /* 링크 색상 */
+    text-decoration: none; /* 링크 밑줄 제거 */
+}
+
+.content a:hover {
+    text-decoration: underline; /* 링크 호버 시 밑줄 */
+}

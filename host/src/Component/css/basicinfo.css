@@ -1,0 +1,73 @@
+/* 기본정보 페이지 스타일링 */
+.container {
+    max-width: 900px; /* 컨테이너의 최대 너비 설정 */
+    margin: 0 auto; /* 중앙 정렬 */
+    padding: 20px;
+    background-color: #f9f9f9; /* 배경색 설정 */
+    border-radius: 8px; /* 컨테이너의 모서리 둥글게 */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* 컨테이너 그림자 */
+    
+}
+body{
+    margin-left: 20px;
+}
+
+/* 필드 그룹을 두 개씩 같은 줄에 배치 */
+.field-group {
+    display: flex;
+    flex-wrap: wrap; /* 항목을 여러 줄로 배치 가능하게 함 */
+    gap: 20px; /* 항목 간의 간격 */
+    margin-bottom: 20px; /* 항목 간의 여백 */
+}
+
+/* 각 필드 */
+.field1 {
+    flex: 1 1 calc(50% - 20px); /* 두 개의 필드가 한 줄에 배치되도록 설정 */
+    box-sizing: border-box; /* 테두리와 패딩을 포함한 박스 크기 조정 */
+    margin-left: 20px;
+    font-size: 120%;
+}
+.field2 {
+    flex: 1 1 calc(50% - 20px); /* 두 개의 필드가 한 줄에 배치되도록 설정 */
+    box-sizing: border-box; /* 테두리와 패딩을 포함한 박스 크기 조정 */
+    margin-left: 20px;
+    margin-top: 30px;
+}
+/* 입력 요소 스타일 */
+input[type="text"], textarea {
+    width: 70%; /* 입력 요소의 너비를 100%로 설정 */
+    padding: 12px; /* 패딩 증가 */
+    border: 2px solid #ddd;
+    border-radius: 4px;
+    box-sizing: border-box; /* 테두리와 패딩을 포함한 박스 크기 조정 */
+    margin-top: 8px; /* 상단 여백 추가 */
+    font-size: 16px; /* 폰트 사이즈 조정 */
+    font-family: "Noto Sans KR", sans-serif; /* 폰트 적용 */
+}
+
+
+/* 이미지 스타일 */
+img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+    border-radius: 4px; /* 이미지 모서리 둥글게 */
+    margin-top: 10px; /* 상단 여백 추가 */
+}
+.binput{
+    margin-left: 30px;
+    margin-bottom: 10px;
+}
+
+/* 응답형 디자인 */
+@media (max-width: 768px) {
+    .field-group {
+        flex-direction: column; /* 화면이 좁을 때 필드를 세로로 배치 */
+    }
+
+    .field1 {
+        flex: 1 1 100%; /* 필드가 100% 너비를 차지하도록 설정 */
+    }
+
+
+}

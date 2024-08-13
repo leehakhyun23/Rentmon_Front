@@ -10,6 +10,7 @@ import { Coupon, DashBoard, Mypage } from './component/mypage';
 
 
 
+import ReservationForm from './component/reservation/ReservationForm';
 
 function App() {
   return (
@@ -23,12 +24,14 @@ function App() {
       <Route path='/getsnsuserinfo/:userid/:provider' element={<Getsnsuserinfo/>}/>
       <Route path='/join' element={<JoinForm />} />
       <Route path='/choosecategory/:userid' element={<Choosecategory />} />
+      <Route path='/reservationForm/:sseq' element={<ReservationForm />} />
       <Route path='/mypage' element={<Mypage />}>
         <Route path='dashboard' element={<DashBoard/>}/>
         <Route path='coupon' element={<Coupon/>}/>
       </Route>
     </Routes>
     <Footer />
+
     </>
   );
 }

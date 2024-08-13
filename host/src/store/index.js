@@ -30,7 +30,3 @@ export default configureStore({
     reducer:persistedReducer,
     middleware:getDefaultMiddleware => getDefaultMiddleware({serializableCheck:false}),
 })
-
-
-
-
