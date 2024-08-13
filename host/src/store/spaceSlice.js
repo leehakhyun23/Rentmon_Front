@@ -62,6 +62,6 @@ const spaceSlice = createSlice({
     },
 });
 
-
 export const {setSpace} = spaceSlice.actions;
 export default spaceSlice;
+
