@@ -1,8 +1,5 @@
 /* space.css */
 
-.innerContainer {
-    padding: 20px;
-  }
   
   .spaces {
     display: flex;
@@ -90,7 +87,7 @@
   position: fixed;
   top: 300px;
   right: 200px;
-  width: 150px;
+  width: 200px;
   padding: 20px;
   background-color: #fff;
   border: 1px solid #ccc;

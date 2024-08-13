@@ -14,6 +14,7 @@ import Login from './Component/member/Login'
 import Join from './Component/member/Join'
 import React from 'react';
 import Main from "./Component/Main";
+import Getsnshostinfo from "./Component/member/Getsnshostinfo";
 
 function App() {
   return (
@@ -31,6 +32,7 @@ function App() {
         <Route path="SpaceManage" element={<SpaceManage />} />
         <Route path="/Login" element={<Login />} />
         <Route path="/Join" element={<Join />} />
+        <Route path="/getsnshostinfo/:hostid" element={<Getsnshostinfo />} />
 
       </Routes>
   );

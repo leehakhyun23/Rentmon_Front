@@ -29,6 +29,8 @@ function Login() {
 
     let onLogin = async()=>{
        try{
+            if(!userid) return setLoginMessage("* 아이디를 입력해주세요.");
+            if(!pwd) return setLoginMessage("* 비밀먼호를 입력해주세요.");
             let usernameWithRole =userid+":user";
             let result = await axios.post("/api/member/login",null,{params:{usernameWithRole,password:pwd}});
             
@@ -41,7 +43,7 @@ function Login() {
               let logindata = await jaxios.get("/api/user/getuseinfo",{params:{userid:result.data.userid}});
               dispatch(loginAction(logindata.data));
               if(!logindata.data){
-                return setLoginMessage("* 아이디 또는 비밀번호를 확인해주세요.");
+                return setLoginMessage("* 관리자에게 문의해주세요.");
               }
 
               //최근 예약 조회
@@ -98,7 +100,7 @@ function Login() {
             <div className='snsLogin'>
                 <span>SNS 로그인</span>
                 <div className='snsbtncontainer'>
-                  <Link to=""><img src='/img/google.png' alt='google'/></Link>
+                  <a href="http://localhost:8070/user/sns/googlestart"><img src='/img/google.png' alt='google'/></a>
                   <a href="http://localhost:8070/user/sns/kakaostart"><img src='/img/kakao.png' alt='kakao'/></a>
                   <a href="http://localhost:8070/user/sns/naverstart"><img src='/img/naver.png' alt='naver' /></a>
                 </div>
