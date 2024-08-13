@@ -7,21 +7,9 @@ import Space from './component/Space';
 
 import './style/space.css';
 
-import Slider from 'react-slick';
-import 'slick-carousel/slick/slick.css';
-import 'slick-carousel/slick/slick-theme.css';
 
-const settings = {
-  dots: false,
-  arrows: false,
-  infinite: false,
-  speed: 500,
-  slidesToShow: 1,
-  slidesToScroll: 1
-}
 
 function SpaceList() {
-  // 로그인 유저 자원
   const user = useSelector(state => state.user);
 
   // 공간 열람 자원
