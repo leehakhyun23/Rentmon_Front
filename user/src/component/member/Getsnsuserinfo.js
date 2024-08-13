@@ -9,7 +9,7 @@ import jaxios from '../../util/jwtUtil';
 import "./css/loading.css";
 
 function Getsnsuserinfo() {
-  const {userid} = useParams();
+    const {userid,provider} = useParams();
     const navigate = useNavigate();
     const dispatch = useDispatch();
 
@@ -21,7 +21,7 @@ function Getsnsuserinfo() {
 
     let snsLogin=async()=>{
         let usernameWithRole =userid+":user";
-        let result = await axios.post("/api/member/login",null,{params:{usernameWithRole,password:"kakao"}});
+        let result = await axios.post("/api/member/login",null,{params:{usernameWithRole,password:provider}});
         
         if(result.data.error === "ERROR_LOGIN"){
             return alert("로그인 실패 관리자에게 문의");

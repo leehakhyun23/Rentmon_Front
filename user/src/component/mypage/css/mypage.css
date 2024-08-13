@@ -1,0 +1,47 @@
+.infoDashBoard { background: #F9F9F9; border-radius: 8px; margin-top: -30px;  padding: 30px 6% 34px; position: relative;}
+.infoDashBoard .container { display: flex; justify-content: space-between;}
+.infoDashBoard .container .left { width: 30%; }
+.infoDashBoard .container .left .userinfo { display: flex; align-items: center;}
+.infoDashBoard .container .left .userinfo .profileImg { border: 1px solid #0090DF; border-radius: 50%; width: 88px; height: 88px; overflow: hidden; }
+.infoDashBoard .container .left .userinfo .profileImg img { width: 100%; height: 100%; object-fit: cover; }
+.infoDashBoard .container .left .userinfo .textbox {  font-size: 13px;  margin-left: 40px; width: calc(100% - 128px); }
+.infoDashBoard .container .left .userinfo .textbox .text { font-size: 18px; display: flex; font-weight: 600; align-items: center; }
+.infoDashBoard .container .left .userinfo .textbox .text img { width: 18px; margin-left: 5px; }
+.infoDashBoard .container .left .userinfo .textbox > div { line-height: 1.3em; font-weight: 500; }
+.infoDashBoard .container .left .userinfo .textbox .email { margin-top: 8px;  }
+.infoDashBoard .container .left .userinfo .textbox .phone { margin-top: 3px;  }
+.infoDashBoard .container .left  p { margin-top: 30px; color: #B1B1B1; text-decoration: underline; cursor: pointer; font-size: 13px; }
+
+.infoDashBoard .container .right { display: flex; align-items: center; width: 60%; justify-content: flex-end;
+}
+.infoDashBoard .container .right .mypagemenu { display: flex; width: 100%; justify-content: flex-end; }
+.infoDashBoard .container .right .mypagemenu .icon { width: 10.3%; text-align: center; padding: 0 4.8%; position: relative; }
+.infoDashBoard .container .right .mypagemenu .icon:last-child { padding-right: 0; }
+
+.infoDashBoard .container .right .mypagemenu .icon::before { content: ""; display: block; width: 1px; height: 15%; background: #D4D4D4; position: absolute; top: 30%;  left: 0; }
+.infoDashBoard .container .right .mypagemenu .icon:first-child:before { display: none; }
+.infoDashBoard .container .right .mypagemenu .icon a { width: 100%; transform: translate(0,0); transition: all .3s; }
+.infoDashBoard .container .right .mypagemenu .icon a:hover { transform: translate(0,-5px); }
+.infoDashBoard .container .right .mypagemenu .icon a img { width: 100%; opacity: 0.6; }
+.infoDashBoard .container .right .mypagemenu .icon a p { font-weight: 600; padding: 0 8px; margin-top: 2px; font-size: 13px;}
+
+@media screen and (max-width: 1000px) {
+    .infoDashBoard { border-radius: 0; margin: -80px -15px 0;  padding: 30px 15px 29px;}
+    .infoDashBoard .container { display:block;}
+    .infoDashBoard .container .left { width: 100%; }
+    .infoDashBoard .container .left .userinfo .profileImg { width: 82px; height: 82px; }
+    .infoDashBoard .container .left .userinfo .textbox .text { font-size: 15px; }
+    .infoDashBoard .container .left .userinfo .textbox .text img { width: 15px; }
+    .infoDashBoard .container .left  p { margin-top: 9px; }
+
+    .infoDashBoard .container .right { width: auto; margin: 40px -15px 0; overflow: auto; justify-content: flex-start; padding-bottom: 5px;  }
+    .infoDashBoard .container .right .mypagemenu { min-width: 450px; width: 450px; padding: 0 15px; }
+    .infoDashBoard .container .right .mypagemenu .icon { width: 25%; padding: 0 13px; }
+    .infoDashBoard .container .right .mypagemenu .icon a img { width: 90%; }
+    .infoDashBoard .container .right .mypagemenu .icon::before { display: none; }
+    .infoDashBoard::after { content: ""; display: block; width: 100%; height: 20px; background: #F9F9F9; position: absolute; left: 0; bottom: 14px; }
+}
+
+/* 공통 */
+.mypagecommon { padding: 88px 0; } 
+/* dashboard */
