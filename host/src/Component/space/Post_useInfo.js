@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from 'react-redux';
+import { setSpace } from '../../store/spaceSlice'; // Redux slice import
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 import { ko } from 'date-fns/locale';
@@ -7,14 +9,23 @@ import '../css/header.css';
 
 function Post_useInfo() {
     const navigate = useNavigate();
-    const [starttime, setStarttime] = useState('00');
-    const [endtime, setEndtime] = useState('00');
-    const [startDate, setStartDate] = useState(null);
-    const [endDate, setEndDate] = useState(null);
-    const [monthholi, setMonthholi] = useState([]);
-    const [weekholi, setWeekholi] = useState([]);
-    const [dayholi, setDayholi] = useState(new Date());
-    const [dropdownValue, setDropdownValue] = useState('option1');
+    const dispatch = useDispatch();
+
+    // Retrieve current space information from Redux state
+    const currentSpace = useSelector((state) => state.space);
+
+    //내가 추가한거 
+    const baseDate = new Date(1998, 5, 23, 1, 0, 0); // 1998년 6월 23일 01시 00분 00초
+    
+
+    const [starttime, setStarttime] = useState(currentSpace.starttime);
+    const [endtime, setEndtime] = useState(currentSpace.endtime);
+    const [startDate, setStartDate] = useState(currentSpace.startDate ? new Date(currentSpace.startDate) : null);
+    const [endDate, setEndDate] = useState(currentSpace.endDate ? new Date(currentSpace.endDate) : null);
+    const [monthholi, setMonthholi] = useState(currentSpace.monthholi || []);
+    const [weekholi, setWeekholi] = useState(currentSpace.weekholi || []);
+    const [dayholi, setDayholi] = useState([]);
+    const [dropdownValue, setDropdownValue] = useState(currentSpace.dropdownValue || 'option1');
 
     const handleOnChange = (e, setter) => {
         setter(e.target.value);
@@ -32,11 +43,9 @@ function Post_useInfo() {
         const value = e.target.value;
         setDropdownValue(value);
         if (value === 'option1') {
-            // Ensure monthholi is an empty array
             setMonthholi([]);
         }
         if (value === 'option2') {
-            // Ensure weekholi is an empty array
             setWeekholi([]);
         }
         if (value === 'option3') {
@@ -53,8 +62,43 @@ function Post_useInfo() {
         );
     };
 
+    //내가 추가한거
+    const updatedStartDate = new Date(baseDate);
+        updatedStartDate.setHours(parseInt(starttime, 10));
+        updatedStartDate.setMinutes(0);
+        updatedStartDate.setSeconds(0);
+
+        const updatedEndDate = new Date(baseDate);
+        updatedEndDate.setHours(parseInt(endtime, 10));
+        updatedEndDate.setMinutes(0);
+        updatedEndDate.setSeconds(0);
+
     const onSubmit = () => {
-        navigate('/Post_facility')
+        dispatch(setSpace({
+            cnum: currentSpace.cnum || '', // Use existing cnum
+            title: currentSpace.title || '', // Maintain existing values
+            subtitle: currentSpace.subtitle || '',
+            price: currentSpace.price || '',
+            personnal: currentSpace.personnal || '',
+            maxpersonnal: currentSpace.maxpersonnal || '',
+            content: currentSpace.content || '',
+            caution: currentSpace.caution || '',
+            zipcode: currentSpace.zipcode || '',
+            province: currentSpace.province || '',
+            town: currentSpace.town || '',
+            village: currentSpace.village || '',
+            address_detail: currentSpace.address_detail || '',
+            imgSrc: currentSpace.imgSrc || '',
+            starttime: updatedStartDate.toISOString(),
+            endtime: updatedEndDate.toISOString(),
+            startDate: startDate ? startDate.toISOString() : null,
+            endDate: endDate ? endDate.toISOString() : null,
+            monthholi,
+            weekholi,
+            dayholi,
+        }));
+        
+        navigate('/Post_facility');
     };
 
     return (
@@ -85,7 +129,7 @@ function Post_useInfo() {
                 </select>
             </div>
             <div>
-                <span>시작일</span>
+                <span>휴가 시작일</span>
                 <DatePicker
                     selected={startDate}
                     onChange={handleStartDateChange}
@@ -95,7 +139,7 @@ function Post_useInfo() {
                 />
             </div>
             <div>
-                <span>마감일</span>
+                <span>휴가 마감일</span>
                 <DatePicker
                     selected={endDate}
                     onChange={handleEndDateChange}
