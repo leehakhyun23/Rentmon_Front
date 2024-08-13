@@ -14,3 +14,10 @@ export const getCookie=(name)=>{
 export const removeCookie = (name,path="/")=>{
     cookie.remove(name, {path});
 }
+
+
+export const setAuthoCookie = (name, value, minutes)=>{
+    const expire = new Date();
+    expire.setUTCMinutes(expire.getUTCMinutes() + minutes);
+    return cookie.set(name, value, {path:"/", expire:expire});
+}

@@ -33,7 +33,7 @@ function Space(props) {
                     (props.space.images) ? (
                         props.space.images.map((image, idx) => {
                             return (
-                                <img key={idx} src={`http://localhost:8070/space_images/${image.originame}`} alt={props.space.title} />
+                                <img key={idx} src={`http://localhost:8070/space_images/${image.originName}`} alt={props.space.title} />
                             )
                         })
                     ) : (null)

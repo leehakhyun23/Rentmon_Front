@@ -40,14 +40,14 @@ function SpaceDetail() {
 
   return (
     <div className='innerContainer'>
-      <Remocon />
+      <Remocon space={space} />
       <div>
       <SpaceMenu />
 
         공간 Detail Section
         <SpaceInfo space={space} />
         <SpaceChat />
-        <Review reviews={space.reviews} />
+        <Review space={space} />
       </div>
     </div>
 

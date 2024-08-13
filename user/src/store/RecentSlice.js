@@ -3,7 +3,7 @@ import { createSlice } from "@reduxjs/toolkit";
 const initialState={
     recentReserve:null,
     recentveiwStore:{},
-    menucount : [],
+    menucount : {},
     weather:null
 }
 
@@ -19,12 +19,15 @@ const recentSlice = createSlice({
         },
         weatherSetAction:(state,action)=>{
             state.weather = action.payload.weather;
+        },
+        menucountAction:(state,action)=>{
+            state.menucount = action.payload.menucount;
         }
         
     }
 });
 
 
-export const {recentReserveAction, logoutRecentRerveAction , weatherSetAction} = recentSlice.actions;
+export const {recentReserveAction, logoutRecentRerveAction , weatherSetAction , menucountAction} = recentSlice.actions;
 export default recentSlice;
 

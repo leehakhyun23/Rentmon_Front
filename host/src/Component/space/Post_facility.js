@@ -1,10 +1,13 @@
 import React, { useState } from 'react';
 import { useNavigate } from "react-router-dom";
+import '../css/header.css';
+import '../css/facility.css';
 
 function Post_facility() {
   // 선택된 체크박스의 값을 저장할 상태
   const [select, setSelect] = useState([]);
   const navigate = useNavigate();
+
   // 체크박스의 상태를 업데이트하는 핸들러 함수
   const handleCheckboxChange = (event) => {
     const { value, checked } = event.target;
@@ -22,12 +25,12 @@ function Post_facility() {
 
   // 선택된 체크박스를 콘솔에 출력하는 함수
   const onSubmit = () => {
-    console.log('Select:', select);
+    navigate('/Post_payment');
   };
 
   return (
     <div>
-      <div>시설 선택</div>
+      <div className='header2'>시설 선택</div>
       <div className="facility-container">
         {[
           'TV/프로젝터',
@@ -77,18 +80,20 @@ function Post_facility() {
           '남/여 화장실 구분',
           '급수시설'
         ].map((facility, index) => (
-          <div key={index} className="facility-item">
+          <label key={index} className="facility-item">
             <input
               type="checkbox"
               value={index + 1}
               onChange={handleCheckboxChange}
             />
-            {facility}
-          </div>
+            <span>{facility}</span>
+          </label>
         ))}
       </div>
-      <button onClick={() => navigate('/Post_basicInfo')}>이전</button>
-      <button onClick={onSubmit}>다음</button>
+      <div className="but2">
+        <button className="but" onClick={() => navigate('/Post_useInfo')}>이전</button>
+        <button className="but" onClick={onSubmit}>다음</button>
+      </div>
     </div>
   );
 }
