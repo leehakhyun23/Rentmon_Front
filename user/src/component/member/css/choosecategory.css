@@ -1,0 +1,71 @@
+.choosejoinContainer { padding: 0; }
+.congTitle canvas { animation: congtitleCanvas 1s 8s forwards; transform: scale(0.5); transform-origin: top center; left: 50% !important; top: 50% !important; transform: translate(-50%, -50%); }
+.choosejoin { padding: 100px 0; overflow: hidden; width: 100%; text-align: center; position: relative; }
+.congTitle h1 { font-size: 25px; font-weight: bold; animation: congtitleAni1 7s forwards; opacity: 0; }
+.congTitle h2 { font-size: 25px; font-weight: bold; margin-top: 25px; animation: congtitleAni2 7s 0.5s forwards; opacity: 0; line-height: 1.8em; }
+
+
+/* station css처리 */
+.commonselectcontainer { text-align: center; margin-top: 40px; animation: congtitleAni3 2s 2s forwards; opacity: 0;  }
+.commonselectcontainer.category { margin-top: 80px; animation: congtitleAni3  2.3s 2s forwards; }
+.commonselectcontainer h1 { font-size: 40px; font-weight: 600; }
+.commonselectcontainer > div { max-width: 650px; margin: 0 auto; margin-top: 24px; }
+.commonselectcontainer > div ul { display: flex; flex-wrap: wrap;justify-content: center; }
+.commonselectcontainer > div ul li { margin: 5px 6.5px; }
+.commonselectcontainer > div ul li input { display: none;  }
+.commonselectcontainer > div ul li label { cursor: pointer; padding: 10px 20px; border: 1px solid #B1B1B1; color: #000; display: block; border-radius: 50px; transition: all 0.3s;}
+
+.commonselectcontainer > div ul li.disabled label { color: #999; background: #d4d4d4; border-color: #d4d4d4;cursor: default;  }
+.commonselectcontainer > div ul li.selected label { color: #fff; background: #0090DF; border-color: #0090DF; cursor: pointer; }
+
+.choosejoinContainer .buttonContainer { margin-top: 80px; animation: congtitleAni3 2.5s 2s  forwards; opacity: 0;  }
+.choosejoinContainer .buttonContainer button { background: #b1b1b1; color: #fff; border: none; font-size: 15px; padding: 18px 0;width: 100%; max-width: 338px; border-radius: 2px; pointer-events: none; }
+.choosejoinContainer .buttonContainer button.active { pointer-events: auto; background: #0090DF;  }
+@keyframes congtitleCanvas{
+    0%{ opacity: 1; }
+    100%{ opacity: 0; }
+}
+@keyframes congtitleAni1{
+    0%{ opacity: 0; transform: translate(0 , 30px);}
+    15%{ opacity: 1; transform: translate(0 , 0px);}
+    90%{ opacity: 1; transform: translate(0 , 0px);}
+    95%{opacity: 0; }
+    100%{display: none; }
+}
+@keyframes congtitleAni2{
+    0%{ opacity: 0; transform: translate(0 , 30px);}
+    15%{ opacity: 1; transform: translate(0 , 0px);}
+    90%{ opacity: 1; transform: translate(0 , 0px); font-size: 25px;  margin-top: 25px;}
+    100%{font-size: 20px; opacity: 1; margin-top: 0; transform: translate(0 , 0px);}
+}
+
+@keyframes congtitleAni3{
+    0%{ opacity: 0; transform: translate(0 , 30px);}
+    100%{opacity: 1; transform: translate(0 , 0px);}
+}
+
+
+@media screen and (max-width: 1000px) {
+    .congTitle h1 { font-size: 15px;  }
+    .congTitle h2 { font-size: 15px; }
+    .choosejoin { padding: 40px 0 80px; }
+  
+    @keyframes congtitleAni2{
+        0%{ opacity: 0; transform: translate(0 , 30px);}
+        15%{ opacity: 1; transform: translate(0 , 0px);}
+        90%{ opacity: 1; transform: translate(0 , 0px); margin-top: 25px;}
+        100%{font-size: 15px; opacity: 1; margin-top: 0; transform: translate(0 , 0px);}
+    }
+
+
+    .commonselectcontainer { margin-top: 25px; }
+    .commonselectcontainer.category { margin-top: 50px; }
+        
+    .commonselectcontainer h1 { font-size: 25px; font-weight: 600; }
+    .commonselectcontainer > div ul li { margin: 5px 4px; }
+    .commonselectcontainer > div ul li label { font-size: 13px; padding:8px 17px; }
+
+    
+.choosejoinContainer .buttonContainer { margin-top: 60px; }
+.choosejoinContainer .buttonContainer button { font-size: 13px; }
+}
