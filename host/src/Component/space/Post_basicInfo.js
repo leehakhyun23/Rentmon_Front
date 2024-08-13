@@ -1,31 +1,34 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux'; // Import useSelector
+import { setSpace } from '../../store/spaceSlice'; // Redux slice import
 import axios from 'axios';
 import '../css/header.css';
 import '../css/basicinfo.css';
 
 function Post_basicInfo() {
     const navigate = useNavigate();
+    const dispatch = useDispatch(); // Initialize useDispatch
+    const currentSpace = useSelector((state) => state.space); // Get current space from Redux store
 
     const [title, setTitle] = useState('');
     const [subtitle, setSubtitle] = useState('');
     const [content, setContent] = useState('');
     const [caution, setCaution] = useState('');
     const [zipcode, setZipcode] = useState('');
-    const [province, setProvince] = useState(''); // 시도
-    const [town, setTown] = useState('');         // 구군
-    const [village, setVillage] = useState('');   // 동
-    const [address_detail, setAddress_detail] = useState(''); // 상세주소
+    const [province, setProvince] = useState(''); 
+    const [town, setTown] = useState('');
+    const [village, setVillage] = useState('');
+    const [address_detail, setAddress_detail] = useState('');
     const [imgSrc, setImgSrc] = useState('');
     const [imgStyle, setImgStyle] = useState({ display: 'none' });
-    
-    // DOM 요소 참조
+    const [price, setPrice]= useState('');
+    const [personnal, setPersonnal] = useState('');
+    const [maxpersonnal, setMaxpersonnal] = useState('');
     const postcodeRef = useRef(null);
-    const addressRef = useRef(null);
     const detailAddressRef = useRef(null);
     const extraAddressRef = useRef(null);
 
-    // 카카오 주소 API 스크립트 로딩
     useEffect(() => {
         const script = document.createElement('script');
         script.src = "//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js";
@@ -40,39 +43,27 @@ function Post_basicInfo() {
         };
     }, []);
 
-    // 주소 검색 열기
     const openPostcode = () => {
         if (window.daum && window.daum.Postcode) {
             new window.daum.Postcode({
                 oncomplete: function (data) {
                     let addr = '';
                     let extraAddr = '';
-    
-                    // 선택된 주소 타입에 따라 주소를 설정
                     if (data.userSelectedType === 'R') {
                         addr = data.roadAddress;
                     } else {
                         addr = data.jibunAddress;
                     }
-    
-                    // 우편번호 설정
                     if (postcodeRef.current) {
                         postcodeRef.current.value = data.zonecode;
-                        setZipcode(data.zonecode); // 상태 업데이트
-                        console.log(data.sido);
-                        console.log(data.sigungu);
-                        console.log(data.roadname);
-                        setProvince(data.sido); // 시도 상태 업데이트
-                        setTown(data.sigungu);  // 구군 상태 업데이트
-                        setVillage(data.roadname); // 동 상태 업데이트
+                        setZipcode(data.zonecode);
+                        setProvince(data.sido);
+                        setTown(data.sigungu);
+                        setVillage(data.roadname);
                     }
-    
-                
-    
                     if (extraAddressRef.current) {
                         extraAddressRef.current.value = extraAddr;
                     }
-    
                     if (detailAddressRef.current) {
                         detailAddressRef.current.focus();
                     }
@@ -84,6 +75,24 @@ function Post_basicInfo() {
     };
 
     const onSubmit = () => {
+        // Dispatch the setSpace action with current state
+        dispatch(setSpace({
+            cnum: currentSpace.cnum || '', // Use existing cnum or empty string if not available
+            title,
+            subtitle,
+            price,
+            personnal,
+            maxpersonnal,
+            content,
+            caution,
+            zipcode,
+            province,
+            town,
+            village,
+            address_detail,
+            imgSrc,
+        }));
+
         navigate('/Post_useInfo');
     };
 
@@ -100,18 +109,27 @@ function Post_basicInfo() {
             <div className='header2'>기본 정보</div>
             
             <div className='field2'>
-                
                 <input className='binput' type="text" value={title} onChange={(e) => setTitle(e.currentTarget.value)} placeholder='공간명'/>
             </div>
             <div className='field1'>
-                <textarea rows="2" className='binput' value={subtitle} onChange={(e) => setSubtitle(e.currentTarget.value)} placeholder='한줄 공간 설명' ></textarea>
+                <textarea rows="2" className='binput' value={subtitle} onChange={(e) => setSubtitle(e.currentTarget.value)} placeholder='한줄 공간 설명'></textarea>
+            </div>
+            <div className='field2'>
+                <input className='binput' type="text" value={price} onChange={(e) => setPrice(e.currentTarget.value)} placeholder='가격 원/시간'/>
+            </div>
+            <div className='field2'>
+                <input className='binput' type="text" value={personnal} onChange={(e) => setPersonnal(e.currentTarget.value)} placeholder='기본 인원'/>
+            </div>
+            <div className='field2'>
+                <input className='binput' type="text" value={maxpersonnal} onChange={(e) => setMaxpersonnal(e.currentTarget.value)} placeholder='최대인원'/>
             </div>
             <div className='field1'>
-                <textarea className='binput' rows="7" value={content} onChange={(e) => setContent(e.currentTarget.value)} placeholder='공간 소개' ></textarea >
+                <textarea className='binput' rows="7" value={content} onChange={(e) => setContent(e.currentTarget.value)} placeholder='공간 소개'></textarea >
             </div>
             <div className='field1'>
                 <textarea className='binput' rows="7" value={caution} onChange={(e) => setCaution(e.currentTarget.value)} placeholder='주의 사항'></textarea>
             </div>
+            
             <div className='field1'>
                 <input
                     className='binput'
@@ -132,7 +150,7 @@ function Post_basicInfo() {
                     value={province}
                     readOnly
                     placeholder='시/도'
-                    onChange={(e) => setProvince(e.currentTarget.value)}/>
+                />
             </div>
             <div className='field1'>
                 <input
@@ -141,7 +159,7 @@ function Post_basicInfo() {
                     value={town}
                     readOnly
                     placeholder='구/군'
-                    onChange={(e) => setTown(e.currentTarget.value)}/>
+                />
             </div>
             <div className='field1'>
                 <input
@@ -150,7 +168,7 @@ function Post_basicInfo() {
                     value={village}
                     readOnly
                     placeholder='동'
-                    onChange={(e) => setVillage(e.currentTarget.value)}/>
+                />
             </div>
             <div className='field1'>
                 <input
@@ -167,7 +185,6 @@ function Post_basicInfo() {
                     className='binput'
                     type="file"
                     onChange={(e) => fileupload(e)}
-                    placeholder='공간 사진'
                 />
             </div>
             <div className='field1'>
