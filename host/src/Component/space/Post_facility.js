@@ -35,7 +35,6 @@ function Post_facility() {
       title: currentSpace.title || '', // Maintain existing values
       subtitle: currentSpace.subtitle || '',
       price: currentSpace.price ||'',
-      personnal: currentSpace.personnal || '',
       maxpersonnal: currentSpace.maxpersonnal || '',
       content: currentSpace.content || '',
       caution: currentSpace.caution || '',
@@ -47,13 +46,9 @@ function Post_facility() {
       imgSrc: currentSpace.imgSrc || '',
       starttime: currentSpace.starttime,
       endtime: currentSpace.endtime,
-      startDate: currentSpace.startDate,
-      endDate: currentSpace.endDate,
-      monthholi: currentSpace.monthholi,
-      weekholi: currentSpace.weekholi,
-      dayholi: currentSpace.dayholi ,
       fnum: select,
     }));
+    console.log(select);
     navigate('/Post_payment');
   };
 

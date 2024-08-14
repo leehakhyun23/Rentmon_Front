@@ -18,6 +18,7 @@ function Post_payment() {
   const [accountnum, setAccountnum] = useState('');
   const [hostid, setHostid] = useState('');
 
+
   useEffect(() => {
     // 쿠키에서 hostid 가져오기
     const hostidCookie = Cookies.get('hostid');
@@ -45,7 +46,6 @@ function Post_payment() {
       title: currentSpace.title || '',
       subtitle: currentSpace.subtitle || '',
       price: currentSpace.price || '',
-      personnal: currentSpace.personnal || '',
       maxpersonnal: currentSpace.maxpersonnal || '',
       content: currentSpace.content || '',
       caution: currentSpace.caution || '',
@@ -59,25 +59,24 @@ function Post_payment() {
     });
   };
 
+  const sendfnum = async() =>{
+    await axios.post('/api/space/insertfnum', {
+      fnum: currentSpace.fnum || '',
+    });
+  }
+
   const sendImgSrc = async () => {
     await axios.post('/api/space/insertImgSrc', {
       imgSrc: currentSpace.imgSrc || '',
     });
   };
 
-  const sendDates = async () => {
-    await axios.post('/api/space/insertClosed', {
-      startDate: currentSpace.startDate,
-      endDate: currentSpace.endDate,
-    });
-  };
-
-  const sendBankInfo = async () => {
-    await axios.post('/api/space/insertAccountNum', {
-      bank,
-      accountnum,
-    });
-  };
+  // const sendBankInfo = async () => {
+  //   await axios.post('/api/space/insertAccountNum', {
+  //     bank,
+  //     accountnum,
+  //   });
+  // };
 
   // 제출 핸들러
   const onSubmit = async () => {
@@ -88,7 +87,6 @@ function Post_payment() {
         title: currentSpace.title || '',
         subtitle: currentSpace.subtitle || '',
         price: currentSpace.price || '',
-        personnal: currentSpace.personnal || '',
         maxpersonnal: currentSpace.maxpersonnal || '',
         content: currentSpace.content || '',
         caution: currentSpace.caution || '',
@@ -100,11 +98,6 @@ function Post_payment() {
         imgSrc: currentSpace.imgSrc || '',
         starttime: currentSpace.starttime,
         endtime: currentSpace.endtime,
-        startDate: currentSpace.startDate,
-        endDate: currentSpace.endDate,
-        monthholi: currentSpace.monthholi,
-        weekholi: currentSpace.weekholi,
-        dayholi: currentSpace.dayholi,
         fnum: currentSpace.fnum,
         bank,
         accountnum,
@@ -117,7 +110,6 @@ function Post_payment() {
         title: currentSpace.title || '',
         subtitle: currentSpace.subtitle || '',
         price: currentSpace.price || '',
-        personnal: currentSpace.personnal || '',
         maxpersonnal: currentSpace.maxpersonnal || '',
         content: currentSpace.content || '',
         caution: currentSpace.caution || '',
@@ -129,11 +121,6 @@ function Post_payment() {
         imgSrc: currentSpace.imgSrc || '',
         starttime: currentSpace.starttime,
         endtime: currentSpace.endtime,
-        startDate: currentSpace.startDate,
-        endDate: currentSpace.endDate,
-        monthholi: currentSpace.monthholi,
-        weekholi: currentSpace.weekholi,
-        dayholi: currentSpace.dayholi,
         fnum: currentSpace.fnum,
         bank,
         accountnum,
@@ -143,8 +130,7 @@ function Post_payment() {
       await Promise.all([
         sendSpaceData(),
         // sendImgSrc(),
-        // sendDates(),
-        // sendBankInfo(),
+        sendfnum(),
       ]);
   
       // 성공적으로 전송 후 페이지 이동
@@ -154,25 +140,48 @@ function Post_payment() {
     }
   };
 
+  const selectStyle = {
+    width: '70%',                // 퍼센트 값은 문자열로 지정
+    padding: '12px',             // 단위가 있는 값은 문자열로 지정
+    border: '2px solid #ddd',    // 단위와 색상은 문자열로 지정
+    borderRadius: '4px',         // 단위는 문자열로 지정
+    boxSizing: 'border-box',     // 문자열로 지정
+    marginTop: '8px',            // 단위는 문자열로 지정
+    fontSize: '16px',            // 단위는 문자열로 지정
+    fontFamily: '"Noto Sans KR", sans-serif', // 문자열로 지정
+  };
+
   return (
     <div>
       <div className='header2'>예약/정산 정보</div>
-      <div>계좌 정보를 입력해주세요</div>
+      <div>
+        <label>
+          <select value={bank} onChange={handleBankChange} style={selectStyle} >
+            <option value="">선택하세요</option>
+            <option value="1">한국은행</option>
+            <option value="2">신한은행</option>
+            <option value="3">국민은행</option>
+            <option value="4">우리은행</option>
+            <option value="5">하나은행</option>
+            <option value="6">기업은행</option>
+            <option value="7">농협은행</option>
+            <option value="8">수협은행</option>
+            <option value="9">한국씨티은행</option>
+            <option value="10">대구은행</option>
+            <option value="11">전북은행</option>
+            <option value="12">부산은행</option>
+            <option value="13">제주은행</option>
+            <option value="14">제일은행</option>
+            <option value="15">경남은행</option>
+            <option value="16">케이뱅크</option>
+            <option value="17">카카오뱅크</option>
+            <option value="18">토스뱅크</option>
+          </select>
+        </label>
+      </div>
       
       <div>
         <label>
-          은행명:
-          <input
-            type="text"
-            value={bank}
-            onChange={handleBankChange}
-            placeholder="은행빼고 상호만 입력하세요"
-          />
-        </label>
-      </div>
-      <div>
-        <label>
-          계좌번호:
           <input
             type="text"
             value={accountnum}
@@ -180,10 +189,6 @@ function Post_payment() {
             placeholder="계좌번호를 입력하세요"
           />
         </label>
-      </div>
-      <div>
-        여태까지 받았던 정보 출력 
-
       </div>
       <div className="but2">
         <button className="but" onClick={() => navigate('/Post_facility')}>이전</button>
