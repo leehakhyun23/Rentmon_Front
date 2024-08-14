@@ -48,12 +48,12 @@ function Review(props) {
     border: "1px solid black",
   }
 
-  useEffect(async ()=>{
-    try{
-      const result = await axios.get(`/api/review/getReviews`, {params:{sseq:space.sseq}})
+  useEffect(async () => {
+    try {
+      const result = await axios.get(`/api/review/getReviews/${space.sseq}`)
       setReviewList(result.data);
       console.log(reviewList);
-    }catch(err){console.error()};
+    } catch (err) { console.error() };
   }, []);
 
 
@@ -110,13 +110,16 @@ function Review(props) {
 
     console.log(props.space.sseq);
     try {
-      await axios.post('/api/review/InsertReview' , {
-        sseq : props.space.sseq,
-        userid:user.userid,
+      await axios.post('/api/review/InsertReview', {
+        Space: props.space,
+        User: user,
         rate,
         content,
-        created_at:new Date().toLocaleString(),
         images
+      }, {
+        headers: {
+          "Content-Type": "application/json"
+        }
       });
 
       // 리뷰 전송 후 상태 초기화
@@ -222,11 +225,19 @@ function Review(props) {
         {reviewList.map((review, index) => (
           <div key={index} className="review">
             <div className="review-header">
-              <span className="review-username">{review.userName}</span>
-              <span className="review-rate">{review.rate}</span>
-              <span className="review-date">{review.date}</span>
+              <span className="review-username">아이디 : {review.user.userid}</span>
+              <span className="review-rate">
+                <ReactStars
+                  count={5}
+                  size={24}
+                  activeColor="#ffd700"
+                  value={review.rate}
+                  readOnly
+                /></span>
+              <span className="review-date">작성일 : {review.create_at}</span>
             </div>
-            <div className="review-content">{review.content}</div>
+            <div className="review-content">내용 : {review.content}</div>
+            <div className="review-reply">답변 : {review.reply} </div>
             <div className="review-images">
               {review.images.map((image, idx) => (
                 <img key={idx} src={URL.createObjectURL(image)} alt={`review-img-${idx}`} />

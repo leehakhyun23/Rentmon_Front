@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import { useSelector } from 'react-redux'
+import Calendar from "react-calendar";
 
 import './style/reservation.css';
 import { useParams, useLocation, useNavigate } from 'react-router-dom';
 import axios from 'axios';
-
 
 import Slider from 'react-slick';
 import 'slick-carousel/slick/slick.css';
@@ -25,26 +25,57 @@ function ReservationForm({ props }) {
     const [space, setSpace] = useState({});
     const { sseq } = useParams(); // URL 파라미터에서 공간 고유 ID 받기
     const location = useLocation();
-    const { startDate, startTime, endTime } = location.state || {}; // 상태에서 날짜와 시간 정보 받기
 
     const [userInfo, setUserInfo] = useState({});  // 예약자 정보
     const [purpose, setPurpose] = useState('');    // 사용 목적
     const [request, setRequest] = useState('');    // 요청 사항
 
 
-    const handleSubmit = (e) => {
-        e.preventDefault();
+    const [date, setDate] = useState(null);
+    const [startTime, setStartTime] = useState("");
+    const [endTime, setEndTime] = useState("");
+    const hours = Array.from({ length: 24 }, (_, i) => `${i}:00`);
 
-        const reservationData = {
-            startDate: startDate,
-            startTime: startTime,
-            endTime: endTime,
-        };
-
-        onSubmit(reservationData);
+    const handleDateChange = (newDate) => {
+        setDate(newDate);
+        setStartTime("");
+        setEndTime("");
     };
 
+    const handleStartTimeChange = (event) => {
+        setStartTime(event.target.value);
+    };
+
+    const handleEndTimeChange = (event) => {
+        setEndTime(event.target.value);
+    };
+
+    const handleSubmit = () => {
+        if (!date || !startTime || !endTime) {
+            alert("Please select date, start time, and end time.");
+            return;
+        }
+
+        if (startTime >= endTime) {
+            alert("End time must be after start time.");
+            return;
+        }
+
+        // 예약 데이터를 서버로 전송
+        const reservationData = {
+            date: date.toISOString().split("T")[0],
+            startTime,
+            endTime,
+        };
+
+        console.log("Reservation Data:", reservationData);
+        // 실제로 서버에 예약 데이터를 전송하는 로직은 여기서 구현됩니다.
+    };
+
+
     const onSubmit = () => { }
+
+
 
     useEffect(
         () => {
@@ -70,6 +101,43 @@ function ReservationForm({ props }) {
 
     return (
         <div className="reservation-form-container">
+            <div className = "reservation-calendar">
+            <div>
+            <h2>Select a date for your reservation</h2>
+            <Calendar onChange={handleDateChange} value={date} />
+            {date && (
+                <>
+                    <div>
+                        <label>Start Time:</label>
+                        <select value={startTime} onChange={handleStartTimeChange}>
+                            <option value="">Select start time</option>
+                            {hours.map((hour, index) => (
+                                <option key={index} value={hour}>
+                                    {hour}
+                                </option>
+                            ))}
+                        </select>
+                    </div>
+                    <div>
+                        <label>End Time:</label>
+                        <select value={endTime} onChange={handleEndTimeChange}>
+                            <option value="">Select end time</option>
+                            {hours.map((hour, index) => (
+                                <option key={index} value={hour}>
+                                    {hour}
+                                </option>
+                            ))}
+                        </select>
+                    </div>
+                    <button onClick={handleSubmit}>Reserve</button>
+                </>
+            )}
+        </div>
+
+            </div>
+            
+
+            
             <div className="space-info">
                 <Slider {...settings}>
                     {space.images && space.images.map((image, idx) => (
@@ -83,7 +151,7 @@ function ReservationForm({ props }) {
 
             <div className="reservation-details">
                 <h3>예약 정보</h3>
-                <p>예약 날짜: {startDate}</p>
+                <p>예약 날짜: {date}</p>
                 <p>시작 시간: {startTime}</p>
                 <p>종료 시간: {endTime}</p>
                 <label>예약 인원: <input type="number" min="1" max="10" /></label>
@@ -94,7 +162,6 @@ function ReservationForm({ props }) {
                 <p>이름: {user.name}</p>
                 <p>이메일: {user.email}</p>
                 <p>전화번호: {user.phone}</p>
-                <label>사용 목적: <input type="text" value={purpose} onChange={(e) => setPurpose(e.target.value)} /></label>
                 <label>요청 사항: <input type="text" value={request} onChange={(e) => setRequest(e.target.value)} /></label>
             </div>
 
