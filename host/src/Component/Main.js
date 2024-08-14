@@ -27,7 +27,7 @@ function Main() {
       </div>
 
       <div className='field'>
-        <button className='btn2' onClick={()=>{navigate('/Login')}}>
+        <button className='btn2' onClick={()=>{navigate('/Join')}}>
           공간 호스트 시작하기
         </button>
       </div>
