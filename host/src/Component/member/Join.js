@@ -25,47 +25,50 @@ function Join() {
     useEffect(()=>{}, [authNum]);
 
     async function onSubmit() {
+        // 입력값 검증
         if (hostid === '') { return alert('아이디를 입력하세요'); }
         if (name === '') { return alert('이름을 입력하세요'); }
         if (email === '') { return alert('이메일을 입력하세요'); }
         if (phone === '') { return alert('전화번호를 입력하세요'); }
         if (pwd === '') { return alert('패스워드를 입력하세요'); }
         if (pwd !== pwdChk) { return alert('패스워드 확인이 일치하지 않습니다'); }
-        if (isEmailCheck === false) {return alert('이메일 인증을 하지않았습니다');}
-
+        if (isEmailCheck === false) { return alert('이메일 인증을 하지않았습니다'); }
+    
         try {
-            let result = await axios.post("/api/host/join", {
+            // 회원가입 요청
+            let result = await axios.post("/api/member/join", {
                 userid: hostid,
-                password: pwd,
-                name: name,
-                email: email,
-                phone: phone,
-                role: "host" // 필요에 따라 role을 포함시킵니다.
+                pwd: pwd,
+                nickname: name,
+                role: "host"
             });
     
+            // 서버 응답 처리
             if (result.data.error) {
                 return setMessage("회원가입 실패. 다시 시도해 주세요.");
             }
             if (result.data.msg === 'ok') {
-                alert('회원 가입이 완료되었습니다. 로그인하세요');
-                navigate('/');
+                let result1 = await axios.post("/api/host/join", {
+                    member: {mseq:result.data.mseq},
+                    hostid: hostid,
+                    pwd: pwd,
+                    nickname: name,
+                    email: email,
+                    phone: phone,
+                });
+                if(result1.data.msg === 'ok'){
+                    alert('회원 가입이 완료되었습니다. 로그인하세요');
+                    navigate('/'); // 회원가입 후 로그인 페이지로 이동
+                } else {
+                    alert("회원가입 실패");
+                }
             }
-    
-            // 로그인 액션 디스패치 및 쿠키 설정 등
-            setCookie("token", {
-                accessToken: result.data.accessToken,
-                refreshToken: result.data.refreshToken,
-            }, 1);
-    
-            dispatch(loginAction(result.data)); // 로그인 액션 디스패치
-            navigate("/");
     
         } catch (err) {
             console.error(err);
             setMessage("회원가입 중 오류가 발생했습니다.");
         }
     }
-
     //     try {
     //         let result = await axios.post("/api/host/join", {
     //             userid: hostid,
