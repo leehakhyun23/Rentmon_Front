@@ -7,10 +7,7 @@ import './css/main.css'
 
 
 function Main() {
-<<<<<<< HEAD
 
-=======
->>>>>>> ce3740f1a8acfe6e18cfc04c62abba6b9731a7d7
   const navigate = useNavigate();
 
   return (

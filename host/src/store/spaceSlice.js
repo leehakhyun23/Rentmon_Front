@@ -5,7 +5,6 @@ const initialState = {
     title: '',
     subtitle:'',
     price:'',
-    personnal:'',
     maxpersonnal:'',
     content:'',
     caution:'',
@@ -16,15 +15,20 @@ const initialState = {
     address_detail:'',
     starttime:'',
     endtime:'',
-    startDate:'',
-    endDate:'',
-    monthholi:[],
-    weekholi:[],
-    dayholi:[],
     fnum:[],
     bank:'',
     accountnum:'',
     hostid:'',
+    imgsrc1:'',
+    imgsrc2:'',
+    imgsrc3:'',
+    imgsrc4:'',
+    imgsrc5:'',
+    imgsrc6:'',
+    imgsrc7:'',
+    imgsrc8:'',
+    imgsrc9:'',
+    imgsrc10:'',
 };
 
 const spaceSlice = createSlice({
@@ -36,7 +40,6 @@ const spaceSlice = createSlice({
             state.title = action.payload.title;
             state.subtitle = action.payload.subtitle;
             state.price = action.payload.price;
-            state.personnal = action.payload.personnal;
             state.maxpersonnal = action.payload.maxpersonnal;
             state.content = action.payload.content;
             state.caution = action.payload.caution;
@@ -45,14 +48,18 @@ const spaceSlice = createSlice({
             state.town = action.payload.town;
             state.village = action.payload.village;
             state.address_detail = action.payload.address_detail;
-            state.imgSrc = action.payload.imgSrc;
+            state.imgsrc1 = action.payload.imgsrc1;
+            state.imgsrc2 = action.payload.imgsrc2;
+            state.imgsrc3 = action.payload.imgsrc3;
+            state.imgsrc4 = action.payload.imgsrc4;
+            state.imgsrc5 = action.payload.imgsrc5;
+            state.imgsrc6 = action.payload.imgsrc6;
+            state.imgsrc7 = action.payload.imgsrc7;
+            state.imgsrc8 = action.payload.imgsrc8;
+            state.imgsrc9 = action.payload.imgsrc9;
+            state.imgsrc10 = action.payload.imgsrc10s
             state.starttime = action.payload.starttime;
             state.endtime = action.payload.endtime;
-            state.startDate = action.payload.startDate;
-            state.endDate = action.payload.endDate;
-            state.monthholi = action.payload.monthholi;
-            state.weekholi = action.payload.weekholi;
-            state.dayholi = action.payload.dayholi;
             state.fnum = action.payload.fnum;
             state.bank = action.payload.bank;
             state.accountnum = action.payload.accountnum;
