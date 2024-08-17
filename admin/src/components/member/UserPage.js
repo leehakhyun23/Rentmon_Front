@@ -1,11 +1,16 @@
 import { Box, Button, Checkbox, List, ListItem, Pagination, Paper } from '@mui/material';
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
+import CouponModal from '../modal/CouponModal';
 
 const UserPage = () => {
     const [userList, setUserList] = useState([]);
     const [checked, setChecked] = useState([]);
     const [selectAll, setSelectAll] = useState(false);
+
+    const [open, setOpen] = useState(false);
+    const handleOpen = () => setOpen(true);
+    const handleClose = () => setOpen(false);
 
     const fetchUserList = () => {
         axios.get('/api/admin/user')
@@ -72,11 +77,13 @@ const UserPage = () => {
                     </List>
                     <Pagination count={10} color="primary" />
                     <Box>
+                        <Button onClick={handleOpen}>쿠폰발급</Button>
                         <Button onClick={handleIsLoginUpdate}>수정</Button>
                         <Button>삭제</Button>
                     </Box>
                 </Paper>
             </Box>
+            <CouponModal open={open} handleClose={handleClose} userids={checked}/>
         </div>
     );
 };
