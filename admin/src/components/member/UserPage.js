@@ -7,24 +7,34 @@ const UserPage = () => {
     const [userList, setUserList] = useState([]);
     const [checked, setChecked] = useState([]);
     const [selectAll, setSelectAll] = useState(false);
+    const [paging, setPaging] = useState({ page: 0, size: 10, totalPages: 1 });
 
     const [open, setOpen] = useState(false);
     const handleOpen = () => setOpen(true);
     const handleClose = () => setOpen(false);
 
-    const fetchUserList = () => {
-        axios.get('/api/admin/user')
-        .then((res) => {
-            setUserList(res.data);
-        })
-        .catch((err) => {
-            console.error(err);
-        })
+    const fetchUserList = (page = 0, size = 10) => {
+        axios.get(`/api/admin/user?page=${page}&size=${size}`)
+            .then((res) => {
+                setUserList(res.data.content);
+                setPaging({ 
+                    page: res.data.number, 
+                    size: res.data.size, 
+                    totalPages: res.data.totalPages 
+                });
+            })
+            .catch((err) => {
+                console.error(err);
+            });
     }
 
     useEffect(() => {
-        fetchUserList();
+        fetchUserList(paging.page, paging.size);
     }, [])
+
+    const handlePageChange = (e, value) => {
+        fetchUserList(value - 1, paging.size);
+    };
 
     const handleOnChange = () => {
         const newSelectAll = !selectAll;
@@ -75,7 +85,7 @@ const UserPage = () => {
                             </ListItem>
                         ))}
                     </List>
-                    <Pagination count={10} color="primary" />
+                    <Pagination count={paging.totalPages} page={paging.page + 1} onChange={handlePageChange} color="primary"/>
                     <Box>
                         <Button onClick={handleOpen}>쿠폰발급</Button>
                         <Button onClick={handleIsLoginUpdate}>수정</Button>
