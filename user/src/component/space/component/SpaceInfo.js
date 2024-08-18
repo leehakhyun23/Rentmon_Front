@@ -91,6 +91,8 @@ function SpaceInfo(props) {
                     <div id='map' style={{ width: "600px", height: "400px", margin: "20px" }}></div>
                 </div>
             </div>
+
+            <button onClick={()=>{navigate(`/ReservationForm/${props.space.sseq}`)}}>예약하기</button>
         </div>
 
     )
