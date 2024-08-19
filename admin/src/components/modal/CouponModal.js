@@ -21,23 +21,28 @@ const style = {
 export default function CouponModal({open, handleClose, userids}) {
     const [limitDate, setLimitDate] = useState(null);
     const [selectedValue, setSelectedValue] = useState(null);
+    const [couponTitle, setCouponTitle] = useState("");
 
     useEffect(() => {
         if (open && userids.length === 0) {
             alert("유저 ID가 선택되지 않았습니다.");
+            setLimitDate(null);
+            setSelectedValue(null);
+            setCouponTitle("");
             handleClose();
         }
     }, [handleClose, open, userids.length]);
 
     const disablePastDates = (date) => {
         return date.isBefore(dayjs(), 'day');
-      };
+    };
 
     const handleIssued = () => {
         const issuedData = {
             userids: userids,
             limitDate: limitDate,
             discount: selectedValue,
+            couponTitle: couponTitle,
         };
 
         axios.post('/api/admin/issuedcoupon', issuedData)
@@ -50,7 +55,14 @@ export default function CouponModal({open, handleClose, userids}) {
             console.error(err);
         })
         
+        setLimitDate(null);
+        setSelectedValue(null);
+        setCouponTitle("");
         handleClose();
+    }
+
+    const couponTitleChange = (e) => {
+        setCouponTitle(e.target.value);
     }
 
     return (
@@ -63,12 +75,15 @@ export default function CouponModal({open, handleClose, userids}) {
                     <FormControl>
                         <FormLabel>Coupon</FormLabel>
                         <RadioGroup name="radio-buttons-group" value={selectedValue} onChange={(e) => setSelectedValue(e.target.value)}>
-                            <FormControlLabel value="1000" control={<Radio />} label="1000원" />
-                            <FormControlLabel value="2000" control={<Radio />} label="2000원" />
                             <FormControlLabel value="3000" control={<Radio />} label="3000원" />
+                            <FormControlLabel value="5000" control={<Radio />} label="5000원" />
+                            <FormControlLabel value="10000" control={<Radio />} label="10000원" />
                         </RadioGroup>
                     </FormControl>
                 </Typography>
+                </Box>
+                <Box>
+                    <TextField label="쿠폰명" variant="outlined" value={couponTitle} onChange={couponTitleChange}/>
                 </Box>
                 <Box>
                     <LocalizationProvider dateAdapter={AdapterDayjs}>

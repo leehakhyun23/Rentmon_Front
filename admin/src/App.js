@@ -7,6 +7,7 @@ import DeclarationPage from './components/declaration/DeclarationPage';
 import InquiryView from './components/inquiry/InquiryView';
 import DeclarationView from './components/declaration/DeclarationView';
 import CouponPage from './components/Coupon/CouponPage';
+import CouponModal from './components/modal/CouponModal';
 
 function App() {
   return (
@@ -19,6 +20,7 @@ function App() {
       <Route path='/declaration' element={<DeclarationPage />} />
       <Route path='/declarationview/:dseq' element={<DeclarationView />} />
       <Route path='/couponpage' element={<CouponPage />} />
+      <Route element={<CouponModal />} />
     </Routes>
   );
 }
