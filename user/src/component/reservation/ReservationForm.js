@@ -26,28 +26,74 @@ function ReservationForm({ props }) {
     const { sseq } = useParams(); // URL 파라미터에서 공간 고유 ID 받기
     const location = useLocation();
     const [request, setRequest] = useState('');    // 요청 사항
+    const [payment, setPayment] = useState();
 
-
+    // 시간값
     const [date, setDate] = useState(null);
     const [startTime, setStartTime] = useState(0);
     const [endTime, setEndTime] = useState(1);
-    const hours = Array.from({ length: 24 }, (_, i) => `${i}:00`);
+    const [startTimestamp, setStartTimestamp] = useState();
+    const [endTimestamp, setEndTimestamp] = useState();
+    const [reserveTime, setReserveTime] = useState();
+    const hours = Array.from({ length: 24 }, (_, i) => `${i}:00:00`);
 
     const handleDateChange = (newDate) => {
-        setDate(newDate);
+        // Date 객체에서 년, 월, 일 추출
+        const year = newDate.getFullYear();
+        const month = String(newDate.getMonth() + 1).padStart(2, '0'); // 월은 0부터 시작하므로 +1, 두 자리 수로 변환
+        const day = String(newDate.getDate()).padStart(2, '0'); // 두 자리 수로 변환
+
+        // YYYY-MM-DD 형식의 문자열로 변환
+        const formattedDate = `${year}-${month}-${day}`;
+
+        setDate(formattedDate);
         setStartTime("");
         setEndTime("");
+
+        console.log("Formatted Date:", formattedDate); // 출력 예: 2024-08-19
     };
 
     const handleStartTimeChange = (event) => {
         setStartTime(event.target.value);
+        const timestamp = `${date} ${event.target.value}`;
+        setStartTimestamp(timestamp);
+
+
     };
 
     const handleEndTimeChange = (event) => {
         setEndTime(event.target.value);
-        calculateTotalPrice();
-        console.log(calculateTotalPrice());
+        const timestamp = `${date} ${event.target.value}`;
+        setEndTimestamp(timestamp);
+        // 바로 예약 시간을 계산하고 결제 금액을 계산합니다.
+        const calculatedReserveTime = calculateTimeDifference(startTimestamp, endTimestamp);
+        const calculatedPayment = calculatedReserveTime * space.price;
+
+        setReserveTime(calculatedReserveTime);  // 필요하면 상태로도 저장
+        setPayment(calculatedPayment);          // 필요하면 상태로도 저장
+
     };
+
+    useEffect(() => {
+        if (startTimestamp && endTimestamp) {
+            const calculatedReserveTime = calculateTimeDifference(startTimestamp, endTimestamp);
+            setReserveTime(calculatedReserveTime);
+            setPayment(calculatedReserveTime * space.price);
+
+            console.log("Reserve Time:", calculatedReserveTime);
+            console.log("Payment:", calculatedReserveTime * space.price);
+        }
+    }, [startTimestamp, endTimestamp, space.price]);
+
+
+    function calculateTimeDifference(startDateStr, endDateStr) {
+        const startDate = new Date(startDateStr);
+        const endDate = new Date(endDateStr);
+        const differenceInMilliseconds = endDate - startDate;
+        const differenceInHours = differenceInMilliseconds / (1000 * 60 * 60);
+        return differenceInHours;
+
+    }
 
     const handleSubmit = () => {
         if (!date || !startTime || !endTime) {
@@ -55,42 +101,35 @@ function ReservationForm({ props }) {
             return;
         }
 
-        if (startTime >= endTime) {
-            alert("예약종료시간은 예약시작시간의 뒤에 있어야 합니다. ");
-            return;
-        }
+        // 예약 데이터를 서버로 전송
+        const reservationData = {
+            reservestart: startTimestamp,
+            reserveend: endTimestamp,
+            request: request,
+            payment: payment,
+            user: user.userid,
+            space: space.sseq
+        };
 
-        // 예약 시작 시간과 종료 시간을 Timestamp 형식으로 변환
-    const startTimestamp = new Date(`${date.toISOString().split('T')[0]} ${startTime}:00`).toISOString().replace('T', ' ').split('.')[0];
-    const endTimestamp = new Date(`${date.toISOString().split('T')[0]} ${endTime}:00`).toISOString().replace('T', ' ').split('.')[0];
+        console.log(reservationData);
 
-    // 예약 데이터를 서버로 전송
-    const reservationData = {
-        reservestart: startTimestamp,
-        reserveend: endTimestamp,
-        request: request,
-        payment: calculateTotalPrice(),
-        user: user,
-        space: space
-    };
-
-    axios.post(`/api/reservation/InsertReservation`, reservationData, {
-        headers:{
-            "Content-Type" : "application/json"
-        }
-    })
-        .then(response => {
-            alert('예약에 성공했습니다.');
-            navigate('/reservation/ReservationDone');  // 예약 성공 후 이동할 페이지
+        axios.post(`/api/reservation/InsertReservation`, reservationData, {
+            headers: {
+                "Content-Type": "application/json"
+            }
         })
-        .catch(error => {
-            console.error('예약에 실패했습니다.', error);
-        });
-};
+            .then(response => {
+                alert('예약에 성공했습니다.');
+                navigate(`/reservation/ReservationDone/${space.sseq}`);  // 예약 성공 후 이동할 페이지
+            })
+            .catch(error => {
+                console.log(space);
+                console.error('예약에 실패했습니다.', error);
+            });
+    };
 
 
     const onSubmit = () => { }
-
 
 
     useEffect(
@@ -104,55 +143,48 @@ function ReservationForm({ props }) {
         }, []
     )
 
-    const calculateTotalPrice = () => {
-        const start = new Date(`2024-01-01T${startTime}`);
-        const end = new Date(`2024-01-01T${endTime}`);
-        const hours = (endTime - startTime);
-        console.log(hours);
-        return hours * space.price;
-    };
 
 
 
 
     return (
         <div className="reservation-form-container">
-            <div className = "reservation-calendar">
-            <div>
-            <Calendar onChange={handleDateChange} value={date} />
-            {date && (
-                <>
-                    <div>
-                        <label>Start Time:</label>
-                        <select value={startTime} onChange={handleStartTimeChange}>
-                            <option value="">Select start time</option>
-                            {hours.map((hour, index) => (
-                                <option key={index} value={hour}>
-                                    {hour}
-                                </option>
-                            ))}
-                        </select>
-                    </div>
-                    <div>
-                        <label>End Time:</label>
-                        <select value={endTime} onChange={handleEndTimeChange}>
-                            <option value="">Select end time</option>
-                            {hours.map((hour, index) => (
-                                <option key={index} value={hour}>
-                                    {hour}
-                                </option>
-                            ))}
-                        </select>
-                    </div>
-                    <button onClick={handleSubmit}>Reserve</button>
-                </>
-            )}
-        </div>
+            <div className="reservation-calendar">
+                <div>
+                    <Calendar onChange={handleDateChange} value={date} />
+                    {date && (
+                        <>
+                            <div>
+                                <label>Start Time:</label>
+                                <select value={startTime} onChange={handleStartTimeChange}>
+                                    <option value="">Select start time</option>
+                                    {hours.map((hour, index) => (
+                                        <option key={index} value={hour}>
+                                            {hour}
+                                        </option>
+                                    ))}
+                                </select>
+                            </div>
+                            <div>
+                                <label>End Time:</label>
+                                <select value={endTime} onChange={handleEndTimeChange}>
+                                    <option value="">Select end time</option>
+                                    {hours.map((hour, index) => (
+                                        <option key={index} value={hour}>
+                                            {hour}
+                                        </option>
+                                    ))}
+                                </select>
+                            </div>
+                            <button onClick={handleSubmit}>Reserve</button>
+                        </>
+                    )}
+                </div>
 
             </div>
-            
 
-            
+
+
             <div className="space-info">
                 <Slider {...settings}>
                     {space.images && space.images.map((image, idx) => (
@@ -166,7 +198,7 @@ function ReservationForm({ props }) {
 
             <div className="reservation-details">
                 <h3>예약 정보</h3>
-                <p>예약 날짜: {date ? date.toLocaleDateString() : "날짜를 선택하세요"}</p>
+                <p>예약 날짜: {date}</p>
                 <p>시작 시간: {startTime}</p>
                 <p>종료 시간: {endTime}</p>
                 <p>공간 주의 사항 : {space.caution}</p>
@@ -182,14 +214,14 @@ function ReservationForm({ props }) {
 
             <div className="host-info">
                 <h3>호스트 정보</h3>
-                <p>이름 : {space.host.hostid}</p>
+                {/* <p>이름 : {space.host.hostid}</p>
                 <p>연락처: {space.host.phone}</p>
-                <p>이메일 : {space.host.email}</p>
+                <p>이메일 : {space.host.email}</p> */}
             </div>
 
             <div className="payment-info">
                 <h3>결제 정보</h3>
-                <p>총 결제 금액: {calculateTotalPrice()}원</p>
+                <p>총 결제 금액: {payment}원</p>
                 <label>결제 수단:
                     <label><input type="radio" name="payment" value="card" /> 신용카드</label>
                     <label><input type="radio" name="payment" value="paypal" /> PayPal</label>

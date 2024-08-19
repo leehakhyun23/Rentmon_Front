@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import ReactStars from 'react-rating-stars-component';
 import { Box, Button, IconButton, TextField } from '@mui/material';
@@ -11,6 +11,7 @@ const Review = (props) => {
     const [content, setContent] = useState("");
     const [rate, setRate] = useState(0);
     const [images, setImages] = useState([]);
+    const [reviewList, setReviewList] = useState([]);
 
     const contentChange = (e) => {
         setContent(e.target.value);   
@@ -30,6 +31,13 @@ const Review = (props) => {
         const files = Array.from(e.target.files);
         setImages((prevImages) => [...prevImages, ...files]);
     };
+
+    useEffect(()=>{
+        const result = axios.get(`/api/review/GetReviews/${props.space.sseq}`)
+        console.log(result.data);
+        setReviewList(result.data);
+
+    }, [])
 
     const handleOnSubmit = () => {
         const formData = new FormData();
