@@ -25,8 +25,6 @@ function ReservationForm({ props }) {
     const [space, setSpace] = useState({});
     const { sseq } = useParams(); // URL 파라미터에서 공간 고유 ID 받기
     const location = useLocation();
-
-    const [userInfo, setUserInfo] = useState({});  // 예약자 정보
     const [request, setRequest] = useState('');    // 요청 사항
 
 
@@ -107,8 +105,8 @@ function ReservationForm({ props }) {
     )
 
     const calculateTotalPrice = () => {
-        const start = new Date(`2024-01-01T${startTime}:00`);
-        const end = new Date(`2024-01-01T${endTime}:00`);
+        const start = new Date(`2024-01-01T${startTime}`);
+        const end = new Date(`2024-01-01T${endTime}`);
         const hours = (endTime - startTime);
         console.log(hours);
         return hours * space.price;
@@ -171,6 +169,7 @@ function ReservationForm({ props }) {
                 <p>예약 날짜: {date ? date.toLocaleDateString() : "날짜를 선택하세요"}</p>
                 <p>시작 시간: {startTime}</p>
                 <p>종료 시간: {endTime}</p>
+                <p>공간 주의 사항 : {space.caution}</p>
             </div>
 
             <div className="user-info">
@@ -183,13 +182,9 @@ function ReservationForm({ props }) {
 
             <div className="host-info">
                 <h3>호스트 정보</h3>
-                <p>{space.hostName}님</p>
-                <p>연락처: {space.hostPhone}</p>
-            </div>
-
-            <div className="reservation-notes">
-                <h3>예약 주의 사항</h3>
-                <p>여기에 예약 관련 주의 사항을 기재하십시오...</p>
+                <p>이름 : {space.host.hostid}</p>
+                <p>연락처: {space.host.phone}</p>
+                <p>이메일 : {space.host.email}</p>
             </div>
 
             <div className="payment-info">
@@ -198,6 +193,11 @@ function ReservationForm({ props }) {
                 <label>결제 수단:
                     <label><input type="radio" name="payment" value="card" /> 신용카드</label>
                     <label><input type="radio" name="payment" value="paypal" /> PayPal</label>
+                </label>
+                <label>쿠폰 사용하기:
+                    <label><input type="radio" name="payment" value="3000coupon" /> 3000원</label>
+                    <label><input type="radio" name="payment" value="5000coupon" /> 5000원</label>
+                    <label><input type="radio" name="payment" value="10000coupon" /> 10000원</label>
                 </label>
             </div>
 

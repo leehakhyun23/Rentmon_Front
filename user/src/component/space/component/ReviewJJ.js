@@ -68,9 +68,8 @@ const Review = (props) => {
     return (
         <div>
             <Box>아이디<TextField label="Outlined" variant="outlined" value={user.userid} aria-readonly/></Box>
-            <Box>공간번호<TextField label="Outlined" variant="outlined" value={props.space.sseq} aria-readonly/></Box>
             <Box>내용<TextField label="Outlined" variant="outlined" value={content} onChange={contentChange}/></Box>
-            <ReactStars
+            별점<ReactStars
           count={5}
           onChange={ratingChanged}
           size={24}
@@ -78,7 +77,6 @@ const Review = (props) => {
           value={rate}
         //isHalf={true}   // 별점 반개 허용(double로 형변환 필요)
         />
-            <Box>별점<TextField label="Outlined" variant="outlined" value={rate} onChange={rateChange}/></Box>
             <Box>사진
                 <Box 
                     display="flex" 
