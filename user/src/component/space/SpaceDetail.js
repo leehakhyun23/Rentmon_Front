@@ -5,13 +5,13 @@ import { useSelector, useDispatch } from 'react-redux';
 import ReactStars from 'react-rating-stars-component';
 import { Box, Button, IconButton, TextField, Typography } from '@mui/material';
 import AddIcon from '@mui/icons-material/Add';
-import SpaceInfo from './component/SpaceInfo';
-import SpaceMenu from './component/SpaceMenu';
-import ReviewJJ from './component/ReviewJJ'
 
 import Slider from 'react-slick'
 import 'slick-carousel/slick/slick.css'
 import 'slick-carousel/slick/slick-theme.css'
+
+<script src="https://dapi.kakao.com/v2/maps/sdk.js?appkey=ab24362149773aad58ca4250688dfec8"></script>
+
 
 const { kakao } = window;
 
@@ -37,12 +37,10 @@ function SpaceDetail() {
   const [reviewList, setReviewList] = useState([]);
 
   const contentChange = (e) => {
-    setContent(e.target.value);
-  }
-
-  const rateChange = (e) => {
-    setRate(e.target.value);
-  }
+    if (e && e.target) {
+      setContent(e.target.value);
+    }
+  };
 
   const ratingChanged = (newRating) => {
     setRate(newRating);
@@ -55,23 +53,32 @@ function SpaceDetail() {
     setImages((prevImages) => [...prevImages, ...files]);
   };
 
-  useEffect(async () => {
-    try {
-      console.log(space);
-      const result = await axios.get(`/api/review/GetReviews/${space.sseq}`);
-      console.log(result.data);
-      setReviewList(result.data);
-    } catch (err) {
-      console.error(err);
-    }
-  }, [])
+  useEffect(() => {
+    const fetchReviews = async () => {
+      try {
+        if (space.sseq) {
+          const result = await axios.get(`/api/review/GetReviews/${space.sseq}`);
+          setReviewList(result.data);
+        }
+      } catch (err) {
+        console.error(err);
+      }
+    };
+
+    fetchReviews();
+
+    // 정리 함수
+    return () => {
+      setReviewList([]); // 언마운트 시 리뷰 리스트 초기화
+    };
+  }, [space.sseq]);
 
   const handleOnSubmit = () => {
     const formData = new FormData();
 
     const review = new Blob([JSON.stringify({
-      // space: props.space,
-      // user: user,
+      space: space,
+      user: user,
       content: content,
       rate: rate,
     })], {
@@ -114,24 +121,29 @@ function SpaceDetail() {
   )
 
   // 지도 생성
-  useEffect(
-    () => {
-      // 지도의 중심위치 설정이동
+  useEffect(() => {
+    if (window.kakao && window.kakao.maps) {
       const container = document.getElementById('map');
       const options = { center: new kakao.maps.LatLng(37.5718407, 126.9872086) };
       const kakaoMap = new kakao.maps.Map(container, options);
-      // 표시지역 마킹
       const markerPosition = new kakao.maps.LatLng(37.5718407, 126.9872086);
-      var marker = new kakao.maps.Marker({
+      const marker = new kakao.maps.Marker({
         position: markerPosition
       });
       marker.setMap(kakaoMap);
-    }, []
-  )
+  
+      return () => {
+        kakaoMap.setCenter(null);  // 지도 리소스 정리
+        marker.setMap(null); // 마커도 제거
+      };
+    } else {
+      console.error('Kakao Maps API is not loaded');
+    }
+  }, []);
 
 
   return (
-    <div className='innerContainer'>
+    <div className='spaceContainer'>
       <div>
         {/* spaceMenu Part */}
         <div className="SpaceMenu-container">
@@ -144,30 +156,26 @@ function SpaceDetail() {
         </div>
 
         {/* spaceInfo Part */}
-        <div className="space">
+        <div className="spaceInfo">
           {<Slider {...settings}>
             {space.images && space.images.map((image, idx) => (
               <img key={idx} src={`http://localhost:8070/space_images/${image.realName}`} alt={space.title} />
             ))}
           </Slider>}
-          <span onClick={() => { navigate(`/spaceDetail/${space.sseq}`) }}> {space.sseq}. {space.title}</span><br />
-
-          <br /><br /><br />
-          <div className="spacetitle">
-            공간 소개
-            <div className="spacecontent">
-              <span> 제목 : {space.title}</span><br />
-              <span> 내용 : {space.content}</span><br />
-              <span> 가격 : {space.price}</span><br />
-              <span> 주소 : </span><br />
-              <span> 시간 : </span>
-              <span> 해시태그들 : </span>
-
-
-            </div>
+          <div className="colTitle">제목</div>
+          <div className="colContent"> {space.sseq}. {space.title} </div>
+          <div className="colTitle">부제목</div>
+          <div className="colContent"> {space.subtitle} </div>
+          <div className="colTitle">내용 시간</div>
+          <div className="colContent"> {space.content} </div>
+          <div className="colTitle">대여가능 시간</div>
+          <div className="colContent"> {space.starttime}시 ~ {space.endtime}시 </div>
+          <div className="colTitle">주소</div>
+          <div className="colContent"> {space.province} {space.town} {space.village} {space.addressdetail} </div>
+          <div className="colTitle">최대 수용인원</div>
+          <div className="colContent"> {space.maxpersonnal} {space.addressdetail} </div>
 
 
-          </div>
           <div className="spacetitle">
             공간 시설 안내
           </div>
@@ -268,6 +276,19 @@ function SpaceDetail() {
                   edit={false}
                   activeColor="#ffd700"
                 />
+                {review.images && (
+                  <Slider {...settings}>
+                    {review.images.map((img, idx) => (
+                      <div key={idx}>
+                        <img
+                          src={`http://localhost:8070/review_images/${img.realname}`}
+                          alt={`리뷰 이미지 ${idx}`}
+                          style={{ width: '100px', height: '100px', objectFit: 'cover', marginRight: '10px' }}
+                        />
+                      </div>
+                    ))}
+                  </Slider>
+                )}
                 {review.reply && (
                   <Typography variant="body2" color="textSecondary">
                     <strong>관리자 답변:</strong> {review.reply}

@@ -24,29 +24,7 @@
     width: 100%;
     height: auto;
   }
-  
-  .space span {
-    display: block;
-    padding: 10px;
-    font-size: 16px;
-    color: #333;
-  }
-  
-  .space h3 {
-    margin: 10px;
-    font-size: 18px;
-  }
-  
-  .space ul {
-    padding: 0 10px;
-    list-style-type: none;
-  }
-  
-  .space ul li {
-    margin: 5px 0;
-    font-size: 14px;
-    color: #666;
-  }
+
 
   .SpaceMenu-container {
     display: flex;
@@ -81,37 +59,4 @@
     padding: 10px; /* 내부 여백을 설정합니다 */
     border-radius: 5px; /* 모서리를 둥글게 설정합니다 */
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* 약간의 그림자를 추가하여 입체감을 줍니다 */
-}
-
-.remocon {
-  position: fixed;
-  top: 300px;
-  right: 200px;
-  width: 200px;
-  padding: 20px;
-  background-color: #fff;
-  border: 1px solid #ccc;
-  border-radius: 10px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  z-index: 1000; /* 다른 요소들 위에 위치하도록 설정 */
-}
-
-.remocon h2 {
-  margin: 0 0 10px 0;
-  font-size: 18px;
-}
-
-.remocon button {
-  width: 100%;
-  padding: 10px;
-  background-color: #007bff;
-  color: #fff;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-  font-size: 16px;
-}
-
-.remocon button:hover {
-  background-color: #0056b3;
 }
