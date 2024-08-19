@@ -1,0 +1,65 @@
+.reservation-form-container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  .space-info, .reservation-details, .user-info, .host-info, .reservation-notes, .payment-info, .agreement {
+    margin-bottom: 20px;
+  }
+  
+  .space-info img {
+    width: 100%;
+    border-radius: 8px;
+  }
+  
+  .space-info h2, .space-info h3 {
+    color: #333;
+  }
+  
+  .space-info p, .space-info label {
+    margin: 8px 0;
+    font-size: 16px;
+    color: #555;
+  }
+  
+  .space-info label {
+    display: flex;
+    align-items: center;
+  }
+  
+  .space-info label input[type="text"], .space-info label input[type="number"] {
+    width: calc(100% - 20px);
+    padding: 8px;
+    margin-top: 5px;
+    border-radius: 4px;
+    border: 1px solid #ddd;
+    font-size: 16px;
+  }
+  
+  .space-info label input[type="checkbox"], .space-info label input[type="radio"] {
+    margin-right: 10px;
+    width: 20px;
+    height: 20px;
+    accent-color: #007bff; /* 브라우저 지원 여부에 따라 체크박스 색상을 변경 */
+    cursor: pointer;
+  }
+  
+  .space-info .submit-button {
+    width: 100%;
+    padding: 15px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 18px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+  
+  .space-info .submit-button:hover {
+    background-color: #0056b3;
+  }

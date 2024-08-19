@@ -94,9 +94,6 @@ function Join() {
                         (e) => { setEmail(e.currentTarget.value) }
                     } placeholder='이메일' />
                 </div>
-                <div className='aa'>
-                <div className='email'>이메일 인증</div>
-                </div>
                 <div className='field'>
                     <input type="text" value={phone} onChange={
                         (e) => { setPhone(e.currentTarget.value) }
