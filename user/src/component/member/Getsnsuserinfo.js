@@ -9,7 +9,7 @@ import jaxios from '../../util/jwtUtil';
 import "./css/loading.css";
 
 function Getsnsuserinfo() {
-  const {userid} = useParams();
+    const {userid,provider} = useParams();
     const navigate = useNavigate();
     const dispatch = useDispatch();
 
@@ -21,27 +21,32 @@ function Getsnsuserinfo() {
 
     let snsLogin=async()=>{
         let usernameWithRole =userid+":user";
-        let result = await axios.post("/api/member/login",null,{params:{usernameWithRole,password:"kakao"}});
+        let result = await axios.post("/api/member/login",null,{params:{usernameWithRole,password:provider}});
         
         if(result.data.error === "ERROR_LOGIN"){
             return alert("로그인 실패 관리자에게 문의");
         }
         setCookie("token",{accessToken:result.data.accessToken , refreshToken : result.data.refreshToken},1);
-
-              //회원 정보 조회
-              let logindata = await jaxios.get("/api/user/getuseinfo",{params:{userid:result.data.userid}});
+        //회원 정보 조회
+        let logindata = await jaxios.get("/api/user/getuseinfo",{params:{userid}});
+        if(!logindata.data.islogin){
+                alert("사용할 수 없는 계정입니다.");
+                return navigate("/login");
+              }
               dispatch(loginAction(logindata.data));
               if(!logindata.data){
                 return alert("로그인 실패 관리자에게 문의");
               }
-
+              
               //최근 예약 조회
-              let recentrerve = await jaxios.get("/api/space/getreserve",{params:{userid:result.data.userid}});
+              let recentrerve = await jaxios.get("/api/space/getreserve",{params:{userid}});
               
               //최근 예약에 날씨 데이터 삽입
               if(recentrerve.data){
                 dispatch(recentReserveAction({recentReserve: recentrerve.data}));
                 fetchForecast();
+              }else{
+                dispatch(recentReserveAction({}));
               }
       
               async function fetchForecast() {

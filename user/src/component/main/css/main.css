@@ -1,0 +1,7 @@
+.main {  }
+.main .mainSlide { margin-top: -40px; border-radius: 19px; overflow: hidden; }
+.main .mainSlide img { width: 100%; }
+
+.main .mainSlide .swiper-button-prev, .main .mySwiper .swiper-button-next { color: #fff; padding: 0 15px; }
+
+.main .recommandSection {  }

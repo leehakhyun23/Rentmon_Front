@@ -10,20 +10,20 @@ function LoginOn() {
   const [recentReservationData , setRecentReservationData] = useState({});
   useEffect(() => {
     if (!recent.recentReserve) return;
-    console.log(recent);
     let recentrv = recent.recentReserve;
     setRecentReservationData({
-      savefilename: recentrv.spaceimage[0]?.realname || '',
+      savefilename: recentrv.space.spaceimage[0]?.realName || '',
       title: recentrv.space?.title || '',
-      count: recentrv.space?.personnal || 0,
+      count: recentrv.space?.maxpersonnal || 0,
       reservedate: recentrv.reservestart || '',
+      reserveend: recentrv.reserveend || '',
       weather : recent.weather || "",
     });
   }, [recent]); 
   return (
     <div className='logOn scrollbar'>
       {/* 상위 내정보 */}
-      <SidebarMyInfo username = {user.name} />
+      <SidebarMyInfo username = {user.name} profileimg={user.profileimg} />
       <RecentReservation rs={recentReservationData}/>
       <MyInfo user={user}/>
     </div>
