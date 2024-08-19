@@ -9,12 +9,7 @@ import AddIcon from '@mui/icons-material/Add';
 import Slider from 'react-slick'
 import 'slick-carousel/slick/slick.css'
 import 'slick-carousel/slick/slick-theme.css'
-
-<script src="https://dapi.kakao.com/v2/maps/sdk.js?appkey=ab24362149773aad58ca4250688dfec8"></script>
-
-
-const { kakao } = window;
-
+import KakaoMap from '../../util/KakaoMap';
 
 const settings = {
   dot: false,
@@ -35,6 +30,8 @@ function SpaceDetail() {
   const [rate, setRate] = useState(0);
   const [images, setImages] = useState([]);
   const [reviewList, setReviewList] = useState([]);
+
+  const [kakaoAddress, setKakaoAddress] = useState("");
 
   const contentChange = (e) => {
     if (e && e.target) {
@@ -107,13 +104,12 @@ function SpaceDetail() {
       })
   }
 
-
-
   useEffect(
     () => {
       axios.get(`/api/space/getSpace/${sseq}`)
         .then((result) => {
           setSpace(result.data);
+          setKakaoAddress(`${result.data.province} ${result.data.town} ${result.data.village} ${result.data.addressdetail}`);
         })
         .catch((err) => { console.error(err) })
 
@@ -198,19 +194,19 @@ function SpaceDetail() {
 
         <div className="spaceMap">
           <div className="spaceMainTitle">위치 확인</div>
-
-          <div className='subPage'>
+            <KakaoMap address={kakaoAddress}/>
+          {/* <div className='subPage'>
             <div className="customer" style={{ flex: "4" }}>
               <div id='map' style={{ width: "600px", height: "400px", margin: "20px" }}></div>
             </div>
-          </div>
+          </div> */}
         </div>
 
 
         <div className="spaceButton">
           <div className="spaceMainTitle">예약하기</div>
 
-          <button onClick={() => { navigate(`/ReservationForm/${space.sseq}`) }}>예약하기</button>
+          <button onClick={() => { navigate(`/reservationForm/${space.sseq}`) }}>예약하기</button>
           <button onClick={() => { }}>찜하기</button>
           <button onClick={() => { }}>문의하기(채팅)</button>
           <button onClick={() => { }}>신고하기</button>
