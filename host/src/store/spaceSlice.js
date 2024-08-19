@@ -19,16 +19,8 @@ const initialState = {
     bank:'',
     accountnum:'',
     hostid:'',
-    imgsrc1:'',
-    imgsrc2:'',
-    imgsrc3:'',
-    imgsrc4:'',
-    imgsrc5:'',
-    imgsrc6:'',
-    imgsrc7:'',
-    imgsrc8:'',
-    imgsrc9:'',
-    imgsrc10:'',
+    rList:[],
+    oList:[],
 };
 
 const spaceSlice = createSlice({
@@ -48,16 +40,8 @@ const spaceSlice = createSlice({
             state.town = action.payload.town;
             state.village = action.payload.village;
             state.address_detail = action.payload.address_detail;
-            state.imgsrc1 = action.payload.imgsrc1;
-            state.imgsrc2 = action.payload.imgsrc2;
-            state.imgsrc3 = action.payload.imgsrc3;
-            state.imgsrc4 = action.payload.imgsrc4;
-            state.imgsrc5 = action.payload.imgsrc5;
-            state.imgsrc6 = action.payload.imgsrc6;
-            state.imgsrc7 = action.payload.imgsrc7;
-            state.imgsrc8 = action.payload.imgsrc8;
-            state.imgsrc9 = action.payload.imgsrc9;
-            state.imgsrc10 = action.payload.imgsrc10s
+            state.rList = action.payload.rList;
+            state.oList = action.payload.oList;
             state.starttime = action.payload.starttime;
             state.endtime = action.payload.endtime;
             state.fnum = action.payload.fnum;

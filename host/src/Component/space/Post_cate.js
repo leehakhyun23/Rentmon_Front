@@ -5,6 +5,7 @@ import { setSpace } from '../../store/spaceSlice';
 import '../css/header.css';
 import '../css/cate.css';
 
+
 function Post_cate() {
     const dispatch = useDispatch();
     const navigate = useNavigate();
