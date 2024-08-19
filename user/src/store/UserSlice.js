@@ -15,10 +15,12 @@ const initialState = {
     gnum:"",
     name:"",
     category1 :"",
-    categroy2 : "",
+    category2 : "",
+    category3 : "",
     station:"",
     snsid:"",
     create_at:""
+    
 }
 
 const userSlice = createSlice({
@@ -38,7 +40,8 @@ const userSlice = createSlice({
                 state.gnum=action.payload.gnum;
                 state.name=action.payload.name;
                 state.category1=action.payload.category1;
-                state.categroy2=action.payload.categroy2;
+                state.category2=action.payload.category2;
+                state.category3=action.payload.category3;
                 state.station=action.payload.station;
                 state.snsid=action.payload.snsid;
                 state.create_at=action.payload.create_at;
@@ -56,7 +59,8 @@ const userSlice = createSlice({
                 state.gnum="";
                 state.name="";
                 state.category1="";
-                state.categroy2="";
+                state.category2="";
+                state.category3="";
                 state.station="";
                 state.snsid="";
                 state.create_at="";

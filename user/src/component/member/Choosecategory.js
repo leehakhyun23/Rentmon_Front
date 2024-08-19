@@ -14,7 +14,9 @@ function Choosecategory() {
         category:[],
     }); 
     const navigate = useNavigate();
-
+useEffect(()=>{
+    window.scrollTo({ top: 0 });
+},[])
     useEffect(()=>{
         setBtnActive(true);
         if(joindata["station"] ==="") setBtnActive(false);

@@ -1,15 +1,28 @@
-import React, { useEffect, useState } from 'react'
+import axios from 'axios';
+import React, { useCallback, useEffect, useState } from 'react'
 
 function CategorySelector({setJoindata}) {
-    const partyroom = ["파티룸","연습실","촬영 스튜디오","스터디룸","공연장","라이브방송","세미나실","악기연습실","운동시설","갤러리","캠핑"];
+    const [category, setCategory] = useState([]);
     const [categorycount, setCategorycount] = useState(0);
     
     useEffect(()=>{
+        getCategoryarr();
+    },[]);
+    useEffect(()=>{
         let checkboxs = document.querySelectorAll(".category-tag-container li");
         document.querySelector(".category-tag-container").addEventListener("click",()=>{checkedlabel(checkboxs)});
-    },[]);
+    },[category])
 
-    function checkedlabel(checkboxs){
+    let getCategoryarr = async()=>{
+        try{
+            let result = await axios.get("/api/user/getCategoryList");
+            console.log(result.data);
+            setCategory(result.data);
+            
+        }catch(err){console.error(err);}
+    }
+
+    let checkedlabel = useCallback((checkboxs)=>{
         let checkedSelects = document.querySelectorAll(".category-tag-container input:checked").length;
         let array = [];
         checkboxs.forEach((elem, index)=>{
@@ -22,13 +35,13 @@ function CategorySelector({setJoindata}) {
            }else elem.classList.remove("selected");
         });
         setCategorycount(checkedSelects);
-    }
+    },[category]);
 
-    function unchecked(checkbox, able){
+    let unchecked=useCallback((checkbox, able)=>{
         if(!checkbox.querySelector("input").checked) checkbox.querySelector("input").disabled = able;
         if(able) checkbox.classList.add("disabled");
         else checkbox.classList.remove("disabled");
-    }
+    },[category]);
 
 
   return (
@@ -36,9 +49,9 @@ function CategorySelector({setJoindata}) {
       <h1>카테고리<small style={{fontSize:"0.6em"}}>({categorycount})</small></h1>
     <div className='category-tag-container'>
         <ul>
-            {partyroom.map((item, key)=>(
-                <li key={key} className={`station-tag`} value={item}>
-                    <label htmlFor={item}>{item}<input type="checkbox" name='category' value= {item} id={item}/></label>
+            {category.map((item, key)=>(
+                <li key={key} className={`station-tag`} value={item.name}>
+                    <label htmlFor={item.name}>{item.name}<input type="checkbox" name='category' value= {item.cnum} id={item.name}/></label>
                 </li>
             ))}
         </ul>

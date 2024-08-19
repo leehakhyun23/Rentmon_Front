@@ -2,15 +2,12 @@ import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 
 function RecentReservation({rs}) {
-    const [dateFormat, setDateFormat] = useState("");
-  
-    useEffect(()=>{
-        if (rs && rs.reservedate) {
-            let datearr = rs.reservedate.split(" ")[0].split("-");
-            setDateFormat(datearr[0]+"년 "+Number(datearr[1])+"월 " + Number(datearr[2])+"일");
+  function dateFormat(date){
+      if (date) {
+        let datearr = date.split(" ")[0].split("-");
+        return(datearr[0]+"년 "+Number(datearr[1])+"월 " + Number(datearr[2])+"일 "+date.split(" ")[1]);
     }
-  },[rs]);
-
+  }
    
   return (
     <div className='recentresevation-container'>
@@ -30,7 +27,7 @@ function RecentReservation({rs}) {
             </div>
             <div className='yearContainer'>
             <div>
-                <p>{dateFormat}</p>
+            <p>{dateFormat(rs.reservedate) }</p>
                 <div>
                       {rs.weather &&  (
                         <div>
@@ -48,7 +45,7 @@ function RecentReservation({rs}) {
         </>
       ):(<>
         <div id="notreserve" style={{padding:"20px 0", textAlign:"center" , color:"#999"}}>
-            현재 다가오는 예약이 없습니다.
+          3일 이내에 등록된 예약이 없습니다.
         </div>
       </>)
       }

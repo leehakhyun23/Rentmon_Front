@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react'
 
 function StationSelector({setJoindata}) {
-    const array = ["서울","부산","대구","인천","광주","대전","울산","세종","경기도","강원도","충청남도","전북","전라남도","경상북도","제주"];
+    const array = ["서울","부산","대구","인천","광주","대전","울산","세종","경기","강원","충청도","전북","전라도","경상도","제주"];
     
     let beforeselector ,clickContaienr;
     

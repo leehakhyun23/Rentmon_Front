@@ -53,11 +53,11 @@ function MyInfo({user}) {
         </div>
       </div>
       <div className='mypagemenu'>
-        <MypageIconButton imglink = {"couponicon.svg"}  text = {`쿠폰(${menucount.couponCount})`} goLink={"/mypage/coupon"}/>
-        <MypageIconButton imglink = {"calendaricon.svg"}  text = {`예약(${menucount.reservCount})`} goLink={"/mypage/reservation"}/>
-        <MypageIconButton imglink = {"boxicon.svg"}  text = {`이용한 공간(${menucount.usesapceCount})`}  goLink={"/mypage/usesapce"}/>
+        <MypageIconButton imglink = {"couponicon.svg"}  text = {`쿠폰(${menucount.couponCount})`} goLink={"/mypage/coupon/1"}/>
+        <MypageIconButton imglink = {"calendaricon.svg"}  text = {`예약(${menucount.reservCount})`} goLink={"/mypage/reservation/1"}/>
+        <MypageIconButton imglink = {"boxicon.svg"}  text = {`이용한 공간(${menucount.usesapceCount})`}  goLink={"/mypage/usesapce/1"}/>
         <MypageIconButton imglink = {"hearticon.svg"}  text = {`찜(${menucount.zzimCount})`}  goLink={"/mypage/zzim"}/>
-        <MypageIconButton imglink = {"chaticon.svg"}  text = {`문의(${menucount.inquiryCount})`}  goLink={"/mypage/qna"}/>
+        <MypageIconButton imglink = {"chaticon.svg"}  text = {`문의(${menucount.inquiryCount})`}  goLink={"/mypage/qna/1"}/>
       </div>
       <div className='recentViewSpace'>
       <h3>최근 본 공간(5)</h3>

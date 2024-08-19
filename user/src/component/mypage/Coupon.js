@@ -1,9 +1,16 @@
 import React from 'react'
+import { useSelector } from 'react-redux';
+import { useParams } from 'react-router-dom'
+import UsedCoupon from './Component/UsedCoupon';
+import WillUseCoupon from './Component/WillUseCoupon'
 
 function Coupon() {
+  const user = useSelector(state=>state.user);
+  const {currentPage} = useParams();
   return (
     <div className=' mypagecommon'>
-      쿠폰페이지입니다.
+      <WillUseCoupon userid = {user.userid} />
+      <UsedCoupon userid={user.userid} />
     </div>
   )
 }
