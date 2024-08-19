@@ -1,5 +1,8 @@
 import React, { useEffect } from 'react'
 import { useSelector } from 'react-redux'
+import MainSlide from './componenet/MainSlide';
+import RecommandSpace from './componenet/RecommandSpace';
+import "./css/main.css"
 
 function Main() {
   let user = useSelector(state=>state.user);
@@ -7,8 +10,9 @@ function Main() {
     console.log(user);
   },[]);
   return (
-    <div>
-      
+    <div className='main innerContainer'>
+      <MainSlide/>
+      <RecommandSpace user={user} />
     </div>
   )
 }

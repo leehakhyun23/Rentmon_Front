@@ -1,9 +1,10 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import MypageIconButton from '../../headerfooter/component/MypageIconButton'
 
 
 function InfoDashBoard({user, menucount}) {
+  const navigate = useNavigate();
   function gradeimg(n){
     if(n===1)return "bronze.png"
     if(n===2)return "silver.png"
@@ -28,15 +29,15 @@ function InfoDashBoard({user, menucount}) {
             </Link>
           </div>
         </div>
-          <p onClick={()=>{}}>정보수정하기  &gt;</p>
+          <p onClick={()=>{navigate("/mypage/updateuser");}}>정보수정하기  &gt;</p>
         </div>
         <div className='right'>
           <div className='mypagemenu'>
-            <MypageIconButton imglink = {"couponicon2.svg"}  text = {`쿠폰(${menucount.couponCount})`} goLink={"/mypage/coupon"}/>
-            <MypageIconButton imglink = {"calendaricon2.svg"}  text = {`예약(${menucount.reservCount})`} goLink={"/mypage/reservation"}/>
-            <MypageIconButton imglink = {"boxicon2.svg"}  text = {`이용한 공간(${menucount.usesapceCount})`}  goLink={"/mypage/usesapce"}/>
+            <MypageIconButton imglink = {"couponicon2.svg"}  text = {`쿠폰(${menucount.couponCount})`} goLink={"/mypage/coupon/1"}/>
+            <MypageIconButton imglink = {"calendaricon2.svg"}  text = {`예약(${menucount.reservCount})`} goLink={"/mypage/reservation/1"}/>
+            <MypageIconButton imglink = {"boxicon2.svg"}  text = {`이용한 공간(${menucount.usesapceCount})`}  goLink={"/mypage/usesapce/1"}/>
             <MypageIconButton imglink = {"hearticon2.svg"}  text = {`찜(${menucount.zzimCount})`}  goLink={"/mypage/zzim"}/>
-            <MypageIconButton imglink = {"chaticon2.svg"}  text = {`문의(${menucount.inquiryCount})`}  goLink={"/mypage/qna"}/>
+            <MypageIconButton imglink = {"chaticon2.svg"}  text = {`문의(${menucount.inquiryCount})`}  goLink={"/mypage/qna/1"}/>
           </div>
         </div>
       </div>

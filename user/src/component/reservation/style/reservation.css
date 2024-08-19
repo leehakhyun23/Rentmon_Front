@@ -16,7 +16,7 @@
     border-radius: 8px;
   }
   
-  h2, h3 {
+  /* h2, h3 {
     color: #333;
   }
   
@@ -44,7 +44,7 @@
     margin-right: 10px;
     width: 20px;
     height: 20px;
-    accent-color: #007bff; /* 브라우저 지원 여부에 따라 체크박스 색상을 변경 */
+    accent-color: #007bff;
     cursor: pointer;
   }
   
@@ -62,4 +62,4 @@
   
   .submit-button:hover {
     background-color: #0056b3;
-  }
+  } */
