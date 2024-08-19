@@ -107,8 +107,8 @@ function ReservationForm({ props }) {
             reserveend: endTimestamp,
             request: request,
             payment: payment,
-            user: user.userid,
-            space: space.sseq
+            user: { userid: user.userid }, // 올바른 형식의 객체로 감싸기
+            space: { sseq: space.sseq } // 올바른 형식의 객체로 감싸기
         };
 
         console.log(reservationData);
