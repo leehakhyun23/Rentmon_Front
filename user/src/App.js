@@ -6,7 +6,7 @@ import Header from './component/headerfooter/Header';
 import Footer from './component/headerfooter/Footer';
 import SpaceList from './component/space/SpaceList';
 import SpaceDetail from './component/space/SpaceDetail';
-import ReserveInsert from './component/reservation/ReserveInsert';
+import ReservationForm from './component/reservation/ReservationForm';
 import Getsnsuserinfo from './component/member/Getsnsuserinfo';
 
 
@@ -19,7 +19,7 @@ function App() {
         <Route path='/' element={<Main />} />
         <Route path='/spaceList' element={<SpaceList />} />
         <Route path='/spaceDetail/:sseq' element={<SpaceDetail />} />
-        <Route path='/reserveInsert' element={<ReserveInsert />} />
+        <Route path='/reservationForm/:sseq' element={<ReservationForm />} />
         <Route path='/getsnsuserinfo/:userid' element={<Getsnsuserinfo/>}/>
       </Routes>
       <Footer />

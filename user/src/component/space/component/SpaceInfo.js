@@ -49,39 +49,38 @@ function SpaceInfo(props) {
                     (props.space.images) ? (
                         props.space.images.map((image, idx) => {
                             return (
-                                <img key={idx} src={`http://localhost:8070/space_images/${image.originame}`} alt={props.space.title} />
+                                <img key={idx} src={`http://localhost:8070/space_images/${image.realName}`} alt={props.space.title} />
                             )
                         })
                     ) : (null)
                 }
             </Slider>}
             <span onClick={() => { navigate(`/spaceDetail/${props.space.sseq}`) }}> {props.space.sseq}. {props.space.title}</span><br />
-            <span> 내용 : {props.space.content}</span><br />
-            <span> 가격 : {props.space.price}</span><br />
-            {/* 해시태그 조회 */}
-            <div>
-                <h3>해시태그:</h3>
-                {props.space.hashtags && props.space.hashtags.length > 0 ? (
-                    <ul>
-                        {props.space.hashtags.map((hashTag, tagIdx) => (
-                            <li key={tagIdx}>
-                                {hashTag.word}
-                            </li>
-                        ))}
-                    </ul>
-                ) : (
-                    <span>해시태그가 없습니다.</span>
-                )}
-            </div>
+
             <br /><br /><br />
             <div className="spacetitle">
                 공간 소개
+                <div className="spacecontent">
+                    <span> 제목 : {props.space.title}</span><br />
+                    <span> 내용 : {props.space.content}</span><br />
+                    <span> 가격 : {props.space.price}</span><br />
+                    <span> 주소 : </span><br />
+                    <span> 시간 : </span>
+                    <span> 해시태그들 : </span>
+
+
+                </div>
+
+
             </div>
             <div className="spacetitle">
                 공간 시설 안내
             </div>
             <div className="spacetitle">
                 이용 시 주의사항
+                <div className="spacecontent">
+                    <span> 내용 : {props.space.caution}</span><br />
+                </div>
             </div>
             <div className="spacetitle">
                 위치정보
@@ -92,6 +91,8 @@ function SpaceInfo(props) {
                     <div id='map' style={{ width: "600px", height: "400px", margin: "20px" }}></div>
                 </div>
             </div>
+
+            <button onClick={()=>{navigate(`/ReservationForm/${props.space.sseq}`)}}>예약하기</button>
         </div>
 
     )

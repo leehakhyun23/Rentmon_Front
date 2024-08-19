@@ -53,7 +53,11 @@ console.log(result);
         <div className='text2'>호스트센터를 이용하시려면 별도의 호스트 회원가입이 필요합니다.</div> <br />
         <div className='form'>
           <div className="sns-btns">
-            <a href="http://localhost:8070/user/sns/kakaostart">Kakao Login</a>
+            <button onClick={
+              () => {
+                window.location.href = 'http://localhost:8070/host/kakaostart';
+              }
+            }>Kakao Login</button>
             <button>Naver Login</button>
             <button>Google Login</button>
             <div className='or'>또는</div>
