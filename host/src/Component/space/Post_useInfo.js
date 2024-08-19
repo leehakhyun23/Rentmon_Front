@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { setSpace } from '../../store/spaceSlice'; // Redux slice import
 import 'react-datepicker/dist/react-datepicker.css';
 import '../css/header.css';
+import '../css/useInfo.css';
 
 function Post_useInfo() {
     const navigate = useNavigate();
@@ -11,7 +12,6 @@ function Post_useInfo() {
 
     // Retrieve current space information from Redux state
     const currentSpace = useSelector((state) => state.space);
-
 
     const [starttime, setStarttime] = useState('');
     const [endtime, setEndtime] = useState('');
@@ -34,25 +34,26 @@ function Post_useInfo() {
             town: currentSpace.town || '',
             village: currentSpace.village || '',
             address_detail: currentSpace.address_detail || '',
-            imgSrc: currentSpace.imgSrc || '',
+            rList: currentSpace.rList || [],
+            oList: currentSpace.oList || [],
             starttime,
-            //: updatedStartDate.toISOString(),
             endtime,
-            // : updatedEndDate.toISOString(),
         }));
 
         navigate('/Post_facility');
     };
 
     return (
-        <div>
+        <div className="container">
             <div className='header2'>이용안내</div>
-            <div>
-                <span>이용 시간</span>
+            <div className='time-container'>
+                <span className='time-label'>이용 시간</span>
                 <select
+                    className='time-select'
                     value={starttime}
                     onChange={(e) => handleOnChange(e, setStarttime)}
                 >
+                    <option value="" disabled>선택</option>
                     {[...Array(24).keys()].map(hour => (
                         <option key={hour} value={String(hour).padStart(2, '0')}>
                             {String(hour).padStart(2, '0')}
@@ -61,9 +62,11 @@ function Post_useInfo() {
                 </select>
                 <span> ~ </span>
                 <select
+                    className='time-select'
                     value={endtime}
                     onChange={(e) => handleOnChange(e, setEndtime)}
                 >
+                    <option value="" disabled>선택</option>
                     {[...Array(25).keys()].map(hour => (
                         <option key={hour} value={String(hour).padStart(2, '0')}>
                             {String(hour).padStart(2, '0')}
@@ -71,7 +74,7 @@ function Post_useInfo() {
                     ))}
                 </select>
             </div>
-            <div className="but2 ">
+            <div className="but2">
                 <button className="but" onClick={() => navigate('/Post_basicInfo')}>이전</button>
                 <button className="but" onClick={onSubmit}>다음</button>
             </div>

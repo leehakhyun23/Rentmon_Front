@@ -25,7 +25,6 @@ function Join() {
     useEffect(()=>{}, [authNum]);
 
     async function onSubmit() {
-        // 입력값 검증
         if (hostid === '') { return alert('아이디를 입력하세요'); }
         if (name === '') { return alert('이름을 입력하세요'); }
         if (email === '') { return alert('이메일을 입력하세요'); }
