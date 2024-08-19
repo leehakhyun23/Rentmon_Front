@@ -5,8 +5,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import SpaceInfo from './component/SpaceInfo';
 import SpaceMenu from './component/SpaceMenu';
 import SpaceChat from './component/SpaceChat';
-import Review from './component/Review';
-import Remocon from './component/Remocon';
+import ReviewJJ from './component/ReviewJJ'
 
 import Slider from 'react-slick'
 import 'slick-carousel/slick/slick.css'
@@ -24,6 +23,7 @@ const settings = {
 
 function SpaceDetail() {
   const [space, setSpace] = useState({});
+  const navigate = useNavigate();
   const { sseq } = useParams();
 
   useEffect(
@@ -40,14 +40,14 @@ function SpaceDetail() {
 
   return (
     <div className='innerContainer'>
-      <Remocon space={space} />
       <div>
       <SpaceMenu />
 
         공간 Detail Section
         <SpaceInfo space={space} />
         <SpaceChat />
-        <Review space={space} />
+        <ReviewJJ space={space} />
+        <button onClick={()=>{navigate(`/ReservationForm/${space.sseq}`)}}></button>
       </div>
     </div>
 

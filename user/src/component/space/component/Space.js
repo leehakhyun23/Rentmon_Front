@@ -33,31 +33,20 @@ function Space(props) {
                     (props.space.images) ? (
                         props.space.images.map((image, idx) => {
                             return (
-                                <img key={idx} src={`http://localhost:8070/space_images/${image.originName}`} alt={props.space.title} />
+                                <img key={idx} src={`http://localhost:8070/space_images/${image.realName}`} alt={props.space.title} />
                             )
                         })
                     ) : (null)
                 }
             </Slider>}
-            <span onClick={() => { navigate(`/spaceDetail/${props.space.sseq}`) }}> {props.space.sseq}. {props.space.title}</span><br />
-            <span> 내용 : {props.space.content}</span><br />
+            <span onClick={() => { navigate(`/spaceDetail/${props.space.sseq}`) }}> 제목 : {props.space.sseq}. {props.space.title}</span><br />
+            <span> 부제 : {props.space.subtitle}</span><br />
             <span> 가격 : {props.space.price}</span><br />
-            {/* 해시태그 조회 */}
-            <div>
-                <h3>해시태그:</h3>
-                {props.space.hashtags && props.space.hashtags.length > 0 ? (
-                    <ul>
-                        {props.space.hashtags.map((hashTag, tagIdx) => (
-                            <li key={tagIdx}>
-                                {hashTag.word}
-                            </li>
-                        ))}
-                    </ul>
-                ) : (
-                    <span>해시태그가 없습니다.</span>
-                )}
-            </div>
-            <br /><br /><br />
+            <span> 위치 : {props.space.province} {props.space.town}</span>
+            <span> 시간 : {props.space.starttime}시 ~ {props.space.endtime}시</span>
+            <span> 최대인원수 : {props.space.maxpersonnal}인 </span>
+            <span> 별점 / 총 리뷰수 : </span>
+            <span> 찜수 : </span>
         </div>
     )
 }
