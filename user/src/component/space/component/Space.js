@@ -28,25 +28,30 @@ function Space(props) {
 
     return (
         <div className="space">
-            {<Slider {...settings} >
+            {<Slider {...settings}  >
                 {
-                    (props.space.images) ? (
-                        props.space.images.map((image, idx) => {
+                    (props.space.spaceimage) ? (
+                        props.space.spaceimage.map((image, idx) => {
                             return (
-                                <img key={idx} src={`http://localhost:8070/space_images/${image.realName}`} alt={props.space.title} />
+                                <img key={idx} src={`http://localhost:8070/space_images/${image.realName}`} alt={props.space.title} onClick={() => { navigate(`/spaceDetail/${props.space.sseq}`) }}/>
                             )
                         })
                     ) : (null)
                 }
             </Slider>}
-            <span onClick={() => { navigate(`/spaceDetail/${props.space.sseq}`) }}> 제목 : {props.space.sseq}. {props.space.title}</span><br />
-            <span> 부제 : {props.space.subtitle}</span><br />
-            <span> 가격 : {props.space.price}</span><br />
-            <span> 위치 : {props.space.province} {props.space.town}</span>
-            <span> 시간 : {props.space.starttime}시 ~ {props.space.endtime}시</span>
-            <span> 최대인원수 : {props.space.maxpersonnal}인 </span>
-            <span> 별점 / 총 리뷰수 : </span>
-            <span> 찜수 : </span>
+            <div className="spaceTitle">제목</div>
+            <div className="spaceContent"> {props.space.sseq}. {props.space.title} </div>
+            <div className="spaceTitle">가격</div>
+            <div className="spaceContent"> {props.space.price}/시간</div>
+            <div className="spaceTitle">위치</div>
+            <div className="spaceContent">{props.space.province} {props.space.town}</div>
+
+            <div className="spaceTitle">별점 / 총리뷰수 / 찜수</div>
+            <div className="spaceContent">
+
+
+            </div>
+
         </div>
     )
 }
