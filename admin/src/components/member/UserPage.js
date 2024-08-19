@@ -1,9 +1,13 @@
 import { Box, Button, Checkbox, FormControl, InputLabel, List, ListItem, MenuItem, Pagination, Paper, Select, TextField } from '@mui/material';
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
+import CouponModal from '../modal/CouponModal';
 
 const UserPage = () => {
     const [userList, setUserList] = useState([]);
+    const [checked, setChecked] = useState([]);
+    const [selectAll, setSelectAll] = useState(false);
+    const [paging, setPaging] = useState({ page: 0, size: 10, totalPages: 1 });
 
     const [searchType, setSearchType] = useState("name");
 
@@ -58,16 +62,17 @@ const UserPage = () => {
     const handleIsLoginUpdate = () => {
         axios.put('/api/admin/islogin', checked)
         .then((res) => {
-            setUserList(res.data);
+            if (res.status === 200) {
+                alert(`${res.data}명의 상태 변경 완료`);
+                setChecked([]);
+                setSelectAll(false);
+                fetchUserList();
+            }
         })
         .catch((err) => {
             console.error(err);
         })
-    }, [])
-
-    const handleOnChange = (e) => {
-        alert("클릭됨");
-    }
+    };
 
     const handleChange = (e) => {
         setSearchType(e.target.value);
@@ -110,6 +115,7 @@ const UserPage = () => {
                     </Box>
                 </Paper>
             </Box>
+            <CouponModal open={open} handleClose={handleClose} userids={checked}/>
         </div>
     );
 };
