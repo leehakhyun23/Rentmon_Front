@@ -1,0 +1,29 @@
+.spaceCompoent { border-radius: 9px; overflow: hidden; border: 1px solid #DCDCDC; }
+.spaceCompoent .imageWrap {  }
+.spaceCompoent .imageWrap .spaceImgSwiper {  }
+.spaceCompoent .imageWrap .spaceImgSwiper .swiper-slide {  }
+.spaceCompoent .imageWrap .spaceImgSwiper .swiper-slide img { width: 100%; height: 209px; object-fit: cover; }
+
+.spaceCompoent .swiper-button-next, .spaceCompoent .swiper-button-prev { color: #fff;  }
+.spaceCompoent .swiper-button-next::after, .spaceCompoent .swiper-button-prev::after { font-size: 33px; }
+
+
+.spaceCompoent .content { padding: 13px 13px; }
+.spaceCompoent .content a { display: block; width: 100%; }
+.spaceCompoent .content a > div { display: flex; justify-content: space-between; }
+.spaceCompoent .content a .title { font-size: 18px; font-weight: bold; }
+.spaceCompoent .content a .title span {  }
+.spaceCompoent .content a .title span svg { fill:#0090DF; }
+
+.spaceCompoent .station {  }
+.spaceCompoent .station .span {  }
+.spaceCompoent .station .span svg {  }
+.spaceCompoent .station .span.tags {  }
+
+
+.spaceCompoent .priceAndinfo {  }
+.spaceCompoent .priceAndinfo .price {  }
+.spaceCompoent .priceAndinfo .price small {  }
+.spaceCompoent .priceAndinfo .info {  }
+.spaceCompoent .priceAndinfo .info span {  }
+.spaceCompoent .priceAndinfo .info span svg {  }
