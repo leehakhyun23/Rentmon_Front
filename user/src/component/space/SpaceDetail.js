@@ -5,7 +5,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import ReactStars from 'react-rating-stars-component';
 import { Box, Button, IconButton, TextField, Typography } from '@mui/material';
 import AddIcon from '@mui/icons-material/Add';
-
+import { getCookie, setAuthoCookie } from '../../util/cookieUtil';
 import Slider from 'react-slick'
 import 'slick-carousel/slick/slick.css'
 import 'slick-carousel/slick/slick-theme.css'
@@ -30,6 +30,7 @@ function SpaceDetail() {
   const [rate, setRate] = useState(0);
   const [images, setImages] = useState([]);
   const [reviewList, setReviewList] = useState([]);
+
 
   const [kakaoAddress, setKakaoAddress] = useState("");
 
@@ -136,6 +137,18 @@ function SpaceDetail() {
   //     console.error('Kakao Maps API is not loaded');
   //   }
   // }, []);
+
+  useEffect(()=>{
+    
+    let rctvw = getCookie("rctvw");
+    if (rctvw === undefined)rctvw = [];
+    if(!rctvw.includes(sseq)){
+      if(rctvw.length >= 5) rctvw.pop();
+      rctvw.push(sseq);
+    }
+    setAuthoCookie("rctvw", rctvw , 60);
+    console.log(rctvw);
+  },[]);
 
 
   return (

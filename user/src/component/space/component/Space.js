@@ -39,7 +39,7 @@ function Space(props) {
                     ) : (null)
                 }
             </Slider>}
-            <div className="spaceTitle">제목</div>
+            <div className="spaceTitle" onClick={() => { navigate(`/spaceDetail/${props.space.sseq}`) }}>제목</div>
             <div className="spaceContent"> {props.space.sseq}. {props.space.title} </div>
             <div className="spaceTitle">가격</div>
             <div className="spaceContent"> {props.space.price}/시간</div>
@@ -47,9 +47,19 @@ function Space(props) {
             <div className="spaceContent">{props.space.province} {props.space.town}</div>
 
             <div className="spaceTitle">별점 / 총리뷰수 / 찜수</div>
+            <div className="spaceContent"></div>
+
+            <div className="spaceTitle">해시태그</div>
             <div className="spaceContent">
-
-
+                {
+                    (props.space.hashtags) ? (
+                        props.space.hashtags.map((tag, idx) => {
+                            return (
+                               <div className="tag">{tag.hseq.word}</div>
+                            )
+                        })
+                    ) : (null)
+                }
             </div>
 
         </div>
