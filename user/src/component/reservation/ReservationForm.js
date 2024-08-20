@@ -101,6 +101,16 @@ function ReservationForm({ props }) {
             return;
         }
 
+        const calculatedReserveTime = calculateTimeDifference(startTimestamp, endTimestamp);
+
+        // endTime이 startTime보다 큰 경우에만 예약을 진행합니다.
+        if (calculatedReserveTime <= 0) {
+            alert("종료 시간이 시작 시간보다 늦어야 합니다.");
+            return;
+        }
+
+
+
         // 예약 데이터를 서버로 전송
         const reservationData = {
             reservestart: startTimestamp,

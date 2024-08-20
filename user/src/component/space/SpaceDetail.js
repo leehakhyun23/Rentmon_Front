@@ -153,7 +153,7 @@ function SpaceDetail() {
   },[]);
 
   return (
-    <div className='spaceContainer'>
+    <div className='spaceContainer innerContainer'>
       <div>
         {/* spaceMenu Part */}
         <div className="SpaceMenu-container">

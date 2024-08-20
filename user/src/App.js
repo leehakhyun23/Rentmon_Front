@@ -18,6 +18,7 @@ import Updateuser from './component/mypage/Updateuser';
 import InsertInquiry from './component/inquiry/InsertInquiry';
 
 function App() {
+
   return (
     <>
     <Header />
