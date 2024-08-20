@@ -55,7 +55,7 @@ function SpaceBoxComponent({record}) {
                         </span>
                         <span className='tags'>
                             {(record.hashtag)&&(record.hashtag.map((elem, idx)=>(
-                                <small key={idx}>#{elem.word} </small>
+                                <small key={idx}>&nbsp;#{elem.word}</small>
                             )))}
                         </span>
                     </div>

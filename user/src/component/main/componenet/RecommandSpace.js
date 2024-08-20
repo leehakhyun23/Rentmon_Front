@@ -31,13 +31,14 @@ function RecommandSpace({user}) {
     <div className='recommandSection'>
       <div className='recommna'>
         <h2>추천 공간</h2>
-        <p>이런 공간은 어떠세요?!</p>
+        <p>이런 공간은 어떠세요?</p>
       </div>
-      <Swiper slidesPerView={1.5} spaceBetween={30} grabCursor={true} 
+      <Swiper slidesPerView={1.5} spaceBetween={10} grabCursor={true} 
             scrollbar={{ hide: false }}
             modules={[Scrollbar]}
             breakpoints={{
               769: {
+                spaceBetween: 30,
                 slidesPerView: 3,
                 slidesPerGroup: 1,
               },}}

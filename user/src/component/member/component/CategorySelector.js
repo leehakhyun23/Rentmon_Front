@@ -16,7 +16,6 @@ function CategorySelector({setJoindata}) {
     let getCategoryarr = async()=>{
         try{
             let result = await axios.get("/api/user/getCategoryList");
-            console.log(result.data);
             setCategory(result.data);
             
         }catch(err){console.error(err);}

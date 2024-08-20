@@ -11,6 +11,7 @@ import Remocon from './component/Remocon';
 import Slider from 'react-slick'
 import 'slick-carousel/slick/slick.css'
 import 'slick-carousel/slick/slick-theme.css'
+import { getCookie, setAuthoCookie } from '../../util/cookieUtil';
 
 
 const settings = {
@@ -32,11 +33,23 @@ function SpaceDetail() {
         .then((result) => {
           setSpace(result.data);
         })
-        .catch((err) => { console.error(err) })
+        .catch((err) => { console.error(err) });
 
     }, []
   )
 
+
+  useEffect(()=>{
+    
+    let rctvw = getCookie("rctvw");
+    if (rctvw === undefined)rctvw = [];
+    if(!rctvw.includes(sseq)){
+      if(rctvw.length >= 5) rctvw.pop();
+      rctvw.push(sseq);
+    }
+    setAuthoCookie("rctvw", rctvw , 60);
+    console.log(rctvw);
+  },[]);
 
   return (
     <div className='innerContainer'>
