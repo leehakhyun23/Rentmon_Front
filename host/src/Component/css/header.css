@@ -33,21 +33,20 @@
 
 .left {
     margin-left: auto; /* 오른쪽으로 이동 (필요시 추가) */
+    display: flex;
+    align-items: center; /* 수직 정렬 (중앙 정렬) */
 }
 
 
 .loginbtn{
     border-radius: 5%;
     border: none;
-    width: 130px;
+    width: 150px;
     height: 40px;
     color: aliceblue;
     background-color: #0090DF;
     font-weight: bold;
   }
-
-
-
 
 
 
@@ -99,3 +98,4 @@
     cursor: not-allowed; /* 비활성화 시 커서 */
     transform: none; /* 비활성화 시 효과 없음 */
 }
+

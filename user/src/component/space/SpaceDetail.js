@@ -14,7 +14,8 @@ import InqueryModal from './component/InqueryModal';
 import "./style/inquiry.css"
 import InquiryList from './component/InquiryList';
 
-const { kakao } = window;
+
+const { kakao } = window; 
 
 const settings = {
   dot: false,

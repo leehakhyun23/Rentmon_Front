@@ -13,12 +13,13 @@ function Login() {
   const [hostid, setHostid] = useState("");
   const [pwd, setPwd] = useState("");
   const [loginMessage , setLoginMessage] = useState("");
+  const [message, setMessage] = useState("");
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const host = useSelector(state=>state.host);
 
   useEffect(()=>{
-    if(host.userid){
+    if(host.hostid){
       alert("이미 로그인 하셨습니다.");
       navigate("/");
     }
@@ -27,7 +28,7 @@ function Login() {
   let onLogin = async () => {
     try {
       if(!hostid) return setLoginMessage("* 아이디를 입력해주세요.");
-      if(!pwd) return setLoginMessage("* 비밀먼호를 입력해주세요.");
+      if(!pwd) return setLoginMessage("* 비밀번호를 입력해주세요.");
       let usernameWithRole = hostid + ":host";
       let result = await axios.post("/api/member/login", null, { params: { usernameWithRole, password: pwd } });
 
@@ -37,20 +38,18 @@ function Login() {
         setCookie("token",{accessToken:result.data.accessToken , refreshToken : result.data.refreshToken},1);
 
         //회원 정보 조회
-        // let logindata = await jaxios.get("/api/host/gethostinfo",{params:{userid:result.data.hostid}});
-        // dispatch(loginAction(logindata.data));
-        // if(!logindata.data){
-        //   return setLoginMessage("* 관리자에게 문의해주세요.");
-        // }
-        // //최근 예약 조회
-        // let recentrerve = await jaxios.get("/api/space/getreserve",{params:{hostid:hostid}});
-        // console.log( recentrerve.data);
-        // dispatch(recentReserveAction({recentReserve: recentrerve.data}));
+        let logindata = await jaxios.get("/api/host/gethostinfo",{params:{hostid:hostid}});
+        dispatch(loginAction(logindata.data));
+        if(!logindata.data){
+          return setLoginMessage("* 관리자에게 문의해주세요.");
+        }
 
+        alert('로그인이 완료되었습니다.');
         navigate("/");
       }
     } catch (err) {
       console.error(err);
+      setMessage("로그인 중 오류가 발생했습니다.");
     }
   }
 

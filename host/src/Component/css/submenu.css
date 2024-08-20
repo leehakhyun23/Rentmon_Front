@@ -1,0 +1,49 @@
+/* *{
+    padding:0;
+    margin:0;
+  } */
+   
+  html, body {
+    height: 100%;
+    margin: 0;
+  }
+
+  .menu{
+    width:80px;
+    height:100%;
+    text-align:center;
+    line-height: 60px;
+    background-color: #f8f8f8;
+    position: relative; 
+  }
+
+  .menu span {
+    display: block;
+    padding: 10px;
+    cursor: pointer;
+  }
+
+  
+  .menu>.sub{
+    height:0;
+    list-style:none;
+    overflow:hidden;
+    width: 300px;
+    transition: height 0.3s ease;
+  }
+
+  .menu>.sub.open {
+    height: 360px;
+  }
+  
+  .menu>.sub li{
+    background-color:white;
+    border-bottom:1px #B1B1B1 solid;
+    
+  }
+  
+  .menu>.sub li>a{
+    text-decoration:none;
+    color:black;
+    padding: 10px;
+  }

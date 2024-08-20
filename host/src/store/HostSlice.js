@@ -5,6 +5,7 @@ import { removeCookie } from "../util/cookieUtil";
 const initialState = {
     mseq:"",
     userid:"",
+    pwd:"",
     nickname:"",
     email:"",
     phone:"",
@@ -27,7 +28,8 @@ const hostSlice = createSlice({
         reducers:{
             loginAction:(state, action)=>{
                 state.mseq=action.payload.mseq;
-                state.userid=action.payload.userid;
+                state.hostid=action.payload.hostid;
+                state.pwd=action.payload.pwd;
                 state.nickname=action.payload.nickname;
                 state.email=action.payload.email;
                 state.phone=action.payload.phone;
@@ -46,6 +48,7 @@ const hostSlice = createSlice({
             logoutAction:(state)=>{
                 state.mseq="";
                 state.userid="";
+                state.pwd="";
                 state.nickname="";
                 state.email="";
                 state.phone="";
