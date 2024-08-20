@@ -4,9 +4,12 @@ import { useParams } from 'react-router-dom'
 import jaxios from '../../util/jwtUtil';
 import MypagePaging from './Component/MypagePaging';
 import QnaComponent from './Component/QnaComponent';
+import QnaModal from './Component/QnaModal';
 
 function Qna() {
     const user = useSelector(state=>state.user);
+    const [isopen, setIsOpen] = useState(true);
+    const [popup , setPopup] = useState({});
     const [list, setList]=useState([]);
     const [page, setPage] = useState({});
     const [begin,setBegin] =useState(0);
@@ -42,7 +45,7 @@ function Qna() {
                 {(list) ?(
                     list.map((elem, key)=>(
                         <div className='row' key={key}>
-                            <QnaComponent num={begin-key} title={elem.title} lastDate={elem.created_at} reply={elem.reply}  />
+                            <QnaComponent num={begin-key} title={elem.title} lastDate={elem.created_at} reply={elem.reply} setPopup={setPopup}  />
                         </div>
                     ))
                 ):""}
@@ -51,6 +54,7 @@ function Qna() {
             <div className='paganation'>
                 <MypagePaging page={page} url={"/mypage/qna/"}/>
             </div>
+           <QnaModal isopen={isopen} setIsOpen={setIsOpen} popup={popup} />
         </div>
     )
 }
