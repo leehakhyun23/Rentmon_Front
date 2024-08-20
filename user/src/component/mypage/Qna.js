@@ -24,6 +24,7 @@ function Qna() {
             let result = await jaxios.get("/api/inquery/getInqueryList/"+user.userid,{params:{page:currentPage}});
             console.log(result.data);
             setList(result.data.list);
+            setPopup(result.data.list[0]);
             setPage(result.data.paging);
             setBegin(result.data.paging.recordAllcount - (result.data.paging.recordrow*(result.data.paging.currentPage-1)));
         }catch(err){console.error(err);}
@@ -45,7 +46,7 @@ function Qna() {
                 {(list) ?(
                     list.map((elem, key)=>(
                         <div className='row' key={key}>
-                            <QnaComponent num={begin-key} title={elem.title} lastDate={elem.created_at} reply={elem.reply} setPopup={setPopup}  />
+                            <QnaComponent num={begin-key} elem={elem} setIsOpen={setIsOpen} setPopup={setPopup}  />
                         </div>
                     ))
                 ):""}
