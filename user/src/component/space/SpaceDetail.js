@@ -10,8 +10,12 @@ import Slider from 'react-slick'
 import 'slick-carousel/slick/slick.css'
 import 'slick-carousel/slick/slick-theme.css'
 import KakaoMap from '../../util/KakaoMap';
+import InqueryModal from './component/InqueryModal';
+import "./style/inquiry.css"
+import InquiryList from './component/InquiryList';
 
-const { kakao } = window;
+
+const { kakao } = window; 
 
 const settings = {
   dot: false,
@@ -23,6 +27,7 @@ const settings = {
 }
 
 function SpaceDetail() {
+  const [inquiryopen, setInquiryopen] = useState(false);
   const user = useSelector(state => state.user);
   const [space, setSpace] = useState({});
   const navigate = useNavigate();
@@ -145,8 +150,8 @@ function SpaceDetail() {
     let rctvw = getCookie("rctvw");
     if (rctvw === undefined)rctvw = [];
     if(!rctvw.includes(sseq)){
-      if(rctvw.length >= 5) rctvw.pop();
-      rctvw.push(sseq);
+      if(rctvw.length >= 6) rctvw.pop();
+      if(sseq !== undefined) rctvw.unshift(sseq);
     }
     setAuthoCookie("rctvw", rctvw , 60);
     console.log(rctvw);
@@ -222,10 +227,10 @@ function SpaceDetail() {
 
           <button onClick={() => { navigate(`/reservationForm/${space.sseq}`) }}>예약하기</button>
           <button onClick={() => { }}>찜하기</button>
-          <button onClick={() => { }}>문의하기(채팅)</button>
+          <button onClick={() => {setInquiryopen(true) }}>문의하기</button>
           <button onClick={() => { }}>신고하기</button>
         </div>
-
+        <InquiryList sseq={sseq} inquiryopen ={inquiryopen}  setInquiryopen={setInquiryopen}/>
         <div className="spaceReviewInsert">
           <div className="spaceMainTitle">리뷰 확인</div>
 
@@ -288,7 +293,7 @@ function SpaceDetail() {
             <Button variant="contained" onClick={handleOnSubmit}>전송</Button>
           </Box>
         </div>
-
+       
         <div className="spaceReviewRead">
           <Box mt={4}>
             <Typography variant="h6">리뷰 목록</Typography>
@@ -331,6 +336,7 @@ function SpaceDetail() {
 
         </div>
       </div>
+     
     </div>
 
   )

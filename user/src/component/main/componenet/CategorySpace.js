@@ -17,7 +17,6 @@ function CategorySpace() {
     let getList= async()=>{
         try{
             let result = await axios.get("/api/main/getSapceList",{params:{cnum}});
-            console.log(result.data);
             setList(result.data);
             
         }catch(err){console.error(err);}

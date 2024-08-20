@@ -1,0 +1,58 @@
+.inquirypopup { padding-top: 30px; }
+.inquirypopup h2 { text-align: center; font-size: 20px; font-weight: 600; }
+.inquirypopup > div {  width: 500px; }
+.inquirypopup > div .row { padding: 20px 20px 0; }
+.inquirypopup > div span { font-size: 15px; font-weight: 500px; margin-right: 5px; margin-bottom: 10px; display: block;}
+.inquirypopup > div p {  }
+.inquirypopup > div .btnwrap {  display: flex;  padding: 0; margin-top: 40px;  }
+.inquirypopup > div .btnwrap button { width: 50%; border: none; background: #ddd; color: #fff; padding: 20px 0;  border-top: 1px solid #ddd; pointer-events: none; transition: all .3s; }
+.inquirypopup > div .btnwrap button:nth-child(2) { background: #fff; color: #0090DF; cursor: pointer; border-top: 1px solid #0090DF; box-sizing: border-box;
+    pointer-events: auto; cursor: pointer;
+}
+.inquirypopup > div .writer { display: flex;  }
+
+.inquirypopup > div .btnwrap button.active { border-top: 1px solid #0090DF; background-color: #0090DF; cursor: pointer; pointer-events: auto; }
+
+
+
+.inquirypopup > div input { height: 42px; border-width: 1.5px; }
+.inquirypopup > div textarea { width: 100%; height: 150px; display: block;  border-width: 1.5px;}
+
+
+
+
+.inquirypopup > div input:focus {  border:1.5px solid #0090DF; outline: none; }
+.inquirypopup > div textarea:focus { border:1.5px solid #0090DF; outline: none; }
+
+
+
+@media (max-width: 756px){ 
+    .inquirypopup > div {  width: 100%; }
+}
+
+.inquiryList { margin: 50px 0 80px; }
+.inquiryList > .title { margin-bottom: 20px; }
+.inquiryList > .title h2 { font-size: 20px;  font-weight: bold;}
+
+.inquiryList .qnaList { }
+.inquiryList .qnaList .row { padding: 40px 30px; border-bottom:1px solid #dedede;  }
+.inquiryList .qnaList .row:last-child {border-bottom:none;  }
+.inquiryList .qnaList .row .userWrap { display: flex; }
+.inquiryList .qnaList .row .userWrap .right { position: relative;  width: calc(100% - 110px); }
+.inquiryList .qnaList .row .userWrap .userimg { width: 80px; height: 80px; margin-right: 30px; }
+.inquiryList .qnaList .row .userWrap .userimg img { width: 100%; height: 100%; object-fit: cover; border-radius: 50%;   }
+.inquiryList .qnaList .row .userWrap .username { font-size: 15px;  margin-bottom: 15px; color: #999; }
+.inquiryList .qnaList .row .userWrap .username .title { margin-bottom: 20px; }
+
+.inquiryList .qnaList .row .userWrap .usercontent { font-size: 16px; }
+.inquiryList .qnaList .row .userWrap .usercontent .title { margin-bottom: 5px; ; }
+.inquiryList .qnaList .row .userWrap .usercontent .content { margin-bottom: 20px; }
+.inquiryList .qnaList .row .userWrap .inquiryDate { color: #999; font-size: 12px;}
+.inquiryList .qnaList .row .userWrap .delet { display: flex; position: absolute; right: 0; top: 0; cursor: pointer; }
+.inquiryList .qnaList .row .userWrap .delet svg { margin-left: 10px; }
+
+.inquiryList .qnaList .row .hostWrap { padding-top: 40px;font-size: 15px; display: flex;  justify-content: flex-end; }
+.inquiryList .qnaList .row .hostWrap > div { width: calc(100% - 110px); }
+.inquiryList .qnaList .row .hostWrap .hostid {  margin-bottom: 15px; color:#0090DF; }
+.inquiryList .qnaList .row .hostWrap .reply { margin-bottom: 20px;  }
+.inquiryList .qnaList .row .hostWrap .replydate { color: #999; font-size: 12px; }

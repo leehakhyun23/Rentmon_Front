@@ -1,12 +1,14 @@
 import React, { useEffect, useState } from 'react'
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { getReserveInfo } from '../../../util/getreser';
 import MyInfo from './MyInfo';
 import RecentReservation from './RecentReservation'
 import SidebarMyInfo from './SidebarMyInfo'
 
-function LoginOn() {
+function LoginOn({mypagePopup , setMypagePopup}) {
   let user = useSelector(state => state.user);
   let recent =useSelector(state => state.recent);
+  let dispatch = useDispatch();
   const [recentReservationData , setRecentReservationData] = useState({});
   useEffect(() => {
     if (!recent.recentReserve) return;
@@ -20,12 +22,16 @@ function LoginOn() {
       weather : recent.weather || "",
     });
   }, [recent]); 
+
+  useEffect(()=>{
+    getReserveInfo(user.userid, dispatch);
+  },[])
   return (
     <div className='logOn scrollbar'>
       {/* 상위 내정보 */}
-      <SidebarMyInfo username = {user.name} profileimg={user.profileimg} />
-      <RecentReservation rs={recentReservationData}/>
-      <MyInfo user={user}/>
+      <SidebarMyInfo username = {user.name} profileimg={user.profileimg} setMypagePopup={setMypagePopup} />
+      <RecentReservation rs={recentReservationData} setMypagePopup={setMypagePopup}/>
+      <MyInfo mypagePopup={mypagePopup} user={user} setMypagePopup={setMypagePopup}/>
     </div>
   )
 }
