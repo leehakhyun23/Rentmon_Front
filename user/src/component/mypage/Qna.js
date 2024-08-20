@@ -28,7 +28,7 @@ function Qna() {
     return (
         <div className='mypagecommon qna'>
             <div className='title'>
-                <h2>문의/신고 ({page.recordAllcount})</h2>
+                <h2>문의 ({page.recordAllcount})</h2>
             </div>
             <div className='qnaList'>
                 <div className='row title'>

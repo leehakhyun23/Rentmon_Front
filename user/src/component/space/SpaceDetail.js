@@ -10,6 +10,9 @@ import Slider from 'react-slick'
 import 'slick-carousel/slick/slick.css'
 import 'slick-carousel/slick/slick-theme.css'
 import KakaoMap from '../../util/KakaoMap';
+import { getCookie, setAuthoCookie } from '../../util/cookieUtil';
+
+const { kakao } = window;
 
 const settings = {
   dot: false,
@@ -112,7 +115,7 @@ function SpaceDetail() {
           setSpace(result.data);
           setKakaoAddress(`${result.data.province} ${result.data.town} ${result.data.village} ${result.data.addressdetail}`);
         })
-        .catch((err) => { console.error(err) })
+        .catch((err) => { console.error(err) });
 
     }, []
   )
@@ -149,7 +152,6 @@ function SpaceDetail() {
     setAuthoCookie("rctvw", rctvw , 60);
     console.log(rctvw);
   },[]);
-
 
   return (
     <div className='spaceContainer'>
