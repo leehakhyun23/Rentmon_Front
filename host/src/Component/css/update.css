@@ -1,0 +1,119 @@
+.updateheader{
+    align-items: center;
+    text-align: center;
+    background-color: #f8f8f8; 
+    border-bottom: 1px solid #ddd;
+    height: 70px;
+    width: 100%;
+}
+
+article {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .logo1 {
+    color: #0090DF;
+    font-size: 1.5em;
+    font-weight: bold;
+}
+
+.updateform {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    padding: 20px;
+    width: 600px;
+    height: 600px;
+}
+
+.aa{
+    width: 100%;
+    color: black;
+}
+
+.aa .idbtn{
+    font-size: 15px;
+    font-weight: normal;
+    cursor: pointer;
+}
+
+.aa .email{
+    font-size: 15px;
+    font-weight: normal;
+    cursor: pointer;
+}
+
+
+.email{
+    background-color: white;
+    border: none;
+    /* border-bottom: 1px solid #999999; */
+    text-align: left;
+    cursor: pointer;
+}
+
+.c{
+    background-color: white;
+    border: none;
+    /* border-bottom: 1px solid #999999; */
+    text-align: left;
+    cursor: pointer;
+}
+
+
+.box{
+    width: 100%;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center; /* 수평 가운데 정렬 */
+    align-items: center;
+    margin-top: 50px;
+}
+
+.box [type="text"]{
+    padding: 0 15px;
+    color: #919191;
+    box-sizing: border-box;
+    -webkit-appearance: none;
+    box-sizing: border-box;
+    appearance: none;
+    box-shadow: none;
+    text-shadow: none;
+    border-radius: 0;
+    border: 2px solid #ddd;
+    background: #fff;
+    width: 100%;
+    height: 47px;
+}
+
+.box [type="password"]{
+    font-size: 16px;
+}
+
+.btn {
+    margin-top: 20px;
+    border-radius: 5%;
+    border: none;
+    width: 600px;
+    height: 45px;
+    color: aliceblue;
+    background-color: #0090DF;
+    font-weight: bold;
+    cursor: pointer;
+}
+.button-container {
+    display: flex;       /* Flexbox를 사용합니다. */
+    justify-content: flex-end; 
+  }
+
+.bbtn{
+    margin-top: 20px;
+    background-color: white;
+    font-weight: bold;
+    border: none;
+    float: right;
+}
