@@ -1,5 +1,6 @@
 import React from 'react'
-import Header from './HeaderFooter/Header'
+import Header from './HeaderFooter/Header';
+
 
 import { useNavigate } from 'react-router-dom';
 import './css/main.css'

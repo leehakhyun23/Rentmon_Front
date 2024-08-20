@@ -23,7 +23,7 @@ const initialState = {
 }
 
 
-const spaceSlice = createSlice({
+const SpaceSlice = createSlice({
     name: 'space',
     initialState,
     reducers: {
@@ -35,6 +35,6 @@ const spaceSlice = createSlice({
     },
 });
 
-export const { setCnum } = spaceSlice.actions;
-export default spaceSlice.reducer; // default로 내보내기
+export const { setCnum } = SpaceSlice.actions;
+export default SpaceSlice.reducer; // default로 내보내기
 

@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from 'react-redux'; // 추가
-import { setCnum } from '../../store/spaceSlice' // 추가
+import { setCnum } from '../../store/SpaceSlice' // 추가
 import '../css/header.css';
 import '../css/cate.css';
 
