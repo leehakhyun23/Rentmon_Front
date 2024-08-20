@@ -1,0 +1,37 @@
+.spaceCompoent { border-radius: 9px; overflow: hidden; border: 1px solid #DCDCDC; }
+.spaceCompoent .imageWrap {  }
+.spaceCompoent .imageWrap .spaceImgSwiper {  }
+.spaceCompoent .imageWrap .spaceImgSwiper .swiper-slide {  }
+.spaceCompoent .imageWrap .spaceImgSwiper .swiper-slide img { width: 100%; height: 209px; object-fit: cover; }
+
+.spaceCompoent .swiper-button-next, .spaceCompoent .swiper-button-prev { color: #fff;  }
+.spaceCompoent .swiper-button-next::after, .spaceCompoent .swiper-button-prev::after { font-size: 33px; }
+
+
+.spaceCompoent .content { padding: 13px 13px; }
+.spaceCompoent .content a { display: block; width: 100%; }
+.spaceCompoent .content a > div { display: flex; justify-content: space-between; }
+.spaceCompoent .content a .title { font-size: 18px; font-weight: bold; }
+.spaceCompoent .content a .title span {  }
+.spaceCompoent .content a .title span svg { fill:#0090DF; font-size: 13px; margin: 0 1.3px; }
+
+.spaceCompoent .station { margin-top: 10px; }
+.spaceCompoent .station span { font-size: 14px; display: flex; align-items: center; }
+.spaceCompoent .station span svg { margin-right:5px; display: inline-block; }
+.spaceCompoent .station span.tags {color: #999999;  }
+.spaceCompoent .station span.tags small { font-size: inherit;  }
+
+
+.spaceCompoent .priceAndinfo {  margin-top: 10px;}
+.spaceCompoent .priceAndinfo .price { font-size: 20px; color: #0090DF; font-weight: 600; }
+.spaceCompoent .priceAndinfo .price small { color: #999999; margin-left: 3px; font-size: 13px; }
+.spaceCompoent .priceAndinfo .info { display: flex; align-items: center; }
+.spaceCompoent .priceAndinfo .info span { display: flex; align-items: center; margin-left: 5px; }
+.spaceCompoent .priceAndinfo .info span svg { margin:0 5px; display: block; }
+.spaceCompoent .priceAndinfo .info span:nth-child(2) svg { font-size: 18px; position: relative; top: 2px; }
+.spaceCompoent .priceAndinfo .info span:nth-child(3) svg { position: relative; top: 2px; }
+
+
+@media (max-width: 756px){ 
+
+}
