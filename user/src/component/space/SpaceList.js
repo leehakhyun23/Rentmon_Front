@@ -92,7 +92,7 @@ function SpaceList() {
 
 
     return (
-      <div className='innerContainer'>
+      <div className='spaceContainer'>
         <div>
 
         검색 Section
@@ -136,8 +136,6 @@ function SpaceList() {
             </select>
           </div>
 
-
-        공간 열람 Section (무한페이지)
           <div className="spaces">
             {
               (spaceList) ? (
