@@ -23,7 +23,7 @@ const initialState = {
     oList:[],
 };
 
-const spaceSlice = createSlice({
+const SpaceSlice = createSlice({
     name: 'space',
     initialState,
     reducers: {

@@ -16,6 +16,7 @@ import React from 'react';
 import Main from "./Component/Main";
 import Getsnshostinfo from "./Component/member/Getsnshostinfo";
 import Update from "./Component/member/Update";
+import Submenu from "./Component/member/Submenu";
 
 function App() {
   return (
@@ -34,7 +35,10 @@ function App() {
         <Route path="/Login" element={<Login />} />
         <Route path="/Join" element={<Join />} />
         <Route path="/Update" element={<Update />} />
-        <Route path="/getsnshostinfo/:hostid" element={<Getsnshostinfo />} />
+        <Route path="/Submenu" element={<Submenu />} />
+        <Route path="/getsnshostinfo/:hostid/kakao" element={<Getsnshostinfo />} />
+        <Route path="/getsnshostinfo/:hostid/naver" element={<Getsnshostinfo />} />
+        <Route path="/getsnshostinfo/:hostid/google" element={<Getsnshostinfo />} />
 
       </Routes>
   );
