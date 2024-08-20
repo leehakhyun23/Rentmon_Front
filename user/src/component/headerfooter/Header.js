@@ -62,7 +62,7 @@ useEffect(()=>{
         {/* 서치팝업 창 */}
         <Searchpopup searchshow={searchshow} searchWord={searchWord} setSearchWord={setSearchWord} setSearchPopup={setSearchPopup} />
         {/* 마이페이지 사이드바메뉴 */}
-        <MypageSidebar  loginOn ={(user.name)?(true):(false)} mypageShow={mypageShow} setMypagePopup={setMypagePopup} mypageBlack={mypageBlack}/>
+        <MypageSidebar mypagePopup={mypagePopup}  loginOn ={(user.name)?(true):(false)} mypageShow={mypageShow} setMypagePopup={setMypagePopup} mypageBlack={mypageBlack}/>
     </>
 
   )

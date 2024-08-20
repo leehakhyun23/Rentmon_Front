@@ -15,7 +15,6 @@ import Usesapce from './component/mypage/Usesapce';
 import Zzim from './component/mypage/Zzim';
 import Qna from './component/mypage/Qna';
 import Updateuser from './component/mypage/Updateuser';
-import InsertInquiry from './component/inquiry/InsertInquiry';
 
 function App() {
   return (
@@ -41,7 +40,6 @@ function App() {
         <Route path='qna/:currentPage' element={<Qna/>} />
         <Route path='updateuser' element={<Updateuser/>} />
       </Route>
-      <Route path='/insertInquiry/:scseq' element={<InsertInquiry />}/>
     </Routes>
     <Footer />
 

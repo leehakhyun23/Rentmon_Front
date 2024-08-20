@@ -1,8 +1,8 @@
 import React from 'react'
 
-function QnaComponent({num,title,lastDate,reply}) {
+function QnaComponent({num,title,lastDate,reply ,setPopup}) {
   return (
-    <div>
+    <div onClick={()=>{setPopup()}}>
         <div className='num'>{num}</div>
         <div className='title'>{title}</div>
         <div className='lastDate'>{lastDate}</div>

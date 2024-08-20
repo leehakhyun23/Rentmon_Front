@@ -22,7 +22,6 @@ function RecommandSpace({user}) {
             let result
             if(user.email){ result = await axios.post("/api/main/getRecommandSpace",user)}
             else { result = await axios.post("/api/main/getRecommandSpace")}
-            console.log(result.data);
             setRcList(result.data);
         }catch(err){console.error(err);}
     }
