@@ -6,7 +6,7 @@ import InquiryPage from './components/inquiry/InquiryPage';
 import DeclarationPage from './components/declaration/DeclarationPage';
 import InquiryView from './components/inquiry/InquiryView';
 import DeclarationView from './components/declaration/DeclarationView';
-import CouponPage from './components/Coupon/CouponPage';
+import CouponPage from './components/coupon/CouponPage';
 import CouponModal from './components/modal/CouponModal';
 
 function App() {
