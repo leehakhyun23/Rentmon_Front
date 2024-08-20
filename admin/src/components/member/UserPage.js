@@ -2,6 +2,9 @@ import { Box, Button, Checkbox, FormControl, InputLabel, List, ListItem, MenuIte
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import CouponModal from '../modal/CouponModal';
+import PeopleIcon from '@mui/icons-material/People';
+import PersonIcon from '@mui/icons-material/Person';
+import PersonOffIcon from '@mui/icons-material/PersonOff';
 
 const UserPage = () => {
     const [userList, setUserList] = useState([]);
@@ -82,17 +85,22 @@ const UserPage = () => {
         <div>
             유저
             <Box sx={{display: 'flex', flexDirection: 'column', justifyContent: 'center'}}>
-                <Box sx={{display: 'flex', justifyContent: 'flex-end'}}>
-                    <FormControl>
-                        <InputLabel id="demo-simple-select-label">Search</InputLabel>
-                        <Select value={searchType} label="Search" onChange={handleChange}>
-                            <MenuItem value="name">이름</MenuItem>
-                            <MenuItem value="phone">전화번호</MenuItem>
-                            <MenuItem value="email">이메일</MenuItem>
-                        </Select>
-                        </FormControl>
-                    <TextField label="Keyword" variant="outlined" />
-                    <Button variant="contained">검색</Button>
+                <Box sx={{display: 'flex', justifyContent: 'space-between'}}>
+                    <Box>
+                        <PeopleIcon/><PersonIcon/><PersonOffIcon/>
+                    </Box>
+                    <Box>
+                        <FormControl>
+                            <InputLabel id="demo-simple-select-label">Search</InputLabel>
+                            <Select value={searchType} label="Search" onChange={handleChange}>
+                                <MenuItem value="name">이름</MenuItem>
+                                <MenuItem value="phone">전화번호</MenuItem>
+                                <MenuItem value="email">이메일</MenuItem>
+                            </Select>
+                            </FormControl>
+                        <TextField label="Keyword" variant="outlined" />
+                        <Button variant="contained">검색</Button>
+                    </Box>
                 </Box>
                 <Paper elevation={3}>
                     <Box>
