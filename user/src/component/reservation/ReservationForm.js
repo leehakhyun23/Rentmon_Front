@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import { useSelector } from 'react-redux'
+import Calendar from "react-calendar";
 
 import './style/reservation.css';
 import { useParams, useLocation, useNavigate } from 'react-router-dom';
 import axios from 'axios';
-
 
 import Slider from 'react-slick';
 import 'slick-carousel/slick/slick.css';
@@ -25,26 +25,112 @@ function ReservationForm({ props }) {
     const [space, setSpace] = useState({});
     const { sseq } = useParams(); // URL 파라미터에서 공간 고유 ID 받기
     const location = useLocation();
-    const { startDate, startTime, endTime } = location.state || {}; // 상태에서 날짜와 시간 정보 받기
-
-    const [userInfo, setUserInfo] = useState({});  // 예약자 정보
-    const [purpose, setPurpose] = useState('');    // 사용 목적
     const [request, setRequest] = useState('');    // 요청 사항
+    const [payment, setPayment] = useState();
 
+    // 시간값
+    const [date, setDate] = useState(null);
+    const [startTime, setStartTime] = useState(0);
+    const [endTime, setEndTime] = useState(1);
+    const [startTimestamp, setStartTimestamp] = useState();
+    const [endTimestamp, setEndTimestamp] = useState();
+    const [reserveTime, setReserveTime] = useState();
+    const hours = Array.from({ length: 24 }, (_, i) => `${i}:00:00`);
 
-    const handleSubmit = (e) => {
-        e.preventDefault();
+    const handleDateChange = (newDate) => {
+        // Date 객체에서 년, 월, 일 추출
+        const year = newDate.getFullYear();
+        const month = String(newDate.getMonth() + 1).padStart(2, '0'); // 월은 0부터 시작하므로 +1, 두 자리 수로 변환
+        const day = String(newDate.getDate()).padStart(2, '0'); // 두 자리 수로 변환
 
-        const reservationData = {
-            startDate: startDate,
-            startTime: startTime,
-            endTime: endTime,
-        };
+        // YYYY-MM-DD 형식의 문자열로 변환
+        const formattedDate = `${year}-${month}-${day}`;
 
-        onSubmit(reservationData);
+        setDate(formattedDate);
+        setStartTime("");
+        setEndTime("");
+
+        console.log("Formatted Date:", formattedDate); // 출력 예: 2024-08-19
     };
 
+    const handleStartTimeChange = (event) => {
+        setStartTime(event.target.value);
+        const timestamp = `${date} ${event.target.value}`;
+        setStartTimestamp(timestamp);
+
+
+    };
+
+    const handleEndTimeChange = (event) => {
+        setEndTime(event.target.value);
+        const timestamp = `${date} ${event.target.value}`;
+        setEndTimestamp(timestamp);
+        // 바로 예약 시간을 계산하고 결제 금액을 계산합니다.
+        const calculatedReserveTime = calculateTimeDifference(startTimestamp, endTimestamp);
+        const calculatedPayment = calculatedReserveTime * space.price;
+
+        setReserveTime(calculatedReserveTime);  // 필요하면 상태로도 저장
+        setPayment(calculatedPayment);          // 필요하면 상태로도 저장
+
+    };
+
+    useEffect(() => {
+        if (startTimestamp && endTimestamp) {
+            const calculatedReserveTime = calculateTimeDifference(startTimestamp, endTimestamp);
+            setReserveTime(calculatedReserveTime);
+            setPayment(calculatedReserveTime * space.price);
+
+            console.log("Reserve Time:", calculatedReserveTime);
+            console.log("Payment:", calculatedReserveTime * space.price);
+        }
+    }, [startTimestamp, endTimestamp, space.price]);
+
+
+    function calculateTimeDifference(startDateStr, endDateStr) {
+        const startDate = new Date(startDateStr);
+        const endDate = new Date(endDateStr);
+        const differenceInMilliseconds = endDate - startDate;
+        const differenceInHours = differenceInMilliseconds / (1000 * 60 * 60);
+        return differenceInHours;
+
+    }
+
+    const handleSubmit = () => {
+        if (!date || !startTime || !endTime) {
+            alert("예약 날짜와 시간을 지정해주세요.");
+            return;
+        }
+
+        // 예약 데이터를 서버로 전송
+        const reservationData = {
+            reservestart: startTimestamp,
+            reserveend: endTimestamp,
+            request: request,
+            payment: payment,
+            user: { userid: user.userid }, // 올바른 형식의 객체로 감싸기
+            space: { sseq: space.sseq } // 올바른 형식의 객체로 감싸기
+        };
+
+        console.log(reservationData);
+
+        axios.post(`/api/reservation/InsertReservation`, reservationData, {
+            headers: {
+                "Content-Type": "application/json"
+            }
+        })
+            .then(response => {
+                alert('예약에 성공했습니다.');
+                navigate(`/reservation/ReservationDone/${space.sseq}`);  // 예약 성공 후 이동할 페이지
+            })
+            .catch(error => {
+                console.log(space);
+                console.error('예약에 실패했습니다.', error);
+            });
+    };
+
+
     const onSubmit = () => { }
+
 
     useEffect(
         () => {
@@ -57,23 +143,52 @@ function ReservationForm({ props }) {
         }, []
     )
 
-    const calculateTotalPrice = () => {
-        // 사용 시간 계산 (시작 시간과 종료 시간을 토대로)
-        const start = new Date(`2024-01-01T${startTime}:00`);
-        const end = new Date(`2024-01-01T${endTime}:00`);
-        const hours = (end - start) / (1000 * 60 * 60);
-        return hours * space.price;
-    };
 
 
 
 
     return (
         <div className="reservation-form-container">
+            <div className="reservation-calendar">
+                <div>
+                    <Calendar onChange={handleDateChange} value={date} />
+                    {date && (
+                        <>
+                            <div>
+                                <label>Start Time:</label>
+                                <select value={startTime} onChange={handleStartTimeChange}>
+                                    <option value="">Select start time</option>
+                                    {hours.map((hour, index) => (
+                                        <option key={index} value={hour}>
+                                            {hour}
+                                        </option>
+                                    ))}
+                                </select>
+                            </div>
+                            <div>
+                                <label>End Time:</label>
+                                <select value={endTime} onChange={handleEndTimeChange}>
+                                    <option value="">Select end time</option>
+                                    {hours.map((hour, index) => (
+                                        <option key={index} value={hour}>
+                                            {hour}
+                                        </option>
+                                    ))}
+                                </select>
+                            </div>
+                            <button onClick={handleSubmit}>Reserve</button>
+                        </>
+                    )}
+                </div>
+
+            </div>
+
+
+
             <div className="space-info">
                 <Slider {...settings}>
                     {space.images && space.images.map((image, idx) => (
-                        <img key={idx} src={`http://localhost:8070/space_images/${image.originName}`} alt={space.title} />
+                        <img key={idx} src={`http://localhost:8070/space_images/${image.originame}`} alt={space.title} />
                     ))}
                 </Slider>
                 <h2>{space.title}</h2>
@@ -83,10 +198,10 @@ function ReservationForm({ props }) {
 
             <div className="reservation-details">
                 <h3>예약 정보</h3>
-                <p>예약 날짜: {startDate}</p>
+                <p>예약 날짜: {date}</p>
                 <p>시작 시간: {startTime}</p>
                 <p>종료 시간: {endTime}</p>
-                <label>예약 인원: <input type="number" min="1" max="10" /></label>
+                <p>공간 주의 사항 : {space.caution}</p>
             </div>
 
             <div className="user-info">
@@ -94,40 +209,31 @@ function ReservationForm({ props }) {
                 <p>이름: {user.name}</p>
                 <p>이메일: {user.email}</p>
                 <p>전화번호: {user.phone}</p>
-                <label>사용 목적: <input type="text" value={purpose} onChange={(e) => setPurpose(e.target.value)} /></label>
                 <label>요청 사항: <input type="text" value={request} onChange={(e) => setRequest(e.target.value)} /></label>
             </div>
 
             <div className="host-info">
                 <h3>호스트 정보</h3>
-                <p>{space.hostName}님</p>
-                <p>연락처: {space.hostPhone}</p>
-            </div>
-
-            <div className="reservation-notes">
-                <h3>예약 주의 사항</h3>
-                <p>여기에 예약 관련 주의 사항을 기재하십시오...</p>
+                {/* <p>이름 : {space.host.hostid}</p>
+                <p>연락처: {space.host.phone}</p>
+                <p>이메일 : {space.host.email}</p> */}
             </div>
 
             <div className="payment-info">
                 <h3>결제 정보</h3>
-                <p>총 결제 금액: {calculateTotalPrice()}원</p>
+                <p>총 결제 금액: {payment}원</p>
                 <label>결제 수단:
                     <label><input type="radio" name="payment" value="card" /> 신용카드</label>
                     <label><input type="radio" name="payment" value="paypal" /> PayPal</label>
                 </label>
+                <label>쿠폰 사용하기:
+                    <label><input type="radio" name="payment" value="3000coupon" /> 3000원</label>
+                    <label><input type="radio" name="payment" value="5000coupon" /> 5000원</label>
+                    <label><input type="radio" name="payment" value="10000coupon" /> 10000원</label>
+                </label>
             </div>
 
-            <div className="agreement">
-                <h3>동의 사항</h3>
-                <label><input type="checkbox" /> 위 공간의 예약조건 확인 및 결제진행 동의</label>
-                <label><input type="checkbox" /> 환불규정 안내에 대한 동의</label>
-                <label><input type="checkbox" /> 개인정보 제3자 제공 동의</label>
-                <label><input type="checkbox" /> 개인정보 수집 및 이용 동의</label>
-                <label><input type="checkbox" /> 전체 동의</label>
-            </div>
-
-            <button className="submit-button" onClick={handleSubmit}>결제하기인데 일단은 생략하고 예약하기</button>
+            <button className="submit-button" onClick={handleSubmit}>예약하기</button>
         </div>
     );
 }

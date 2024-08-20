@@ -16,6 +16,7 @@ function ImageCheck({setInfo}) {
       }
       reader.readAsDataURL(file);
       setInfo(prev=>({...prev, profileimg:file}));
+      console.log(file);
     }
   }
 

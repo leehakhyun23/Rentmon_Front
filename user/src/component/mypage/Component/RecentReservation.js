@@ -8,14 +8,15 @@ function RecentReservation() {
     useEffect(() => {
       if (!recent.recentReserve) return;
       let recentrv = recent.recentReserve;
-      console.log(recentrv);
       setRecentReservationData({
-        savefilename: recentrv.spaceimage[0]?.realName || '',
+        savefilename: recentrv.space.spaceimage[0]?.realName || '',
         title: recentrv.space?.title || '',
-        count: recentrv.space?.personnal || 0,
+        count: recentrv.space?.maxpersonnal || 0,
         reservedate: recentrv.reservestart || '',
+        reserveend: recentrv.reserveend || '',
         weather : recent.weather || "",
-        content : recentrv.space.content
+        content : recentrv.space.content || "",
+        price :recentrv.payment || ""
       });
     }, [recent]); 
   return (

@@ -1,0 +1,47 @@
+
+/* 전체 컨테이너 스타일 */
+.container {
+    padding: 20px;
+    font-family: Arial, sans-serif;
+}
+
+/* 헤더 스타일 */
+.header2 {
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 20px;
+}
+
+/* 이용 시간 컨테이너 스타일 */
+.time-container {
+    display: flex;
+    align-items: center;
+    gap: 10px; /* 요소 간의 간격 */
+    margin-bottom: 20px; /* 하단 여백 */
+}
+
+/* 레이블 스타일 */
+.time-label {
+    font-size: 16px;
+    font-weight: 600;
+}
+
+/* 드롭다운 스타일 */
+.time-select {
+    width: 80px; /* 너비 조정 */
+    padding: 5px;
+    font-size: 14px; /* 글자 크기 */
+    border: 1px solid #ccc; /* 테두리 색상 */
+    border-radius: 4px; /* 둥근 모서리 */
+    background-color: #fff; /* 배경색 */
+    cursor: pointer; /* 커서 스타일 */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* 박스 그림자 */
+    transition: border-color 0.3s ease, box-shadow 0.3s ease; /* 애니메이션 */
+}
+
+/* 드롭다운 포커스 시 스타일 */
+.time-select:focus {
+    border-color: #007bff; /* 포커스 시 테두리 색상 */
+    outline: none; /* 기본 포커스 아웃라인 제거 */
+    box-shadow: 0 0 0 2px rgba(0, 123, 255, 0.2); /* 포커스 시 그림자 */
+}

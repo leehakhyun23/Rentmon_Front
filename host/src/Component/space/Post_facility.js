@@ -1,30 +1,55 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from "react-router-dom";
+import { useSelector, useDispatch } from 'react-redux';
+import { setSpace } from '../../store/spaceSlice'; // Import your Redux slice
 import '../css/header.css';
 import '../css/facility.css';
 
 function Post_facility() {
-  // 선택된 체크박스의 값을 저장할 상태
-  const [select, setSelect] = useState([]);
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
-  // 체크박스의 상태를 업데이트하는 핸들러 함수
+  // Retrieve current space information from Redux state
+  const currentSpace = useSelector((state) => state.space);
+
+  // Initialize select state with current facilities from Redux state
+  const [select, setSelect] = useState(currentSpace.selectedFacilities || []);
+
+  // Update the state when checkboxes change
   const handleCheckboxChange = (event) => {
     const { value, checked } = event.target;
 
     setSelect((prevSelected) => {
       if (checked) {
-        // 체크박스가 선택되면 선택된 항목 배열에 추가
         return [...prevSelected, value];
       } else {
-        // 체크박스가 선택 해제되면 선택된 항목 배열에서 제거
         return prevSelected.filter(item => item !== value);
       }
     });
   };
 
-  // 선택된 체크박스를 콘솔에 출력하는 함수
+  // Handle form submission
   const onSubmit = () => {
+    dispatch(setSpace({
+      cnum: currentSpace.cnum || '', // Use existing cnum
+      title: currentSpace.title || '', // Maintain existing values
+      subtitle: currentSpace.subtitle || '',
+      price: currentSpace.price ||'',
+      maxpersonnal: currentSpace.maxpersonnal || '',
+      content: currentSpace.content || '',
+      caution: currentSpace.caution || '',
+      zipcode: currentSpace.zipcode || '',
+      province: currentSpace.province || '',
+      town: currentSpace.town || '',
+      village: currentSpace.village || '',
+      address_detail: currentSpace.address_detail || '',
+      rList: currentSpace.rList || '',
+      oList: currentSpace.oList || '',
+      starttime: currentSpace.starttime,
+      endtime: currentSpace.endtime,
+      fnum: select,
+    }));
+    console.log(select);
     navigate('/Post_payment');
   };
 
@@ -84,6 +109,7 @@ function Post_facility() {
             <input
               type="checkbox"
               value={index + 1}
+              checked={select.includes(String(index + 1))}
               onChange={handleCheckboxChange}
             />
             <span>{facility}</span>

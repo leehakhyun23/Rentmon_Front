@@ -28,36 +28,40 @@ function Space(props) {
 
     return (
         <div className="space">
-            {<Slider {...settings} >
+            {<Slider {...settings}  >
                 {
-                    (props.space.images) ? (
-                        props.space.images.map((image, idx) => {
+                    (props.space.spaceimage) ? (
+                        props.space.spaceimage.map((image, idx) => {
                             return (
-                                <img key={idx} src={`http://localhost:8070/space_images/${image.originName}`} alt={props.space.title} />
+                                <img key={idx} src={`http://localhost:8070/space_images/${image.realName}`} alt={props.space.title} onClick={() => { navigate(`/spaceDetail/${props.space.sseq}`) }}/>
                             )
                         })
                     ) : (null)
                 }
             </Slider>}
-            <span onClick={() => { navigate(`/spaceDetail/${props.space.sseq}`) }}> {props.space.sseq}. {props.space.title}</span><br />
-            <span> 내용 : {props.space.content}</span><br />
-            <span> 가격 : {props.space.price}</span><br />
-            {/* 해시태그 조회 */}
-            <div>
-                <h3>해시태그:</h3>
-                {props.space.hashtags && props.space.hashtags.length > 0 ? (
-                    <ul>
-                        {props.space.hashtags.map((hashTag, tagIdx) => (
-                            <li key={tagIdx}>
-                                {hashTag.word}
-                            </li>
-                        ))}
-                    </ul>
-                ) : (
-                    <span>해시태그가 없습니다.</span>
-                )}
+            <div className="spaceTitle" onClick={() => { navigate(`/spaceDetail/${props.space.sseq}`) }}>제목</div>
+            <div className="spaceContent"> {props.space.sseq}. {props.space.title} </div>
+            <div className="spaceTitle">가격</div>
+            <div className="spaceContent"> {props.space.price}/시간</div>
+            <div className="spaceTitle">위치</div>
+            <div className="spaceContent">{props.space.province} {props.space.town}</div>
+
+            <div className="spaceTitle">별점 / 총리뷰수 / 찜수</div>
+            <div className="spaceContent"></div>
+
+            <div className="spaceTitle">해시태그</div>
+            <div className="spaceContent">
+                {
+                    (props.space.hashtags) ? (
+                        props.space.hashtags.map((tag, idx) => {
+                            return (
+                               <div className="tag">{tag.hseq.word}</div>
+                            )
+                        })
+                    ) : (null)
+                }
             </div>
-            <br /><br /><br />
+
         </div>
     )
 }

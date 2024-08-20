@@ -15,51 +15,7 @@
     width: 100%;
     border-radius: 8px;
   }
-  
-  h2, h3 {
-    color: #333;
-  }
-  
-  p, label {
-    margin: 8px 0;
-    font-size: 16px;
-    color: #555;
-  }
-  
-  label {
-    display: flex;
-    align-items: center;
-  }
-  
-  label input[type="text"], label input[type="number"] {
-    width: calc(100% - 20px);
-    padding: 8px;
-    margin-top: 5px;
-    border-radius: 4px;
-    border: 1px solid #ddd;
-    font-size: 16px;
-  }
-  
-  label input[type="checkbox"], label input[type="radio"] {
-    margin-right: 10px;
-    width: 20px;
-    height: 20px;
-    accent-color: #007bff; /* 브라우저 지원 여부에 따라 체크박스 색상을 변경 */
-    cursor: pointer;
-  }
-  
-  .submit-button {
-    width: 100%;
-    padding: 15px;
-    background-color: #007bff;
-    color: white;
-    border: none;
-    border-radius: 8px;
-    font-size: 18px;
-    cursor: pointer;
-    transition: background-color 0.3s;
-  }
-  
-  .submit-button:hover {
-    background-color: #0056b3;
+
+  .space-info h2, .space-info h3 {
+
   }

@@ -1,19 +1,12 @@
 import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
+import { dayFormat } from '../../../util/formatDate'
 
 function ReservationComponent({rs}) {
-    const [dateFormat, setDateFormat] = useState("");
   
-    useEffect(()=>{
-        if (rs && rs.reservedate) {
-            let datearr = rs.reservedate.split(" ")[0].split("-");
-            setDateFormat(datearr[0]+"년 "+Number(datearr[1])+"월 " + Number(datearr[2])+"일");
-    }
-  },[rs]);
 
-   
   return (
-    <div className='recentresevation-container'>
+    <div className='recentresevation-component'>
       {(rs && rs.reservedate)?(
         <>
           <div className='recentresevation-wrapper'>
@@ -23,15 +16,16 @@ function ReservationComponent({rs}) {
               <div className='placeInfo'>
                    <div>
                       <span>{rs.title}</span>
-                      <img src='/img/peopleIcon.svg' alt='peple'/> - {rs.count}명
+                      <img src='/img/peopleIcon.svg' alt='peple'/>&nbsp; - &nbsp;<small>{rs.count}명</small>
                   </div>
-                  <span>{rs.content}</span>
+                  <span className='content'>{rs.content}</span>
+                  <span className='price'>{(new Intl.NumberFormat('ko-KR').format(rs.price))} 원</span>
                   
               </div>
             </div>
             <div className='yearContainer'>
             <div>
-                <p>{dateFormat}</p>
+                <p>{dayFormat(rs.reservedate) +"~"+ dayFormat(rs.reserveend)}</p>
                 <div>
                       {rs.weather &&  (
                         <div>
@@ -49,7 +43,7 @@ function ReservationComponent({rs}) {
         </>
       ):(<>
         <div id="notreserve" style={{padding:"20px 0", textAlign:"center" , color:"#999"}}>
-            현재 다가오는 예약이 없습니다.
+            3일 이내에 등록된 예약이 없습니다.
         </div>
       </>)
       }

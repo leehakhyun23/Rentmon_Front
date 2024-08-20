@@ -54,7 +54,7 @@ useEffect(()=>{
                     <div>
                         <div className='pc'>{(searchPopup)?(null):<SearchInputClick searchWord={searchWord} setSearchPopup={setSearchPopup} />}</div>
                         <Iconbutton src={"/img/peopleIcon.svg"} click={()=>{setMypagePopup(true)}} />
-                        {(user.mseq)&&(<ListIconButton click={()=>{navigate("/")}}  listcount={listcount}/>)}
+                        {(user.name)&&(<ListIconButton click={()=>{navigate("/mypage/reservation/1")}}  listcount={listcount}/>)}
                     </div>
                 </div>
             </div>
@@ -62,7 +62,7 @@ useEffect(()=>{
         {/* 서치팝업 창 */}
         <Searchpopup searchshow={searchshow} searchWord={searchWord} setSearchWord={setSearchWord} setSearchPopup={setSearchPopup} />
         {/* 마이페이지 사이드바메뉴 */}
-        <MypageSidebar  loginOn ={(user.mseq)?(true):(false)} mypageShow={mypageShow} setMypagePopup={setMypagePopup} mypageBlack={mypageBlack}/>
+        <MypageSidebar  loginOn ={(user.name)?(true):(false)} mypageShow={mypageShow} setMypagePopup={setMypagePopup} mypageBlack={mypageBlack}/>
     </>
 
   )

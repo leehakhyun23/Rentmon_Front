@@ -37,10 +37,15 @@ function Login() {
             if(result.data.error === "ERROR_LOGIN"){
               return setLoginMessage("* 아이디 또는 비밀번호를 확인해주세요.");
             }else{
+              
               setCookie("token",{accessToken:result.data.accessToken , refreshToken : result.data.refreshToken},1);
-
+              
               //회원 정보 조회
-              let logindata = await jaxios.get("/api/user/getuseinfo",{params:{userid:result.data.userid}});
+              let logindata = await jaxios.get("/api/user/getuseinfo",{params:{userid}});
+              if(!logindata.data.islogin){
+                alert("사용할 수 없는 계정입니다.");
+                return navigate("/login");
+              }
               dispatch(loginAction(logindata.data));
               if(!logindata.data){
                 return setLoginMessage("* 관리자에게 문의해주세요.");
@@ -48,11 +53,12 @@ function Login() {
 
               //최근 예약 조회
               let recentrerve = await jaxios.get("/api/space/getreserve",{params:{userid:userid}});
-              
               //최근 예약에 날씨 데이터 삽입
               if(recentrerve.data){
                 dispatch(recentReserveAction({recentReserve: recentrerve.data}));
                 fetchForecast();
+              }else{
+                dispatch(recentReserveAction({}));
               }
       
               async function fetchForecast() {
@@ -67,8 +73,9 @@ function Login() {
     
               function displayForecast(data) {
                 data.list.forEach(item => {
-                  if( !item.dt_txt.includes(recentrerve.data.reservestart.split(" ")[0]+" 21:00:00")) return false;
+                  if( !item.dt_txt.includes(recentrerve.data.reservestart.split(" ")[0]+" 00:00:00")) return false;
                   dispatch(weatherSetAction({weather:{
+                    date : item.dt_txt,
                     temp : item.main.temp,
                     description:item.weather[0].description,
                     icon :`http://openweathermap.org/img/wn/${item.weather[0].icon}@2x.png`
