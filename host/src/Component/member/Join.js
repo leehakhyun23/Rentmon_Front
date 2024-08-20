@@ -36,11 +36,11 @@ function Join() {
     
         try {
             // 회원가입 요청
-            let result = await axios.post("/api/member/join", {
-                userid: hostid,
+            let result = await axios.post("/api/host/join", {
+                hostid: hostid,
                 pwd: pwd,
                 nickname: name,
-                role: "host"
+                role: "host",
             });
     
             // 서버 응답 처리
@@ -49,7 +49,7 @@ function Join() {
             }
             if (result.data.msg === 'ok') {
                 let result1 = await axios.post("/api/host/join", {
-                    member: {mseq:result.data.mseq},
+                    host: {mseq:result.data.mseq},
                     hostid: hostid,
                     pwd: pwd,
                     nickname: name,
