@@ -43,10 +43,23 @@ function Post_basicInfo() {
     const [ divStyle8, setDivStyle8 ] = useState({display:'none'});
     const [ divStyle9, setDivStyle9 ] = useState({display:'none'});
     const [ divStyle10, setDivStyle10 ] = useState({display:'none'});
-    const [imgList, setIimgList] = useState([]);
+    const [rList, setRList] = useState([]);
     const postcodeRef = useRef(null);
     const detailAddressRef = useRef(null);
     const extraAddressRef = useRef(null);
+
+    //임의로 추가해본다 
+    const [originalname1, setOriginalname1] = useState('');
+    const [originalname2, setOriginalname2] = useState('');
+    const [originalname3, setOriginalname3] = useState('');
+    const [originalname4, setOriginalname4] = useState('');
+    const [originalname5, setOriginalname5] = useState('');
+    const [originalname6, setOriginalname6] = useState('');
+    const [originalname7, setOriginalname7] = useState('');
+    const [originalname8, setOriginalname8] = useState('');
+    const [originalname9, setOriginalname9] = useState('');
+    const [originalname10, setOriginalname10] = useState('');
+    const [oList, setOList] = useState([]);
 
     useEffect(() => {
         const script = document.createElement('script');
@@ -68,7 +81,6 @@ function Post_basicInfo() {
         flexDirection:"row",
         margin:"5px 0",
         justifyContent: "space-between",
-        border:"1px solid black",
     }
 
     async function imgUpload(e, n){
@@ -77,42 +89,61 @@ function Post_basicInfo() {
 
         const result = await jaxios.post('/api/space/imgup', formData );
 
-        if( n == 1){
-            setDivStyle2( fieldStyle );
-            setImgsrc1( `http://localhost:8070/space_images/${result.data.savefilename}`);
-        }else if( n == 2){
-            setDivStyle3( fieldStyle );
-            setImgsrc2( `http://localhost:8070/space_images/${result.data.savefilename}`);
-        }else if( n == 3){
-            setDivStyle4( fieldStyle );
-            setImgsrc3( `http://localhost:8070/space_images/${result.data.savefilename}`);
-        }else if( n == 4){
-            setDivStyle5( fieldStyle );
-            setImgsrc4( `http://localhost:8070/space_images/${result.data.savefilename}`);
-        }else if( n == 5){
-            setDivStyle6( fieldStyle );
-            setImgsrc5( `http://localhost:8070/space_images/${result.data.savefilename}`);
-        }else if( n == 6){
-            setDivStyle7( fieldStyle );
-            setImgsrc6( `http://localhost:8070/space_images/${result.data.savefilename}`);
-        }else if( n == 7){
-            setDivStyle8( fieldStyle );
-            setImgsrc7( `http://localhost:8070/space_images/${result.data.savefilename}`);
-        }else if( n == 8){
-            setDivStyle9( fieldStyle );
-            setImgsrc8( `http://localhost:8070/space_images/${result.data.savefilename}`);
-        }else if( n == 9){
-            setDivStyle10( fieldStyle );
-            setImgsrc9( `http://localhost:8070/space_images/${result.data.savefilename}`);
-        }else if( n == 10){
-            setImgsrc10( `http://localhost:8070/space_images/${result.data.savefilename}`);
+        let realname = result.data.realname;
+        let originalname = result.data.originalname;
+
+        if (n === 1) {
+            setDivStyle2(fieldStyle);
+            setImgsrc1(`http://localhost:8070/space_images/${realname}`);
+            setOriginalname1(`http://localhost:8070/space_images/${originalname}`);
+        } else if (n === 2) {
+            setDivStyle3(fieldStyle);
+            setImgsrc2(`http://localhost:8070/space_images/${realname}`);
+            setOriginalname2(`http://localhost:8070/space_images/${originalname}`);
+        } else if (n === 3) {
+            setDivStyle4(fieldStyle);
+            setImgsrc3(`http://localhost:8070/space_images/${realname}`);
+            setOriginalname3(`http://localhost:8070/space_images/${originalname}`);
+        } else if (n === 4) {
+            setDivStyle5(fieldStyle);
+            setImgsrc4(`http://localhost:8070/space_images/${realname}`);
+            setOriginalname4(`http://localhost:8070/space_images/${originalname}`);
+        } else if (n === 5) {
+            setDivStyle6(fieldStyle);
+            setImgsrc5(`http://localhost:8070/space_images/${realname}`);
+            setOriginalname5(`http://localhost:8070/space_images/${originalname}`);
+        } else if (n === 6) {
+            setDivStyle7(fieldStyle);
+            setImgsrc6(`http://localhost:8070/space_images/${realname}`);
+            setOriginalname6(`http://localhost:8070/space_images/${originalname}`);
+        } else if (n === 7) {
+            setDivStyle8(fieldStyle);
+            setImgsrc7(`http://localhost:8070/space_images/${realname}`);
+            setOriginalname7(`http://localhost:8070/space_images/${originalname}`);
+        } else if (n === 8) {
+            setDivStyle9(fieldStyle);
+            setImgsrc8(`http://localhost:8070/space_images/${realname}`);
+            setOriginalname8(`http://localhost:8070/space_images/${originalname}`);
+        } else if (n === 9) {
+            setDivStyle10(fieldStyle);
+            setImgsrc9(`http://localhost:8070/space_images/${realname}`);
+            setOriginalname9(`http://localhost:8070/space_images/${originalname}`);
+        } else if (n === 10) {
+            setImgsrc10(`http://localhost:8070/space_images/${realname}`);
+            setOriginalname10(`http://localhost:8070/space_images/${originalname}`);
         }
-
-        let arr = [...imgList];
-        arr.push(result.data.savefilename);
-        setIimgList( [...arr] );
-        console.log(imgList);
-
+    
+        // Correctly update the lists
+        let updatedRList = [...rList];
+        updatedRList.push(realname);
+        setRList(updatedRList);
+    
+        let updatedOList = [...oList];
+        updatedOList.push(originalname);
+        setOList(updatedOList);
+    
+        console.log('rList:', updatedRList);
+        console.log('oList:', updatedOList);
     }
 
     const openPostcode = () => {
@@ -161,18 +192,11 @@ function Post_basicInfo() {
             town,
             village,
             address_detail,
-            imgsrc1,
-            imgsrc2,
-            imgsrc3,
-            imgsrc4,
-            imgsrc5,
-            imgsrc6,
-            imgsrc7,
-            imgsrc8,
-            imgsrc9,
-            imgsrc10,
+            rList,
+            oList,
         }));
-
+        console.log("rList"+rList);
+        console.log("oList"+oList);
         navigate('/Post_useInfo');
     };
 

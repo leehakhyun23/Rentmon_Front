@@ -8,9 +8,9 @@ import SpaceList from './component/space/SpaceList';
 import SpaceDetail from './component/space/SpaceDetail';
 import { Coupon, DashBoard, Mypage, Reservation } from './component/mypage';
 
-
-
 import ReservationForm from './component/reservation/ReservationForm';
+import ReservationDone from './component/reservation/ReservationDone';
+
 import Usesapce from './component/mypage/Usesapce';
 import Zzim from './component/mypage/Zzim';
 import Qna from './component/mypage/Qna';
@@ -30,6 +30,8 @@ function App() {
       <Route path='/join' element={<JoinForm />} />
       <Route path='/choosecategory/:userid' element={<Choosecategory />} />
       <Route path='/reservationForm/:sseq' element={<ReservationForm />} />
+      <Route path='/reservationDone/:sseq' element={<ReservationDone />} />
+
       <Route path='/mypage' element={<Mypage />}>
         <Route path='dashboard' element={<DashBoard/>}/>
         <Route path='coupon/:currentPage' element={<Coupon/>}/>

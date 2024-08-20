@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { setSpace } from '../../store/spaceSlice'; // 경로 조정 필요
 import '../css/header.css';
+import '../css/payment.css';
 import axios from 'axios'; 
 import Cookies from 'js-cookie';
 
@@ -18,13 +19,13 @@ function Post_payment() {
   const [accountnum, setAccountnum] = useState('');
   const [hostid, setHostid] = useState('');
 
-
   useEffect(() => {
     // 쿠키에서 hostid 가져오기
     const hostidCookie = Cookies.get('hostid');
     if (!hostidCookie || hostidCookie.trim() === '') {
+      console.log("쿠키 못받아왔움" );
       // hostid가 존재하지 않거나 빈 문자열인 경우 처리
-      setHostid("e"); // 필요에 따라 적절한 값을 설정하세요
+      setHostid("q"); // 필요에 따라 적절한 값을 설정하세요
     } else {
       setHostid(hostidCookie);
     }
@@ -38,51 +39,13 @@ function Post_payment() {
   const handleAccountnumChange = (event) => {
     setAccountnum(event.target.value);
   };
-  // 공간 
-  const sendSpaceData = async () => {
-    await axios.post('/api/space/insertSpace', {
-      hostid: hostid,
-      cnum: currentSpace.cnum || '',
-      title: currentSpace.title || '',
-      subtitle: currentSpace.subtitle || '',
-      price: currentSpace.price || '',
-      maxpersonnal: currentSpace.maxpersonnal || '',
-      content: currentSpace.content || '',
-      caution: currentSpace.caution || '',
-      zipcode: currentSpace.zipcode || '',
-      province: currentSpace.province || '',
-      town: currentSpace.town || '',
-      village: currentSpace.village || '',
-      address_detail: currentSpace.address_detail || '',
-      starttime: currentSpace.starttime,
-      endtime: currentSpace.endtime,
-    });
-  };
-
-  const sendfnum = async() =>{
-    await axios.post('/api/space/insertfnum', {
-      fnum: currentSpace.fnum || '',
-    });
-  }
-
-  const sendImgSrc = async () => {
-    await axios.post('/api/space/insertImgSrc', {
-      imgSrc: currentSpace.imgSrc || '',
-    });
-  };
-
-  // const sendBankInfo = async () => {
-  //   await axios.post('/api/space/insertAccountNum', {
-  //     bank,
-  //     accountnum,
-  //   });
-  // };
 
   // 제출 핸들러
   const onSubmit = async () => {
     try {
-      // 콘솔로 데이터 출력
-      console.log('Submitting data:', {
+      // 1. Insert space and get sseq
+      const spaceResponse = await axios.post('/api/space/insertSpace', {
+        hostid: hostid,
         cnum: currentSpace.cnum || '',
         title: currentSpace.title || '',
         subtitle: currentSpace.subtitle || '',
@@ -95,68 +58,51 @@ function Post_payment() {
         town: currentSpace.town || '',
         village: currentSpace.village || '',
         address_detail: currentSpace.address_detail || '',
-        imgSrc: currentSpace.imgSrc || '',
         starttime: currentSpace.starttime,
         endtime: currentSpace.endtime,
-        fnum: currentSpace.fnum,
-        bank,
-        accountnum,
-        hostid,
       });
   
-      // Redux 상태 업데이트
-      dispatch(setSpace({
-        cnum: currentSpace.cnum || '',
-        title: currentSpace.title || '',
-        subtitle: currentSpace.subtitle || '',
-        price: currentSpace.price || '',
-        maxpersonnal: currentSpace.maxpersonnal || '',
-        content: currentSpace.content || '',
-        caution: currentSpace.caution || '',
-        zipcode: currentSpace.zipcode || '',
-        province: currentSpace.province || '',
-        town: currentSpace.town || '',
-        village: currentSpace.village || '',
-        address_detail: currentSpace.address_detail || '',
-        imgSrc: currentSpace.imgSrc || '',
-        starttime: currentSpace.starttime,
-        endtime: currentSpace.endtime,
-        fnum: currentSpace.fnum,
-        bank,
-        accountnum,
-        hostid,
-      }));
-      // 데이터 전송
-      await Promise.all([
-        sendSpaceData(),
-        // sendImgSrc(),
-        sendfnum(),
-      ]);
+      // Extract sseq from response
+      const sseq = spaceResponse.data;
+      console.log(sseq);
+      console.log(Array.isArray(currentSpace.fnum) ? currentSpace.fnum : [currentSpace.fnum]);
+      // 2. Insert fnum with sseq
+      await axios.post('/api/space/insertfnum', {
+        sseq: sseq,
+        numbers: Array.isArray(currentSpace.fnum) ? currentSpace.fnum : [currentSpace.fnum],
+      }, {
+        headers: {
+            'Content-Type': 'application/json',
+        }
+      });
+      console.log(currentSpace.rList);
+      console.log(currentSpace.oList);
+      // 3. Optionally, handle imgList or other data here if needed
+      await axios.post('/api/space/insertImgSrc', {
+        sseq: sseq,
+        originalnames: currentSpace.oList, // 배열로 전달
+        realnames: currentSpace.rList, // 배열로 전달
+    }, {
+        headers: {
+            'Content-Type': 'application/json',
+        }
+    });
   
-      // 성공적으로 전송 후 페이지 이동
+      // Success: navigate or handle as needed
       navigate('/');
+  
     } catch (error) {
       console.error('Error during submission:', error);
     }
   };
 
-  const selectStyle = {
-    width: '70%',                // 퍼센트 값은 문자열로 지정
-    padding: '12px',             // 단위가 있는 값은 문자열로 지정
-    border: '2px solid #ddd',    // 단위와 색상은 문자열로 지정
-    borderRadius: '4px',         // 단위는 문자열로 지정
-    boxSizing: 'border-box',     // 문자열로 지정
-    marginTop: '8px',            // 단위는 문자열로 지정
-    fontSize: '16px',            // 단위는 문자열로 지정
-    fontFamily: '"Noto Sans KR", sans-serif', // 문자열로 지정
-  };
-
   return (
-    <div>
+    <div className='form-container'>
       <div className='header2'>예약/정산 정보</div>
-      <div>
-        <label>
-          <select value={bank} onChange={handleBankChange} style={selectStyle} >
+      <div className='select-container'>
+        <label className='option-label'>
+          은행
+          <select value={bank} onChange={handleBankChange}>
             <option value="">선택하세요</option>
             <option value="1">한국은행</option>
             <option value="2">신한은행</option>
@@ -180,8 +126,9 @@ function Post_payment() {
         </label>
       </div>
       
-      <div>
+      <div className='input-container'>
         <label>
+          계좌번호
           <input
             type="text"
             value={accountnum}
