@@ -2,7 +2,7 @@ import React from 'react'
 
 function QnaComponent({num,elem ,setIsOpen,setPopup}) {
   return (
-    <div onClick={()=>{
+    <div  style={{cursor:"pointer"}} onClick={()=>{
       setPopup(elem);
       setIsOpen(true);
     }}>

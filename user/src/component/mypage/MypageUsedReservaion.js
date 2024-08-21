@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from 'react'
 import { FaRegStar, FaStar } from 'react-icons/fa';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 
 function MypageUsedReservaion({record,num}) {
+    const navigate = useNavigate();
     const [rating, setRating] = useState([]);
     useEffect(()=>{
         setRating([]);
@@ -21,7 +22,7 @@ function MypageUsedReservaion({record,num}) {
     }
   return (
     <div>
-        <div className='recentresevation-component'>
+        <div className='recentresevation-component' style={{cursor:"pointer"}} onClick={()=>{navigate(`/spaceDetail/${reservation.space.sseq}`)}}>
             <div className="recentresevation-container"  >
                 <div className='top'><span>No. {num}</span><p>{dayFormat(reservation.reservestart)}~{dayFormat(reservation.reserveend)}</p></div>
                 <div className='recentresevation-wrapper'>

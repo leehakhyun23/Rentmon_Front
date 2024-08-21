@@ -1,22 +1,32 @@
 import { menucountAction, recentReserveAction, weatherSetAction } from "../store/RecentSlice";
+import { getCoordinates } from "./citibaming";
 import jaxios from "./jwtUtil";
 
 
 
 export const getReserveInfo= async(userid ,dispatch)=>{
     const API_KEY = 'aded7a236492c4b574347a7dc6f3a1db';
-    const city = "Seoul";
-    let url = `https://api.openweathermap.org/data/2.5/forecast?q=${city}&appid=${API_KEY}&units=metric&lang=kr`;
+    let city;
+    let url;
     
     let result = await jaxios.get("/api/user/menucountarray" ,{params:{userid}});
     dispatch(menucountAction({menucount:result.data}));
-
-     //최근 예약 조회
-     let recentrerve = await jaxios.get("/api/space/getreserve",{params:{userid}});
-              
-     //최근 예약에 날씨 데이터 삽입
-     if(recentrerve.data){
-       dispatch(recentReserveAction({recentReserve: recentrerve.data}));
+    
+    //최근 예약 조회
+    let recentrerve = await jaxios.get("/api/space/getreserve",{params:{userid}});
+    
+    //최근 예약에 날씨 데이터 삽입
+    if(recentrerve.data){
+      let space = recentrerve.data.space;
+      dispatch(recentReserveAction({recentReserve: recentrerve.data}));
+      city = await getCoordinates(space.province + " " + space.town + " " + space.village);
+      console.log(city);
+      
+      if(!city){
+        city = "Seoul";
+        url = `https://api.openweathermap.org/data/2.5/forecast?q=${city}&appid=${API_KEY}&units=metric&lang=kr`;
+      }else{ url = `https://api.openweathermap.org/data/2.5/forecast?lat=${city.latitude}&lon=${city.longitude}&appid=${API_KEY}&units=metric&lang=kr`; }
+      
        fetchForecast();
      }else{
        dispatch(recentReserveAction({}));

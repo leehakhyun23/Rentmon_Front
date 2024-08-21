@@ -2,31 +2,34 @@ import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom';
 import { dayFormat } from '../../../util/formatDate';
 
-function ReseveListComponent({record, num}) {
+function ReseveListComponent({record, num , setReservData , setModalon}) {
     let [dday, setDday]=useState("");
     useEffect(()=>{
+        let nowdate = new Date(new Date);
         let now = new Date(new Date);
         now.setHours(0,0,0,0);
         let threeday = new Date(now);
         threeday.setDate(now.getDate()+3);
         let recoddate = new Date(record.reservestart);
         let recodenddata = new Date(record.reserveend);
-        if(recoddate >= now && recoddate <= threeday){
+        if(recoddate >= nowdate && recoddate <= threeday){
             const timeDiff = recoddate - now;
             const daysDiff = Math.ceil(timeDiff / (1000 * 60 * 60 * 24));
             setDday(daysDiff-1);
         }else{
             setDday("");
         }
+        console.log(record);
     },[record]);
 
   
   return (
-    <div className='recentresevation-component' style={{order:dday}}>
+    <div className='recentresevation-component' style={{order:dday , cursor:"pointer"}} onClick={()=>{setModalon(true); 
+        setReservData(record); }} >
       {(dday !=="")&&(<div className='dday'>D-{dday}</div>)}
          <div className={`recentresevation-wrapper ${(dday !=="")&&("ddayplus")}`}  >
             <div className='img-box'>
-                  <img src={`http://localhost:8070/space_images/${record.space.spaceimage[0].realName}`} alt={record.space.spaceimage[0].realName}/>
+                {(record.space.spaceimage[0])&&(<img src={`http://localhost:8070/space_images/${record.space.spaceimage[0].realName}`} alt={record.space.spaceimage[0].realName}/>)}
               </div>
               <div className='placeInfo'>
                    <div>

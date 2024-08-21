@@ -8,7 +8,7 @@ import QnaModal from './Component/QnaModal';
 
 function Qna() {
     const user = useSelector(state=>state.user);
-    const [isopen, setIsOpen] = useState(true);
+    const [isopen, setIsOpen] = useState(false);
     const [popup , setPopup] = useState({});
     const [list, setList]=useState([]);
     const [page, setPage] = useState({});

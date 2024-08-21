@@ -1,47 +1,41 @@
 /* global naver */
 
+import { async } from 'q';
 import React, { useEffect, useState } from 'react';
 import Modal from 'react-modal';
+import { getCoordinates } from '../../../util/citibaming';
 import { dayFormat } from '../../../util/formatDate';
+import { openNaverMap, searchAddressToCoordinate, searchAddressToCoordinatereturn } from '../../../util/NaverMap';
 
 function ReservModal({ modalon, setModalon, rerveData }) {
   const [message, setMessage] = useState('');
+  const [map , setmap] = useState();
     useEffect(() => {
-        if (modalon && rerveData.space) {
-            // 모달이 열리고 예약 데이터가 있을 때 지도 초기화
-            console.log(rerveData.space.province + " "+ rerveData.space.town + " "+rerveData.space.village + " " + rerveData.space.addressdetail);
-            searchAddressToCoordinate(rerveData.space.province + " "+ rerveData.space.town + " "+rerveData.space.village + " " + rerveData.space.addressdetail );
-        }
+      mdalon();
     }, [modalon, rerveData]);
 
-    function searchAddressToCoordinate(address) {
-      setMessage("");
-        naver.maps.Service.geocode({
-            query: address
-        }, function (status, response) {
-            if (status === naver.maps.Service.Status.ERROR) {
-              return alert('Something Wrong!');
-            }
-            if (response.v2.meta.totalCount === 0) {
-              return setMessage("주소가 올바르지 않습니다.");
-            }
-           
-
-            var item = response.v2.addresses[0];
-            insertAddress(item.roadAddress, item.y, item.x);
-        });
+    const mdalon=async()=>{
+      try{
+        setMessage("");
+        if (modalon && rerveData.space) {
+          let assress = rerveData.space.province + " " + rerveData.space.town + " " + rerveData.space.village  + " " + rerveData.space.addressdetail;
+          // 모달이 열리고 예약 데이터가 있을 때 지도 초기화
+          let result = await getCoordinates(assress);
+          setmap(result);
+          console.log(result);
+          searchAddressToCoordinate(assress ,setMessage , rerveData.space.title );
+          
+         }
+      }catch(err){
+        console.error(err)
+        setMessage("저장된 주소가 올바르지 않습니다.");
+      }
     }
 
-    function insertAddress(address, latitude, longitude) {
-        var map = new naver.maps.Map('map', {
-            center: new naver.maps.LatLng(latitude, longitude),
-            zoom: 19
-        });
-        var marker = new naver.maps.Marker({
-            map: map,
-            position: new naver.maps.LatLng(latitude, longitude),
-        });
-    }
+    useEffect(()=>{
+      console.log( map);
+    },[map]);
+
 
     return (
         <div>
@@ -50,7 +44,7 @@ function ReservModal({ modalon, setModalon, rerveData }) {
                     {rerveData.space && (
                         <div className="modal-content scrollbar">
                             <h2 className="modal-title">{rerveData.space.title}</h2>
-                            <img src={`http://localhost:8070/space_images/${rerveData.space.spaceimage[0].realName}`} alt='savefilename' />
+                            {(rerveData.space.spaceimage[0])&&(<img src={`http://localhost:8070/space_images/${rerveData.space.spaceimage[0].realName}`} alt='savefilename'/>)}
                             <p className="modal-description">{rerveData.space.content}</p>
                             <div className="modal-info">
                                 <div className="info-item">
@@ -69,10 +63,12 @@ function ReservModal({ modalon, setModalon, rerveData }) {
                                     <strong>최대인원</strong> {rerveData.space.maxpersonnal}
                                 </div>
                             </div>
-                            <div>
-                                <h2>위치</h2>
-                                {(message)?(message):(
-                                    <div id="map" style={{ height: '400px' }}></div>
+                            <div className='mapwrap'>
+                              <h2>위치</h2>
+                                {(message)?(<div className='message'>{message}</div>):(
+                                    <>
+                                      <div id="map" style={{ height: '400px' }}></div>
+                                    </>
                                 )}
                             </div>
                         </div>

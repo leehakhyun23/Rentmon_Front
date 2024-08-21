@@ -40,12 +40,14 @@ function MyInfo({mypagePopup , user , setMypagePopup}) {
     countArray();
     if(rctvw !== undefined){
       getspaceviewlist(rctvw);
+      console.log(rctvw);
     }
   },[rctvw]);
   let getspaceviewlist = async(rctvw)=>{
     try{
       let reuslt = await axios.post("/api/main/getspaceviewlist",rctvw);
       setRecentview(reuslt.data);
+      console.log(reuslt.data);
     }catch(err){ console.error(err.response?.data || err.message);}
   }
 
@@ -85,7 +87,7 @@ function MyInfo({mypagePopup , user , setMypagePopup}) {
             className="mySwiper"
           >
             {(recentview)&&(recentview.map((elem, idx)=>(
-               <SwiperSlide key={idx}><Link to={"spaceDetail/"+elem.sseq} onClick={()=>{setMypagePopup(false)}}>{(elem.spaceimage.length>0)&&(<img src={`http://localhost:8070/space_images/${elem.spaceimage[0].realName}`} alt='placeimg'/>)}<p>{elem.title}</p></Link></SwiperSlide>
+               <SwiperSlide key={idx}><Link value={idx} to={"spaceDetail/"+elem.sseq} onClick={()=>{setMypagePopup(false)}}>{(elem.spaceimage.length>0)&&(<img src={`http://localhost:8070/space_images/${elem.spaceimage[0].realName}`} alt='placeimg'/>)}<p>{elem.title}</p></Link></SwiperSlide>
             )))}
          
         </Swiper>
