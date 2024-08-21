@@ -1,4 +1,4 @@
-import { Box, Button, Checkbox, FormControl, InputLabel, List, ListItem, MenuItem, Pagination, Paper, Select, TextField } from '@mui/material';
+import { Box, Button, ButtonGroup, Checkbox, FormControl, InputLabel, List, ListItem, MenuItem, Pagination, Paper, Select, TextField } from '@mui/material';
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import CouponModal from '../modal/CouponModal';
@@ -104,7 +104,12 @@ const UserPage = () => {
             <Box sx={{display: 'flex', flexDirection: 'column', justifyContent: 'center'}}>
                 <Box sx={{display: 'flex', justifyContent: 'space-between'}}>
                     <Box>
-                        <PeopleIcon/><PersonIcon/><PersonOffIcon/> <PriorityHighIcon/>
+                        <ButtonGroup variant="contained">
+                            <Button startIcon={<PeopleIcon />}/>
+                            <Button startIcon={<PersonIcon />}/>
+                            <Button startIcon={<PersonOffIcon />}/>
+                            <Button startIcon={<PriorityHighIcon />}/>
+                        </ButtonGroup>
                     </Box>
                     <Box>
                         <FormControl>

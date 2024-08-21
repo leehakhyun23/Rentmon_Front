@@ -15,7 +15,7 @@ const MainPage = () => {
                 <Link to="/hostpage">호스트목록</Link>
             </Box>
             <Box>
-                <Link to="/inquiry">문의</Link>
+                <Link to="/couponpage">쿠폰</Link>
             </Box>
             <Box>
                 <Link to="/declaration">신고</Link>
