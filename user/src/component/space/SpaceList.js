@@ -23,10 +23,7 @@ function SpaceList() {
   const [hasmore, setHasmore] = useState(true);   //무한스크롤 
 
   // 검색 정보
-
-  const searchWord = useSelector((state) => state.search.searchWord);
-
-//  const [searchWord, setSearchWord] = useState('');   // 검색 해시태그
+  const [searchWord, setSearchWord] = useState('');   // 검색 해시태그
   const [searchRegion, setSearchRegion] = useState(''); // 검색 지역
   const [searchDate, setSearchDate] = useState("");  //검색 날짜
 
@@ -57,6 +54,9 @@ function SpaceList() {
 
 
   //검색(값입력) : 
+  const handleWordChange = (event) => {
+    setSearchWord(event.target.value);
+  };
 
   const handleRegionChange = (event) => {
     setSearchRegion(event.target.value);
@@ -148,7 +148,8 @@ function SpaceList() {
     <div className='spaceContainer innerContainer'>
       <div className="searchSection">
         <div className="searchWord">
-          <h1>확인 {searchWord}</h1>
+          <label>일단 여기서 word인풋 : </label>
+          <input value={searchWord} onChange={handleWordChange} />
         </div>
 
         <div className="searchRegion">

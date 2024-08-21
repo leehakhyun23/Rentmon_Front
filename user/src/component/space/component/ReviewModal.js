@@ -3,7 +3,7 @@ import ReactModal from 'react-modal';
 import { useSelector } from 'react-redux';
 import { useParams } from 'react-router';
 import jaxios from '../../../util/jwtUtil';
-import { Box, Button, IconButton, TextField, Typography } from '@mui/material';
+import { Box, IconButton } from '@mui/material';
 import AddIcon from '@mui/icons-material/Add';
 import ReactStars from 'react-rating-stars-component';
 
