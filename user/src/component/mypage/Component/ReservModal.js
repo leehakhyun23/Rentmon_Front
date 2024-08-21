@@ -22,18 +22,16 @@ function ReservModal({ modalon, setModalon, rerveData }) {
           // 모달이 열리고 예약 데이터가 있을 때 지도 초기화
           let result = await getCoordinates(assress);
           setmap(result);
-          console.log(result);
           searchAddressToCoordinate(assress ,setMessage , rerveData.space.title );
           
          }
       }catch(err){
-        console.error(err)
+        console.error(err);
         setMessage("저장된 주소가 올바르지 않습니다.");
       }
     }
 
     useEffect(()=>{
-      console.log( map);
     },[map]);
 
 

@@ -6,13 +6,13 @@ export const getCoordinates = (address) => {
         }, function(status, response) {
             if (status === naver.maps.Service.Status.ERROR) {
                 console.error('주소이상!');
-                reject(new Error('주소이상'));
+                // reject();
                 return;
             }
 
             if (response.v2.meta.totalCount === 0) {
                 console.error('주소이상');
-                reject(new Error('주소이상'));
+                // reject();
                 return;
             }
 

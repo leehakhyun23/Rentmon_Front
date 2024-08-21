@@ -19,7 +19,6 @@ function ReseveListComponent({record, num , setReservData , setModalon}) {
         }else{
             setDday("");
         }
-        console.log(record);
     },[record]);
 
   

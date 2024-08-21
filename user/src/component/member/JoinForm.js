@@ -50,7 +50,6 @@ function JoinForm() {
             formData.append("email",info.email);
             if (info.profileimg) {
                 formData.append("profileimg", info.profileimg);
-                console.log(info.profileimg);
               }
 
             try{

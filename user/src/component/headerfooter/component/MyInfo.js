@@ -40,14 +40,12 @@ function MyInfo({mypagePopup , user , setMypagePopup}) {
     countArray();
     if(rctvw !== undefined){
       getspaceviewlist(rctvw);
-      console.log(rctvw);
     }
   },[rctvw]);
   let getspaceviewlist = async(rctvw)=>{
     try{
       let reuslt = await axios.post("/api/main/getspaceviewlist",rctvw);
       setRecentview(reuslt.data);
-      console.log(reuslt.data);
     }catch(err){ console.error(err.response?.data || err.message);}
   }
 

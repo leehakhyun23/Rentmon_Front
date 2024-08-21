@@ -21,7 +21,6 @@ function ReservationList() {
     let getReservation=async(n)=>{
        try{
         let result = await jaxios.get("/api/reservation/getReservationList/"+user.userid,{params:{page:n}});
-        console.log(result.data);
        setList(result.data.list);
        setPage(result.data.paging);
        }catch(err){console.error(err);}
