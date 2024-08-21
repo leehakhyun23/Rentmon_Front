@@ -15,7 +15,7 @@ import InqueryModal from './component/InqueryModal';
 import "./style/inquiry.css"
 import InquiryList from './component/InquiryList';
 import ReviewList from './component/ReviewList';
-import ReportModal from './component/ReportModal';  
+import ReportModal from './component/ReportModal';
 
 
 const { kakao } = window;
@@ -48,6 +48,9 @@ function SpaceDetail() {
   const [zzimCount, setZzimCount] = useState();
   const [kakaoAddress, setKakaoAddress] = useState("");
 
+
+  const [zzimOn, setZzimOn] = useState(false);
+
   // 각 섹션에 대한 참조 생성
   const spaceInfoRef = useRef(null);
   const spaceFacilitiesRef = useRef(null);
@@ -62,7 +65,7 @@ function SpaceDetail() {
   const scrollToSection = (ref) => {
     const offsetTop = ref.current.getBoundingClientRect().top + window.pageYOffset;
     window.scrollTo({
-      top: offsetTop - menuHeight, 
+      top: offsetTop - menuHeight,
       behavior: 'smooth'
     });
   };
@@ -80,7 +83,35 @@ function SpaceDetail() {
         })
         .catch((err) => { console.error(err) });
     }, []
-  )
+  );
+
+  // 찜 조회 및 토글
+  useEffect(() => {
+    const checkZzim = async () => {
+      try {
+        const response = await axios.get('/api/zzim/check', {
+          params: { userid: user.userid, sseq }
+        });
+        setZzimOn(response.data.zzimOn);
+      } catch (error) {
+        console.error('Error checking zzim status', error);
+      }
+    };
+
+    checkZzim();
+  }, []);
+
+  const toggleZzim = async () => {
+    try {
+      await axios.post('/api/zzim/toggle', null, {
+        params: { userid: user.userid, sseq }
+      });
+      setZzimOn(!zzimOn);
+    } catch (error) {
+      console.error('Error toggling zzim', error);
+    }
+  };
+
 
 
   // 쿠키
@@ -96,21 +127,19 @@ function SpaceDetail() {
     console.log(rctvw);
   }, []);
 
-  const toggleZzim = ()=>{}
-
   return (
     <div className='spaceContainer innerContainer'>
       <div>
         {/* spaceMenu Part */}
         <div className="SpaceMenu-container">
-        <div className="SpaceMenu-item" onClick={() => scrollToSection(spaceInfoRef)}>공간 정보</div>
-        <div className="SpaceMenu-item" onClick={() => scrollToSection(spaceFacilitiesRef)}>시설 안내</div>
-        <div className="SpaceMenu-item" onClick={() => scrollToSection(spaceMapRef)}>지도</div>
-        <div className="SpaceMenu-item" onClick={() => scrollToSection(inquiryListRef)}>문의 리스트</div>
-        <div className="SpaceMenu-item" onClick={() => scrollToSection(reviewListRef)}>리뷰 리스트</div>
-        <div className="SpaceMenu-item" onClick={() => navigate('/spaceList')}>다른공간 보러가기</div>
+          <div className="SpaceMenu-item" onClick={() => scrollToSection(spaceInfoRef)}>공간 정보</div>
+          <div className="SpaceMenu-item" onClick={() => scrollToSection(spaceFacilitiesRef)}>시설 안내</div>
+          <div className="SpaceMenu-item" onClick={() => scrollToSection(spaceMapRef)}>지도</div>
+          <div className="SpaceMenu-item" onClick={() => scrollToSection(inquiryListRef)}>문의 리스트</div>
+          <div className="SpaceMenu-item" onClick={() => scrollToSection(reviewListRef)}>리뷰 리스트</div>
+          <div className="SpaceMenu-item" onClick={() => navigate('/spaceList')}>다른공간 보러가기</div>
 
-      </div>
+        </div>
 
         {/* spaceInfo Part */}
         <div className="spaceInfo">
@@ -136,18 +165,18 @@ function SpaceDetail() {
           <div className="spaceTitle">최대 수용인원</div>
           <div className="spaceContent"> {space.maxpersonnal}인 </div>
           <div className="spaceTitle">태그</div>
-          <div className="spaceContent"> 
-          {
-            (tagList) ? (
-              tagList.map((tag, idx) => {
-                return (
-                  <div key={idx} style={{ float: 'left', marginRight: '10px' }}>
-                    <div>#{tag.word}</div>
-                  </div>
-                )
-              })
-            ) : (null)
-          }
+          <div className="spaceContent">
+            {
+              (tagList) ? (
+                tagList.map((tag, idx) => {
+                  return (
+                    <div key={idx} style={{ float: 'left', marginRight: '10px' }}>
+                      <div>#{tag.word}</div>
+                    </div>
+                  )
+                })
+              ) : (null)
+            }
 
           </div>
         </div>
@@ -183,7 +212,9 @@ function SpaceDetail() {
         <div className="spaceButton">
           <div className="spaceMainTitle"></div>
           <button onClick={() => { navigate(`/reservationForm/${space.sseq}`) }}>예약하기</button>
-          <button onClick={() => { toggleZzim()}}>찜하기</button>
+          <button onClick={toggleZzim}>
+            {zzimOn ? '찜 해제' : '찜 하기'}
+          </button>
           <button onClick={() => { setInquiryopen(true) }}>문의하기</button>
           <button onClick={() => { setReviewopen(true) }}>리뷰작성</button>
           <button onClick={() => { setReportopen(true) }}>신고하기</button>
@@ -193,7 +224,7 @@ function SpaceDetail() {
         <InquiryList sseq={sseq} inquiryopen={inquiryopen} setInquiryopen={setInquiryopen} />
 
         <div ref={reviewListRef}></div>
-        <ReviewList sseq={sseq} reviewopen={reviewopen} setReviewopen={setReviewopen} ref={reviewListRef}/>
+        <ReviewList sseq={sseq} reviewopen={reviewopen} setReviewopen={setReviewopen} ref={reviewListRef} />
 
         <ReportModal sseq={sseq} reportopen={reportopen} setReportopen={setReportopen} />
 

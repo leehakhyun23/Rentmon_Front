@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
 
 
 import '../style/space.css';
@@ -20,6 +21,7 @@ const settings = {
 function Space(props) {
     const [space, setSpace] = useState();
     const navigate = useNavigate();
+    const dispatch = useDispatch();
 
     useEffect(()=>{
         setSpace(props.spaceDTO.space);
