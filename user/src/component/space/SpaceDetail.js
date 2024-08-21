@@ -1,9 +1,10 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import axios from "axios";
 import { useNavigate, useParams } from "react-router-dom";
 import { useSelector, useDispatch } from 'react-redux';
 import ReactStars from 'react-rating-stars-component';
 import { Box, Button, IconButton, TextField, Typography } from '@mui/material';
+
 import AddIcon from '@mui/icons-material/Add';
 import { getCookie, setAuthoCookie } from '../../util/cookieUtil';
 import Slider from 'react-slick'
@@ -14,9 +15,10 @@ import InqueryModal from './component/InqueryModal';
 import "./style/inquiry.css"
 import InquiryList from './component/InquiryList';
 import ReviewList from './component/ReviewList';
+import ReportModal from './component/ReportModal';  
 
 
-const { kakao } = window; 
+const { kakao } = window;
 
 const settings = {
   dot: false,
@@ -30,6 +32,7 @@ const settings = {
 function SpaceDetail() {
   const [inquiryopen, setInquiryopen] = useState(false);
   const [reviewopen, setReviewopen] = useState(false);
+  const [reportopen, setReportopen] = useState(false);
   const user = useSelector(state => state.user);
   const [space, setSpace] = useState({});
   const { sseq } = useParams();
@@ -45,75 +48,24 @@ function SpaceDetail() {
   const [zzimCount, setZzimCount] = useState();
   const [kakaoAddress, setKakaoAddress] = useState("");
 
-  // Review 입력
-  const contentChange = (e) => {
-    if (e && e.target) {
-      setContent(e.target.value);
-    }
-  };
-  const ratingChanged = (newRating) => {
-    setRate(newRating);
-  };
-  const handleAddImage = (e) => {
-    const files = Array.from(e.target.files);
-    setImages((prevImages) => [...prevImages, ...files]);
-  };
+  // 각 섹션에 대한 참조 생성
+  const spaceInfoRef = useRef(null);
+  const spaceFacilitiesRef = useRef(null);
+  const spaceMapRef = useRef(null);
+  const inquiryListRef = useRef(null);
+  const reviewListRef = useRef(null);
 
+  // 메뉴 높이 
+  const menuHeight = 150;
 
-  // Review 조회
-  useEffect(() => {
-    const fetchReviews = async () => {
-      try {
-        if (space.sseq) {
-          const result = await axios.get(`/api/review/GetReviews/${space.sseq}`);
-          setReviewList(result.data);
-        }
-      } catch (err) {
-        console.error(err);
-      }
-    };
-    fetchReviews();
-    // 정리 함수
-    return () => {
-      setReviewList([]); // 언마운트 시 리뷰 리스트 초기화
-    };
-  }, [space.sseq]);
-
-
-  // Review 제출
-  const handleOnSubmit = () => {
-    const formData = new FormData();
-
-    const review = new Blob([JSON.stringify({
-      space: space,
-      user: user,
-      content: content,
-      rate: rate,
-    })], {
-      type: "application/json",
+  // 해당 섹션으로 스크롤하는 함수
+  const scrollToSection = (ref) => {
+    const offsetTop = ref.current.getBoundingClientRect().top + window.pageYOffset;
+    window.scrollTo({
+      top: offsetTop - menuHeight, 
+      behavior: 'smooth'
     });
-
-    formData.append('review', review);
-
-    images.forEach((image) => {
-      formData.append(`images`, image);
-    });
-
-    axios.post('/api/review/InsertReview', formData, {
-      headers: {
-        'Content-Type': 'multipart/form-data',
-      },
-    })
-      .then((res) => {
-        console.log(res.data);
-        setContent("");
-        setRate(0);
-        setImages([]);
-      })
-      .catch((err) => {
-        console.error(err);
-      })
-  }
+  };
 
   // Space 조회
   useEffect(
@@ -122,41 +74,47 @@ function SpaceDetail() {
         .then((result) => {
           setSpace(result.data.space);
           setInquiryList(result.data.inquiryList);
-          setKakaoAddress(`${space.province} ${space.town} ${space.village} ${space.addressdetail}`);
+          setTagList(result.data.hashtag);
+          setZzimCount(result.data.zzimCount);
+          setKakaoAddress(`${result.data.space.province} ${result.data.space.town} ${result.data.space.village} ${result.data.space.addressdetail}`);
         })
         .catch((err) => { console.error(err) });
-
     }, []
   )
 
 
-  useEffect(()=>{
-    
+  // 쿠키
+  useEffect(() => {
+
     let rctvw = getCookie("rctvw");
-    if (rctvw === undefined)rctvw = [];
-    if(!rctvw.includes(sseq)){
-      if(rctvw.length >= 6) rctvw.pop();
-      if(sseq !== undefined) rctvw.unshift(sseq);
+    if (rctvw === undefined) rctvw = [];
+    if (!rctvw.includes(sseq)) {
+      if (rctvw.length >= 6) rctvw.pop();
+      if (sseq !== undefined) rctvw.unshift(sseq);
     }
-    setAuthoCookie("rctvw", rctvw , 60);
+    setAuthoCookie("rctvw", rctvw, 60);
     console.log(rctvw);
-  },[]);
+  }, []);
+
+  const toggleZzim = ()=>{}
 
   return (
     <div className='spaceContainer innerContainer'>
       <div>
         {/* spaceMenu Part */}
         <div className="SpaceMenu-container">
-          <div className="SpaceMenu-item">공간소개</div>
-          <div className="SpaceMenu-item">시설안내</div>
-          <div className="SpaceMenu-item">위치확인</div>
-          <div className="SpaceMenu-item">예약하기</div>
-          <div className="SpaceMenu-item">리뷰</div>
-        </div>
+        <div className="SpaceMenu-item" onClick={() => scrollToSection(spaceInfoRef)}>공간 정보</div>
+        <div className="SpaceMenu-item" onClick={() => scrollToSection(spaceFacilitiesRef)}>시설 안내</div>
+        <div className="SpaceMenu-item" onClick={() => scrollToSection(spaceMapRef)}>지도</div>
+        <div className="SpaceMenu-item" onClick={() => scrollToSection(inquiryListRef)}>문의 리스트</div>
+        <div className="SpaceMenu-item" onClick={() => scrollToSection(reviewListRef)}>리뷰 리스트</div>
+        <div className="SpaceMenu-item" onClick={() => navigate('/spaceList')}>다른공간 보러가기</div>
+
+      </div>
 
         {/* spaceInfo Part */}
         <div className="spaceInfo">
-          <div className="spaceMainTitle">공간 소개</div>
+          <div className="spaceMainTitle" ref={spaceInfoRef}>공간 소개</div>
           {<Slider {...settings}>
             {space.spaceimage && space.spaceimage.map((image, idx) => (
               <img key={idx} src={`http://localhost:8070/space_images/${image.realName}`} alt={space.title} />
@@ -177,18 +135,37 @@ function SpaceDetail() {
           <div className="spaceContent"> {space.province} {space.town} {space.village} {space.addressdetail} </div>
           <div className="spaceTitle">최대 수용인원</div>
           <div className="spaceContent"> {space.maxpersonnal}인 </div>
+          <div className="spaceTitle">태그</div>
+          <div className="spaceContent"> 
+          {
+            (tagList) ? (
+              tagList.map((tag, idx) => {
+                return (
+                  <div key={idx} style={{ float: 'left', marginRight: '10px' }}>
+                    <div>#{tag.word}</div>
+                  </div>
+                )
+              })
+            ) : (null)
+          }
+
+          </div>
         </div>
 
 
-        <div className="spaceFacilities">
-          <div className="spaceMainTitle">시설 안내</div>
+        <div className="spaceFacilities" >
+          <div className="spaceMainTitle" ref={spaceFacilitiesRef}>시설 안내</div>
           {
             (space.facilities) ? (
               space.facilities.map((facil, idx) => {
                 return (
                   <div key={facil.facility.fnum}>
                     <div>{facil.facility.name}</div>
-                    <div>{facil.facility.fnum}</div>
+                    <div><img
+                      src={`/icon_images/${facil.facility.icon}`}
+                      alt={`${facil.facility.name} 아이콘`}
+                      style={{ width: '100px', height: '100px' }}
+                    /></div>
                   </div>
                 )
               })
@@ -196,29 +173,32 @@ function SpaceDetail() {
           }
         </div>
 
-        <div className="spaceMap">
-          <div className="spaceMainTitle">위치 확인</div>
-            <KakaoMap address={kakaoAddress}/>
+        <div className="spaceMap" ref={spaceMapRef}>
+          <div className="spaceMainTitle"></div>
+          <KakaoMap address={kakaoAddress} />
 
         </div>
 
 
         <div className="spaceButton">
-          <div className="spaceMainTitle">예약하기</div>
-
+          <div className="spaceMainTitle"></div>
           <button onClick={() => { navigate(`/reservationForm/${space.sseq}`) }}>예약하기</button>
-          <button onClick={() => { }}>찜하기</button>
-          <button onClick={() => {setInquiryopen(true) }}>문의하기</button>
-          <button onClick={() => {setReviewopen(true) }}>리뷰작성</button>
-          <button onClick={() => { }}>신고하기</button>
+          <button onClick={() => { toggleZzim()}}>찜하기</button>
+          <button onClick={() => { setInquiryopen(true) }}>문의하기</button>
+          <button onClick={() => { setReviewopen(true) }}>리뷰작성</button>
+          <button onClick={() => { setReportopen(true) }}>신고하기</button>
         </div>
-        <InquiryList sseq={sseq} inquiryopen ={inquiryopen}  setInquiryopen={setInquiryopen}/>
 
+        <div ref={inquiryListRef}></div>
+        <InquiryList sseq={sseq} inquiryopen={inquiryopen} setInquiryopen={setInquiryopen} />
 
-        <ReviewList sseq={sseq} reviewopen ={reviewopen}  setReviewopen={setReviewopen}/>
+        <div ref={reviewListRef}></div>
+        <ReviewList sseq={sseq} reviewopen={reviewopen} setReviewopen={setReviewopen} ref={reviewListRef}/>
+
+        <ReportModal sseq={sseq} reportopen={reportopen} setReportopen={setReportopen} />
 
       </div>
-     
+
     </div>
 
   )

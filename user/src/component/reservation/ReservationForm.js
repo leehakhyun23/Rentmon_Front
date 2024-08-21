@@ -141,18 +141,16 @@ function ReservationForm({ props }) {
 
     const onSubmit = () => { }
 
-
+    // Space 조회
     useEffect(
         () => {
-            axios.get(`/api/space/getSpace/${sseq}`)
-                .then((result) => {
-                    setSpace(result.data);
-                })
-                .catch((err) => { console.error(err) })
-
+          axios.get(`/api/space/getSpace/${sseq}`)
+            .then((result) => {
+              setSpace(result.data.space);
+            })
+            .catch((err) => { console.error(err) });
         }, []
-    )
-
+      )
 
 
 
