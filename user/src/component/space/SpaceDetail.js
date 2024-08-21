@@ -13,6 +13,7 @@ import KakaoMap from '../../util/KakaoMap';
 import InqueryModal from './component/InqueryModal';
 import "./style/inquiry.css"
 import InquiryList from './component/InquiryList';
+import ReviewList from './component/ReviewList';
 
 
 const { kakao } = window; 
@@ -28,36 +29,38 @@ const settings = {
 
 function SpaceDetail() {
   const [inquiryopen, setInquiryopen] = useState(false);
+  const [reviewopen, setReviewopen] = useState(false);
   const user = useSelector(state => state.user);
   const [space, setSpace] = useState({});
-  const navigate = useNavigate();
   const { sseq } = useParams();
+  const navigate = useNavigate();
+
 
   const [content, setContent] = useState("");
   const [rate, setRate] = useState(0);
   const [images, setImages] = useState([]);
   const [reviewList, setReviewList] = useState([]);
-
-
+  const [inquiryList, setInquiryList] = useState([]);
+  const [tagList, setTagList] = useState([]);
+  const [zzimCount, setZzimCount] = useState();
   const [kakaoAddress, setKakaoAddress] = useState("");
 
+  // Review 입력
   const contentChange = (e) => {
     if (e && e.target) {
       setContent(e.target.value);
     }
   };
-
   const ratingChanged = (newRating) => {
     setRate(newRating);
   };
-
-
-
   const handleAddImage = (e) => {
     const files = Array.from(e.target.files);
     setImages((prevImages) => [...prevImages, ...files]);
   };
 
+
+  // Review 조회
   useEffect(() => {
     const fetchReviews = async () => {
       try {
@@ -69,15 +72,15 @@ function SpaceDetail() {
         console.error(err);
       }
     };
-
     fetchReviews();
-
     // 정리 함수
     return () => {
       setReviewList([]); // 언마운트 시 리뷰 리스트 초기화
     };
   }, [space.sseq]);
 
+
+  // Review 제출
   const handleOnSubmit = () => {
     const formData = new FormData();
 
@@ -112,38 +115,20 @@ function SpaceDetail() {
       })
   }
 
+  // Space 조회
   useEffect(
     () => {
       axios.get(`/api/space/getSpace/${sseq}`)
         .then((result) => {
-          setSpace(result.data);
-          setKakaoAddress(`${result.data.province} ${result.data.town} ${result.data.village} ${result.data.addressdetail}`);
+          setSpace(result.data.space);
+          setInquiryList(result.data.inquiryList);
+          setKakaoAddress(`${space.province} ${space.town} ${space.village} ${space.addressdetail}`);
         })
         .catch((err) => { console.error(err) });
 
     }, []
   )
 
-  // // 지도 생성
-  // useEffect(() => {
-  //   if (window.kakao && window.kakao.maps) {
-  //     const container = document.getElementById('map');
-  //     const options = { center: new kakao.maps.LatLng(37.5718407, 126.9872086) };
-  //     const kakaoMap = new kakao.maps.Map(container, options);
-  //     const markerPosition = new kakao.maps.LatLng(37.5718407, 126.9872086);
-  //     const marker = new kakao.maps.Marker({
-  //       position: markerPosition
-  //     });
-  //     marker.setMap(kakaoMap);
-
-  //     return () => {
-  //       kakaoMap.setCenter(null);  // 지도 리소스 정리
-  //       marker.setMap(null); // 마커도 제거
-  //     };
-  //   } else {
-  //     console.error('Kakao Maps API is not loaded');
-  //   }
-  // }, []);
 
   useEffect(()=>{
     
@@ -214,11 +199,7 @@ function SpaceDetail() {
         <div className="spaceMap">
           <div className="spaceMainTitle">위치 확인</div>
             <KakaoMap address={kakaoAddress}/>
-          {/* <div className='subPage'>
-            <div className="customer" style={{ flex: "4" }}>
-              <div id='map' style={{ width: "600px", height: "400px", margin: "20px" }}></div>
-            </div>
-          </div> */}
+
         </div>
 
 
@@ -228,113 +209,14 @@ function SpaceDetail() {
           <button onClick={() => { navigate(`/reservationForm/${space.sseq}`) }}>예약하기</button>
           <button onClick={() => { }}>찜하기</button>
           <button onClick={() => {setInquiryopen(true) }}>문의하기</button>
+          <button onClick={() => {setReviewopen(true) }}>리뷰작성</button>
           <button onClick={() => { }}>신고하기</button>
         </div>
         <InquiryList sseq={sseq} inquiryopen ={inquiryopen}  setInquiryopen={setInquiryopen}/>
-        <div className="spaceReviewInsert">
-          <div className="spaceMainTitle">리뷰 확인</div>
 
-          <Box>아이디<TextField label="Outlined" variant="outlined" value={user.userid} aria-readonly /></Box>
-          <Box>내용<TextField label="Outlined" variant="outlined" value={content} onChange={contentChange} /></Box>
-          별점<ReactStars
-            count={5}
-            onChange={ratingChanged}
-            size={24}
-            activeColor="#ffd700"
-            value={rate}
-          //isHalf={true}   // 별점 반개 허용(double로 형변환 필요)
-          />
-          <Box>사진
-            <Box
-              display="flex"
-              alignItems="center"
-              border="1px solid #ccc"
-              padding="8px"
-              borderRadius="4px"
-              minHeight="150px"
-              position="relative"
-              mt={2}
-            >
-              {images.map((image, index) => (
-                <Box
-                  key={index}
-                  display="flex"
-                  alignItems="center"
-                  justifyContent="center"
-                  width="100px"
-                  height="100px"
-                  border="1px solid #ccc"
-                  borderRadius="4px"
-                  marginRight="8px"
-                >
-                  <img
-                    src={URL.createObjectURL(image)}
-                    alt={`preview-${index}`}
-                    style={{ maxWidth: '100%', maxHeight: '100%' }}
-                  />
-                </Box>
-              ))}
-              <IconButton
-                component="label"
-                style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', width: '100px', height: '100px', border: '1px solid #ccc', borderRadius: '4px' }}
-              >
-                <AddIcon />
-                <input
-                  type="file"
-                  accept="image/*"
-                  multiple
-                  hidden
-                  onChange={handleAddImage}
-                />
-              </IconButton>
-            </Box>
-          </Box>
-          <Box>
-            <Button variant="contained" onClick={handleOnSubmit}>전송</Button>
-          </Box>
-        </div>
-       
-        <div className="spaceReviewRead">
-          <Box mt={4}>
-            <Typography variant="h6">리뷰 목록</Typography>
-            {reviewList.length > 0 ? (
-              reviewList.map((review, index) => (
-                <Box key={index} border="1px solid #ccc" borderRadius="4px" padding="16px" mt={2}>
-                  <Typography variant="subtitle1"><strong>작성자:</strong> {review.user.userid}</Typography>
-                  <Typography variant="body1"><strong>내용:</strong> {review.content}</Typography>
-                  <ReactStars
-                    count={5}
-                    size={24}
-                    value={review.rate}
-                    edit={false}
-                    activeColor="#ffd700"
-                  />
-                  {review.images && (
-                    <Slider {...settings}>
-                      {review.images.map((img, idx) => (
-                        <div key={idx}>
-                          <img
-                            src={`http://localhost:8070/review_images/${img.realname}`}
-                            alt={`리뷰 이미지 ${idx}`}
-                            style={{ width: '100px', height: '100px', objectFit: 'cover', marginRight: '10px' }}
-                          />
-                        </div>
-                      ))}
-                    </Slider>
-                  )}
-                  {review.reply && (
-                    <Typography variant="body2" color="textSecondary">
-                      <strong>관리자 답변:</strong> {review.reply}
-                    </Typography>
-                  )}
-                </Box>
-              ))
-            ) : (
-              <Typography variant="body2">등록된 리뷰가 없습니다.</Typography>
-            )}
-          </Box>
 
-        </div>
+        <ReviewList sseq={sseq} reviewopen ={reviewopen}  setReviewopen={setReviewopen}/>
+
       </div>
      
     </div>

@@ -76,7 +76,7 @@ function MyInfo({mypagePopup , user , setMypagePopup}) {
         <MypageIconButton imglink = {"chaticon.svg"}  text = {`문의(${menucount.inquiryCount})`}  goLink={"/mypage/qna/1"}/>
       </div>
       <div className='recentViewSpace'>
-      <h3>최근 본 공간({rctvw.length})</h3>
+      {/* <h3>최근 본 공간({rctvw.length})</h3> */}
           <Swiper
             slidesPerView={2.5}
             spaceBetween={12}
