@@ -4,8 +4,10 @@ import { dayFormat } from '../../../util/formatDate';
 import jaxios from '../../../util/jwtUtil';
 import { RiDeleteBack2Line } from "react-icons/ri";
 
+
 import SapcePaging from './SapcePaging';
 import InqueryModal from './InqueryModal';
+
 
 function InquiryList({sseq , inquiryopen , setInquiryopen}) {
     let user = useSelector(state => state.user);

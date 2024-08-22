@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
-import { useSelector, useDispatch } from 'react-redux';
+import { useDispatch } from 'react-redux';
 
 
 import '../style/space.css';
@@ -24,14 +23,18 @@ function Space(props) {
     const navigate = useNavigate();
     const dispatch = useDispatch();
 
+    useEffect(()=>{
+        setSpace(props.spaceDTO.space);
+    }, [])
+
 
 
     return (
         <div className="space">
             {<Slider {...settings}  >
                 {
-                    (props.space.spaceimage) ? (
-                        props.space.spaceimage.map((image, idx) => {
+                    (space.spaceimage) ? (
+                        space.spaceimage.map((image, idx) => {
                             return (
                                 <img key={idx} src={`http://localhost:8070/space_images/${image.realName}`} alt={props.space.title} onClick={() => { navigate(`/spaceDetail/${props.space.sseq}`) }}/>
                             )
@@ -40,7 +43,7 @@ function Space(props) {
                 }
             </Slider>}
             <div className="spaceTitle" onClick={() => { navigate(`/spaceDetail/${props.space.sseq}`) }}>제목</div>
-            <div className="spaceContent"> {props.space.sseq}. {props.space.title} </div>
+            <div className="spaceContent"> {space.sseq}. {space.title} </div>
             <div className="spaceTitle">가격</div>
             <div className="spaceContent"> {props.space.price}/시간</div>
             <div className="spaceTitle">위치</div>
