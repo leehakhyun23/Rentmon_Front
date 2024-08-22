@@ -145,11 +145,11 @@
     .calendarContainer .react-calendar__tile--now abbr { width: 27px; height: 27px; top: -4px; left: -4px; }
 
     .recentresevation-component { margin-top: 28px; border-radius: 16px; padding: 20px 15px; display: block; }
-    .recentresevation-component .recentresevation-wrapper { display: block; }
-    .recentresevation-component .recentresevation-wrapper .img-box { margin-right: 0px; }
-    .recentresevation-component .recentresevation-wrapper .img-box img { width: 100%; border-radius: 4px; }
-    .recentresevation-component .recentresevation-wrapper .placeInfo { margin-top: 10px; }
-    .recentresevation-component .recentresevation-wrapper .placeInfo > div {display: flex; }
+    .recentreservation .recentresevation-component .recentresevation-wrapper { display: block; }
+    .recentreservation .recentresevation-component .recentresevation-wrapper .img-box { margin-right: 0px; }
+    .recentreservation .recentresevation-component .recentresevation-wrapper .img-box img { width: 100%; border-radius: 4px; }
+    .recentreservation .recentresevation-component .recentresevation-wrapper .placeInfo { margin-top: 10px; }
+    .recentreservation .recentresevation-component .recentresevation-wrapper .placeInfo > div {display: flex; }
     .recentresevation-component .yearContainer { align-items: flex-start; margin-top: 10px; }
     .recentresevation-component .yearContainer > div { text-align: left; }
     .recentresevation-component .yearContainer > div > p { color: #0090DF; font-size: 13px; }
