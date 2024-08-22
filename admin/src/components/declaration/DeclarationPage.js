@@ -5,6 +5,8 @@ import { Link } from 'react-router-dom';
 import PlaylistAddCheckIcon from '@mui/icons-material/PlaylistAddCheck';
 import PlaylistRemoveIcon from '@mui/icons-material/PlaylistRemove';
 import ReorderIcon from '@mui/icons-material/Reorder';
+import MarkAsUnreadOutlinedIcon from '@mui/icons-material/MarkAsUnreadOutlined';
+import MarkEmailUnreadIcon from '@mui/icons-material/MarkEmailUnread';
 
 const DeclarationPage = () => {
     const [declarationList, setDeclarationList] = useState([]);
@@ -33,7 +35,7 @@ const DeclarationPage = () => {
                         <ListItem>답변여부      신고자아이디        공간이름        제목        작성일자</ListItem>
                         
                         {declarationList.map((decla) => (
-                            <ListItem key={decla.dseq}>{decla.reply === null ? 'X' : 'O'} {decla.reporter} <Link to={`/declarationview/${decla.dseq}`}>{decla.title}</Link> {decla.created_at}</ListItem>
+                            <ListItem key={decla.dseq}>{decla.reply === null ? <MarkAsUnreadOutlinedIcon/> : <MarkEmailUnreadIcon/>} {decla.reporter} <Link to={`/declarationview/${decla.dseq}`}>{decla.title}</Link> {decla.created_at}</ListItem>
                         ))}
                     </List>
                 </Box>

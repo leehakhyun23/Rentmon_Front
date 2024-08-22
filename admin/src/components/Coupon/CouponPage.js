@@ -1,4 +1,4 @@
-import { List, ListItem } from '@mui/material';
+import { Box, List, ListItem, Pagination } from '@mui/material';
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 
@@ -17,7 +17,7 @@ const CouponPage = () => {
         .catch((err) => {
             console.log(err);
         })
-    }, []);
+    }, [paging]);
 
     return (
         <div>
@@ -30,6 +30,9 @@ const CouponPage = () => {
                     </ListItem>
                 ))}
             </List>
+            <Box sx={{display: 'flex', justifyContent: 'center'}}>
+                <Pagination count={paging.totalPages} page={paging.page + 1} /*onChange={handlePageChange}*/ color="primary"/>
+            </Box>
         </div>
     );
 };
