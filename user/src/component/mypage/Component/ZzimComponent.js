@@ -22,7 +22,7 @@ function ZzimComponent({record}) {
     return (
         (remove)&&(
             <div className='zzimcomp'>
-                <div className='imgcontainer'> <Link to="">{(record.space.spaceimage&&record.space.spaceimage.length>0)&&(<img src={`http://localhost:8070/space_images/${record.space.spaceimage[0].realName}`}/>)}</Link></div>
+                <div className='imgcontainer'> <Link  to={`/spaceDetail/${record.space.sseq}`}>{(record.space.spaceimage&&record.space.spaceimage.length>0)&&(<img src={`http://localhost:8070/space_images/${record.space.spaceimage[0].realName}`}/>)}</Link></div>
                 <div className='content'>
                     <div className='title'>
                         <span>{record.space.title}</span>

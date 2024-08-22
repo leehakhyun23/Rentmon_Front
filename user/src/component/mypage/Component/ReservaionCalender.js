@@ -12,7 +12,6 @@ function ReservationCalendar() {
   const [dayList , setDayList] = useState([]);
 
   useEffect(()=>{
-    console.log(year+"-"+month+"월");
     if(year)getReservationList();
   },[year,month])
    
@@ -20,7 +19,6 @@ function ReservationCalendar() {
   let getReservationList = async()=>{
     try{
       let result = await jaxios.get("/api/reservation/getReservationList",{params:{year,month,userid:user.userid}});
-      console.log(result.data);
       setDayList(prev => [...result.data])
     }catch(err){
       console.error(err);

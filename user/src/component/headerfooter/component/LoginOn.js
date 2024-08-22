@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
+import { logoutRecentRerveAction } from '../../../store/RecentSlice';
+import { logoutAction } from '../../../store/UserSlice';
 import { getReserveInfo } from '../../../util/getreser';
 import MyInfo from './MyInfo';
 import RecentReservation from './RecentReservation'
@@ -24,6 +26,7 @@ function LoginOn({mypagePopup , setMypagePopup}) {
   }, [recent]); 
 
   useEffect(()=>{
+    
     getReserveInfo(user.userid, dispatch);
   },[])
   return (

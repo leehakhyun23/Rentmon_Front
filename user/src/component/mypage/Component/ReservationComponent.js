@@ -1,11 +1,18 @@
+import { async } from 'q';
 import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { dayFormat } from '../../../util/formatDate'
+import ReservModal from './ReservModal'
 
-function ReservationComponent({rs}) {
-  
+function ReservationComponent({space , rs}) {
+  const [modalon, setModalon] =useState(false);
+  const [rerveData , setReservData] = useState({});
+  useEffect(()=>{
+    setReservData(space);
+  },[space, rs]);
 
   return (
+    <>
     <div className='recentresevation-component'>
       {(rs && rs.reservedate)?(
         <>
@@ -37,9 +44,10 @@ function ReservationComponent({rs}) {
                 
             </div>
             <div className='gobtn'>
-                <Link to={"/detailveiw/"+rs.seq}><img src='/img/reservarrow.png' alt='reservarrow.png'/></Link>
+                <Link onClick={()=>{setModalon(true)}}>자세히 보기<img src='/img/reservarrow.png' alt='reservarrow.png'/></Link>
             </div>
         </div>
+        
         </>
       ):(<>
         <div id="notreserve" style={{padding:"20px 0", textAlign:"center" , color:"#999"}}>
@@ -48,8 +56,9 @@ function ReservationComponent({rs}) {
       </>)
       }
       
-        
     </div>
+    <ReservModal modalon={modalon} setModalon={setModalon} rerveData={rerveData} />
+    </>
     )
 }
 

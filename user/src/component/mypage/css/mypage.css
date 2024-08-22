@@ -165,7 +165,7 @@
 
 .ReactModal__Overlay { z-index: 100; background-color: rgba(0,0,0,0.6) !important; backdrop-filter: blur(15px); }
 .ReactModal__Overlay .ReactModal__Content { inset: unset !important; left: 50% !important; top: 50% !important; transform: translate(-50% ,-50%); overflow: visible !important; padding: 0 !important; }
-.mypageModal { position: relative; max-width: 450px;}
+.mypageModal { position: relative; max-width: 650px;}
 .mypageModal .modal-content {    padding:40px 30px; max-height: 450px; height: 65vh; margin: auto; overflow: auto; }
 .mypageModal .md-close { position: absolute; bottom: -50px ; left: 50%; transform: translate(-50% , 0); border-radius: 50%; width: 13px; height: 13px; padding: 6px; background: #fff; cursor: pointer; display: block; }
 .mypageModal .md-close span { position: relative; display: block; width: 100%; height: 100%;  transition: all .3s;  }
@@ -179,7 +179,9 @@
 .mypageModal img { width: 100%; border-radius: 10px; }
 .mypageModal .modal-description { font-size: 15px; margin-top: 10px; }
 .mypageModal .modal-info {  margin-top: 30px;}
-.mypageModal .modal-info .info-item { margin-top: 10px; }
+.mypageModal .modal-info .info-item { margin-top: 10px;  }
+.mypageModal .modal-info .info-item.price { margin-top: 30px;  }
+.mypageModal .modal-info .info-item span { font-size: 13px; color: #999; }
 .mypageModal .modal-info .info-item strong { font-weight: 500; width: 100px; display: inline-block; color: #999; }
 
 .mypageModal  .modal-location { margin-top: 50; border-top: 1px solid #f5f5f5; padding-top: 20px; }
@@ -406,3 +408,55 @@
 .qna .qnaList .row  .lastDate {width: 40%;   }
 .qna .qnaList .row  .useyn { width: 20%; }
 }
+
+
+/* qna 모달 */
+.modal { position: relative; padding: 30px 20px 0; max-height: 80vh; overflow: auto; }
+.modal h2 { font-size: 25px; font-weight: bold; margin-bottom: 20px; }
+.modal .userinquiry {  }
+.modal .userinquiry .title { font-weight: 600; font-size: 16px; margin-bottom: 10px; }
+.modal .userinquiry .content { font-size: 14px; }
+.modal .userinquiry .createday { font-size: 12px; color: #999; margin-top: 20px; }
+.modal .reply { padding: 20px 0; border-top: 1px solid #f5f5f5; margin-top: 30px; }
+.modal .reply p { font-weight: 600; font-size: 16px; margin-bottom: 10px; }
+.modal .reply .hostid { font-weight: 600; font-size: 15px; color: #999; margin-bottom: 15px; }
+.modal .reply .content { font-size: 14px; }
+.modal .reply .replydate {  font-size: 12px; color: #999; margin-top: 20px;}
+.modal .noreply { font-size: 15px; text-align: left; padding: 20px 0; color: #b9b9b9; border-top: 1px solid #f5f5f5; margin-top: 30px; }
+
+.modal .spaceInfo { max-width: 350px; margin: 0 auto; box-shadow: none; padding: 0; }
+.modal .spaceInfo img { width: 100%; border-radius: 9px; }
+.modal .spaceInfo .spaceName {  margin: 5px 0; }
+.modal .spaceInfo .spaceName p { font-size: 15px; font-weight: bold;  }
+.modal .spaceInfo .spaceName span { font-size: 15px; color: #999;   }
+.modal .spaceInfo a { margin: 20px -20px 0 ; display: block; background: #0090DF; color: #fff; text-align: center; padding: 20px 0; }
+.modal .spaceInfo a svg { margin-left: 10px; }
+
+
+
+
+
+.md-close { position: absolute; bottom: -50px ; left: 50%; transform: translate(-50% , 0); border-radius: 50%; width: 13px; height: 13px; padding: 6px; background: #fff; cursor: pointer; display: block; }
+.md-close span { position: relative; display: block; width: 100%; height: 100%;  transition: all .3s;  }
+.md-close span::after,
+.md-close span::before { content: ""; display: block; width: 100%; height: 1px; background: #000; transform: rotate(45deg); position: absolute; left: 0;top: 50%; }
+.md-close span::before { transform: rotate(-45deg); }
+.md-close:hover  span { transform: rotate(180deg); }
+
+
+
+  
+  /* 스크롤바의 폭 너비 */
+.scrollbar::-webkit-scrollbar { width: 4px; }
+
+.scrollbar::-webkit-scrollbar-thumb { background: rgba(0, 0, 0, 0.3); border-radius: 10px; }
+
+.scrollbar::-webkit-scrollbar-track {
+    background: rgba(220, 20, 60, .1);  
+}
+
+.mapwrap { margin-top:30px }
+.mapwrap .message { text-align: center; padding: 30px 0; color: #999; }
+.mapwrap h2 { font-size:20px; font-weight: 600; margin-bottom: 20px; }
+
+.mypageModal .reresevbutton { background: #0090DF; color: #fff; border: none;  width: 100%; padding: 20px 0; margin-top: 50px; }

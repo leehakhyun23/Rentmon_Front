@@ -7,9 +7,7 @@ import "./css/main.css"
 
 function Main() {
   let user = useSelector(state=>state.user);
-  useEffect(()=>{
-    console.log(user);
-  },[]);
+ 
   return (
     <div className='main innerContainer'>
       <MainSlide/>
