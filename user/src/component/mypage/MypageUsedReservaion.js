@@ -27,7 +27,8 @@ function MypageUsedReservaion({record,num}) {
                 <div className='top'><span>No. {num}</span><p>{dayFormat(reservation.reservestart)}~{dayFormat(reservation.reserveend)}</p></div>
                 <div className='recentresevation-wrapper'>
                     <div className='img-box'>
-                        <img src={`http://localhost:8070/space_images/${reservation.space.spaceimage[0].realName}`} alt={reservation.space.spaceimage[0].realName}/>
+                        {(reservation.space.spaceimage[0])&&(<img src={`http://localhost:8070/space_images/${reservation.space.spaceimage[0].realName}`} alt={reservation.space.spaceimage[0].realName}/>)}
+                        
                     </div>
                     <div className='placeInfo'>
                         <div>
