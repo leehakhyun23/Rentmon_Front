@@ -1,18 +1,43 @@
-import React from 'react'
+import React, { useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { useDispatch, useSelector} from 'react-redux'
 import RecommandTag from './component/RecommandTag';
 import RectnRecord from './component/RectnRecord'
+import { SearchOnAction, SearchOutAction} from '../../store/SearchSlice';
+
 
 function Searchpopup({searchshow, setSearchPopup ,searchWord ,setSearchWord}) {
+    let navigate = useNavigate();
+    let dispatch = useDispatch();
+
 
     let deleterecord = (n)=>{
         console.log(n);
     }
+
+    useEffect(()=>{
+        if( searchWord == ''){
+            dispatch(SearchOutAction());
+        }
+    }, [])
+
+    let enterSpaceList = (e)=>{
+        if(e.key === 'Enter'){
+            if (searchWord.trim()){
+                dispatch(SearchOnAction({searchWord}))
+                navigate(`/spaceList`);
+            } else{
+                dispatch(SearchOutAction());
+            }
+        }
+    }
+
   return (
     <>
     <div className='searchPopup-container' style={searchshow}>
         <div className='innerContainer'>
             <div className='input-conatiner'>
-                <input type="text" value={searchWord} onChange={(e)=>{setSearchWord(e.currentTarget.value)}} placeholder='어떤 공간을 찾으세요?'/>
+                <input type="text" value={searchWord} onKeyDown={enterSpaceList} onChange={(e)=>{setSearchWord(e.currentTarget.value)}} placeholder='어떤 공간을 찾으세요?'/>
                 <img src='/img/searchIcon.svg' alt='searchIcon.svg' />
             </div>
             <div className='bottom'>

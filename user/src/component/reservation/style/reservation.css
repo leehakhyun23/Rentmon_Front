@@ -1,21 +1,58 @@
-.reservation-form-container {
-    max-width: 800px;
-    margin: 0 auto;
-    padding: 20px;
-    background-color: #f9f9f9;
-    border-radius: 8px;
-    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
-  }
-  
-  .space-info, .reservation-details, .user-info, .host-info, .reservation-notes, .payment-info, .agreement {
-    margin-bottom: 20px;
-  }
-  
-  .space-info img {
-    width: 100%;
-    border-radius: 8px;
-  }
+.reservationContainer {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+  background-color: #f9f9f9;
+  border-radius: 8px;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+}
 
-  .space-info h2, .space-info h3 {
+.reservation-calendar {
+  background-color: #f9f9f9;
+  border-radius: 10px;
+  padding: 20px;
+}
 
-  }
+
+
+
+.space-info,
+.reservation-info,
+.user-info,
+.host-info,
+.payment-info,
+.agreement {
+  margin-bottom: 20px;
+}
+
+.space-info img {
+  width: 100%;
+  border-radius: 8px;
+}
+
+
+
+.time-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.time-button {
+  background-color: #f1f1f1;
+  border: 1px solid #ddd;
+  padding: 10px 20px;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+.time-button.selected {
+  background-color: #0090DF;
+  color: white;
+  font-weight: bold;
+}
+
+.time-button:hover {
+  background-color: #007ACC;
+  color: white;
+}
