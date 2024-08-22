@@ -53,11 +53,12 @@ function ReviewList({ sseq, reviewopen, setReviewopen }) {
                                     <div className='usercontent'>
                                         <ReactStars
                                             count={5}
-                                            size={24}
+                                            size={18}
                                             value={elem.rate}
                                             edit={false}
-                                            activeColor="#ffd700"
+                                            activeColor="#0090DF"
                                         />
+                                        <br/>
                                         <div className='content'><pre>{elem.content}</pre></div>
                                         {elem.images && (
                                             elem.images.map((img, idx) => (

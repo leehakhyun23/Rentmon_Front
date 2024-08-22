@@ -4,6 +4,9 @@ import { useNavigate } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import Calendar from "react-calendar";
 import Space from './component/Space';
+import jaxios from '../../util/jwtUtil';
+
+
 import './style/space.css';
 
 import SpaceBoxComponent from '../main/componenet/SpaceBoxComponent';
@@ -23,7 +26,8 @@ function SpaceList() {
   const [hasmore, setHasmore] = useState(true);   //무한스크롤 
 
   // 검색 정보
-  const [searchWord, setSearchWord] = useState('');   // 검색 해시태그
+  const search = useSelector(state => state.search);
+  const [searchCnum, setSearchCnum] = useState(0);
   const [searchRegion, setSearchRegion] = useState(''); // 검색 지역
   const [searchDate, setSearchDate] = useState("");  //검색 날짜
 
@@ -33,9 +37,14 @@ function SpaceList() {
   const [searchRstart, setSearchRstart] = useState(''); //검색 예약시작시간 : 날짜 + 시간
   const [searchRend, setSearchRend] = useState(''); //검색 예약종료시간 : 날짜 + 시간
 
-  // 필터링 정보
+  // 필터링 정보, 검색용 배열
+  const [category, setCategory] = useState([]);
   const [sortOption, setSortOption] = useState(0);
 
+  // 카테고리 들고오기
+  useEffect(()=>{
+    getCategoryarr();
+},[]);
 
   // 무한스크롤
   useEffect(() => {
@@ -51,12 +60,20 @@ function SpaceList() {
 
   // 검색값(지역)
   const regions = ['서울', '경기', '인천', '부산', '광주', '대구', '대전', '울산', '제주', '강원', '경남', '경북', '전남', '전북'];
+  let getCategoryarr = async () => {
+    try {
+      let result = await jaxios.get("/api/user/getCategoryList");
+      setCategory(result.data);
+
+    } catch (err) { console.error(err); }
+  }
+
 
 
   //검색(값입력) : 
-  const handleWordChange = (event) => {
-    setSearchWord(event.target.value);
-  };
+  const handleCategoryChange = (event)=>{
+    setSearchCnum(event.target.value);
+  }
 
   const handleRegionChange = (event) => {
     setSearchRegion(event.target.value);
@@ -104,15 +121,17 @@ function SpaceList() {
     try {
       const params = {
         page,
-        searchword: searchWord,
+        cnum : searchCnum,
+        searchword: search.searchWord,
         province: searchRegion,
         reservestart: searchRstart,
         reserveend: searchRend,
         sortOption: sortOption
       }
 
-      const result = await axios.get(`/api/space/getSpaceList`, { params });
+      const result = await jaxios.get(`/api/space/getSpaceList`, { params });
       console.log(result);
+    
       setSpaceList(prevSpaces => [...prevSpaces, ...result.data]);
       console.log(page);
 
@@ -147,9 +166,14 @@ function SpaceList() {
   return (
     <div className='spaceContainer innerContainer'>
       <div className="searchSection">
-        <div className="searchWord">
-          <label>일단 여기서 word인풋 : </label>
-          <input value={searchWord} onChange={handleWordChange} />
+        <div className="searchCategory">
+          <label htmlFor="category">카테고리 : </label>
+          <select id="category" value={searchCnum} onChange={handleCategoryChange}>
+            <option value="">카테고리를 선택하세요</option>
+            {category.map((category, index) => (
+              <option key={index} value={category.cnum}>{category.name}</option>
+            ))}
+          </select>
         </div>
 
         <div className="searchRegion">
@@ -183,7 +207,7 @@ function SpaceList() {
         </div>
 
         <button id="searchButton" onClick={async () => {
-          console.log(`검색: ${searchWord}, ${searchRegion}, ${searchRstart}, ${searchRend}`)
+          console.log(`검색:${search.searchCategory} ${search.searchWord}, ${searchRegion}, ${searchRstart}, ${searchRend}`)
           searchSpaces();
         }}>
           검색

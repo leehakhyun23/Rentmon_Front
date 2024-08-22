@@ -15,7 +15,6 @@ const searchSlice = createSlice({
             },
             SearchOutAction:(state)=>{
                 state.searchWord=""
-                removeCookie("token","/");
             }
         }
 });
