@@ -120,11 +120,10 @@ function SpaceDetail() {
     let rctvw = getCookie("rctvw");
     if (rctvw === undefined) rctvw = [];
     if (!rctvw.includes(sseq)) {
-      if (rctvw.length >= 6) rctvw.pop();
       if (sseq !== undefined) rctvw.unshift(sseq);
+      if (rctvw.length >= 6) rctvw.pop();
     }
     setAuthoCookie("rctvw", rctvw, 60);
-    console.log(rctvw);
   }, []);
 
   return (
