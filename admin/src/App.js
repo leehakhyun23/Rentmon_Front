@@ -1,23 +1,33 @@
 import { Route, Routes } from 'react-router-dom';
-import MainPage from './components/MainPage';
-import UserPage from './components/member/UserPage';
-import HostPage from './components/member/HostPage';
-import DeclarationPage from './components/declaration/DeclarationPage';
-import DeclarationView from './components/declaration/DeclarationView';
-import CouponPage from './components/coupon/CouponPage';
-import CouponModal from './components/modal/CouponModal';
+import Main from './components/Main';
+import MainRoutes from './template/MainRoutes';
+import { useState } from 'react';
+import CustomAppBar from './template/AppBar';
+import CustomDrawer from './template/Drawer';
 
 function App() {
+  const [open, setOpen] = useState(false);
+
+  const handleDrawerOpen = () => {
+    setOpen(true);
+  };
+
+  const handleDrawerClose = () => {
+    setOpen(false);
+  };
+
   return (
-    <Routes>
-      <Route index element={<MainPage />} />
-      <Route path='/userpage' element={<UserPage />} />
-      <Route path='/hostpage' element={<HostPage />} />
-      <Route path='/declaration' element={<DeclarationPage />} />
-      <Route path='/declarationview/:dseq' element={<DeclarationView />} />
-      <Route path='/couponpage' element={<CouponPage />} />
-      <Route element={<CouponModal />} />
-    </Routes>
+    <div style={{ display: 'flex' }}>
+      <CustomAppBar open={open} handleDrawerOpen={handleDrawerOpen} />
+      <CustomDrawer open={open} handleDrawerClose={handleDrawerClose} />
+      <Main open={open}>
+        <Routes>
+          {MainRoutes.map((route, index) => (
+            <Route key={index} path={route.path} element={route.element} />
+          ))}
+        </Routes>
+      </Main>
+    </div>
   );
 }
 

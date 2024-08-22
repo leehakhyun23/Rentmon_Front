@@ -9,6 +9,9 @@ const MainPage = () => {
                 메인
             </Box>
             <Box>
+                <Link to="/main">메인</Link>
+            </Box>
+            <Box>
                 <Link to="/userpage">유저목록</Link>
             </Box>
             <Box>

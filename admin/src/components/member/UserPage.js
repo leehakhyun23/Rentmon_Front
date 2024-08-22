@@ -41,7 +41,7 @@ const UserPage = () => {
     }, [])
 
     const handlePageChange = (e, value) => {
-        fetchUserList(paging.page, paging.size, searchType, keyword);
+        fetchUserList(value - 1, paging.size, searchType, keyword);
     };
 
     const handleOnChange = () => {
@@ -129,7 +129,7 @@ const UserPage = () => {
                         <List>
                             <ListItem>아이디    닉네임    등급    전화번호    이메일      회원가입일    신고당한횟수      로그인 가능      <Checkbox onChange={handleOnChange} checked={selectAll}/></ListItem>
                             {userList.map((user, idx) => (
-                                <ListItem key={idx}>{user.userid} {user.name} {user.gname} {user.phone} {user.email} {user.createdAt} {user.declaCount} {user.islogin === true ? 'Y' : 'N'}
+                                <ListItem key={idx}>{user.userid} {user.name} {user.gname} {user.phone} {user.email} {user.createdAt} {user.declaCount} {user.isLogin === true ? 'Y' : 'N'}
                                     <Checkbox checked={checked.includes(user.userid)} onChange={() => handleCheckboxChange(user.userid)}/>
                                 </ListItem>
                             ))}
