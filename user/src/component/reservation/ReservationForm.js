@@ -3,7 +3,6 @@ import { useSelector } from 'react-redux'
 import Calendar from "react-calendar";
 import 'react-calendar/dist/Calendar.css';
 
-
 import './style/reservation.css';
 import { useParams, useLocation, useNavigate } from 'react-router-dom';
 import axios from 'axios';
@@ -12,6 +11,8 @@ import Slider from 'react-slick';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 
+
+// 이미지 슬릭을 위한 세팅
 const settings = {
     dots: false,
     arrows: false,
@@ -22,13 +23,20 @@ const settings = {
 }
 
 function ReservationForm({ props }) {
+    
+    // 기본자원
     let user = useSelector(state => state.user);
-    const navigate = useNavigate();
     const [space, setSpace] = useState({});
     const [host, setHost] = useState({});
+
+
+    const navigate = useNavigate();
     const { sseq } = useParams(); // URL 파라미터에서 공간 고유 ID 받기
+
+    // 예약에서 추가적으로 입력받을 내용
     const [request, setRequest] = useState('');    // 요청 사항
     const [payment, setPayment] = useState();
+
 
     // 시간값
     const [date, setDate] = useState(null);
@@ -39,15 +47,14 @@ function ReservationForm({ props }) {
     const [reserveTime, setReserveTime] = useState();
 
 
-
-
+    // able 타임을 고려해서 리스트를 작성하는 것으로.... 변수명도 ableHours
     const hours = Array.from({ length: 24 }, (_, i) => `${i}:00:00`);
 
+    const [selectedPhase, setSelectedPhase] = useState("start"); // "start" 또는 "end" 상태 추적
 
-    
+
 
     const handleDateChange = (newDate) => {
-        // Date 객체에서 년, 월, 일 추출
         const year = newDate.getFullYear();
         const month = String(newDate.getMonth() + 1).padStart(2, '0'); // 월은 0부터 시작하므로 +1, 두 자리 수로 변환
         const day = String(newDate.getDate()).padStart(2, '0'); // 두 자리 수로 변환
@@ -56,10 +63,11 @@ function ReservationForm({ props }) {
         const formattedDate = `${year}-${month}-${day}`;
 
         setDate(formattedDate);
-        setStartTime("");
-        setEndTime("");
-
-        console.log("Formatted Date:", formattedDate); // 출력 예: 2024-08-19
+        setStartTime(null);
+        setEndTime(null);
+        setStartTimestamp(null);
+        setEndTimestamp(null);
+        setSelectedPhase("start");
     };
 
     const handleStartTimeChange = (event) => {
@@ -83,15 +91,25 @@ function ReservationForm({ props }) {
 
     };
 
-    const [selectedTimeSlot, setSelectedTimeSlot] = useState(null);
-
-    const handleTimeSlotClick = (time, type) => {
-        if (type === "start") {
+    const handleTimeSlotClick = (time) => {
+        if (selectedPhase === "start") {
             setStartTime(time);
             setStartTimestamp(`${date} ${time}`);
-        } else if (type === "end") {
+            setSelectedPhase("end");
+        } else if (selectedPhase === "end") {
+            if (new Date(`${date} ${time}`) <= new Date(startTimestamp)) {
+                alert("종료 시간은 시작 시간보다 늦어야 합니다. 다시 선택해주세요.");
+                return;
+            }
             setEndTime(time);
             setEndTimestamp(`${date} ${time}`);
+            setSelectedPhase("start");
+        }
+    
+        if (selectedPhase === "end" && startTimestamp) {
+            const calculatedReserveTime = calculateTimeDifference(startTimestamp, `${date} ${time}`);
+            setReserveTime(calculatedReserveTime);
+            setPayment(calculatedReserveTime * space.price);
         }
     };
 
@@ -121,16 +139,7 @@ function ReservationForm({ props }) {
             alert("예약 날짜와 시간을 지정해주세요.");
             return;
         }
-
         const calculatedReserveTime = calculateTimeDifference(startTimestamp, endTimestamp);
-
-        // endTime이 startTime보다 큰 경우에만 예약을 진행합니다.
-        if (calculatedReserveTime <= 0) {
-            alert("종료 시간이 시작 시간보다 늦어야 합니다.");
-            return;
-        }
-
-
 
         // 예약 데이터를 서버로 전송
         const reservationData = {
@@ -151,16 +160,13 @@ function ReservationForm({ props }) {
         })
             .then(response => {
                 alert('예약에 성공했습니다.');
-                navigate(`/reservation/ReservationDone/${space.sseq}`);  // 예약 성공 후 이동할 페이지
+                navigate(`/mypage/reservation/1`);  // 예약 성공 후 이동할 페이지
             })
             .catch(error => {
                 console.log(space);
                 console.error('예약에 실패했습니다.', error);
             });
     };
-
-
-    const onSubmit = () => { }
 
     // Space 조회
     useEffect(
@@ -169,50 +175,42 @@ function ReservationForm({ props }) {
                 .then((result) => {
                     setSpace(result.data.space);
                     setHost(result.data.space.host);
-                    console.log(result.data.space)
                 })
                 .catch((err) => { console.error(err) });
         }, []
     )
 
-
-
-
     return (
 
         <div className="reservationContainer">
+
+            <div className="space-info">
+                <Slider {...settings}>
+                    {space.spaceimage && space.spaceimage.map((image, idx) => (
+                        <img key={idx} src={`http://localhost:8070/space_images/${image.realName}`} alt={space.title} />
+                    ))}
+                </Slider>
+                <h2>{space.title}</h2>
+                <p>{space.content}</p>
+                <p>가격: {space.price}원/시간</p>
+            </div>
+
             <div className="reservationCalendar">
                 <div>
-                    <Calendar onChange={handleDateChange} value={date} />
+                    <Calendar onChange={handleDateChange} value={date} tileDisabled={({ date }) => date < new Date()} />
                     {date && (
-                        <div className="timeSelect">;
-                            <div>
-                                <h4>Start Time:</h4>
-                                <div className="time-buttons">
-                                    {hours.map((hour, index) => (
-                                        <button
-                                            key={index}
-                                            className={`time-button ${startTime === hour ? 'selected' : ''}`}
-                                            onClick={() => handleTimeSlotClick(hour, "start")}
-                                        >
-                                            {hour}
-                                        </button>
-                                    ))}
-                                </div>
-                            </div>
-                            <div>
-                                <h4>End Time:</h4>
-                                <div className="time-buttons">
-                                    {hours.map((hour, index) => (
-                                        <button
-                                            key={index}
-                                            className={`time-button ${endTime === hour ? 'selected' : ''}`}
-                                            onClick={() => handleTimeSlotClick(hour, "end")}
-                                        >
-                                            {hour}
-                                        </button>
-                                    ))}
-                                </div>
+                        <div className="timeSelect">
+                            <h4>{selectedPhase === "start" ? "예약 시작 시간을 선택해주세요!" : "예약 종료 시간을 선택해주세요!"}</h4>
+                            <div className="time-buttons">
+                                {hours.map((hour, index) => (
+                                    <button
+                                        key={index}
+                                        className={`time-button ${startTime === hour ? 'start-selected' : ''} ${endTime === hour ? 'end-selected' : ''}`}
+                                        onClick={() => handleTimeSlotClick(hour)}
+                                    >
+                                        {hour}
+                                    </button>
+                                ))}
                             </div>
 
 
@@ -245,18 +243,6 @@ function ReservationForm({ props }) {
 
             </div>
 
-
-
-            <div className="space-info">
-                <Slider {...settings}>
-                    {space.images && space.images.map((image, idx) => (
-                        <img key={idx} src={`http://localhost:8070/space_images/${image.originame}`} alt={space.title} />
-                    ))}
-                </Slider>
-                <h2>{space.title}</h2>
-                <p>{space.content}</p>
-                <p>가격: {space.price}원/시간</p>
-            </div>
 
             <div className="reservation-info">
                 <h3>예약 정보</h3>

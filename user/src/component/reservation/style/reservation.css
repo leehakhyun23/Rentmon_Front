@@ -56,3 +56,13 @@
   background-color: #007ACC;
   color: white;
 }
+
+.time-button.start-selected {
+  background-color: #007bff; /* 파란색 */
+  color: white;
+}
+
+.time-button.end-selected {
+  background-color: #ffc107; /* 노란색 */
+  color: black;
+}
