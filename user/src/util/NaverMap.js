@@ -1,4 +1,3 @@
-/* global naver */
 export const searchAddressToCoordinate = (address ,setMessage , text) =>{
     setMessage("");
       naver.maps.Service.geocode({

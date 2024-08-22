@@ -1,3 +1,5 @@
+import { useState } from "react";
+
 /* global naver */
 export const getCoordinates = (address) => {
     return new Promise((resolve, reject) => {

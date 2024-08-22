@@ -2,10 +2,11 @@ import axios from 'axios';
 import { async } from 'q';
 import React, { useEffect, useState } from 'react'
 import { useNavigate, useParams } from 'react-router';
+import { getCookie } from '../../util/cookieUtil';
 import jaxios from '../../util/jwtUtil';
 
 function ResetPasswordUrl() {
-    const {userid} = useParams();
+    const {userid , code} = useParams();
     const [message , setMessage] = useState("");
 
     const [password, setPassword] = useState("");
@@ -14,8 +15,6 @@ function ResetPasswordUrl() {
     const navigate = useNavigate();
 
     const regex = /^(?=.*[A-Za-z])(?=.*\d|.*[^A-Za-z0-9])[A-Za-z\d!@#$%^&*(),.?":{}|<>]{8,30}$|^(?=.*\d)(?=.*[A-Za-z]|.*[^A-Za-z0-9])[A-Za-z\d!@#$%^&*(),.?":{}|<>]{8,30}$|^(?=.*[^A-Za-z0-9])(?=.*[A-Za-z]|.*\d)[A-Za-z\d!@#$%^&*(),.?":{}|<>]{8,30}$/;
-
-
     
     useEffect(()=>{
         setPasswordcheck(false);
@@ -31,8 +30,18 @@ function ResetPasswordUrl() {
         return setMessage("");
     },[password, pwdcheck]);
 
+    useEffect(()=>{
+        let resetPwd = getCookie("resetPwd");
+        console.log(resetPwd);
+        if( resetPwd != code) {
+            alert("유효한 페이지가 아닙니다.");
+            return navigate("/");
+        }
+    },[])
+
 
     const onSubmit = async()=>{
+       
         try{
             let data={
                 password, userid

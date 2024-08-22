@@ -26,8 +26,8 @@ function QnaModal({isopen , setIsOpen , popup}) {
             <div className='spaceInfo'>
                 {(popup.space.spaceimage&&popup.space.spaceimage.length>0)&&(<img src={`http://localhost:8070/space_images/${popup.space.spaceimage[0].realName}`}/>)}
                 <div className='spaceName'>
-                    <span>{popup.space.title}</span>
                     <p>공간 이름</p>
+                    <span>{popup.space.title}</span>
                 </div>
                 <Link to={`/spaceDetail/${popup.space.sseq}`}>공간 보러가기<IoIosArrowForward /></Link>
             </div>

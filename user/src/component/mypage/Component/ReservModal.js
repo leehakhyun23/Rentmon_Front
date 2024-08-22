@@ -1,18 +1,20 @@
-/* global naver */
 
 import { async } from 'q';
 import React, { useEffect, useState } from 'react';
 import Modal from 'react-modal';
+import { useNavigate } from 'react-router-dom';
 import { getCoordinates } from '../../../util/citibaming';
 import { dayFormat } from '../../../util/formatDate';
 import { openNaverMap, searchAddressToCoordinate, searchAddressToCoordinatereturn } from '../../../util/NaverMap';
 
 function ReservModal({ modalon, setModalon, rerveData }) {
+  const navigate = useNavigate();
   const [message, setMessage] = useState('');
   const [map , setmap] = useState();
     useEffect(() => {
       mdalon();
     }, [modalon, rerveData]);
+    Modal.setAppElement('#root');
 
     const mdalon=async()=>{
       try{
@@ -69,6 +71,7 @@ function ReservModal({ modalon, setModalon, rerveData }) {
                                     </>
                                 )}
                             </div>
+                            <button className='reresevbutton' onClick={()=>{navigate("/spaceDetail/"+rerveData.space.sseq)}}>다시 예약하러가기</button>
                         </div>
                     )}
                     <div onClick={() => { setModalon(false) }} className="md-close">

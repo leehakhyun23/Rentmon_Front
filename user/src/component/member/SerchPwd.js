@@ -1,7 +1,16 @@
 import axios from 'axios';
-import { async } from 'q';
 import React, { useEffect, useState } from 'react'
+import { setAuthoCookie } from '../../util/cookieUtil';
+function getRandomNumbersString(count, min, max) {
+    let randomNumbers = [];
+    
+    while(randomNumbers.length < count) {
+        const randomNumber = Math.floor(Math.random() * (max - min + 1)) + min;
+        randomNumbers.push(randomNumber);
+    }
 
+    return randomNumbers.join('');
+}
 function SerchPwd() {
     const [email, setEmail] = useState("");
     const [userid, setUserid] = useState("");
@@ -16,9 +25,13 @@ function SerchPwd() {
         }
     },[email, userid]);
 
+    
+
     const onSubmit = async()=>{
         try{
-            let resetPasswordUrl = "http://localhost:3000/resetPasswordUrl/"+userid;
+            let code=getRandomNumbersString(6,1,100);
+            setAuthoCookie("resetPwd",code,5);
+            let resetPasswordUrl = "http://localhost:3000/resetPasswordUrl/"+userid+"/"+code;
             let result = await axios.post("/api/main/searchPwd",null,{params:{userid, email ,resetPasswordUrl}});
             setMessage(result.data);
             document.querySelector(".messageani").classList.add("on");
