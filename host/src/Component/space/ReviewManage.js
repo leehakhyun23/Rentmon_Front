@@ -1,11 +1,14 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Header from '../HeaderFooter/Header'
 import Submenu from '../member/Submenu';
 import '../css/reviewManage.css'
 import '../css/header.css'
+import { useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 
 
 function ReviewManage() {
+  const host = useSelector(state => state.host);
   // 현재 활성화된 탭을 관리하는 상태
   const [activeTab, setActiveTab] = useState('review'); // 'review' 또는 'qna'
 
@@ -14,6 +17,8 @@ function ReviewManage() {
   const [dropdownValue, setDropdownValue] = useState('option1');
   const [reservations, setReservations] = useState([]); // 예시 데이터 배열
   const [filteredReservations, setFilteredReservations] = useState([]);
+  const navigate = useNavigate();
+
 
   // 탭 클릭 시 상태 변경 함수
   const handleTabClick = (tab) => {
@@ -46,6 +51,16 @@ function ReviewManage() {
       console.error("데이터를 가져오는 데 문제가 발생했습니다.", error);
     }
   };
+
+  useEffect(() => {
+    // 정보를 수정할 때만 경고를 띄우도록 수정
+    if (host.hostid || host.provider !== 'kakao') {
+        if (!host.hostid) {
+            alert('로그인이 필요한 서비스입니다');
+            navigate('/');
+        }
+    }
+}, [host, navigate]);
   
   return (
     <article>

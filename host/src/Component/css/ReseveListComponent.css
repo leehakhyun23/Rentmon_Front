@@ -5,7 +5,7 @@
     padding: 20px;
     background-color: #f9f9f9; /* 배경색 추가 */
     border-radius: 8px; /* 모서리 둥글게 */
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* 그림자 추가 */
+    /* box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); 그림자 추가 */
     width: 250px;
     height: 50px;
 }

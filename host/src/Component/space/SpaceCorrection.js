@@ -3,6 +3,8 @@ import { useLocation, useNavigate } from 'react-router-dom';
 import '../css/header.css';
 import '../css/SpaceCorrection.css';
 import Header from '../HeaderFooter/Header'
+import '../css/reviewManage.css'
+import Submenu from '../member/Submenu';
 
 function SpaceCorrection() {
     const location = useLocation();
@@ -19,8 +21,10 @@ function SpaceCorrection() {
 
     return (
         <div className="container">
-          <Header />
-            <div className='header2'> 공간 수정 </div>
+              <div className='rheader'>
+                <div className='logo3'>공간 수정</div>
+                <div className='left'><Submenu /></div>
+            </div>
             <div>
                 {imageName && (
                     <img 

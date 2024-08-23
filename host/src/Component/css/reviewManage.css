@@ -66,28 +66,31 @@
 .container1 {
     display: flex;
     justify-content: flex-end; /* 오른쪽 끝으로 정렬 */
-    padding: 10px; /* 필요에 따라 padding 조절 */
+    /* padding: 10px; 필요에 따라 padding 조절 */
     background-color: white;
     border: none;
     width: 1000px;
+    height: 20px;
   }
   
-  /* 드롭다운을 감싸는 컨테이너 */
-  .select-container {
+  .dropdown-container {
+    margin-top: 10px; /* 드롭다운과 검색창 사이의 간격 */
     display: flex;
-    align-items: center; /* 수직 중앙 정렬 */
-    margin-right: 10px;
-    width: 100px;
-    height: 35px;
-  }
-  
-  /* 드롭다운 스타일 조정 */
-  #myDropdown {
-    font-size: 12px; /* 작은 글꼴 크기 설정 */
-    padding: 7px; /* 내부 여백 조정 */
-    border: 1px solid #99999994;
-  }
+    justify-content: flex-end;
+}
 
+.select-container {
+    display: flex;
+    align-items: center;
+    width: 200px; /* 드롭다운 너비 조정 */
+}
+
+#myDropdown {
+    font-size: 12px;
+    padding: 7px;
+    border: 1px solid #99999994;
+    width: 100%; /* 드롭다운 너비 조정 */
+}
   .qnaa{
     margin-top: 10px;
   }

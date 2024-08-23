@@ -3,11 +3,12 @@ import { useNavigate } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { setSpace } from '../../store/spaceSlice'; // 경로 조정 필요
 import Header from '../HeaderFooter/Header'
-
+import '../css/reviewManage.css'
 import '../css/header.css';
 import '../css/payment.css';
 import axios from 'axios'; 
 import Cookies from 'js-cookie';
+import Submenu from '../member/Submenu';
 
 function Post_payment() {
   const navigate = useNavigate();
@@ -97,12 +98,14 @@ function Post_payment() {
 
   return (
     <div className='form-container'>
-      <Header />
-      <div className='header2'>예약/정산 정보</div>
+       <div className='rheader'>
+                <div className='logo3'>예약/정산 정보</div>
+                <div className='left'><Submenu /></div>
+            </div>
       <div className='select-container'>
         <label className='option-label'>
           은행
-          <select value={bank} onChange={handleBankChange}>
+          <select className='select' value={bank} onChange={handleBankChange}>
             <option value="">선택하세요</option>
             <option value="1">한국은행</option>
             <option value="2">신한은행</option>

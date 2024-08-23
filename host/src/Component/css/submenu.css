@@ -8,7 +8,19 @@
   display: flex;
   align-items: center; /* Center content vertically */
   justify-content: center; /* Center content horizontally */
+  z-index: 1;
 }
+
+.close-btn {
+  position: absolute;
+  top: 10px; /* 버튼의 위치 조정 */
+  right: 10px;
+  background: none;
+  border: none;
+  font-size: 24px;
+  cursor: pointer;
+}
+
 
 .menu span {
   display: block;

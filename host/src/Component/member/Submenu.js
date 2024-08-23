@@ -8,14 +8,19 @@ function Submenu() {
   const navigate = useNavigate();
 
 
+  const closeMenu = () => {
+    setIsOpen(false);
+  };
+
   return (
     <div className="menu" onClick={() => setIsOpen(!isOpen)}>
       <span>Menu</span>
       <ul className={`sub ${isOpen ? 'open' : ''}`} ref={subBarRef}>
+      <button className="close-btn" onClick={closeMenu}>×</button>
         <li><a href="#None" onClick={() => { navigate('/') }}>Home</a></li>
         <li><a href="#None" onClick={() => { navigate('/') }}>예약/캘린더</a></li>
         <li><a href="#None" onClick={() => { navigate('/ReviewManage') }}>후기/Q&A</a></li>
-        <li><a href="#None" onClick={() => { navigate('/Post_cate') }}>공간관리</a></li>
+        <li><a href="#None" onClick={() => { navigate('/SpaceManage') }}>공간관리</a></li>
         <li><a href="#None" onClick={() => { navigate('/') }}>1:1문의</a></li>
         <li><a href="#None" onClick={() => { navigate('/') }}>공지사항</a></li>
         <li><a href="#None" onClick={() => { navigate('/Report') }}>운영지표</a></li>

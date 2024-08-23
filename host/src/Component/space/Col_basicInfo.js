@@ -5,6 +5,7 @@ import '../css/header.css';
 import '../css/colbasicinfo.css';
 import jaxios from '../../util/jwtUtil';
 import Header from '../HeaderFooter/Header'
+import Submenu from '../member/Submenu';
 
 function Col_basicInfo() {
     const [address, setAddress] = useState('');
@@ -111,9 +112,10 @@ function Col_basicInfo() {
 
     return (
         <div className='container'>
-            <Header />
-            <div className='header2'>기본 정보 수정</div>
-            
+                <div className='rheader'>
+                <div className='logo3'>기본 정보 수정</div>
+                <div className='left'><Submenu /></div>
+            </div>
             <div className='field2'>
                 <input className='binput' type="text" value={title} onChange={(e) => setTitle(e.currentTarget.value)} placeholder='공간명'/>
             </div>

@@ -4,7 +4,10 @@ import { useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { loginAction, logoutAction } from '../../store/HostSlice';
 import '../css/update.css';
+import '../css/submenu.css';
+import '../css/header.css';
 import { removeCookie } from '../../util/cookieUtil';
+import Submenu from './Submenu';
 
 function Update() {
     const host = useSelector(state => state.host);
@@ -40,7 +43,7 @@ function Update() {
 
     useEffect(() => {
         // 정보를 수정할 때만 경고를 띄우도록 수정
-        if (host.hostid && host.provider !== 'kakao') {
+        if (host.hostid || host.provider !== 'kakao') {
             if (!host.hostid) {
                 alert('로그인이 필요한 서비스입니다');
                 navigate('/');
@@ -107,10 +110,10 @@ function Update() {
 
     return (
         <article>
-            <div className='updateheader'>
-                <div className='logo1'>호스트 정보수정</div>
-                <div className='left'></div>
-            </div>
+        <div className='rheader'>
+        <div className='logo3'>정보 수정</div>
+        <div className='left'><Submenu /></div>
+      </div>
             <div className='updateform'>
                 <div className="box">
                     <input type="text" value={hostid} readOnly placeholder={hostid} />

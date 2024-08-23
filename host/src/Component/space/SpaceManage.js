@@ -5,6 +5,9 @@ import { useSelector } from 'react-redux';
 import '../css/header.css'; // 스타일 시트
 import '../css/SpaceManage.css';
 import Header from '../HeaderFooter/Header';
+import Submenu from '../member/Submenu';
+import '../css/reviewManage.css'
+
 
 function SpaceManage() {
     const [spaces, setSpaces] = useState([]);
@@ -62,8 +65,10 @@ function SpaceManage() {
 
     return (
         <div>
-            <Header />
-            <div className='header2'>내 장소 관리</div>
+            <div className='rheader'>
+                <div className='logo3'>내 장소 관리</div>
+                <div className='left'><Submenu /></div>
+            </div>
             <div className='register-button-container'>
                 <button className='register-button' onClick={() => navigate('/Post_cate')}>장소 등록</button>
             </div>

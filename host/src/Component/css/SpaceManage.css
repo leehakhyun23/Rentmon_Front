@@ -20,7 +20,7 @@
     width: 300px; /* 카드 너비 고정 */
     height: 400px; /* 카드 높이 고정 */
     text-align: center;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* 카드 그림자 */
+    /* box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); 카드 그림자 */
     transition: transform 0.3s ease, box-shadow 0.3s ease;
     overflow: hidden; /* 내용이 카드 밖으로 넘치는 것을 방지 */
 }
@@ -109,6 +109,7 @@
     display: flex;
     justify-content: center; /* 버튼을 수평으로 가운데 정렬 */
     margin-bottom: 20px; /* 버튼과 아래 콘텐츠 사이의 간격 */
+    margin-top: 20px;
 }
 
 .register-button {

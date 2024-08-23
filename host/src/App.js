@@ -22,7 +22,6 @@ import Col_facility from "./Component/space/Col_facility";
 import Col_useInfo from "./Component/space/Col_useInfo";
 import LoginOn from "./Component/member/LoginOn";
 import LogoutButton from "./Component/member/LogoutButton";
-import ReviewManage from "./Component/space/ReviewManage";
 import Report from "./Component/space/Report";
 
 function App() {
@@ -47,9 +46,7 @@ function App() {
         <Route path="/ReviewManage" element={<ReviewManage />} />
         <Route path="/LogoutButton" element={<LogoutButton />} />
         <Route path="/Report" element={<Report />} />
-        <Route path="/getsnshostinfo/:hostid/kakao" element={<Getsnshostinfo />} />
-        <Route path="/getsnshostinfo/:hostid/naver" element={<Getsnshostinfo />} />
-        <Route path="/getsnshostinfo/:hostid/google" element={<Getsnshostinfo />} />
+        <Route path="/getsnshostinfo/:hostid/:provider" element={<Getsnshostinfo />} />
         <Route path="Col_basicInfo" element={<Col_basicInfo />} />
         <Route path="Col_facility" element={<Col_facility />} />
         <Route path="Col_useInfo" element={<Col_useInfo />} />

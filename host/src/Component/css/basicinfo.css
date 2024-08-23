@@ -1,15 +1,23 @@
 /* 기본정보 페이지 스타일링 */
 .container {
-    max-width: 900px; /* 컨테이너의 최대 너비 설정 */
+    /* max-width: 900px; 컨테이너의 최대 너비 설정 */
     margin: 0 auto; /* 중앙 정렬 */
-    padding: 20px;
-    background-color: #f9f9f9; /* 배경색 설정 */
+    /* padding: 20px; */
+    background-color: white; /* 배경색 설정 */
     border-radius: 8px; /* 컨테이너의 모서리 둥글게 */
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* 컨테이너 그림자 */
+    /* box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); 컨테이너 그림자 */
     
 }
 body{
     margin-left: 20px;
+}
+
+/* 필드 그룹을 두 개씩 같은 줄에 배치 */
+.field1, .field2 {
+    width: 500px; /* 필드의 너비를 500px로 설정 */
+    box-sizing: border-box; /* 테두리와 패딩을 포함한 박스 크기 조정 */
+    margin-left: 20px;
+    margin-top: 30px;
 }
 
 /* 필드 그룹을 두 개씩 같은 줄에 배치 */
@@ -20,22 +28,13 @@ body{
     margin-bottom: 20px; /* 항목 간의 여백 */
 }
 
-/* 각 필드 */
-.field1 {
+/* 각 필드가 50%의 너비를 가지도록 설정 */
+.field1, .field2 {
     flex: 1 1 calc(50% - 20px); /* 두 개의 필드가 한 줄에 배치되도록 설정 */
-    box-sizing: border-box; /* 테두리와 패딩을 포함한 박스 크기 조정 */
-    margin-left: 20px;
-    font-size: 120%;
-}
-.field2 {
-    flex: 1 1 calc(50% - 20px); /* 두 개의 필드가 한 줄에 배치되도록 설정 */
-    box-sizing: border-box; /* 테두리와 패딩을 포함한 박스 크기 조정 */
-    margin-left: 20px;
-    margin-top: 30px;
 }
 /* 입력 요소 스타일 */
 input[type="text"], textarea {
-    width: 70%; /* 입력 요소의 너비를 100%로 설정 */
+    /* width: 70%; 입력 요소의 너비를 100%로 설정 */
     padding: 12px; /* 패딩 증가 */
     border: 2px solid #ddd;
     border-radius: 4px;
