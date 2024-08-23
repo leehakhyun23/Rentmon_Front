@@ -108,6 +108,7 @@ article {
 .button-container {
     display: flex;       /* Flexbox를 사용합니다. */
     justify-content: flex-end; 
+    margin-bottom: 50px;
   }
 
 .bbtn{
@@ -116,4 +117,5 @@ article {
     font-weight: bold;
     border: none;
     float: right;
+    margin-bottom: 50px;
 }

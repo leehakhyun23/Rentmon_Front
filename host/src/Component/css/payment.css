@@ -9,18 +9,21 @@
   
   .form-container {
     width: 100%;
-    max-width: 600px; /* 최대 너비 설정 */
+    /* max-width: 600px; 최대 너비 설정 */
     margin: 0 auto; /* 가운데 정렬 */
-    padding: 20px;
+    /* padding: 20px; */
     border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* 박스 그림자 추가 */
+    /* box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); 박스 그림자 추가 */
     background-color: #fff; /* 배경 색상 추가 */
   }
   
   .select-container,
   .input-container {
-    width: 100%;
-    margin-bottom: 20px;
+    width: 700px;
+    margin-bottom: 80px;
+    margin: 30px;
+    margin-left: 600px;
+    margin-top: 70px;
   }
   
   .select-container select,
@@ -37,15 +40,17 @@
   
   .select-container select:focus,
   .input-container input:focus {
-    border-color: #0056b3; /* 포커스 시 보더 색상 */
+    border-color: #0090DF; /* 포커스 시 보더 색상 */
     outline: none;
   }
   
   .option-label {
-    margin-bottom: 5px;
+    margin-top: 5px;
     font-size: 16px;
     color: #333;
   }
   
-  
+  .select{
+    margin-top: 10px;
+  }
   

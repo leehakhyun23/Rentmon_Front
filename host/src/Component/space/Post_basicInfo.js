@@ -3,10 +3,14 @@ import { useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux'; // Import useSelector
 import { setSpace } from '../../store/spaceSlice'; // Redux slice import
 import axios from 'axios';
-import '../css/header.css';
 import '../css/basicinfo.css';
+import '../css/header.css';
+import '../css/reviewManage.css'
 import Header from '../HeaderFooter/Header'
 import jaxios from '../../util/jwtUtil';
+import Submenu from '../member/Submenu';
+
+
 
 function Post_basicInfo() {
     const navigate = useNavigate();
@@ -206,9 +210,10 @@ function Post_basicInfo() {
 
     return (
         <div className='container'>
-            <Header />
-            <div className='header2'>기본 정보</div>
-            
+               <div className='rheader'>
+                <div className='logo3'>기본 정보</div>
+                <div className='left'><Submenu /></div>
+            </div>
             <div className='field2'>
                 <input className='binput' type="text" value={title} onChange={(e) => setTitle(e.currentTarget.value)} placeholder='공간명'/>
             </div>

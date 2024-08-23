@@ -57,7 +57,7 @@
     margin: 20px auto; /* 자동 중앙 정렬 및 외부 여백 */
     max-width: 800px; /* 최대 너비 */
     border-radius: 8px; /* 모서리 둥글기 */
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* 그림자 효과 */
+    /* box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); 그림자 효과 */
     font-family: 'Arial', sans-serif; /* 글꼴 설정 */
     color: #333; /* 텍스트 색상 */
     line-height: 1.6; /* 줄 간격 */

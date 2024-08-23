@@ -58,6 +58,11 @@ input{
     margin-bottom: 10px;
 }
 
+.loginContainer .loginform .snsLogin { margin-top: 80px; }
+.loginContainer .loginform .snsLogin span { font-size: 18px; font-weight: 600; display: block; margin-bottom: 18px; }
+.loginContainer .loginform .snsbtncontainer a { margin-right: 20px; }
+
+
 .hostid [type="text"]{
     padding: 0 15px;
     color: #919191;
