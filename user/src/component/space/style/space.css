@@ -159,23 +159,96 @@
   display: flex;
   flex-wrap: wrap;
   align-items: center;
+  flex-direction: column;
+
   margin-bottom: 20px;
 }
 
-.searchWord, .searchRegion, .searchTime, .spaceFilter {
+.searchCategory, .searchRegion, .searchTime, .spaceFilter {
   flex: 1;
   margin-right: 10px;
 }
 
-.searchTime{
+
+/* 카테고리 및 지역 선택 */
+.searchCategory, .searchRegion {
   display: flex;
-  flex-direction: column;
+  align-items: center;
+  gap: 10px;
 }
 
-.searchTime label,
-.searchTime input {
-  margin-bottom: 5px;
+.searchCategory label, .searchRegion label {
+  font-size: 16px;
+  font-weight: bold;
 }
+
+.searchCategory select, .searchRegion select {
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  font-size: 14px;
+  outline: none;
+  width: 200px;
+}
+
+.searchCategory select:focus, .searchRegion select:focus {
+  border-color: #007bff;
+  box-shadow: 0 0 0 2px rgba(0, 123, 255, 0.25);
+}
+
+
+
+/* 예약일 및 시간 입력 */
+.searchTime {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.searchTime label {
+  font-size: 16px;
+  font-weight: bold;
+}
+
+.searchTime input[type="date"], .searchTime input[type="time"] {
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  font-size: 14px;
+}
+
+.searchTime input[type="date"]:focus, .searchTime input[type="time"]:focus {
+  border-color: #007bff;
+  box-shadow: 0 0 0 2px rgba(0, 123, 255, 0.25);
+}
+
+
+/* 정렬 선택 */
+.spaceFilter {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.spaceFilter label {
+  font-size: 16px;
+  font-weight: bold;
+}
+
+.spaceFilter select {
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  font-size: 14px;
+  outline: none;
+  width: 200px;
+}
+
+.spaceFilter select:focus {
+  border-color: #007bff;
+  box-shadow: 0 0 0 2px rgba(0, 123, 255, 0.25);
+}
+
 
 #searchButton {
   padding: 10px 20px;
