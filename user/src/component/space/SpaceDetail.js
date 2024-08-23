@@ -35,6 +35,7 @@ function SpaceDetail() {
   const [reportopen, setReportopen] = useState(false);
   const user = useSelector(state => state.user);
   const [space, setSpace] = useState({});
+  const navigate = useNavigate();
   const { sseq } = useParams();
   const navigate = useNavigate();
 
