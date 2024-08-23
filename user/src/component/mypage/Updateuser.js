@@ -16,7 +16,7 @@ function Updateuser() {
     const user = useSelector(state=>state.user);
     const dispatch = useDispatch();
     useEffect(()=>{
-        console.log(user);
+        // console.log(user);
     },[user]);
 
     const updateUser = async()=>{

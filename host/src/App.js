@@ -20,6 +20,10 @@ import Submenu from "./Component/member/Submenu";
 import Col_basicInfo from "./Component/space/Col_basicInfo";
 import Col_facility from "./Component/space/Col_facility";
 import Col_useInfo from "./Component/space/Col_useInfo";
+import LoginOn from "./Component/member/LoginOn";
+import LogoutButton from "./Component/member/LogoutButton";
+import ReviewManage from "./Component/space/ReviewManage";
+import Report from "./Component/space/Report";
 
 function App() {
   return (
@@ -39,6 +43,10 @@ function App() {
         <Route path="/Join" element={<Join />} />
         <Route path="/Update" element={<Update />} />
         <Route path="/Submenu" element={<Submenu />} />
+        <Route path="/LoginOn" element={<LoginOn />} />
+        <Route path="/ReviewManage" element={<ReviewManage />} />
+        <Route path="/LogoutButton" element={<LogoutButton />} />
+        <Route path="/Report" element={<Report />} />
         <Route path="/getsnshostinfo/:hostid/kakao" element={<Getsnshostinfo />} />
         <Route path="/getsnshostinfo/:hostid/naver" element={<Getsnshostinfo />} />
         <Route path="/getsnshostinfo/:hostid/google" element={<Getsnshostinfo />} />

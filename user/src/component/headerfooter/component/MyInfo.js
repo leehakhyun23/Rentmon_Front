@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import MypageIconButton from './MypageIconButton'
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { FreeMode, Pagination } from 'swiper/modules';
@@ -10,28 +10,45 @@ import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import jaxios from '../../../util/jwtUtil';
 import { menucountAction } from '../../../store/RecentSlice';
-
-function MyInfo({user}) {
+import { getCookie } from '../../../util/cookieUtil';
+import axios from 'axios';
+function gradeText(n){
+  if(n===1)return "브론즈"
+  if(n===2)return "실버"
+  if(n===3)return "골드"
+  if(n===4)return "플레티넘"
+  if(n===5)return "다이아몬즈"
+}
+function gradeimg(n){
+  if(n===1)return "bronze.png"
+  if(n===2)return "silver.png"
+  if(n===3)return "gold.png"
+  if(n===4)return "platinum.png"
+  if(n===5)return "diamond.png"
+}
+function MyInfo({mypagePopup , user , setMypagePopup}) {
+  let [recentview, setRecentview] = useState([]);
   const dispatch = useDispatch();
   const recent = useSelector(state=>state.recent);
   const menucount = recent.menucount;
-  function gradeText(n){
-    if(n===1)return "브론즈"
-    if(n===2)return "실버"
-    if(n===3)return "골드"
-    if(n===4)return "플레티넘"
-    if(n===5)return "다이아몬즈"
-  }
-  function gradeimg(n){
-    if(n===1)return "bronze.png"
-    if(n===2)return "silver.png"
-    if(n===3)return "gold.png"
-    if(n===4)return "platinum.png"
-    if(n===5)return "diamond.png"
-  }
+  let [rctvw , setRctvw] =useState([]);
+  
+
+  useEffect(()=>{
+    setRctvw(getCookie("rctvw"));
+  },[mypagePopup]);
   useEffect(()=>{
     countArray();
-  },[]);
+    if(rctvw !== undefined){
+      getspaceviewlist(rctvw);
+    }
+  },[rctvw]);
+  let getspaceviewlist = async(rctvw)=>{
+    try{
+      let reuslt = await axios.post("/api/main/getspaceviewlist",rctvw);
+      setRecentview(reuslt.data);
+    }catch(err){ console.error(err.response?.data || err.message);}
+  }
 
   let countArray =  async()=>{
     try{
@@ -59,8 +76,10 @@ function MyInfo({user}) {
         <MypageIconButton imglink = {"hearticon.svg"}  text = {`찜(${menucount.zzimCount})`}  goLink={"/mypage/zzim"}/>
         <MypageIconButton imglink = {"chaticon.svg"}  text = {`문의(${menucount.inquiryCount})`}  goLink={"/mypage/qna/1"}/>
       </div>
+      {(rctvw)&&(
+
       <div className='recentViewSpace'>
-      <h3>최근 본 공간(5)</h3>
+      {/* <h3>최근 본 공간({rctvw.length})</h3> */}
           <Swiper
             slidesPerView={2.5}
             spaceBetween={12}
@@ -68,13 +87,13 @@ function MyInfo({user}) {
             modules={[FreeMode, Pagination]}
             className="mySwiper"
           >
-          <SwiperSlide><Link to={"/"}><img src='/img/placeimg.png' alt='placeimg'/><p>A스튜디오</p></Link></SwiperSlide>
-          <SwiperSlide><Link to={"/"}><img src='/img/placeimg.png' alt='placeimg'/><p>A스튜디오</p></Link></SwiperSlide>
-          <SwiperSlide><Link to={"/"}><img src='/img/placeimg.png' alt='placeimg'/><p>A스튜디오</p></Link></SwiperSlide>
-          <SwiperSlide><Link to={"/"}><img src='/img/placeimg.png' alt='placeimg'/><p>A스튜디오</p></Link></SwiperSlide>
-          <SwiperSlide><Link to={"/"}><img src='/img/placeimg.png' alt='placeimg'/><p>A스튜디오</p></Link></SwiperSlide>
+            {(recentview)&&(recentview.map((elem, idx)=>(
+               <SwiperSlide key={idx}><Link value={idx} to={"spaceDetail/"+elem.sseq} onClick={()=>{setMypagePopup(false)}}>{(elem.spaceimage.length>0)&&(<img src={`http://localhost:8070/space_images/${elem.spaceimage[0].realName}`} alt='placeimg'/>)}<p>{elem.title}</p></Link></SwiperSlide>
+            )))}
+         
         </Swiper>
       </div>
+      )}
     </div>
   )
 }

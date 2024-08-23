@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useSelector } from 'react-redux'
 import Calendar from "react-calendar";
-
 import './style/reservation.css';
 import { useParams, useLocation, useNavigate } from 'react-router-dom';
 import axios from 'axios';
@@ -23,8 +22,8 @@ function ReservationForm({ props }) {
     let user = useSelector(state => state.user);
     const navigate = useNavigate();
     const [space, setSpace] = useState({});
+    const [host, setHost] = useState({});
     const { sseq } = useParams(); // URL 파라미터에서 공간 고유 ID 받기
-    const location = useLocation();
     const [request, setRequest] = useState('');    // 요청 사항
     const [payment, setPayment] = useState();
 
@@ -35,7 +34,14 @@ function ReservationForm({ props }) {
     const [startTimestamp, setStartTimestamp] = useState();
     const [endTimestamp, setEndTimestamp] = useState();
     const [reserveTime, setReserveTime] = useState();
+
+
+
+
     const hours = Array.from({ length: 24 }, (_, i) => `${i}:00:00`);
+
+
+    
 
     const handleDateChange = (newDate) => {
         // Date 객체에서 년, 월, 일 추출
@@ -74,6 +80,18 @@ function ReservationForm({ props }) {
 
     };
 
+    const [selectedTimeSlot, setSelectedTimeSlot] = useState(null);
+
+    const handleTimeSlotClick = (time, type) => {
+        if (type === "start") {
+            setStartTime(time);
+            setStartTimestamp(`${date} ${time}`);
+        } else if (type === "end") {
+            setEndTime(time);
+            setEndTimestamp(`${date} ${time}`);
+        }
+    };
+
     useEffect(() => {
         if (startTimestamp && endTimestamp) {
             const calculatedReserveTime = calculateTimeDifference(startTimestamp, endTimestamp);
@@ -100,6 +118,16 @@ function ReservationForm({ props }) {
             alert("예약 날짜와 시간을 지정해주세요.");
             return;
         }
+
+        const calculatedReserveTime = calculateTimeDifference(startTimestamp, endTimestamp);
+
+        // endTime이 startTime보다 큰 경우에만 예약을 진행합니다.
+        if (calculatedReserveTime <= 0) {
+            alert("종료 시간이 시작 시간보다 늦어야 합니다.");
+            return;
+        }
+
+
 
         // 예약 데이터를 서버로 전송
         const reservationData = {
@@ -131,33 +159,64 @@ function ReservationForm({ props }) {
 
     const onSubmit = () => { }
 
-
+    // Space 조회
     useEffect(
         () => {
             axios.get(`/api/space/getSpace/${sseq}`)
                 .then((result) => {
-                    setSpace(result.data);
+                    setSpace(result.data.space);
+                    setHost(result.data.space.host);
+                    console.log(result.data.space)
                 })
-                .catch((err) => { console.error(err) })
-
+                .catch((err) => { console.error(err) });
         }, []
     )
 
 
 
 
-
     return (
-        <div className="reservation-form-container">
-            <div className="reservation-calendar">
+
+        <div className="reservationContainer">
+            <div className="reservationCalendar">
                 <div>
                     <Calendar onChange={handleDateChange} value={date} />
                     {date && (
-                        <>
+                        <div className="timeSelect">;
                             <div>
-                                <label>Start Time:</label>
+                                <h4>Start Time:</h4>
+                                <div className="time-buttons">
+                                    {hours.map((hour, index) => (
+                                        <button
+                                            key={index}
+                                            className={`time-button ${startTime === hour ? 'selected' : ''}`}
+                                            onClick={() => handleTimeSlotClick(hour, "start")}
+                                        >
+                                            {hour}
+                                        </button>
+                                    ))}
+                                </div>
+                            </div>
+                            <div>
+                                <h4>End Time:</h4>
+                                <div className="time-buttons">
+                                    {hours.map((hour, index) => (
+                                        <button
+                                            key={index}
+                                            className={`time-button ${endTime === hour ? 'selected' : ''}`}
+                                            onClick={() => handleTimeSlotClick(hour, "end")}
+                                        >
+                                            {hour}
+                                        </button>
+                                    ))}
+                                </div>
+                            </div>
+
+
+                            {/* <div className="startTimeSelect">
+                                <label>예약 시작 시간 : </label>
                                 <select value={startTime} onChange={handleStartTimeChange}>
-                                    <option value="">Select start time</option>
+                                    <option value="">예약시작시간</option>
                                     {hours.map((hour, index) => (
                                         <option key={index} value={hour}>
                                             {hour}
@@ -165,19 +224,19 @@ function ReservationForm({ props }) {
                                     ))}
                                 </select>
                             </div>
-                            <div>
-                                <label>End Time:</label>
+                            <div className="endTimeSelect">
+                                <label>예약 종료 시간 : </label>
                                 <select value={endTime} onChange={handleEndTimeChange}>
-                                    <option value="">Select end time</option>
+                                    <option value="">예약 종료 시간</option>
                                     {hours.map((hour, index) => (
                                         <option key={index} value={hour}>
                                             {hour}
                                         </option>
                                     ))}
                                 </select>
-                            </div>
+                            </div> */}
                             <button onClick={handleSubmit}>Reserve</button>
-                        </>
+                        </div>
                     )}
                 </div>
 
@@ -196,7 +255,7 @@ function ReservationForm({ props }) {
                 <p>가격: {space.price}원/시간</p>
             </div>
 
-            <div className="reservation-details">
+            <div className="reservation-info">
                 <h3>예약 정보</h3>
                 <p>예약 날짜: {date}</p>
                 <p>시작 시간: {startTime}</p>
@@ -214,23 +273,28 @@ function ReservationForm({ props }) {
 
             <div className="host-info">
                 <h3>호스트 정보</h3>
-                {/* <p>이름 : {space.host.hostid}</p>
-                <p>연락처: {space.host.phone}</p>
-                <p>이메일 : {space.host.email}</p> */}
+                <p>이름 : {host.hostid}</p>
+                <p>연락처: {host.phone}</p>
+                <p>이메일 : {host.email}</p>
             </div>
 
             <div className="payment-info">
                 <h3>결제 정보</h3>
-                <p>총 결제 금액: {payment}원</p>
-                <label>결제 수단:
-                    <label><input type="radio" name="payment" value="card" /> 신용카드</label>
-                    <label><input type="radio" name="payment" value="paypal" /> PayPal</label>
-                </label>
-                <label>쿠폰 사용하기:
-                    <label><input type="radio" name="payment" value="3000coupon" /> 3000원</label>
-                    <label><input type="radio" name="payment" value="5000coupon" /> 5000원</label>
-                    <label><input type="radio" name="payment" value="10000coupon" /> 10000원</label>
-                </label>
+                <p>총 결제 금액: {payment}원</p>;
+                <div>
+
+                    <label>결제 수단:
+                        <label><input type="radio" name="payment" value="card" /> 신용카드</label>
+                        <label><input type="radio" name="payment" value="paypal" /> PayPal</label>
+                    </label>
+                </div>
+                <div>
+                    <label>쿠폰 사용하기:
+                        <label><input type="radio" name="coupon" value="3000coupon" /> 3000원</label>
+                        <label><input type="radio" name="coupon" value="5000coupon" /> 5000원</label>
+                        <label><input type="radio" name="coupon" value="10000coupon" /> 10000원</label>
+                    </label>
+                </div>
             </div>
 
             <button className="submit-button" onClick={handleSubmit}>예약하기</button>

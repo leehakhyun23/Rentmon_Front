@@ -1,9 +1,13 @@
 import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
+import { searchAddressToCoordinatereturn } from '../../../util/NaverMap';
 
-function RecentReservation({rs}) {
+function RecentReservation({rs , setMypagePopup}) {
+  
+
   function dateFormat(date){
       if (date) {
+        
         let datearr = date.split(" ")[0].split("-");
         return(datearr[0]+"년 "+Number(datearr[1])+"월 " + Number(datearr[2])+"일 "+date.split(" ")[1]);
     }
@@ -39,7 +43,7 @@ function RecentReservation({rs}) {
                 
             </div>
             <div className='gobtn'>
-                <Link to={"/detailveiw/"+rs.seq}><img src='/img/reservarrow.png' alt='reservarrow.png'/></Link>
+                <Link to={"/mypage/dashboard"} onClick={()=>{setMypagePopup(false)}}><img src='/img/reservarrow.png' alt='reservarrow.png'/></Link>
             </div>
         </div>
         </>

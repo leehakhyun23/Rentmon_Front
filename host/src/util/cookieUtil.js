@@ -14,3 +14,4 @@ export const getCookie=(name)=>{
 export const removeCookie = (name,path="/")=>{
     cookie.remove(name, {path});
 }
+

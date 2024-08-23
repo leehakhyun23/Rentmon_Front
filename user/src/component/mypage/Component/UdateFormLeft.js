@@ -31,7 +31,6 @@ function UdateFormLeft({user,updateUser}) {
       }
       reader.readAsDataURL(file);
       setProfileimg(prev=>( {profileimg:file}));
-      // console.log(file);
     }
     setIsSubmit(true);
   }

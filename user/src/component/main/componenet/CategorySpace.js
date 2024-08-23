@@ -1,5 +1,6 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react'
+import { Link } from 'react-router-dom';
 import SpaceBoxComponent from './SpaceBoxComponent';
 
 function CategorySpace() {
@@ -17,7 +18,6 @@ function CategorySpace() {
     let getList= async()=>{
         try{
             let result = await axios.get("/api/main/getSapceList",{params:{cnum}});
-            console.log(result.data);
             setList(result.data);
             
         }catch(err){console.error(err);}
@@ -44,6 +44,7 @@ function CategorySpace() {
                 <SpaceBoxComponent  key={key} record={elem} />
             ))))}
         </div>
+        <div className='moreSpace'><Link to={"/spaceList"}>공간 더보기</Link></div>
     </div>
   )
 }

@@ -9,7 +9,6 @@ function Bank({bank, setBank}) {
         getBankList();
     },[]);
     useEffect(()=>{
-        console.log(bank);
         if(bank) setBank(bank);
         else setBank(banckList[0]);
     },[banckList]);
