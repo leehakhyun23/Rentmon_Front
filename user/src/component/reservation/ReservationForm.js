@@ -53,7 +53,7 @@ function ReservationForm({ props }) {
             axios.get(`/api/space/getSpace/${sseq}`)
                 .then((result) => {
                     setSpace(result.data.space);
-                    setHost(result.data.space.host);
+                    // setHost(result.data.space.host);
                 })
                 .catch((err) => { console.error(err) });
         }, []
@@ -271,12 +271,12 @@ function ReservationForm({ props }) {
                 <label>요청 사항: <input type="text" value={request} onChange={(e) => setRequest(e.target.value)} /></label>
             </div>
 
-            <div className="host-info">
+            {/* <div className="host-info">
                 <h3>호스트 정보</h3>
                 <p>이름 : {host.hostid}</p>
                 <p>연락처: {host.phone}</p>
                 <p>이메일 : {host.email}</p>
-            </div>
+            </div> */}
 
             <div className="payment-info">
                 <h3>결제 정보</h3>
