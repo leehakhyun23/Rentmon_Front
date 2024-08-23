@@ -21,6 +21,7 @@ const initialState = {
     hostid:'',
     rList:[],
     oList:[],
+    address:'',
 };
 
 const SpaceSlice = createSlice({
@@ -48,11 +49,12 @@ const SpaceSlice = createSlice({
             state.bank = action.payload.bank;
             state.accountnum = action.payload.accountnum;
             state.hostid = action.payload.hostid;
+            state.address = action.payload.address;
         // 추가적인 액션 생성자는 나중에 필요할 경우 정의
         },
     },
 });
 
-export const {setSpace} = spaceSlice.actions;
-export default spaceSlice;
+export const {setSpace} = SpaceSlice.actions;
+export default SpaceSlice;
 

@@ -12,27 +12,28 @@ import jaxios from '../../../util/jwtUtil';
 import { menucountAction } from '../../../store/RecentSlice';
 import { getCookie } from '../../../util/cookieUtil';
 import axios from 'axios';
-
+function gradeText(n){
+  if(n===1)return "브론즈"
+  if(n===2)return "실버"
+  if(n===3)return "골드"
+  if(n===4)return "플레티넘"
+  if(n===5)return "다이아몬즈"
+}
+function gradeimg(n){
+  if(n===1)return "bronze.png"
+  if(n===2)return "silver.png"
+  if(n===3)return "gold.png"
+  if(n===4)return "platinum.png"
+  if(n===5)return "diamond.png"
+}
 function MyInfo({mypagePopup , user , setMypagePopup}) {
   let [recentview, setRecentview] = useState([]);
   const dispatch = useDispatch();
   const recent = useSelector(state=>state.recent);
   const menucount = recent.menucount;
   let [rctvw , setRctvw] =useState([]);
-  function gradeText(n){
-    if(n===1)return "브론즈"
-    if(n===2)return "실버"
-    if(n===3)return "골드"
-    if(n===4)return "플레티넘"
-    if(n===5)return "다이아몬즈"
-  }
-  function gradeimg(n){
-    if(n===1)return "bronze.png"
-    if(n===2)return "silver.png"
-    if(n===3)return "gold.png"
-    if(n===4)return "platinum.png"
-    if(n===5)return "diamond.png"
-  }
+  
+
   useEffect(()=>{
     setRctvw(getCookie("rctvw"));
   },[mypagePopup]);
@@ -75,6 +76,8 @@ function MyInfo({mypagePopup , user , setMypagePopup}) {
         <MypageIconButton imglink = {"hearticon.svg"}  text = {`찜(${menucount.zzimCount})`}  goLink={"/mypage/zzim"}/>
         <MypageIconButton imglink = {"chaticon.svg"}  text = {`문의(${menucount.inquiryCount})`}  goLink={"/mypage/qna/1"}/>
       </div>
+      {(rctvw)&&(
+
       <div className='recentViewSpace'>
       {/* <h3>최근 본 공간({rctvw.length})</h3> */}
           <Swiper
@@ -85,11 +88,12 @@ function MyInfo({mypagePopup , user , setMypagePopup}) {
             className="mySwiper"
           >
             {(recentview)&&(recentview.map((elem, idx)=>(
-               <SwiperSlide key={idx}><Link to={"spaceDetail/"+elem.sseq} onClick={()=>{setMypagePopup(false)}}>{(elem.spaceimage.length>0)&&(<img src={`http://localhost:8070/space_images/${elem.spaceimage[0].realName}`} alt='placeimg'/>)}<p>{elem.title}</p></Link></SwiperSlide>
+               <SwiperSlide key={idx}><Link value={idx} to={"spaceDetail/"+elem.sseq} onClick={()=>{setMypagePopup(false)}}>{(elem.spaceimage.length>0)&&(<img src={`http://localhost:8070/space_images/${elem.spaceimage[0].realName}`} alt='placeimg'/>)}<p>{elem.title}</p></Link></SwiperSlide>
             )))}
          
         </Swiper>
       </div>
+      )}
     </div>
   )
 }

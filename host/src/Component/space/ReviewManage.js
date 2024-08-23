@@ -1,4 +1,9 @@
 import React, { useState } from 'react';
+import Header from '../HeaderFooter/Header'
+import Submenu from '../member/Submenu';
+import '../css/reviewManage.css'
+import '../css/header.css'
+
 
 function ReviewManage() {
   // 현재 활성화된 탭을 관리하는 상태
@@ -43,30 +48,43 @@ function ReviewManage() {
   };
   
   return (
-    <div>
-      <div>이용 후기 관리</div>
-      <div>
-        <button onClick={() => handleTabClick('review')} style={{ width: '500px', height: '50px' }}>
-          이용 후기
-        </button>
-        <button onClick={() => handleTabClick('qna')} style={{ width: '500px', height: '50px' }}>
-          Q&A
-        </button>
+    <article>
+      <div className='rheader'>
+        <div className='logo3'>이용 후기 관리</div>
+        <div className='left'><Submenu /></div>
+      </div>
+      <div className='rq'>
+      <button
+        className={`tab-button ${activeTab === 'review' ? 'active' : ''}`}
+        onClick={() => handleTabClick('review')}
+      >
+        이용 후기
+      </button>
+      <button
+        className={`tab-button ${activeTab === 'qna' ? 'active' : ''}`}
+        onClick={() => handleTabClick('qna')}
+      >
+        Q&A
+      </button>
       </div>
       <div>
         {activeTab === 'review' && (
           <div>
             {/* 이용 후기 관련 콘텐츠 */}
-            <div>
-              예약 정보 검색
+            <div className='search'>
+              <div>예약 정보 검색</div>
               <input type="text" value={searchTerm} onChange={handleSearchChange} style={{width:'80%'}}/>
               <button onClick={handleSearch}>검색</button>
-              <select id="myDropdown" value={dropdownValue} onChange={handleDropdownChange}>
-                <option value="option1">최신순</option>
-                <option value="option2">오래된순</option>
-                <option value="option3">별점 높은 순</option>
-                <option value="option4">별점 낮은 순</option>
+            </div>
+            <div className="container1">
+              <div className="select-container">
+                <select id="myDropdown" value={dropdownValue} onChange={handleDropdownChange}>
+                  <option value="option1">최신순</option>
+                  <option value="option2">오래된순</option>
+                  <option value="option3">별점 높은 순</option>
+                  <option value="option4">별점 낮은 순</option>
               </select>
+            </div>
             </div>
             <div>
               {/* 필터링된 결과 표시 */}
@@ -79,14 +97,14 @@ function ReviewManage() {
           </div>
         )}
         {activeTab === 'qna' && (
-          <div>
+          <div className='qnaa'>
             {/* Q&A 관련 콘텐츠 */}
             <h2>Q&A 내용</h2>
             <p>여기에 Q&A 관련 정보를 추가하세요.</p>
           </div>
         )}
       </div>
-    </div>
+    </article>
   );
 }
 

@@ -67,6 +67,7 @@ function Login() {
             <h2>LOGIN</h2>
             <input type="text" name="userid" value={userid} onChange={(e)=>{setUserid(e.currentTarget.value)}} placeholder="아이디" />
             <input type="password" name="pwd"  value={pwd} onChange={(e)=>{setPwd(e.currentTarget.value)}} placeholder="비밀번호"  /><br/>
+            <div className='pwdSearch'><Link to="/serchPwd">비밀번호 찾기</Link></div>
             <div className='alertmessage'><p>{loginMessage}</p></div>
             <button onClick={onLogin}>로그인</button>
             <div className='joinbox'><Link to="/join">일반 회원가입</Link></div>

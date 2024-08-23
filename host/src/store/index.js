@@ -1,5 +1,5 @@
 import {configureStore} from '@reduxjs/toolkit';
-import SpaceSlice from "./SpaceSlice";
+import SpaceSlice from "./spaceSlice";
 import hostSlice from "./HostSlice";
 
 // 저장소를 세션을 이용하여 저장

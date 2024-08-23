@@ -3,11 +3,14 @@ import { useSelector } from 'react-redux';
 import ReservationComponent from './ReservationComponent';
 
 function RecentReservation() {
+  
     let recent =useSelector(state => state.recent);
     const [recentReservationData , setRecentReservationData] = useState({});
+    const [space , setSpace] =useState({});
     useEffect(() => {
       if (!recent.recentReserve) return;
       let recentrv = recent.recentReserve;
+      
       setRecentReservationData({
         savefilename: recentrv.space.spaceimage[0]?.realName || '',
         title: recentrv.space?.title || '',
@@ -18,6 +21,7 @@ function RecentReservation() {
         content : recentrv.space.content || "",
         price :recentrv.payment || ""
       });
+      setSpace(recentrv);
     }, [recent]); 
   return (
     <div className='recentreservation'>
@@ -26,7 +30,7 @@ function RecentReservation() {
             <h2>최근 다가온 예약</h2>
         </div>
         <div>
-            <ReservationComponent rs={recentReservationData}/>
+            <ReservationComponent space={space} rs={recentReservationData}/>
         </div>
     </div>
   )

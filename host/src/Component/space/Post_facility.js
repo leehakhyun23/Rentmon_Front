@@ -4,6 +4,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { setSpace } from '../../store/spaceSlice'; // Import your Redux slice
 import '../css/header.css';
 import '../css/facility.css';
+import Header from '../HeaderFooter/Header'
 
 function Post_facility() {
   const navigate = useNavigate();
@@ -48,6 +49,7 @@ function Post_facility() {
       starttime: currentSpace.starttime,
       endtime: currentSpace.endtime,
       fnum: select,
+      address: currentSpace.address,
     }));
     console.log(select);
     navigate('/Post_payment');
@@ -55,6 +57,7 @@ function Post_facility() {
 
   return (
     <div>
+      <Header />
       <div className='header2'>시설 선택</div>
       <div className="facility-container">
         {[

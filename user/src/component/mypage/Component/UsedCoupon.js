@@ -15,7 +15,6 @@ function UsedCoupon({userid}) {
     let getCouponlist = async()=>{
         try{
             let result = await jaxios.get("/api/reservation/getMypageUsedCouponList/"+userid,{params:{page:currentPage}});
-            console.log(result.data);
             setCoupon(result.data.list);
             setPage(result.data.paging);
             setBegin(result.data.paging.recordAllcount - (result.data.paging.recordrow*(result.data.paging.currentPage-1)));

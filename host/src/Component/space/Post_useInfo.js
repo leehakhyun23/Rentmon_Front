@@ -5,7 +5,7 @@ import { setSpace } from '../../store/spaceSlice'; // Redux slice import
 import 'react-datepicker/dist/react-datepicker.css';
 import '../css/header.css';
 import '../css/useInfo.css';
-
+import Header from '../HeaderFooter/Header'
 function Post_useInfo() {
     const navigate = useNavigate();
     const dispatch = useDispatch();
@@ -38,6 +38,7 @@ function Post_useInfo() {
             oList: currentSpace.oList || [],
             starttime,
             endtime,
+            address : currentSpace.address,
         }));
 
         navigate('/Post_facility');
@@ -45,6 +46,7 @@ function Post_useInfo() {
 
     return (
         <div className="container">
+            <Header />
             <div className='header2'>이용안내</div>
             <div className='time-container'>
                 <span className='time-label'>이용 시간</span>

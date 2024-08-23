@@ -1,0 +1,78 @@
+/* 전체 컨테이너 스타일 */
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* 수평 중앙 정렬 */
+    justify-content: flex-start; /* 상단에 정렬 */
+    min-height: 100vh; /* 전체 뷰포트 높이 */
+    padding: 2rem;
+    box-sizing: border-box; /* 패딩을 포함한 박스 크기 조정 */
+}
+
+/* 헤더 스타일 */
+.header2 {
+    width: 100%;
+    font-size: 1.5rem;
+    font-weight: bold;
+    text-align: center; /* 중앙 정렬 */
+    margin-bottom: 1.5rem; /* 아래쪽 여백 추가 */
+    position: sticky; /* 스크롤 시 상단에 고정 */
+    top: 0; /* 상단에 위치시킴 */
+    background-color: white; /* 배경색을 설정하여 내용이 겹치는 것을 방지 */
+    z-index: 10; /* 다른 요소보다 위에 위치하도록 설정 */
+}
+
+/* 이미지 스타일 */
+.space-image {
+    width: 100%;
+    max-width: 600px; /* 적당한 최대 너비 설정 */
+    height: auto;
+    margin-bottom: 1.5rem; /* 아래쪽 여백 추가 */
+    display: block;
+    border-radius: 8px; /* 선택 사항: 이미지에 둥근 모서리 추가 */
+}
+
+/* 폼 스타일 */
+form {
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* 폼 내 요소들을 수평 중앙 정렬 */
+    width: 100%;
+    margin-bottom: 2rem; /* 폼과 버튼 사이 여백 추가 */
+}
+
+/* 입력 필드 스타일 */
+input[type="text"] {
+    padding: 0.5rem;
+    font-size: 1rem;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    margin-bottom: 1rem;
+    width: 100%;
+    max-width: 400px; /* 적당한 최대 너비 설정 */
+}
+
+/* 버튼 컨테이너 스타일 */
+.button-container1 {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem; /* 버튼 사이의 간격 설정 */
+}
+
+/* 버튼 스타일 */
+.button-container1 button {
+    padding: 0.5rem 1rem;
+    font-size: 1rem;
+    border: none;
+    border-radius: 4px;
+    background-color: #007bff;
+    color: white;
+    cursor: pointer;
+    width: 100%;
+    max-width: 200px; /* 버튼의 최대 너비 설정 */
+}
+
+.button-container1 button:hover {
+    background-color: #0056b3;
+}

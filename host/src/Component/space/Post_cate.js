@@ -4,6 +4,7 @@ import { useDispatch } from 'react-redux';
 import { setSpace } from '../../store/spaceSlice';
 import '../css/header.css';
 import '../css/cate.css';
+import Header from '../HeaderFooter/Header'
 
 
 function Post_cate() {
@@ -25,6 +26,7 @@ function Post_cate() {
 
     return (
         <div>
+            <Header />
             <div className='header2'>공간 유형 선택</div>
             <div className='content'>
                 11개의 공간 용도(파티룸, 연습실, 촬영스튜디오, 스터디룸, 공연장, 라이브방송, 세미나실, 악기연습실, 운동시설, 갤러리, 캠핑) 중 1개의 용도 안에서만 유형을 선택할 수 있습니다.<br />

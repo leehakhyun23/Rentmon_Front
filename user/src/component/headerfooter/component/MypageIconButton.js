@@ -6,7 +6,8 @@ function MypageIconButton({imglink, text, goLink}) {
     <div className='icon'>
         <Link to={goLink}>
             <img src={"/img/"+imglink} alt="imglink"/>
-            <p>{text}</p>
+            <p>{text.split(" ")[0]}</p>
+            {(text.split(" ")[1])&&(<p>{text.split(" ")[1]}</p>)}
         </Link>
     </div>
   )
