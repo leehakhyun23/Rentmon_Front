@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import Header from '../HeaderFooter/Header';
 import { useNavigate, useLocation } from 'react-router-dom';
 import axios from 'axios';
+import Submenu from '../member/Submenu';
 
 function Col_useInfo() {
   const navigate = useNavigate();
@@ -53,7 +54,10 @@ function Col_useInfo() {
   return (
     <div>
       <Header />
-      <div className='header2'>이용안내</div>
+      <div className='rheader'>
+            <div className='logo3'>이용 안내 수정</div>
+            <div className='left'><Submenu /></div>
+             </div>
       <div className='time-container'>
         <span className='time-label'>이용 시간</span>
         <select

@@ -7,7 +7,6 @@ function Submenu() {
   const subBarRef = useRef(null);
   const navigate = useNavigate();
 
-
   const closeMenu = () => {
     setIsOpen(false);
   };
