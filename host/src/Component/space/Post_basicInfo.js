@@ -1,31 +1,38 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux'; 
+import { setSpace } from '../../store/spaceSlice'; 
 import axios from 'axios';
-import '../css/header.css';
 import '../css/basicinfo.css';
-
+import '../css/header.css';
+import '../css/reviewManage.css'
+import Header from '../HeaderFooter/Header'
+import jaxios from '../../util/jwtUtil';
+import Submenu from '../member/Submenu';
 function Post_basicInfo() {
     const navigate = useNavigate();
-
+    const dispatch = useDispatch();
+    const currentSpace = useSelector((state) => state.space);
+    const [address, setAddress] = useState('');
     const [title, setTitle] = useState('');
     const [subtitle, setSubtitle] = useState('');
     const [content, setContent] = useState('');
     const [caution, setCaution] = useState('');
     const [zipcode, setZipcode] = useState('');
-    const [province, setProvince] = useState(''); // 시도
-    const [town, setTown] = useState('');         // 구군
-    const [village, setVillage] = useState('');   // 동
-    const [address_detail, setAddress_detail] = useState(''); // 상세주소
-    const [imgSrc, setImgSrc] = useState('');
-    const [imgStyle, setImgStyle] = useState({ display: 'none' });
-    
-    // DOM 요소 참조
+    const [province, setProvince] = useState(''); 
+    const [town, setTown] = useState('');
+    const [village, setVillage] = useState('');
+    const [address_detail, setAddress_detail] = useState('');
+    const [price, setPrice]= useState('');
+    const [maxpersonnal, setMaxpersonnal] = useState('');
+    const [imgsrc, setImgsrc] = useState([]);
+    const [divStyle, setDivStyle] = useState(Array(10).fill({display:'none'}));
+    const [rList, setRList] = useState([]);
+    const [oList, setOList] = useState([]);
     const postcodeRef = useRef(null);
-    const addressRef = useRef(null);
     const detailAddressRef = useRef(null);
     const extraAddressRef = useRef(null);
 
-    // 카카오 주소 API 스크립트 로딩
     useEffect(() => {
         const script = document.createElement('script');
         script.src = "//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js";
@@ -40,39 +47,63 @@ function Post_basicInfo() {
         };
     }, []);
 
-    // 주소 검색 열기
+    const fieldStyle = {
+        width:"100%", 
+        display: "flex",
+        flexDirection:"row",
+        margin:"5px 0",
+        justifyContent: "space-between",
+    };
+
+    async function imgUpload(e, index) {
+        let formData = new FormData();
+        formData.append('image', e.target.files[0]);
+
+        const result = await jaxios.post('/api/space/imgup', formData);
+        let realname = result.data.realname;
+        let originalname = result.data.originalname;
+
+        setDivStyle(prevStyles => {
+            const newStyles = [...prevStyles];
+            newStyles[index] = fieldStyle;
+            return newStyles;
+        });
+
+        setImgsrc(prevImgsrc => {
+            const newImgsrc = [...prevImgsrc];
+            newImgsrc[index] = `http://localhost:8070/space_images/${realname}`;
+            return newImgsrc;
+        });
+
+        setRList(prevList => [...prevList, realname]);
+        setOList(prevList => [...prevList, originalname]);
+
+        console.log('rList:', rList);
+        console.log('oList:', oList);
+    }
+
     const openPostcode = () => {
         if (window.daum && window.daum.Postcode) {
             new window.daum.Postcode({
                 oncomplete: function (data) {
                     let addr = '';
                     let extraAddr = '';
-    
-                    // 선택된 주소 타입에 따라 주소를 설정
                     if (data.userSelectedType === 'R') {
                         addr = data.roadAddress;
                     } else {
                         addr = data.jibunAddress;
                     }
-    
-                    // 우편번호 설정
                     if (postcodeRef.current) {
                         postcodeRef.current.value = data.zonecode;
-                        setZipcode(data.zonecode); // 상태 업데이트
-                        console.log(data.sido);
-                        console.log(data.sigungu);
-                        console.log(data.roadname);
-                        setProvince(data.sido); // 시도 상태 업데이트
-                        setTown(data.sigungu);  // 구군 상태 업데이트
-                        setVillage(data.roadname); // 동 상태 업데이트
+                        setZipcode(data.zonecode);
+                        setProvince(data.sido);
+                        setTown(data.sigungu);
+                        setVillage(data.roadname);
+                        setAddress(data.address);
                     }
-    
-                
-    
                     if (extraAddressRef.current) {
                         extraAddressRef.current.value = extraAddr;
                     }
-    
                     if (detailAddressRef.current) {
                         detailAddressRef.current.focus();
                     }
@@ -84,30 +115,48 @@ function Post_basicInfo() {
     };
 
     const onSubmit = () => {
+        dispatch(setSpace({
+            cnum: currentSpace.cnum || '',
+            title,
+            subtitle,
+            price,
+            maxpersonnal,
+            content,
+            caution,
+            zipcode,
+            province,
+            town,
+            village,
+            address_detail,
+            rList,
+            oList,
+            address,
+        }));
+        console.log("rList:", rList);
+        console.log("oList:", oList);
         navigate('/Post_useInfo');
     };
 
-    async function fileupload(e) {
-        const formData = new FormData();
-        formData.append('image', e.target.files[0]);
-        const result = await axios.post('/api/member/fileupload', formData);
-        setImgSrc(`http://localhost:8070/uploads/${result.data.filename}`);
-        setImgStyle({ display: 'block', width: '200px' });
-    }
-
     return (
         <div className='container'>
-            <div className='header2'>기본 정보</div>
-            
+               <div className='rheader'>
+                <div className='logo3'>기본 정보</div>
+                <div className='left'><Submenu /></div>
+            </div>
             <div className='field2'>
-                
                 <input className='binput' type="text" value={title} onChange={(e) => setTitle(e.currentTarget.value)} placeholder='공간명'/>
             </div>
             <div className='field1'>
-                <textarea rows="2" className='binput' value={subtitle} onChange={(e) => setSubtitle(e.currentTarget.value)} placeholder='한줄 공간 설명' ></textarea>
+                <textarea rows="2" className='binput' value={subtitle} onChange={(e) => setSubtitle(e.currentTarget.value)} placeholder='한줄 공간 설명'></textarea>
+            </div>
+            <div className='field2'>
+                <input className='binput' type="text" value={price} onChange={(e) => setPrice(e.currentTarget.value)} placeholder='가격 원/시간'/>
+            </div>
+            <div className='field2'>
+                <input className='binput' type="text" value={maxpersonnal} onChange={(e) => setMaxpersonnal(e.currentTarget.value)} placeholder='최대인원'/>
             </div>
             <div className='field1'>
-                <textarea className='binput' rows="7" value={content} onChange={(e) => setContent(e.currentTarget.value)} placeholder='공간 소개' ></textarea >
+                <textarea className='binput' rows="7" value={content} onChange={(e) => setContent(e.currentTarget.value)} placeholder='공간 소개'></textarea>
             </div>
             <div className='field1'>
                 <textarea className='binput' rows="7" value={caution} onChange={(e) => setCaution(e.currentTarget.value)} placeholder='주의 사항'></textarea>
@@ -124,7 +173,6 @@ function Post_basicInfo() {
                     placeholder='우편번호'
                 />
             </div>
-            
             <div className='field1'>
                 <input
                     className='binput'
@@ -132,7 +180,7 @@ function Post_basicInfo() {
                     value={province}
                     readOnly
                     placeholder='시/도'
-                    onChange={(e) => setProvince(e.currentTarget.value)}/>
+                />
             </div>
             <div className='field1'>
                 <input
@@ -141,7 +189,7 @@ function Post_basicInfo() {
                     value={town}
                     readOnly
                     placeholder='구/군'
-                    onChange={(e) => setTown(e.currentTarget.value)}/>
+                />
             </div>
             <div className='field1'>
                 <input
@@ -150,7 +198,7 @@ function Post_basicInfo() {
                     value={village}
                     readOnly
                     placeholder='동'
-                    onChange={(e) => setVillage(e.currentTarget.value)}/>
+                />
             </div>
             <div className='field1'>
                 <input
@@ -162,20 +210,12 @@ function Post_basicInfo() {
                     onChange={(e) => setAddress_detail(e.currentTarget.value)}
                 />
             </div>
-            <div className='field1'>
-                <input
-                    className='binput'
-                    type="file"
-                    onChange={(e) => fileupload(e)}
-                    placeholder='공간 사진'
-                />
-            </div>
-            <div className='field1'>
-                <div>
-                    <img src={imgSrc} style={imgStyle} alt="Uploaded" />
+            {[1,2,3,4,5,6,7,8,9,10].map((num, index) => (
+                <div className='field1' key={num} style={divStyle[index]}>
+                    <input type="file" onChange={(e) => imgUpload(e, index)} />
+                    {imgsrc[index] && <img src={imgsrc[index]} alt={`img${num}`} height="50" />}
                 </div>
-            </div>
-
+            ))}
             <div className='but2'>
                 <button className="but" onClick={() => navigate('/Post_cate')}>이전</button>
                 <button className="but" onClick={onSubmit}>다음</button>

@@ -1,7 +1,7 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import ReactStars from 'react-rating-stars-component';
-import { Box, Button, IconButton, TextField } from '@mui/material';
+import { Box, Button, IconButton, TextField, Typography } from '@mui/material';
 import AddIcon from '@mui/icons-material/Add';
 import axios from 'axios';
 
@@ -11,6 +11,7 @@ const Review = (props) => {
     const [content, setContent] = useState("");
     const [rate, setRate] = useState(0);
     const [images, setImages] = useState([]);
+    const [reviewList, setReviewList] = useState([]);
 
     const contentChange = (e) => {
         setContent(e.target.value);   
@@ -30,6 +31,17 @@ const Review = (props) => {
         const files = Array.from(e.target.files);
         setImages((prevImages) => [...prevImages, ...files]);
     };
+
+    useEffect( async ()=>{
+        try {
+            console.log(props.space);
+            const result = await axios.get(`/api/review/GetReviews/${props.space.sseq}`);
+            console.log(result.data);
+            setReviewList(result.data);
+        } catch (err) {
+            console.error(err);
+        }
+    }, [])
 
     const handleOnSubmit = () => {
         const formData = new FormData();
@@ -124,6 +136,35 @@ const Review = (props) => {
             </Box>
             <Box>
                 <Button variant="contained" onClick={handleOnSubmit}>전송</Button>
+            </Box>
+
+
+
+            {/* 리뷰 리스트 렌더링 */}
+            <Box mt={4}>
+                <Typography variant="h6">리뷰 목록</Typography>
+                {reviewList.length > 0 ? (
+                    reviewList.map((review, index) => (
+                        <Box key={index} border="1px solid #ccc" borderRadius="4px" padding="16px" mt={2}>
+                            <Typography variant="subtitle1"><strong>작성자:</strong> {review.user.userid}</Typography>
+                            <Typography variant="body1"><strong>내용:</strong> {review.content}</Typography>
+                            <ReactStars
+                                count={5}
+                                size={24}
+                                value={review.rate}
+                                edit={false}
+                                activeColor="#ffd700"
+                            />
+                            {review.reply && (
+                                <Typography variant="body2" color="textSecondary">
+                                    <strong>관리자 답변:</strong> {review.reply}
+                                </Typography>
+                            )}
+                        </Box>
+                    ))
+                ) : (
+                    <Typography variant="body2">등록된 리뷰가 없습니다.</Typography>
+                )}
             </Box>
         </div>
     );

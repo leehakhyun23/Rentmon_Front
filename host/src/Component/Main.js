@@ -1,5 +1,6 @@
 import React from 'react'
-import Header from './HeaderFooter/Header'
+import Header from './HeaderFooter/Header';
+
 
 import { useNavigate } from 'react-router-dom';
 import './css/main.css'
@@ -7,6 +8,7 @@ import './css/main.css'
 
 
 function Main() {
+
   const navigate = useNavigate();
 
   return (
@@ -23,7 +25,7 @@ function Main() {
       </div>
 
       <div className='field'>
-        <button className='btn2' onClick={()=>{navigate('/Login')}}>
+        <button className='btn2' onClick={()=>{navigate('/Join')}}>
           공간 호스트 시작하기
         </button>
       </div>

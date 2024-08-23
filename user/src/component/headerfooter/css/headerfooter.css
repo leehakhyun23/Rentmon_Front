@@ -55,6 +55,8 @@
     .footer .innerContainer .right .footer-nav ul li:last-child { padding-right: 25px; }
     .footer .innerContainer .right p { text-align: left; margin-top: 50px;}
 
+    .header .innerContainer .left > div .iconbutton { margin-right: 5px; }
+    .header .innerContainer .left > div .iconbutton > div .countbox { right: -8px; }
 }
 
 
@@ -74,9 +76,9 @@
 .searchPopup-container .bottom > div { width: 50%; }
 .searchPopup-container .bottom .recent-search { padding-right: 100px; }
 .searchPopup-container .bottom .recent-search .list {  }
-.searchPopup-container .bottom .recent-search .list .record { display: flex; align-items: center; justify-content: space-between; margin-bottom: 10px; }
+.searchPopup-container .bottom .recent-search .list .record { display: flex; align-items: center; justify-content: space-between; margin-bottom: 10px; cursor: pointer; }
 .searchPopup-container .bottom .recent-search .list .record > div { display: flex; align-items: center; }
-.searchPopup-container .bottom .recent-search .list .record > div img { opacity: 0.3; position: relative; top: 2px;  }
+.searchPopup-container .bottom .recent-search .list .record > div img { opacity: 0.3; position: relative; top: 2px; margin-right: 5px; }
 .searchPopup-container .bottom .recent-search .list .record > div a { margin-left: 5px; }
 .searchPopup-container .bottom .recent-search .list .record span { position: relative; width: 13px; height: 13px; cursor: pointer; }
 .searchPopup-container .bottom .recent-search .list .record span::before ,
@@ -87,8 +89,8 @@
 .searchPopup-container .bottom .recommand-keyword {  }
 .searchPopup-container .bottom .recommand-keyword .taglist { display: flex; display: flex; gap: 10px;
     flex-wrap: wrap; }
-.searchPopup-container .bottom .recommand-keyword .taglist a { border:1px solid #B1B1B1; color: #B1B1B1; border-radius: 50px; border-radius: 50px; font-size: 12px; padding: 5px 9px; transition: all .3s; }
-.searchPopup-container .bottom .recommand-keyword .taglist a:hover { border-color: #0090DF; color: #fff; background: #0090DF; }
+.searchPopup-container .bottom .recommand-keyword .taglist div { border:1px solid #B1B1B1; color: #B1B1B1; border-radius: 50px; border-radius: 50px; font-size: 12px; padding: 9px 9px; transition: all .3s; cursor: pointer; }
+.searchPopup-container .bottom .recommand-keyword .taglist div:hover { border-color: #0090DF; color: #fff; background: #0090DF; }
 
 .searchPopup-close { position: absolute; bottom: -50px; left: 50%; transform: translate(-50% , 0); border-radius: 50%; width: 13px; height: 13px; padding: 6px; background-color: #fff; cursor: pointer; }
 .searchPopup-close span { position: relative; display: block; width: 100%; height: 100%;  transition: all .3s;  }
@@ -132,9 +134,12 @@
 /* 유저정보 */
 .logOn .userinfo { background: #0090DF; padding: 20px 20px 70px; color: #fff; display: flex; }
 .logOn .userinfo .profileImg { width: 70px; height: 70px; }
-.logOn .userinfo .profileImg img { width: 100%; height: 100%; }
+.logOn .userinfo .profileImg img { width: 100%; height: 100%; border-radius: 50%; object-fit: cover; }
 .logOn .userinfo .textbox { margin-left: 20px; margin-top: 15px; display: block; }
 .logOn .userinfo .textbox .text { font-size: 15px; }
+.logOn .userinfo .textbox .text a { color: #fff; display: flex;  }
+.logOn .userinfo .textbox .text a img { margin-left: 10px; transition: all .3s; transform: translate(0 , 0); }
+.logOn .userinfo .textbox .text a:hover img {   transform: translate(10px , 0); }
 .logOn .userinfo .textbox p { text-decoration: underline; font-size: 13px; color: #f9f9f9; margin-top: 20px; cursor: pointer; }
 /* 최근 예약 */
 .logOn .recentresevation-container { background: #fff; margin: 0 15px; margin-top: -50px; border-radius: 16px; padding: 16px 15px; box-shadow: 0px 0px 15px rgba(0,0,0,0.1); position: relative; }
@@ -158,6 +163,8 @@
 .logOn .recentresevation-container .yearContainer > div > div >  span { color: #858585; font-size: 12px; }
 
 .logOn .recentresevation-container > div .gobtn { position: absolute; right: 20px; bottom: 20px; }
+.logOn .recentresevation-container > div .gobtn a img { transition: all .3s; transform: translate(0 ,0); }
+.logOn .recentresevation-container > div .gobtn:hover a img { transform: translate(5px ,0); }
 @media screen and (max-width: 1000px) {
     .ms-container .ms-container-close { top: 15px; left:  -18px; }
 }
@@ -173,7 +180,8 @@
 .logOn .myInfo .myGrade > div p { font-size: 13px; color: #B1B1B1; }
 
 .logOn .myInfo .mypagemenu { display: flex;margin-top: 28px; }
-.logOn .myInfo .mypagemenu .icon { width: 20%; display: flex; flex-direction: column; justify-content: flex-start; align-items: center; text-align: center;}
+.logOn .myInfo .mypagemenu .icon { width: 20%; display: flex; flex-direction: column; justify-content: flex-start; align-items: center; text-align: center; transition: all .3s; transform: translate(0 ,0);}
+.logOn .myInfo .mypagemenu .icon:hover { transform: translate(0 , -5px); }
 .logOn .myInfo .mypagemenu .icon a {  }
 .logOn .myInfo .mypagemenu .icon a img {  }
 .logOn .myInfo .mypagemenu .icon a p { margin: 0 10px;  }

@@ -1,0 +1,87 @@
+.menu {
+  width: 80px;
+  height: 100%;
+  text-align: center;
+  line-height: 60px;
+  background-color: #f8f8f8;
+  position: relative;
+  display: flex;
+  align-items: center; /* Center content vertically */
+  justify-content: center; /* Center content horizontally */
+  z-index: 1;
+}
+
+.close-btn {
+  position: absolute;
+  top: 10px; /* 버튼의 위치 조정 */
+  right: 10px;
+  background: none;
+  border: none;
+  font-size: 24px;
+  cursor: pointer;
+}
+
+.close-btn {
+  position: absolute;
+  top: 10px; /* 버튼의 위치 조정 */
+  right: 10px;
+  background: none;
+  border: none;
+  font-size: 24px;
+  cursor: pointer;
+}
+
+
+.menu span {
+  display: block;
+  padding: 10px;
+  cursor: pointer;
+}
+
+.menu>.sub {
+  position: absolute;
+  top: 0; /* Align to top of the parent container */
+  /* left: 100%; Position to the right of the parent container */
+  right: 0;
+  height: 0;
+  list-style: none;
+  overflow: hidden;
+  width: 300px;
+  background-color: white;
+  border: 1px solid #B1B1B1;
+  transition: height 0.3s ease, opacity 0.3s ease; /* Add opacity transition */
+  opacity: 0; /* Initially hide the menu */
+  transform: translateX(10px); /* Slightly offset the menu for better visibility */
+}
+
+.menu>.sub.open {
+  height: 500px;
+  opacity: 1; /* Make the menu visible */
+  transform: translateX(0); /* Reset the offset */
+}
+
+.menu>.sub li {
+  border-bottom: 1px solid #B1B1B1;
+  padding: 0; /* Remove padding */
+  padding-top: 5px;
+  margin: 0; /* Remove margin */
+  height: 50px;
+}
+
+.menu>.sub li:last-child {
+  border-bottom: none; /* Remove the border of the last item */
+}
+
+.menu>.sub li>a {
+  text-decoration: none;
+  color: black;
+  display: block;
+  padding: 10px;
+  white-space: nowrap; /* Prevent text wrapping */
+}
+
+.left {
+  margin-left: auto; /* 오른쪽으로 이동 (필요시 추가) */
+  display: flex;
+  align-items: center; /* 수직 정렬 (중앙 정렬) */
+}

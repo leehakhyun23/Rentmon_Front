@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom'
+import jaxios from '../../util/jwtUtil';
 import Iconbutton from './component/Iconbutton'
 import ListIconButton from './component/ListIconButton';
 import MypageSidebar from './component/MypageSidebar';
@@ -16,6 +17,9 @@ const user =useSelector(state=>state.user);
 const [searchshow, setSearchshow] = useState({display:"none"});
 const [searchPopup , setSearchPopup] = useState(false);
 const [searchWord,setSearchWord] =useState('');
+const [listcount, setListcount] =useState(0);
+const recent = useSelector(state=>state.recent);
+const menucount = recent.menucount;
 useEffect(()=>{
     if(!searchPopup) setSearchshow({display:"none"});
     else setSearchshow({display:"block"});
@@ -25,6 +29,10 @@ useEffect(()=>{
 const [mypageShow, setMypageShow] = useState({right:"-100%"});
 const [mypagePopup , setMypagePopup] = useState(false);
 const [mypageBlack , setMypageBlack] =useState({display:"none"});
+
+useEffect(()=>{
+    setListcount(menucount.reservCount);
+},[recent]);
 
 
 useEffect(()=>{
@@ -46,7 +54,7 @@ useEffect(()=>{
                     <div>
                         <div className='pc'>{(searchPopup)?(null):<SearchInputClick searchWord={searchWord} setSearchPopup={setSearchPopup} />}</div>
                         <Iconbutton src={"/img/peopleIcon.svg"} click={()=>{setMypagePopup(true)}} />
-                        {(user.mseq)&&(<ListIconButton click={()=>{navigate("/")}}  listcount={2}/>)}
+                        {(user.name)&&(<ListIconButton click={()=>{navigate("/mypage/reservation/1")}}  listcount={listcount}/>)}
                     </div>
                 </div>
             </div>
@@ -54,7 +62,7 @@ useEffect(()=>{
         {/* 서치팝업 창 */}
         <Searchpopup searchshow={searchshow} searchWord={searchWord} setSearchWord={setSearchWord} setSearchPopup={setSearchPopup} />
         {/* 마이페이지 사이드바메뉴 */}
-        <MypageSidebar  loginOn ={(user.mseq)?(true):(false)} mypageShow={mypageShow} setMypagePopup={setMypagePopup} mypageBlack={mypageBlack}/>
+        <MypageSidebar mypagePopup={mypagePopup}  loginOn ={(user.name)?(true):(false)} mypageShow={mypageShow} setMypagePopup={setMypagePopup} mypageBlack={mypageBlack}/>
     </>
 
   )

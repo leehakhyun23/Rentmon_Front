@@ -33,3 +33,83 @@
     .loginContainer .loginform > div .joinbox a { font-size: 13px;  }
     .loginContainer .loginform .snsbtncontainer a img { width: 40px; }
 }
+
+
+
+
+.joinform { padding: 0px 0; max-width: 400px; margin: 0 auto; }
+.joinform h2 { font-size: 40px; text-align: center; color: #0090DF; font-weight: bold; margin-bottom: 40px; }
+.joinform input { border: 1px solid #D9D9D9; border-radius: 2px;  }
+.joinform input::placeholder { color: #B1B1B1; }
+
+.joinform .field {  }
+.joinform .field > div { display: flex; }
+.joinform .field p { text-align: right; color: #CE4B41;  margin-top: 10px; font-size: 13px;}
+.joinform button.checkbutton { width: 35%; margin-left: 10px; background: #B1B1B1; color: #fff; border: none; height: auto; border-radius: 2px; pointer-events: none; }
+.joinform button.checkbutton.active { background: #0090DF; cursor: pointer; pointer-events:auto;}
+.joinform .field p.good { color: #0090DF;  }
+
+.joinform .password { margin-top: 40px; }
+.joinform .password input {margin-bottom: 15px;  }
+.joinform .password input:nth-child(2) {  }
+.joinform .password span { display: block; text-align: right; color: #B1B1B1; font-size: 13px; }
+.joinform .password p { margin-top: 10px; }
+
+.joinform .ectinfo { margin-top: 40px; }
+.joinform .ectinfo input { margin-bottom: 10px; }
+.joinform .ectinfo span { display: block; text-align: right; color: #B1B1B1; font-size: 13px; }
+
+.joinform .emailContaienr { margin-top: 40px; }
+.joinform .emailContaienr .emailput { margin-bottom: 10px; }
+.joinform .emailContaienr .emailput input {  }
+.joinform .emailContaienr .emailput button {  }
+
+.joinform .emailContaienr .emailcheck { display: block; }
+.joinform .emailContaienr .emailcheck > div { position: relative; margin-bottom: 10px; }
+.joinform .emailContaienr .emailcheck > div input {  }
+.joinform .emailContaienr .emailcheck > div .timer { position: absolute; right: 15px; top: 50%; transform: translate(0 , -50%); color:#999; }
+
+
+.joinform .emailContaienr .emailcheck .checkbutton { width: 100%; height: 47px;margin: 0; }
+.joinform .emailContaienr p {  }
+
+.joinform .profileImage { margin-top: 40px; }
+.joinform .profileImage p { font-size: 15px; margin-bottom: 20px; }
+.joinform .imgContainer { display: flex; }
+.joinform .imgContainer .img_input { width: 32%; }
+.joinform .imgContainer .img_input img {border-radius: 50%; border: 1px solid #0090DF; width: 100%; object-fit: cover;max-height: 119px; height:27.5vw ;  }
+.joinform .imgContainer .img_input input { display: none; }
+.joinform .imgContainer .buttonContainer { margin-left: 20px; width: 70%; display: flex; flex-direction: column; justify-content: center; cursor: pointer; }
+.joinform .imgContainer .buttonContainer button { display: block; height: 44px; color: #fff; background-color: #0090DF; border: 1px solid #0090DF;width: 100%; border-radius: 2px; }
+.joinform .imgContainer .buttonContainer button:last-child { background: none; color: #0090DF; margin-top: 15px; }
+
+.joinform .nextJoin { margin-top: 70px; }
+.joinform .nextJoin button { width: 100%; height: 47px; background: #B1B1B1; color: #fff; border: none; border-radius: 50px; pointer-events: none; }
+
+.joinform .nextJoin button.active { background: #0090DF; pointer-events: auto; }
+.joinform .nextJoin p { text-align: center; font-size: 13px; color: #CE4B41;margin-top: 20px; }
+
+
+@media screen and (max-width: 1000px) {
+    /* .joinform h2 { font-size: 30px; margin-bottom: 17px;  } */
+    /* .joinform { padding: 50px 0; } */
+}
+
+.pwdSearch {  text-align: right; }
+.pwdSearch a { color: #999; }
+
+.pwdCeck { max-width: 450px; margin-bottom: 100px; }
+.pwdCeck h2 { font-size: 30px; font-weight: 600; text-align: center; padding-bottom: 40px; }
+.pwdCeck input { border-width: 1px; margin-top: 10px; }
+.pwdCeck .explain { margin-top: 30px; color: #999; font-size: 13px; }
+.pwdCeck .explain p {  }
+.pwdCeck button { margin-top: 30px; width: 100%; text-align: center; padding: 20px 0; background: #B1B1B1; color: #fff; pointer-events: none; border: none;  }
+.pwdCeck button.active { background: #0090DF; pointer-events: auto; cursor: pointer; }
+
+
+
+.messageani { position: fixed; top: 50%; left: 50%; transform: translate(-50% , -50%); background: rgba(0,0,0,0.8); color: #fff; padding: 30px; opacity: 0; transition: all .3s; visibility: hidden; }
+.messageani.on { opacity: 1; visibility: visible; }
+.pwdCeck .msg { color: #CE4B41; font-size: 15px; margin-top: 10px; display: block;}
+.pwdCeck .msg.ok { color: #0090DF; }
+  
