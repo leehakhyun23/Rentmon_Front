@@ -203,7 +203,7 @@ function SpaceDetail() {
 
         <div className="spaceMap" ref={spaceMapRef}>
           <div className="spaceMainTitle"></div>
-          <KakaoMap address={kakaoAddress} />
+          <KakaoMap address={space.address} />
 
         </div>
 
