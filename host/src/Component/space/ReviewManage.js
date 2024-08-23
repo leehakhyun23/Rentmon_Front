@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-
+import Header from '../HeaderFooter/Header'
 function ReviewManage() {
   // 현재 활성화된 탭을 관리하는 상태
   const [activeTab, setActiveTab] = useState('review'); // 'review' 또는 'qna'
@@ -44,6 +44,7 @@ function ReviewManage() {
   
   return (
     <div>
+      <Header />
       <div>이용 후기 관리</div>
       <div>
         <button onClick={() => handleTabClick('review')} style={{ width: '500px', height: '50px' }}>

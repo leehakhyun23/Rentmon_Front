@@ -1,21 +1,18 @@
-import React, { useState, useEffect } from 'react';
-import { useNavigate } from "react-router-dom";
-import { useSelector, useDispatch } from 'react-redux';
-import { setSpace } from '../../store/spaceSlice'; // Import your Redux slice
+import React, { useState } from 'react';
+import { useNavigate, useLocation } from 'react-router-dom';
+import axios from 'axios'; // Import axios
 import '../css/header.css';
 import '../css/facility.css';
-import Header from '../HeaderFooter/Header'
+import Header from '../HeaderFooter/Header';
 
-function Post_facility() {
+function Col_facility() {
   const navigate = useNavigate();
-  const dispatch = useDispatch();
-
-  // Retrieve current space information from Redux state
-  const currentSpace = useSelector((state) => state.space);
 
   // Initialize select state with current facilities from Redux state
-  const [select, setSelect] = useState(currentSpace.selectedFacilities || []);
-
+  const location = useLocation();
+  const [select, setSelect] = useState([]);
+  const queryParams = new URLSearchParams(location.search);
+  const sseq = queryParams.get('sseq');
   // Update the state when checkboxes change
   const handleCheckboxChange = (event) => {
     const { value, checked } = event.target;
@@ -30,34 +27,29 @@ function Post_facility() {
   };
 
   // Handle form submission
-  const onSubmit = () => {
-    dispatch(setSpace({
-      cnum: currentSpace.cnum || '', // Use existing cnum
-      title: currentSpace.title || '', // Maintain existing values
-      subtitle: currentSpace.subtitle || '',
-      price: currentSpace.price ||'',
-      maxpersonnal: currentSpace.maxpersonnal || '',
-      content: currentSpace.content || '',
-      caution: currentSpace.caution || '',
-      zipcode: currentSpace.zipcode || '',
-      province: currentSpace.province || '',
-      town: currentSpace.town || '',
-      village: currentSpace.village || '',
-      address_detail: currentSpace.address_detail || '',
-      rList: currentSpace.rList || '',
-      oList: currentSpace.oList || '',
-      starttime: currentSpace.starttime,
-      endtime: currentSpace.endtime,
-      fnum: select,
-      address: currentSpace.address,
-    }));
-    console.log(select);
-    navigate('/Post_payment');
+  const onSubmit = async () => {
+    try {
+      // Send data to server
+      const response = await axios.post(`/api/space/updateFacilities`, {
+        sseq, // Ensure sseq is available in currentSpace
+        numbers: select,
+      });
+
+      if (response.status === 200) {
+        console.log('Facilities updated successfully');
+        navigate('/SpaceManage');
+      } else {
+        console.error('Failed to update facilities');
+      }
+    } catch (error) {
+      console.error('Error occurred during submission:', error);
+    }
   };
 
   return (
     <div>
       <Header />
+      
       <div className='header2'>시설 선택</div>
       <div className="facility-container">
         {[
@@ -120,11 +112,11 @@ function Post_facility() {
         ))}
       </div>
       <div className="but2">
-        <button className="but" onClick={() => navigate('/Post_useInfo')}>이전</button>
+        <button className="but" onClick={() => navigate('/SpaceManage')}>이전</button>
         <button className="but" onClick={onSubmit}>다음</button>
       </div>
     </div>
   );
 }
 
-export default Post_facility;
+export default Col_facility;
