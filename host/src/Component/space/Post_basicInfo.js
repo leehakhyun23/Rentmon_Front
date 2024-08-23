@@ -27,7 +27,7 @@ function Post_basicInfo() {
     const [price, setPrice]= useState('');
     const [maxpersonnal, setMaxpersonnal] = useState('');
     const [imgsrc, setImgsrc] = useState([]);
-    const [divStyle, setDivStyle] = useState(Array(10).fill({display:'none'}));
+    let [divStyle, setDivStyle] = useState(Array(10).fill({display:'none'}));
     const [rList, setRList] = useState([]);
     const [oList, setOList] = useState([]);
     const postcodeRef = useRef(null);
@@ -48,6 +48,11 @@ function Post_basicInfo() {
         };
     }, []);
 
+    useEffect(()=>{
+        setDivStyle(prev=>({...prev, [0]:{display:"block"}}));
+        console.log(divStyle);
+    },[]);
+
     const fieldStyle = {
         width:"100%", 
         display: "flex",
@@ -64,14 +69,10 @@ function Post_basicInfo() {
         let realname = result.data.realname;
         let originalname = result.data.originalname;
 
-        setDivStyle(prevStyles => {
-            const newStyles = [...prevStyles];
-            newStyles[index] = fieldStyle;
-            return newStyles;
-        });
+        setDivStyle(prevStyles => ({...prevStyles , [index]:{fieldStyle}}));
 
         setImgsrc(prevImgsrc => {
-            const newImgsrc = [...prevImgsrc];
+            let newImgsrc = [...prevImgsrc];
             newImgsrc[index] = `http://localhost:8070/space_images/${realname}`;
             return newImgsrc;
         });
@@ -81,6 +82,8 @@ function Post_basicInfo() {
 
         console.log('rList:', rList);
         console.log('oList:', oList);
+        
+        setDivStyle(prev=>({...prev, [index+1]:{display:"block"}}));
     }
 
     const openPostcode = () => {
@@ -212,7 +215,7 @@ function Post_basicInfo() {
                 />
             </div>
             {[1,2,3,4,5,6,7,8,9,10].map((num, index) => (
-                <div className='field1' key={num} style={divStyle[index]}>
+                <div className='field1 fileField' key={num} style={divStyle[index]}>
                     <input type="file" onChange={(e) => imgUpload(e, index)} />
                     {imgsrc[index] && <img src={imgsrc[index]} alt={`img${num}`} height="50" />}
                 </div>
