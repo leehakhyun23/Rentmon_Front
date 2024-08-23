@@ -89,7 +89,6 @@ const spaceSlice = createSlice({
                 state.station="";
                 state.snsid="";
                 state.create_at="";
-                removeCookie("token","/");
             }
         }
 });

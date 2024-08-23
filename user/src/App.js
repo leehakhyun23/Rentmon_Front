@@ -15,14 +15,18 @@ import Usesapce from './component/mypage/Usesapce';
 import Zzim from './component/mypage/Zzim';
 import Qna from './component/mypage/Qna';
 import Updateuser from './component/mypage/Updateuser';
-import InsertInquiry from './component/inquiry/InsertInquiry';
+import SerchPwd from './component/member/SerchPwd';
+import ResetPasswordUrl from './component/member/ResetPasswordUrl';
 
 function App() {
+
   return (
     <>
     <Header />
     <Routes>
       <Route path='/login' element={<Login />} />
+      <Route path='/serchPwd' element={<SerchPwd />} />
+      <Route path='/resetPasswordUrl/:userid/:code' element={<ResetPasswordUrl />} />
       <Route path='/' element={<Main/>} />
       <Route path='/spaceList' element={<SpaceList />} />
       <Route path='/spaceDetail/:sseq' element={<SpaceDetail />} />
@@ -41,7 +45,6 @@ function App() {
         <Route path='qna/:currentPage' element={<Qna/>} />
         <Route path='updateuser' element={<Updateuser/>} />
       </Route>
-      <Route path='/insertInquiry/:scseq' element={<InsertInquiry />}/>
     </Routes>
     <Footer />
 

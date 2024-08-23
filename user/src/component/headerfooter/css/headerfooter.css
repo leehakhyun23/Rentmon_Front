@@ -76,9 +76,9 @@
 .searchPopup-container .bottom > div { width: 50%; }
 .searchPopup-container .bottom .recent-search { padding-right: 100px; }
 .searchPopup-container .bottom .recent-search .list {  }
-.searchPopup-container .bottom .recent-search .list .record { display: flex; align-items: center; justify-content: space-between; margin-bottom: 10px; }
+.searchPopup-container .bottom .recent-search .list .record { display: flex; align-items: center; justify-content: space-between; margin-bottom: 10px; cursor: pointer; }
 .searchPopup-container .bottom .recent-search .list .record > div { display: flex; align-items: center; }
-.searchPopup-container .bottom .recent-search .list .record > div img { opacity: 0.3; position: relative; top: 2px;  }
+.searchPopup-container .bottom .recent-search .list .record > div img { opacity: 0.3; position: relative; top: 2px; margin-right: 5px; }
 .searchPopup-container .bottom .recent-search .list .record > div a { margin-left: 5px; }
 .searchPopup-container .bottom .recent-search .list .record span { position: relative; width: 13px; height: 13px; cursor: pointer; }
 .searchPopup-container .bottom .recent-search .list .record span::before ,
@@ -89,8 +89,8 @@
 .searchPopup-container .bottom .recommand-keyword {  }
 .searchPopup-container .bottom .recommand-keyword .taglist { display: flex; display: flex; gap: 10px;
     flex-wrap: wrap; }
-.searchPopup-container .bottom .recommand-keyword .taglist a { border:1px solid #B1B1B1; color: #B1B1B1; border-radius: 50px; border-radius: 50px; font-size: 12px; padding: 5px 9px; transition: all .3s; }
-.searchPopup-container .bottom .recommand-keyword .taglist a:hover { border-color: #0090DF; color: #fff; background: #0090DF; }
+.searchPopup-container .bottom .recommand-keyword .taglist div { border:1px solid #B1B1B1; color: #B1B1B1; border-radius: 50px; border-radius: 50px; font-size: 12px; padding: 9px 9px; transition: all .3s; cursor: pointer; }
+.searchPopup-container .bottom .recommand-keyword .taglist div:hover { border-color: #0090DF; color: #fff; background: #0090DF; }
 
 .searchPopup-close { position: absolute; bottom: -50px; left: 50%; transform: translate(-50% , 0); border-radius: 50%; width: 13px; height: 13px; padding: 6px; background-color: #fff; cursor: pointer; }
 .searchPopup-close span { position: relative; display: block; width: 100%; height: 100%;  transition: all .3s;  }

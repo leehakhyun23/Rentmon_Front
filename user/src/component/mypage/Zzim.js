@@ -33,7 +33,7 @@ function Zzim() {
             let result = await jaxios.get("/api/zzim/getZzimList/"+user.userid,{params:{page}});
             console.log(result.data);
             setZzim(prev=>[...prev,...result.data]);
-            if(result.data.length ==0) setHasMore(false);
+            if(result.data.length == 0) setHasMore(false);
         }catch(err){console.error(err);}
     }
     
@@ -46,7 +46,7 @@ function Zzim() {
         <div className='zzimContainer'>
             <h2>찜({recent.menucount.zzimCount})</h2>
             <div className='zzimList'>
-                {(zzim)&&(
+                {(zzim.length > 0)&&(
                     zzim.map((elem, idx)=>{
                         return <ZzimComponent key={idx} record={elem}/>
                     })

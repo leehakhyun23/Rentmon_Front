@@ -46,3 +46,6 @@
     .categorySelect .categoryTagWrap { justify-content: left; margin-bottom: 20px; } 
     .categorySelect .categoryTagWrap span { padding: 8px 15px; margin: 4px 3px; font-size: 12px; }
 }
+
+.moreSpace { max-width: 450px; margin: 80px auto 0px; }
+.moreSpace a { background: #0090DF; border: none; color: #fff; text-align: center; display: block; padding: 18px 0; font-size: 14px; border-radius: 4px;  }

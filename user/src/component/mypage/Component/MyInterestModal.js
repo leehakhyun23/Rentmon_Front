@@ -19,9 +19,9 @@ function MyInterestModal({category, user , isopen , setIsopen , updateUser}) {
       if(!user.category1)setInterest(prev=>{return {...prev,category:[] }});
   },[isopen,user]);
   useEffect(()=>{
-    setBtnActive(true);
-    if(interset["station"] ==="") setBtnActive(false);
-    if(interset["category"].length < 3) setBtnActive(false);
+   
+    if(interset["station"] != null && interset["category"].length >= 3) setBtnActive(true);
+    else setBtnActive(false);
 },[interset]);
 
 let close = ()=>{

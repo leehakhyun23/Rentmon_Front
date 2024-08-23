@@ -37,7 +37,6 @@ function UpdateMyCardModal({isopen , setIsopen , card , updateUser }) {
             if(user.cseq) data["cseq"] = user.cseq.cseq;
             let reuslt= await jaxios.post("/api/bank/changeBank",data,{params:{
                 userid:user.userid}});
-            console.log(reuslt.data);
             updateUser();
             setIsopen(false);
         }catch(err){console.error(err);}

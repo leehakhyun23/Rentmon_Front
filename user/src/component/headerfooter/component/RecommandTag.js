@@ -1,9 +1,9 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 
-function RecommandTag({text , url}) {
+function RecommandTag({text , recentseqrchClick}) {
   return (
-      <Link to={url}>{text}</Link>
+      <div onClick={()=>{recentseqrchClick(text)}}>{text}</div>
   )
 }
 

@@ -4,9 +4,12 @@ import { useParams } from 'react-router-dom'
 import jaxios from '../../util/jwtUtil';
 import MypagePaging from './Component/MypagePaging';
 import QnaComponent from './Component/QnaComponent';
+import QnaModal from './Component/QnaModal';
 
 function Qna() {
     const user = useSelector(state=>state.user);
+    const [isopen, setIsOpen] = useState(false);
+    const [popup , setPopup] = useState({});
     const [list, setList]=useState([]);
     const [page, setPage] = useState({});
     const [begin,setBegin] =useState(0);
@@ -21,6 +24,7 @@ function Qna() {
             let result = await jaxios.get("/api/inquery/getInqueryList/"+user.userid,{params:{page:currentPage}});
             console.log(result.data);
             setList(result.data.list);
+            if(result.data.list[0])setPopup(result.data.list[0]);
             setPage(result.data.paging);
             setBegin(result.data.paging.recordAllcount - (result.data.paging.recordrow*(result.data.paging.currentPage-1)));
         }catch(err){console.error(err);}
@@ -42,7 +46,7 @@ function Qna() {
                 {(list) ?(
                     list.map((elem, key)=>(
                         <div className='row' key={key}>
-                            <QnaComponent num={begin-key} title={elem.title} lastDate={elem.created_at} reply={elem.reply}  />
+                            <QnaComponent num={begin-key} elem={elem} setIsOpen={setIsOpen} setPopup={setPopup}  />
                         </div>
                     ))
                 ):""}
@@ -51,6 +55,7 @@ function Qna() {
             <div className='paganation'>
                 <MypagePaging page={page} url={"/mypage/qna/"}/>
             </div>
+           <QnaModal isopen={isopen} setIsOpen={setIsOpen} popup={popup} />
         </div>
     )
 }
