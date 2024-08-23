@@ -11,7 +11,7 @@ function UsedCoupon({userid}) {
     const [begin,setBegin] =useState(0);
     useEffect(()=>{
         getCouponlist();
-    },[userid]);
+    },[userid , currentPage]);
     let getCouponlist = async()=>{
         try{
             let result = await jaxios.get("/api/reservation/getMypageUsedCouponList/"+userid,{params:{page:currentPage}});
@@ -38,7 +38,7 @@ function UsedCoupon({userid}) {
                 ):""}
             </div>
             <div className='paganation'>
-                <MypagePaging page={page} url={"/mypage/coupon/"}/>
+                <MypagePaging page={page} url={"/mypage/coupon/"} currentPage= {currentPage} />
             </div>
         </div>
     )
