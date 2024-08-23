@@ -41,9 +41,11 @@ const DashBoard = () => {
             {loading ? (
                 <div>Loading...</div>
             ) : (
-                <Box sx={{ display: 'flex', flexDirection: 'column', gap: 4 }}>
-                    <MemberPieChart data={memberData} />
-                    <CategoryPieChart data={pieData} />
+                <Box sx={{ display: 'flex', flexDirection: 'column', margin: 2 }}>
+                    <Box sx={{ display: 'flex', justifyContent: 'space-around', margin: 2 }}>
+                        <MemberPieChart data={memberData} />
+                        <CategoryPieChart data={pieData} />
+                    </Box>
                     <Box>
                         <FormControl fullWidth>
                             <InputLabel id="period-select-label">Period</InputLabel>
