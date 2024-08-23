@@ -41,7 +41,7 @@ function Login() {
         let logindata = await jaxios.get("/api/host/gethostinfo",{params:{hostid:hostid}});
         dispatch(loginAction(logindata.data));
         if(!logindata.data){
-          return setLoginMessage("* 관리자에게 문의해주세요.");
+          return setLoginMessage("관리자에게 문의해주세요.");
         }
 
         alert('로그인이 완료되었습니다.');

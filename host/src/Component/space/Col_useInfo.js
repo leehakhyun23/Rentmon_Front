@@ -53,7 +53,6 @@ function Col_useInfo() {
 
   return (
     <div>
-      <Header />
       <div className='rheader'>
             <div className='logo3'>이용 안내 수정</div>
             <div className='left'><Submenu /></div>

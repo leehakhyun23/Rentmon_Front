@@ -13,6 +13,7 @@
 
 /* 이용 시간 컨테이너 스타일 */
 .time-container {
+    margin-left: 20px;
     display: flex;
     align-items: center;
     gap: 10px; /* 요소 간의 간격 */

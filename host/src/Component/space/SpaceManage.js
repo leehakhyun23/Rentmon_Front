@@ -13,8 +13,19 @@ function SpaceManage() {
     const [spaces, setSpaces] = useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
+    const host = useSelector(state => state.host);
     const navigate = useNavigate();
     const hostid = useSelector((state) => state.host.hostid); // Redux에서 hostid 가져오기
+
+    useEffect(() => {
+        // 정보를 수정할 때만 경고를 띄우도록 수정
+        if (host.hostid || host.provider !== 'kakao') {
+            if (!host.hostid) {
+                alert('로그인이 필요한 서비스입니다');
+                navigate('/');
+            }
+        }
+    }, [host, navigate]);
 
     useEffect(() => {
         // 데이터 가져오기 함수
