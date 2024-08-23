@@ -7,8 +7,16 @@ import DeclarationView from "../components/declaration/DeclarationView";
 import CouponPage from "../components/coupon/CouponPage";
 import CouponModal from "../components/modal/CouponModal";
 import { IconGiftCard, IconHome, IconReport, IconUser, IconUsers } from '@tabler/icons-react';
+import DashBoard from "../components/dashboard/DashBoard";
 
 const RoutesAndMenu = [
+  {
+    id: "dashboard",
+    title: "DashBoard",
+    url: "/",
+    icon: IconHome,
+    element: <DashBoard />,
+  },
   {
     id: "main",
     title: "Main",

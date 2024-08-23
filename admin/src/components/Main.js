@@ -36,4 +36,5 @@ const Main = ({ open, children }) => {
     </MainStyled>
   );
 };
+
 export default Main;
