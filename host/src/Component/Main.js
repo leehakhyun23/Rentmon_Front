@@ -8,6 +8,7 @@ import './css/main.css'
 
 
 function Main() {
+
   const navigate = useNavigate();
 
   return (

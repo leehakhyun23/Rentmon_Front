@@ -26,7 +26,7 @@ function JoinForm() {
         setOksubmit(true);
         setMessage("");
         for(let key of Object.keys(info)){
-            if(key === "profileimg") return false;
+            if(key === "profileimg") continue;
             if(!info[key]){
                 setOksubmit(false);
                 if(key === "userid") setMessage("* 아이디 입력 또는 중복확인을 확인해주세요.");
@@ -50,6 +50,7 @@ function JoinForm() {
             formData.append("email",info.email);
             if (info.profileimg) {
                 formData.append("profileimg", info.profileimg);
+                console.log(info.profileimg);
               }
 
             try{

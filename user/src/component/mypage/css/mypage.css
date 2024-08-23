@@ -1,3 +1,4 @@
+.innerContainer.mypage { max-width: 1300px; }
 .infoDashBoard { background: #F9F9F9; border-radius: 8px; margin-top: -30px;  padding: 30px 6% 34px; position: relative;}
 .infoDashBoard .container { display: flex; justify-content: space-between;}
 .infoDashBoard .container .left { width: 30%; }
@@ -43,5 +44,365 @@
 }
 
 /* 공통 */
-.mypagecommon { padding: 88px 0; } 
+.mypagecommon { padding: 88px 0 0; } 
+.mypagecommon .title { display: flex; align-items: center; }
+.mypagecommon .title small { font-size: 15px; color: #b9b9b9; display: block; align-items: flex-end; margin-left: 10px;}
+.mypagecommon .title img { margin-right: 12px; }
+.mypagecommon .title h2 { font-size: 25px; font-weight: 600;  align-items: center;}
 /* dashboard */
+.recentreservation {  }
+.recentreservation .title { display: flex; align-items: center; }
+.recentreservation .title small { font-size: 15px; color: #b9b9b9; display: block; align-items: flex-end; margin-left: 10px;}
+.recentreservation .title img { margin-right: 12px; }
+.recentreservation .title h2 { font-size: 25px; font-weight: 600;  align-items: center;}
+.recentresevation-component { margin-top: 30px; border: 1px solid #DCDCDC; border-radius: 16px; display: flex; justify-content: space-between; padding: 34px 20px; }
+.recentresevation-component .recentresevation-wrapper { display: flex; }
+.recentresevation-component .recentresevation-wrapper .img-box { margin-right: 20px; }
+.recentresevation-component .recentresevation-wrapper .img-box img { width: 131px; border-radius: 2px; }
+.recentresevation-component .recentresevation-wrapper .placeInfo {  }
+.recentresevation-component .recentresevation-wrapper .placeInfo > div {display: flex; align-items: center; }
+.recentresevation-component .recentresevation-wrapper .placeInfo > div span { font-size: 18px; margin-right: 20px;  font-weight: 600;}
+.recentresevation-component .recentresevation-wrapper .placeInfo > div img { width: 15px; position: relative; top: 2px; }
+.recentresevation-component .recentresevation-wrapper .placeInfo small { color: #999; font-size: 15px; }
+.recentresevation-component .recentresevation-wrapper .placeInfo span { display: block; }
+.recentresevation-component .recentresevation-wrapper .placeInfo span.content { margin-top: 13px; font-size: 14px; }
+.recentresevation-component .recentresevation-wrapper .placeInfo span.price { color: #999; font-size: 14px; font-weight: 600; margin-top: 5px; }
+.recentresevation-component .yearContainer { display: flex; flex-direction: column; align-items: flex-end; }
+.recentresevation-component .yearContainer > div { text-align: right; }
+.recentresevation-component .yearContainer > div > p { color: #0090DF; font-size: 13px; }
+.recentresevation-component .yearContainer > div > div {  }
+.recentresevation-component .yearContainer > div > div > div { display: flex; align-items: center; 
+    justify-content: flex-end; }
+.recentresevation-component .yearContainer > div > div > div img {  width: 35px;}
+.recentresevation-component .yearContainer > div > div > div span { font-size: 13px; }
+.recentresevation-component .yearContainer > div.gobtn { margin-top: 10px; transform: translate(-5px , 0); transition: all .3s; }
+.recentresevation-component .yearContainer > div.gobtn a { display: flex; align-items: center;}
+.recentresevation-component .yearContainer > div.gobtn img {  margin-left: 10px; }
+.recentresevation-component .yearContainer > div.gobtn:hover { transform: translate(0px , 0); }
+.recentresevation-component .notreserve {  }
+
+/* 예약리스트 */
+.calendarContainer { margin-top: 124px; position: relative; }
+.recentreservation .react-calendar { }
+.recentreservation .react-calendar .react-calendar__navigation { display: flex; justify-content: flex-end; position: absolute; right: 0; top: 0; }
+.recentreservation .react-calendar .react-calendar__navigation .react-calendar__navigation__label { display: none;}
+.recentreservation .react-calendar .react-calendar__navigation .react-calendar__navigation__arrow { background: none; border: 1px solid #DCDCDC; font-size: 20px;
+    padding: 10px 22px; border-radius: 50px; cursor: pointer; color: #999999;
+}
+
+.recentreservation .react-calendar .react-calendar__navigation .react-calendar__navigation__arrow:hover { background: #f5f5f5; }
+
+.recentreservation .react-calendar .react-calendar__navigation .react-calendar__navigation__arrow.react-calendar__navigation__next-button { margin-left: 20px; } 
+.recentreservation .react-calendar .react-calendar__navigation .react-calendar__navigation__arrow.react-calendar__navigation__next-button::before ,
+.recentreservation .react-calendar .react-calendar__navigation .react-calendar__navigation__arrow.react-calendar__navigation__prev-button::after { content: "이전달"; display: inline-block; font-size: 15px; margin-left: 10px; color: #000; }
+.recentreservation .react-calendar .react-calendar__navigation .react-calendar__navigation__arrow.react-calendar__navigation__next-button::before { content: "다음달";margin-left: 0px; margin-right: 10px;  }
+
+.calendarContainer .react-calendar__month-view { margin-top: 60px; }
+.calendarContainer .react-calendar__month-view .react-calendar__month-view__weekdays { border-top: 1px solid #DCDCDC; border-bottom: 1px solid #DCDCDC; padding: 27px 0; }
+.calendarContainer .react-calendar__month-view .react-calendar__month-view__weekdays .react-calendar__month-view__weekdays__weekday abbr { text-decoration: none; margin-left: 15px; font-size: 14px; }
+.calendarContainer .react-calendar__month-view .react-calendar__month-view__weekdays .react-calendar__month-view__weekdays__weekday:first-child { color: #CE4B41; }
+
+.calendarContainer .react-calendar__month-view__days { background: #f9f9f9; }
+
+.calendarContainer .react-calendar__month-view__days abbr {  color: #999999; margin-bottom: 18px; font-size: 14px; }
+.calendarContainer .react-calendar__month-view__days__day { height: 187px; background: none; border: 0.5px solid #f5f5f5; display:flex; flex-direction: column;
+    padding: 15px; background: #fff;
+}
+
+.calendarContainer .react-calendar__tile--now  abbr {  color: #fff; background-color: #0090DF; width: 32px; height: 32px; display: flex; align-items: center; justify-content: center; border-radius: 50%; position: relative; left: -7px; top: -7px; margin-bottom: 5px; }
+
+/* 예약 박스 */
+.calendarContainer .react-calendar__month-view__days__day > div { margin: 0px -0px; width: calc(100% + 00px); text-align: left;position: relative; display: flex;
+    flex-direction: column; }
+.calendarContainer .react-calendar__month-view__days__day > div > div {  background: #b9b9b9; color: #fff; padding: 6px 10px; border-radius: 2px;overflow: hidden;
+    white-space: nowrap; text-overflow: ellipsis; word-break: break-all; font-size: 12px; order: 1; display: flex; }
+
+@media (min-width: 1000px) and (max-width: 1300px) {
+    .calendarContainer .react-calendar__month-view__days__day { height: 14.38461538461538vw;}
+}
+
+@media (max-width: 700px){
+    
+    .calendarContainer { margin-top: 60px;}
+    .mypagecommon .title h2 { font-size: 20px; }
+    
+.calendarContainer .react-calendar__month-view { margin-top: 30px; }
+    
+    .recentreservation .react-calendar .react-calendar__navigation .react-calendar__navigation__arrow {  font-size: 25px; padding: 1px 0px 0px; border-radius: 50%;
+        width: 30px; height: 30px; line-height: 1em; display: flex; justify-content: center; align-items: stretch; }
+    
+    .recentreservation .react-calendar .react-calendar__navigation .react-calendar__navigation__arrow.react-calendar__navigation__next-button::before ,
+    .recentreservation .react-calendar .react-calendar__navigation .react-calendar__navigation__arrow.react-calendar__navigation__prev-button::after { display: none; }
+    
+
+    .calendarContainer  .react-calendar__viewContainer { width: 100%; overflow: auto; margin: 0 -20px; padding: 0 20px; padding-bottom: 30px; }
+    .calendarContainer  .react-calendar__month-view { width: 600px; }
+    .calendarContainer .react-calendar__month-view__days__day{ height: 111px; padding: 8px; }
+    .calendarContainer .react-calendar__month-view__days__day > div > div { font-size: 10px; }
+
+
+    .calendarContainer .react-calendar__month-view__days abbr { font-size: 12px; }
+    .calendarContainer .react-calendar__tile--now abbr { width: 27px; height: 27px; top: -4px; left: -4px; }
+
+    .recentresevation-component { margin-top: 28px; border-radius: 16px; padding: 20px 15px; display: block; }
+    .recentresevation-component .recentresevation-wrapper { display: block; }
+    .recentresevation-component .recentresevation-wrapper .img-box { margin-right: 0px; }
+    .recentresevation-component .recentresevation-wrapper .img-box img { width: 100%; border-radius: 4px; }
+    .recentresevation-component .recentresevation-wrapper .placeInfo { margin-top: 10px; }
+    .recentresevation-component .recentresevation-wrapper .placeInfo > div {display: flex; }
+    .recentresevation-component .yearContainer { align-items: flex-start; margin-top: 10px; }
+    .recentresevation-component .yearContainer > div { text-align: left; }
+    .recentresevation-component .yearContainer > div > p { color: #0090DF; font-size: 13px; }
+    .recentresevation-component .yearContainer > div > div {  }
+    .recentresevation-component .yearContainer > div > div > div { display: flex; align-items: center; justify-content: flex-start;}
+    .recentresevation-component .yearContainer > div > div > div img {  width: 35px;}
+    .recentresevation-component .yearContainer > div > div > div span { font-size: 13px; }
+    .recentresevation-component .yearContainer > div.gobtn { margin-top: 10px; transform: translate(-5px , 0); transition: all .3s; }
+    .recentresevation-component .yearContainer > div.gobtn:hover { transform: translate(0px , 0); }
+    .recentresevation-component .yearContainer > div.gobtn { text-align: right; width: 100%;}
+    .recentresevation-component .yearContainer > div.gobtn a { display: inline-block; }
+}
+
+.ReactModal__Overlay { z-index: 100; background-color: rgba(0,0,0,0.6) !important; backdrop-filter: blur(15px); }
+.ReactModal__Overlay .ReactModal__Content { inset: unset !important; left: 50% !important; top: 50% !important; transform: translate(-50% ,-50%); overflow: visible !important; padding: 0 !important; }
+.mypageModal { position: relative; max-width: 450px;}
+.mypageModal .modal-content {    padding:40px 30px; max-height: 450px; height: 65vh; margin: auto; overflow: auto; }
+.mypageModal .md-close { position: absolute; bottom: -50px ; left: 50%; transform: translate(-50% , 0); border-radius: 50%; width: 13px; height: 13px; padding: 6px; background: #fff; cursor: pointer; display: block; }
+.mypageModal .md-close span { position: relative; display: block; width: 100%; height: 100%;  transition: all .3s;  }
+.mypageModal .md-close span::after,
+.mypageModal .md-close span::before { content: ""; display: block; width: 100%; height: 1px; background: #000; transform: rotate(45deg); position: absolute; left: 0;top: 50%; }
+.mypageModal .md-close span::before { transform: rotate(-45deg); }
+.mypageModal .md-close:hover  span { transform: rotate(180deg); }
+
+
+.mypageModal .modal-title { font-size: 20px; font-weight: bold; margin-bottom: 20px; }
+.mypageModal img { width: 100%; border-radius: 10px; }
+.mypageModal .modal-description { font-size: 15px; margin-top: 10px; }
+.mypageModal .modal-info {  margin-top: 30px;}
+.mypageModal .modal-info .info-item { margin-top: 10px; }
+.mypageModal .modal-info .info-item strong { font-weight: 500; width: 100px; display: inline-block; color: #999; }
+
+.mypageModal  .modal-location { margin-top: 50; border-top: 1px solid #f5f5f5; padding-top: 20px; }
+
+
+.recentresevation-component { position: relative; }
+.recentresevation-component .ddayplus { padding-top: 30px; }
+.recentresevation-component .dday{ position: absolute; top: 20px; left: 20px; background: #CE4B41; color: #fff; padding: 5px 13px 8px; font-size: 12px; border-radius: 50px;}
+.reservationList { margin-top: 130px; }
+.reservationList .content { display: flex; flex-direction: column; margin-top: 20px; }
+.reservationList .content .recentresevation-component {order: 50;}
+
+
+@media (max-width: 700px){
+.reservationList .content { margin-top: 0; }
+.ReactModal__Overlay .ReactModal__Content { width: 80%;  }
+.mypageModal {  }
+.mypageModal .modal-content { height: 60vh; overflow: auto; }
+.reservationList { margin-top: 100px; }
+
+.reservationList .recentresevation-component .ddayplus { display: flex; }
+.reservationList .recentresevation-component .recentresevation-wrapper { display: flex;  }
+.reservationList .recentresevation-component .recentresevation-wrapper .img-box { width: 30%; }
+.reservationList .recentresevation-component .recentresevation-wrapper .placeInfo { margin: 0; margin-left: 20px; }
+.reservationList .recentresevation-component .recentresevation-wrapper .placeInfo > div span { font-size: 15px; margin-right: 10px; }
+.reservationList .recentresevation-component .recentresevation-wrapper .placeInfo > div img { width: 10px; }
+.reservationList .recentresevation-component .recentresevation-wrapper .placeInfo small { font-size: 13px; }
+.reservationList .recentresevation-component .recentresevation-wrapper .placeInfo span.content { margin-top: 5px; }
+.reservationList .recentresevation-component .yearContainer > div > p{ margin-top: 10px; }
+
+.recentresevation-component .dday { position: absolute; top: 15px; left: 15px; background: #CE4B41; color: #fff; padding: 6px 13px 6px; font-size: 11px; border-radius: 50px;}
+}
+
+.calendarContainer .react-calendar__month-view__days__day > div > div.reserv0 { background: #03BD9E; }
+.calendarContainer .react-calendar__month-view__days__day > div > div.reserv1 { background: #FFBB3B; }
+.calendarContainer .react-calendar__month-view__days__day > div > div.reserv2 { background: #9E5FFF; }
+.calendarContainer .react-calendar__month-view__days__day > div > div.reserv3 { background: #ff411f; }
+.calendarContainer .react-calendar__month-view__days__day > div > div.reserv4 { background: #1f27ff; }
+.calendarContainer .react-calendar__month-view__days__day > div > div.reserv5 { background: #00CFFF; }
+.calendarContainer .react-calendar__month-view__days__day > div > div.reserv6 { background: #FF6F61; }
+.calendarContainer .react-calendar__month-view__days__day > div > div.reserv7 { background: #FFD700; }
+.calendarContainer .react-calendar__month-view__days__day > div > div.reserv8 { background: #FF4500; }
+.calendarContainer .react-calendar__month-view__days__day > div > div.reserv9 { background: #6A5ACD; }
+.calendarContainer .react-calendar__month-view__days__day > div > div.reserv10 { background: #8B0000; }
+.calendarContainer .react-calendar__month-view__days__day > div > div.reserv11 { background: #2E8B57; }
+.calendarContainer .react-calendar__month-view__days__day > div > div.reserv12 { background: #4682B4; }
+.calendarContainer .react-calendar__month-view__days__day > div > div.reserv13 { background: #D2691E; }
+.calendarContainer .react-calendar__month-view__days__day > div > div.reserv14 { background: #FF1493; }
+.calendarContainer .react-calendar__month-view__days__day > div > div.reserv15 { background: #8B008B; }
+.calendarContainer .react-calendar__month-view__days__day > div > div.reserv16 { background: #20B2AA; }
+.calendarContainer .react-calendar__month-view__days__day > div > div.reserv17 { background: #FF6347; }
+.calendarContainer .react-calendar__month-view__days__day > div > div.reserv18 { background: #1E90FF; }
+.calendarContainer .react-calendar__month-view__days__day > div > div.reserv19 { background: #7FFF00; }
+.calendarContainer .react-calendar__month-view__days__day > div > div.reserv20 { background: #DC143C; }
+.calendarContainer .react-calendar__month-view__days__day > div > div.reserv21 { background: #B22222; }
+.calendarContainer .react-calendar__month-view__days__day > div > div.reserv22 { background: #FF8C00; }
+.calendarContainer .react-calendar__month-view__days__day > div > div.reserv23 { background: #483D8B; }
+.calendarContainer .react-calendar__month-view__days__day > div > div.reserv24 { background: #2F4F4F; }
+.calendarContainer .react-calendar__month-view__days__day > div > div.reserv25 { background: #008080; }
+.calendarContainer .react-calendar__month-view__days__day > div > div.reserv26 { background: #FF00FF; }
+.calendarContainer .react-calendar__month-view__days__day > div > div.reserv27 { background: #9932CC; }
+.calendarContainer .react-calendar__month-view__days__day > div > div.reserv28 { background: #32CD32; }
+.calendarContainer .react-calendar__month-view__days__day > div > div.reserv29 { background: #87CEFA; }
+.calendarContainer .react-calendar__month-view__days__day > div > div.reserv30 { background: #FF69B4; }
+
+
+.pagenation-container { display:flex; align-items: center; justify-content: center; margin-top: 50px; }
+.pagenation-container .nextBtn,
+.pagenation-container .prevBtn { width:9px; position:relative; top:3px; margin:0 10px; }
+.pagenation-container .nextBtn img { transform: rotate(-180deg); }
+.pagenation-container img {width:100%;  }
+.pagenation-container .pagenation-wrapper {   display: flex; font-size: 15px; }
+.pagenation-container .pagenation-wrapper * { width: 25px; height: 25px; display: flex; justify-content: center;
+        align-items: center; color:#999999; border-radius:3px;  }
+.pagenation-container .pagenation-wrapper span { background:#0090DF; color:#fff;  }
+
+.serach-form { display:flex; justify-content: center; margin-top:50px; }
+.serach-form input[name="search"] { width:287px; border-radius:5px; border:1px solid #D9D9D9; height:45px; margin-right:5px; display:inline-block; }
+.serach-form input[type="submit"] { height:45px; color:#fff; background:#000; border:none; border-radius:4px; }
+	
+
+.reviewContianer svg { fill: #0090DF; }
+
+/* 사용한 공간 */
+.usedSpace .recentresevation-container > div.top { font-size: 14px; display: flex; margin-bottom: 20px; }
+.usedSpace .recentresevation-container > div.top span { margin-right: 15px; font-weight: 600; }
+.usedSpace .recentresevation-container > div.top p { color: #999999; }
+.usedSpace .recentresevation-component .recentresevation-wrapper .img-box img { width: 225px; border-radius: 9px; }
+.usedSpace .recentresevation-component .recentresevation-wrapper .placeInfo > div span { font-size: 15px; }
+.usedSpace .recentresevation-component .recentresevation-wrapper .placeInfo > div img { width: 12px; }
+.usedSpace .recentresevation-component .recentresevation-wrapper .placeInfo small { font-size: 13px; }
+.usedSpace .recentresevation-component .reviewContianer {  }
+.usedSpace .recentresevation-component .reviewContianer > div { color: #0090DF; text-align: right; font-size: 15px; }
+.usedSpace .recentresevation-component .reviewContianer > div span { display: block; margin-bottom: 10px; }
+.usedSpace .recentresevation-component .reviewContianer > div p { display: block;margin-bottom: 20px; }
+.usedSpace .recentresevation-component .reviewContianer > div a { color: #0090DF; border: 1px solid #0090DF; border-radius: 50px; padding:10px 15px }
+
+
+@media (max-width: 700px){
+
+    .usedSpace .recentresevation-container > div.top {display: block;}
+    .usedSpace .recentresevation-container > div.top span { margin-bottom: 5px;display: block; }
+    .recentresevation-component .recentresevation-wrapper { display: flex; }
+    .usedSpace .recentresevation-component .recentresevation-wrapper .img-box { width: 35%; margin-right: 20px; }
+    .usedSpace .recentresevation-component .recentresevation-wrapper .img-box img { width: 100%;  }
+    .usedSpace .recentresevation-component .recentresevation-wrapper .placeInfo { margin-top: 0; }
+    .usedSpace .recentresevation-component .reviewContianer > div { text-align: left; border-top: 1px solid #D9D9D9; margin: 19px -15px 0; padding: 19px 15px 0; font-size: 13px; }
+    .usedSpace .recentresevation-component .reviewContianer > div a { font-size: 13px; }
+}
+
+
+/* 쿠폰 */
+.useWillcoupon {  }
+.useWillcoupon .notcoupon {  padding: 0px 20px; color: rgb(153, 153, 153); display:block; }
+.useWillcoupon .title { position: relative; }
+.useWillcoupon .tooltipwrap .tooltip { position: absolute; left: 0%; top: -239%; padding: 25px 20px; font-size: 15px; background-color: #fff; box-shadow: 0px 0px 15px rgba(0,0,0,0.2); border-radius: 5px; display: none; }
+.useWillcoupon .tooltipwrap:hover .tooltip { display: block; }
+
+
+.useWillcoupon .tooltipwrap .tooltip::before { content: ''; position: absolute;
+  top: 100%; left: 3%; transform: rotate(180deg); border-width: 6px; border-style: solid; border-color: transparent transparent #fff transparent; border-bottom-color: #fff; }
+
+.useWillcoupon {  }  
+.useWillcoupon .couponList {  border: 1px solid #BFBFBF; padding: 56px 0; margin-top: 30px; border-radius: 15px; }  
+.useWillcoupon .couponList > div { padding: 0 40px; }  
+.useWillcoupon .couponList .swiper-slide {  text-align: center; }  
+.useWillcoupon .couponList .swiper-slide .innerSwiper { padding: 0 15px; }  
+.useWillcoupon .couponList .swiper-slide .innerSwiper > div { position: relative; }  
+.useWillcoupon .couponList .swiper-slide .innerSwiper > div img { width: 100%; }  
+.useWillcoupon .couponList .swiper-slide .innerSwiper > div span { color: #fff; position: absolute; top: 50%; left: 50%; transform: translate(-50% , -50%); font-size: 50px; transform: translate(-63%, -96%); font-size: 32px; font-weight: 600; white-space: nowrap;}  
+.useWillcoupon .couponList .swiper-slide .innerSwiper > p { font-size: 15px; margin-top: 11px;}  
+.useWillcoupon .couponList .swiper-slide .innerSwiper > span { font-size: 15px; color: #8D8D8D; margin-top: 11px; display: block; }  
+.useWillcoupon .couponList .swiper-slide .innerSwiper > span.red { color: #D34A44; } 
+
+.useWillcoupon .swiper-horizontal > .swiper-scrollbar, .swiper-scrollbar.swiper-scrollbar-horizontal { display: none; position: relative; margin-top: 80px; background-color: #E4E4E4;}
+.useWillcoupon .swiper-scrollbar-drag { background: #999; }
+@media (max-width: 1300px){
+    .useWillcoupon .couponList .swiper-slide .innerSwiper > div span {font-size: 2.46vw;}
+}
+@media (max-width: 700px){
+    .useWillcoupon .couponList .swiper-slide .innerSwiper > div span {font-size: 6vw;}
+    .useWillcoupon .title .tooltip{ font-size: 12px; }
+
+
+
+        
+    .useWillcoupon .couponList {  border: none; padding: 0; margin: 0 -15px;  margin-top: 30px; }  
+    .useWillcoupon .couponList > div { padding: 0 15px; }  
+    .useWillcoupon .couponList .swiper-slide .innerSwiper { padding: 10vw 8vw; border-radius: 13px; border: 1px solid #BFBFBF; }  
+    .useWillcoupon .couponList .swiper-slide .innerSwiper > p { font-size: 3.73vw; margin-top: 2.9vw;}  
+    .useWillcoupon .couponList .swiper-slide .innerSwiper > span { font-size: 3.73vw; margin-top: 2.9vw; }  
+    .useWillcoupon .swiper-horizontal > .swiper-scrollbar, .swiper-scrollbar.swiper-scrollbar-horizontal { margin-top: 40px; display: block; }
+
+    
+    .useWillcoupon .notcoupon { border: 1px solid #DCDCDC;  margin:0 15px; border-radius: 16px; padding: 40px 15px; text-align: center; }
+}
+
+.usedcoupon { margin-top: 130px; }
+.usedcoupon .couponList { margin-top: 54px;  }
+.usedcoupon .couponList .row { padding: 20px 30px; border-bottom: 1px solid #F1F1F1; }
+.usedcoupon .couponList .row.title { background: #F1F1F1; }
+.usedcoupon .couponList .row > div { display: flex; width: 100%; align-items: center;}
+.usedcoupon .couponList .row  .num { width: 10%;  }
+.usedcoupon .couponList .row  .title { width: 50%; }
+.usedcoupon .couponList .row  .lastDate {width: 25%; text-align: center;  }
+.usedcoupon .couponList .row  .useyn { width: 15%; text-align: center; color: #8D8D8D; }
+.usedcoupon .couponList .row.title div { color: #8D8D8D; }
+
+@media (max-width: 700px){
+    
+.usedcoupon { margin-top: 80px; }
+.usedcoupon .couponList { margin-top: 30px;  }
+.usedcoupon .couponList .row { padding: 15px 15px; }
+.usedcoupon .couponList .row  .num { width: 9%;  }
+.usedcoupon .couponList .row  .title { width: 30%; }
+.usedcoupon .couponList .row  .lastDate {width: 40%;   }
+.usedcoupon .couponList .row  .useyn { width: 20%; }
+}
+
+.zzimContainer { margin-top: 70px; }
+.zzimContainer h2 { text-align: center; font-size: 25px; font-weight: 600; }
+
+.zzimList { display: flex; flex-wrap: wrap; gap: 30px; margin-top: 60px; }
+.zzimList .zzimcomp { width: calc(33.3333% - 30px); border: 1px solid #D8D8D8; border-radius: 9px; transform: translate(0 , 0px); transition: all .3s;}
+.zzimList .zzimcomp:hover { transform: translate(0 , -20px); }
+.zzimList .zzimcomp .imgcontainer {  }
+.zzimList .zzimcomp .imgcontainer img { width: 100%; }
+.zzimList .zzimcomp .content { padding: 15px; }
+.zzimList .zzimcomp .content .title { margin-bottom: 5px; display: flex; justify-content: space-between; align-items: center;}
+.zzimList .zzimcomp .content .title span { font-size: 15px; font-weight: 600; }
+.zzimList .zzimcomp .content .title svg { fill: #D34A44; font-size: 21px;}
+.zzimList .zzimcomp .content > span { font-size: 14px; }
+.zzimList .zzimcomp .content .hashtag { margin-top: 10px; display: flex;  justify-content: space-between; align-items: center;}
+.zzimList .zzimcomp .content .hashtag span { color: #999999; }
+.zzimList .zzimcomp .content .hashtag svg { fill: #B8B8B8; font-size: 21px; }
+
+
+@media (max-width: 700px){
+    .zzimList { display: block; gap: 0px; margin-top: 40px; }
+    .zzimList .zzimcomp { width: 100%; margin-bottom: 35px; }
+}
+
+
+
+.qna { margin-top: 0px; }
+.qna.mypagecommon > .title { justify-content: center; }
+.qna .qnaList { margin-top: 54px;  }
+.qna .qnaList .row { padding: 20px 30px; border-bottom: 1px solid #F1F1F1; }
+.qna .qnaList .row.title { background: #F1F1F1; }
+.qna .qnaList .row > div { display: flex; width: 100%; align-items: center;}
+.qna .qnaList .row  .num { width: 10%;  }
+.qna .qnaList .row  .title { width: 50%; }
+.qna .qnaList .row  .lastDate {width: 25%; text-align: center;  }
+.qna .qnaList .row  .reply { width: 15%; text-align: center; color: #8D8D8D; }
+.qna .qnaList .row.title div { color: #8D8D8D; }
+
+@media (max-width: 700px){
+    
+.qna { margin-top: 0px; }
+.qna .qnaList { margin-top: 30px;  }
+.qna .qnaList .row { padding: 15px 15px; }
+.qna .qnaList .row  .num { width: 9%;  }
+.qna .qnaList .row  .title { width: 30%; }
+.qna .qnaList .row  .lastDate {width: 40%;   }
+.qna .qnaList .row  .useyn { width: 20%; }
+}

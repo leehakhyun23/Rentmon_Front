@@ -12,10 +12,11 @@ function LoginOn() {
     if (!recent.recentReserve) return;
     let recentrv = recent.recentReserve;
     setRecentReservationData({
-      savefilename: recentrv.spaceimage[0]?.realName || '',
+      savefilename: recentrv.space.spaceimage[0]?.realName || '',
       title: recentrv.space?.title || '',
-      count: recentrv.space?.personnal || 0,
+      count: recentrv.space?.maxpersonnal || 0,
       reservedate: recentrv.reservestart || '',
+      reserveend: recentrv.reserveend || '',
       weather : recent.weather || "",
     });
   }, [recent]); 

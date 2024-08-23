@@ -41,7 +41,6 @@ function SpaceList() {
 
   // 검색값
   const regions = ['서울', '경기', '인천', '부산', '광주', '대구', '대전', '울산', '제주', '강원', '경남', '경북', '전남', '전북'];
-  const personOptions = ['1명', '2명', '3명', '4명', '5명', '6명 이상'];
 
 
   //검색 : 
@@ -93,7 +92,7 @@ function SpaceList() {
 
 
     return (
-      <div className='innerContainer'>
+      <div className='spaceContainer'>
         <div>
 
         검색 Section
@@ -108,15 +107,6 @@ function SpaceList() {
               </select>
             </div>
 
-            <div>
-              <label htmlFor="personnal">인원:</label>
-              <select id="personnal" value={selectedPersonnal} onChange={handlePersonnalChange}>
-                <option value="">인원 수를 선택하세요</option>
-                {personOptions.map((person, index) => (
-                  <option key={index} value={person}>{person}</option>
-                ))}
-              </select>
-            </div>
 
             <div>
               <label htmlFor="calendar">시작 날짜:</label>
@@ -146,8 +136,6 @@ function SpaceList() {
             </select>
           </div>
 
-
-        공간 열람 Section (무한페이지)
           <div className="spaces">
             {
               (spaceList) ? (

@@ -1,5 +1,150 @@
 /* space.css */
 
+
+/* 공간 상세 페이지 컨테이너 */
+.spaceContainer {
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+  background-color: #f9f9f9;
+}
+
+/* 공간 메뉴 */
+.SpaceMenu-container {
+  display: flex;
+  justify-content: space-around;
+  background-color: #f0f0f0;
+  padding: 10px;
+  border-radius: 5px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  margin-bottom: 20px;
+}
+
+.SpaceMenu-item {
+  padding: 10px 20px;
+  background-color: #e0e0e0;
+  border: 1px solid #d0d0d0;
+  border-radius: 4px;
+  text-align: center;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.SpaceMenu-item:hover {
+  background-color: #d0d0d0;
+}
+
+/* 공간 정보 */
+.spaceInfo {
+  margin-top: 20px;
+  background-color: #ffffff;
+  border-radius: 8px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+}
+
+.spaceTitle {
+  font-weight: bold;
+  margin-top: 10px;
+}
+
+.spaceContent {
+  margin-bottom: 15px;
+}
+
+/* 공간 시설 */
+.spaceFacilities {
+  margin-top: 20px;
+  background-color: #ffffff;
+  border-radius: 8px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+}
+
+.spaceFacilities div {
+  margin-bottom: 10px;
+}
+
+.spaceFacilities div:last-child {
+  margin-bottom: 0;
+}
+
+/* 지도 */
+.spaceMap {
+  margin-top: 20px;
+}
+
+#map {
+  width: 100%;
+  height: 400px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+/* 버튼 */
+.spaceButton {
+  margin-top: 20px;
+}
+
+.spaceButton button {
+  background-color: #007bff;
+  color: #ffffff;
+  border: none;
+  border-radius: 4px;
+  padding: 10px 20px;
+  margin-right: 10px;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.spaceButton button:hover {
+  background-color: #0056b3;
+}
+
+/* 리뷰 작성 및 목록 */
+.spaceReviewInsert {
+  margin-top: 20px;
+  background-color: #ffffff;
+  border-radius: 8px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+}
+
+.spaceReviewInsert Box {
+  margin-bottom: 15px;
+}
+
+.spaceReviewInsert img {
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  margin-right: 8px;
+}
+
+.spaceReviewRead {
+  margin-top: 20px;
+}
+
+.spaceReviewRead Box {
+  background-color: #ffffff;
+  border-radius: 8px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  margin-bottom: 10px;
+}
+
+.spaceReviewRead img {
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  margin-right: 8px;
+}
+
+.spaceReviewRead .reviewContent {
+  margin-top: 10px;
+}
+
+
+
   
   .spaces {
     display: flex;
@@ -16,6 +161,7 @@
     transition: transform 0.2s ease-in-out;
   }
   
+
   .space:hover {
     transform: translateY(-10px);
   }
@@ -24,40 +170,18 @@
     width: 100%;
     height: auto;
   }
-  
-  .space span {
-    display: block;
-    padding: 10px;
-    font-size: 16px;
-    color: #333;
-  }
-  
-  .space h3 {
-    margin: 10px;
-    font-size: 18px;
-  }
-  
-  .space ul {
-    padding: 0 10px;
-    list-style-type: none;
-  }
-  
-  .space ul li {
-    margin: 5px 0;
-    font-size: 14px;
-    color: #666;
-  }
 
+/* 
   .SpaceMenu-container {
     display: flex;
     justify-content: space-around;
-    background-color: #f0f0f0; /* Background color similar to the image */
+    background-color: #f0f0f0; 
     padding: 10px;
   }
   
   .SpaceMenu-item {
     padding: 10px 20px;
-    background-color: #e0e0e0; /* Background color for the items */
+    background-color: #e0e0e0;
     border: 1px solid #d0d0d0;
     border-radius: 4px;
     text-align: center;
@@ -68,50 +192,20 @@
   }
   
   .SpaceMenu-item:hover {
-    background-color: #d0d0d0; /* Hover effect */
+    background-color: #d0d0d0; 
   }
 
    .spacetitle {
-    font-size: 24px; /* 글자 크기를 조정합니다 */
-    font-weight: bold; /* 글자 두께를 굵게 합니다 */
-    margin: 20px; /* 상하좌우 여백을 설정합니다 */
-    top: 10px; /* 상단에서 10px 떨어진 위치에 배치합니다 */
-    left: 10px; /* 왼쪽에서 10px 떨어진 위치에 배치합니다 */
-    background-color: white; /* 배경색을 흰색으로 설정합니다 */
-    padding: 10px; /* 내부 여백을 설정합니다 */
-    border-radius: 5px; /* 모서리를 둥글게 설정합니다 */
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* 약간의 그림자를 추가하여 입체감을 줍니다 */
+    font-size: 24px; 
+    font-weight: bold;
+    margin: 20px; 
+    top: 10px; 
+    left: 10px; 
+    background-color: white; 
+    padding: 10px; 
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); 
 }
+*/
 
-.remocon {
-  position: fixed;
-  top: 300px;
-  right: 200px;
-  width: 200px;
-  padding: 20px;
-  background-color: #fff;
-  border: 1px solid #ccc;
-  border-radius: 10px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  z-index: 1000; /* 다른 요소들 위에 위치하도록 설정 */
-}
 
-.remocon h2 {
-  margin: 0 0 10px 0;
-  font-size: 18px;
-}
-
-.remocon button {
-  width: 100%;
-  padding: 10px;
-  background-color: #007bff;
-  color: #fff;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-  font-size: 16px;
-}
-
-.remocon button:hover {
-  background-color: #0056b3;
-}
