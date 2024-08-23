@@ -37,7 +37,6 @@ function SpaceDetail() {
   const [space, setSpace] = useState({});
   const navigate = useNavigate();
   const { sseq } = useParams();
-  const navigate = useNavigate();
 
 
   const [content, setContent] = useState("");
