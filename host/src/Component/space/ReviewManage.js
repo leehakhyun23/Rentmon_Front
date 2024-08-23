@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import Header from '../HeaderFooter/Header'
 import Submenu from '../member/Submenu';
 import '../css/reviewManage.css'
 import '../css/header.css'

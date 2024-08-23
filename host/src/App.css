@@ -23,7 +23,8 @@ img { vertical-align:top; }
 a { display:inline-block; text-decoration:none; color:#555; }
 ul,li { list-style:none; /* list-style-type:none; */ }
 /* select, */
-input[type='text'], 
+
+/* input[type='text'],  */
 input[type='password'],
 input[type='submit'],
 input[type='button'],

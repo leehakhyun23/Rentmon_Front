@@ -5,13 +5,14 @@ import { setSpace } from '../../store/spaceSlice'; // Redux slice import
 import axios from 'axios';
 import '../css/header.css';
 import '../css/basicinfo.css';
+import Header from '../HeaderFooter/Header'
 import jaxios from '../../util/jwtUtil';
 
 function Post_basicInfo() {
     const navigate = useNavigate();
     const dispatch = useDispatch(); // Initialize useDispatch
     const currentSpace = useSelector((state) => state.space); // Get current space from Redux store
-
+    const [address, setAddress] = useState('');
     const [title, setTitle] = useState('');
     const [subtitle, setSubtitle] = useState('');
     const [content, setContent] = useState('');
@@ -163,6 +164,7 @@ function Post_basicInfo() {
                         setProvince(data.sido);
                         setTown(data.sigungu);
                         setVillage(data.roadname);
+                        setAddress(data.address);
                     }
                     if (extraAddressRef.current) {
                         extraAddressRef.current.value = extraAddr;
@@ -194,6 +196,7 @@ function Post_basicInfo() {
             address_detail,
             rList,
             oList,
+            address,
         }));
         console.log("rList"+rList);
         console.log("oList"+oList);
@@ -203,6 +206,7 @@ function Post_basicInfo() {
 
     return (
         <div className='container'>
+            <Header />
             <div className='header2'>기본 정보</div>
             
             <div className='field2'>
