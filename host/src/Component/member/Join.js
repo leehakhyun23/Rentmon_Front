@@ -1,6 +1,6 @@
 import axios from 'axios';
 import React, { useEffect, useRef, useState } from 'react'
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { getCookie, setCookie } from '../../util/cookieUtil';
 import '../css/join.css'
@@ -18,11 +18,20 @@ function Join() {
     const [authNum, setAuthNum] = useState('');
     const [inputAuthNum, setInputAuthNum] = useState('');
     const emailAuth = useRef(null);
+  const host = useSelector(state=>state.host);
+
 
     const navigate = useNavigate();
     const dispatch = useDispatch();
 
     useEffect(()=>{}, [authNum]);
+
+    useEffect(()=>{
+        if(host.hostid){
+          alert("이미 회원가입 하셨습니다.");
+          navigate("/");
+        }
+      },[]);
 
     async function onSubmit() {
         // 입력값 검증
@@ -35,75 +44,24 @@ function Join() {
         if (isEmailCheck === false) { return alert('이메일 인증을 하지않았습니다'); }
     
         try {
-            // 회원가입 요청
             let result = await axios.post("/api/host/join", {
                 hostid: hostid,
                 pwd: pwd,
                 nickname: name,
-                role: "host",
+                email: email,
+                phone: phone,
             });
-    
-            // 서버 응답 처리
-            if (result.data.error) {
-                return setMessage("회원가입 실패. 다시 시도해 주세요.");
+            if(result.data.msg === 'ok'){
+                alert('회원 가입이 완료되었습니다. 로그인하세요');
+                navigate('/'); // 회원가입 후 로그인 페이지로 이동
+            } else {
+                alert("회원가입 실패");
             }
-            if (result.data.msg === 'ok') {
-                let result1 = await axios.post("/api/host/join", {
-                    host: {mseq:result.data.mseq},
-                    hostid: hostid,
-                    pwd: pwd,
-                    nickname: name,
-                    email: email,
-                    phone: phone,
-                });
-                if(result1.data.msg === 'ok'){
-                    alert('회원 가입이 완료되었습니다. 로그인하세요');
-                    navigate('/'); // 회원가입 후 로그인 페이지로 이동
-                } else {
-                    alert("회원가입 실패");
-                }
-            }
-    
         } catch (err) {
             console.error(err);
             setMessage("회원가입 중 오류가 발생했습니다.");
         }
     }
-    //     try {
-    //         let result = await axios.post("/api/host/join", {
-    //             userid: hostid,
-    //             password: pwd,
-    //             role: "host",
-    //           });
-    //         // ('/api/host/join', { hostid, email, pwd, name, phone });
-    //         if (result.data.error) {
-    //             return setMessage("회원가입 실패. 다시 시도해 주세요.");
-    //         }
-    //         if (result.data.msg == 'ok') {
-    //             await axios.post("/api/host/join", {
-    //                 userid: hostid,
-    //                 password: pwd,
-    //                 name: name,
-    //                 email: email,
-    //                 phone: phone
-    //             });
-    //             alert('회원 가입이 완료되었습니다. 로그인하세요');
-    //             navigate('/');
-    //         }
-
-    //         setCookie("token", {
-    //             accessToken: result.data.accessToken,
-    //             refreshToken: result.data.refreshToken,
-    //           }, 1);
-
-    //         dispatch(loginAction(result.data)); // 로그인 액션 디스패치
-    //         navigate("/");
-      
-    //     } catch (err) {
-    //         console.error(err);
-    //         setMessage("회원가입 중 오류가 발생했습니다.");
-    //     }
-    // }
 
     async function handleAuthNum() {
         if (email === '') { return alert('이메일을 입력하세요'); }
@@ -160,7 +118,6 @@ function Join() {
             <div className='joinheader'>
                 <div className="logo1">호스트 회원가입</div>
                 <div className='left'>
-
                 </div>
             </div>
             <div className='joinform'>

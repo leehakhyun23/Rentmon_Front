@@ -86,16 +86,16 @@ input{
   }
 
 .loginbtn{
-    margin-top: 10px;
-    margin-right: 50px;
+        /* margin-top: 10px; */
+    /* margin-right: 30px; */
         border-radius: 5%;
         border: none;
-        width: 100%;
+        width: 120px;
         height: 40px;
         color: aliceblue;
         background-color: #0090DF;
         font-weight: bold;
-    cursor: pointer;
+         cursor: pointer;
 }
 
 .jointext{

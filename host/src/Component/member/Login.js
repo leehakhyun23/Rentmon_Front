@@ -27,8 +27,8 @@ function Login() {
 
   let onLogin = async () => {
     try {
-      if(!hostid) return setLoginMessage("* 아이디를 입력해주세요.");
-      if(!pwd) return setLoginMessage("* 비밀번호를 입력해주세요.");
+      if(!hostid) return setLoginMessage("아이디를 입력해주세요.");
+      if(!pwd) return setLoginMessage("비밀번호를 입력해주세요.");
       let usernameWithRole = hostid + ":host";
       let result = await axios.post("/api/member/login", null, { params: { usernameWithRole, password: pwd } });
 
