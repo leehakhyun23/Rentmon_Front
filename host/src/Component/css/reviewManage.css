@@ -1,0 +1,107 @@
+.rq{
+    width: 1000px;
+    height: 70px;
+    display: flex;
+    margin-top: 20px;
+}
+
+.tab-button{
+    width: 500px;
+    height: 60px;
+    background-color: #ddd;
+    border: none;
+    color: #999999;
+    font-size: 100%;
+}
+
+.rheader{
+    display: flex;
+    align-items: center; /* 수직 정렬 (중앙 정렬) */
+    text-align: center;
+    background-color: #f8f8f8; /* 배경색 (원하는 색으로 변경) */
+    border-bottom: 1px solid #ddd; /* 하단 경계선 (필요시 추가) */
+    height: 70px;
+    width: 100%;
+}
+
+.logo3{
+    color: #0090DF;
+    font-size: 1.5em;
+    font-weight: bold;
+    flex: 1; /* 자유 공간을 차지 */
+    text-align: center;
+}
+
+
+.tab-button.active {
+    background-color: #0090DF; /* 활성화된 버튼의 배경색 */
+    color: #fff; /* 활성화된 버튼의 텍스트 색상 */
+}
+
+.search {
+    display: flex;
+    align-items: center; /* 수직 중앙 정렬 */
+    gap: 10px; /* 요소 간의 간격을 설정 */
+    width: 1000px;
+}
+
+/* input과 button에 스타일 추가 */
+.search input[type="text"] {
+    flex: 1; /* 남은 공간을 차지하도록 설정 */
+    min-width: 0; /* input이 부모 요소의 너비를 초과하지 않도록 설정 */
+}
+
+.search div {
+    margin-left: 10px;
+}
+
+.search button {
+    width: 100px;
+    height: 45px;
+    background-color: #0090DF; /* 활성화된 버튼의 배경색 */
+    color: #fff;
+    border: none;
+}
+
+.container1 {
+    display: flex;
+    justify-content: flex-end; /* 오른쪽 끝으로 정렬 */
+    padding: 10px; /* 필요에 따라 padding 조절 */
+    background-color: white;
+    border: none;
+    width: 1000px;
+  }
+  
+  /* 드롭다운을 감싸는 컨테이너 */
+  .select-container {
+    display: flex;
+    align-items: center; /* 수직 중앙 정렬 */
+    margin-right: 10px;
+    width: 100px;
+    height: 35px;
+  }
+  
+  /* 드롭다운 스타일 조정 */
+  #myDropdown {
+    font-size: 12px; /* 작은 글꼴 크기 설정 */
+    padding: 7px; /* 내부 여백 조정 */
+    border: 1px solid #99999994;
+  }
+
+  .qnaa{
+    margin-top: 10px;
+  }
+
+  .sel{
+    padding: 7px; /* 내부 여백 조정 */
+    border: 1px solid #99999994;
+    width: 450px;
+    height: 50px;
+    margin-top: 20px;
+    border-radius: 5px;
+  }
+
+
+
+
+  

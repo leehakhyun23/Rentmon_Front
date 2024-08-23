@@ -47,7 +47,7 @@ const hostSlice = createSlice({
             },
             logoutAction:(state)=>{
                 state.mseq="";
-                state.userid="";
+                state.hostid="";
                 state.pwd="";
                 state.nickname="";
                 state.email="";
