@@ -35,8 +35,8 @@ function SpaceDetail() {
   const [reportopen, setReportopen] = useState(false);
   const user = useSelector(state => state.user);
   const [space, setSpace] = useState({});
-  const { sseq } = useParams();
   const navigate = useNavigate();
+  const { sseq } = useParams();
 
 
   const [content, setContent] = useState("");
@@ -203,7 +203,7 @@ function SpaceDetail() {
 
         <div className="spaceMap" ref={spaceMapRef}>
           <div className="spaceMainTitle"></div>
-          <KakaoMap address={kakaoAddress} />
+          <KakaoMap address={space.address} />
 
         </div>
 

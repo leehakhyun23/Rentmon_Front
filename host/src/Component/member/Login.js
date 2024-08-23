@@ -27,8 +27,8 @@ function Login() {
 
   let onLogin = async () => {
     try {
-      if(!hostid) return setLoginMessage("* 아이디를 입력해주세요.");
-      if(!pwd) return setLoginMessage("* 비밀번호를 입력해주세요.");
+      if(!hostid) return setLoginMessage("아이디를 입력해주세요.");
+      if(!pwd) return setLoginMessage("비밀번호를 입력해주세요.");
       let usernameWithRole = hostid + ":host";
       let result = await axios.post("/api/member/login", null, { params: { usernameWithRole, password: pwd } });
 
@@ -41,7 +41,7 @@ function Login() {
         let logindata = await jaxios.get("/api/host/gethostinfo",{params:{hostid:hostid}});
         dispatch(loginAction(logindata.data));
         if(!logindata.data){
-          return setLoginMessage("* 관리자에게 문의해주세요.");
+          return setLoginMessage("관리자에게 문의해주세요.");
         }
 
         alert('로그인이 완료되었습니다.');
@@ -63,11 +63,6 @@ function Login() {
         <div className='text1'>호스트 로그인</div>
         <div className='text2'>호스트센터를 이용하시려면 별도의 호스트 회원가입이 필요합니다.</div> <br />
         <div className='form'>
-          <div className="sns-btns">
-            <a href="http://localhost:8070/host/sns/kakaostart">Kakao Login</a>
-            <a href="http://localhost:8070/host/sns/naverstart">Naver Login</a>
-            <a href="http://localhost:8070/host/sns/googlestart">Google Login</a>
-            <div className='or'>또는</div>
             <div className='hostid'>
             <input type="text" name="hostid" value={hostid} onChange={
               (e) => { setHostid(e.currentTarget.value) }
@@ -82,9 +77,16 @@ function Login() {
               <div className='jointext'>아직 렌트몬 호스트가 아니신가요?</div>
               <div className='joinbtn' onClick={() => { navigate('/Join') }}>호스트 회원가입</div>
             </div>
+            <div className='snsLogin'>
+                <span>SNS 로그인</span>
+                <div className='snsbtncontainer'>
+                  <a href="http://localhost:8070/host/sns/googlestart"><img src='/img/google.png' alt='google'/></a>
+                  <a href="http://localhost:8070/host/sns/kakaostart"><img src='/img/kakao.png' alt='kakao'/></a>
+                  <a href="http://localhost:8070/host/sns/naverstart"><img src='/img/naver.png' alt='naver' /></a>
+                </div>
+            </div>
           </div>
-        </div>
-      </div>
+            </div>
     </article>
   )
 }

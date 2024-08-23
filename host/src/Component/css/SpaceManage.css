@@ -1,0 +1,138 @@
+/* 전체 리스트 스타일 */
+.space-list {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center; /* 카드들을 수평으로 가운데 정렬 */
+    gap: 20px; /* 카드 간의 간격 */
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+/* 리스트 항목 스타일 */
+.space-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border: 1px solid #ddd;
+    padding: 10px;
+    border-radius: 5px;
+    width: 300px; /* 카드 너비 고정 */
+    height: 400px; /* 카드 높이 고정 */
+    text-align: center;
+    /* box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); 카드 그림자 */
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    overflow: hidden; /* 내용이 카드 밖으로 넘치는 것을 방지 */
+}
+
+/* 리스트 항목 호버 스타일 */
+.space-item:hover {
+    transform: scale(1.05); /* 호버 시 확대 효과 */
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); /* 호버 시 그림자 강화 */
+}
+
+/* 이미지 스타일 */
+.space-image {
+    width: 100%; /* 이미지가 카드 너비에 맞게 조절됨 */
+    height: 200px; /* 고정된 높이 */
+    object-fit: cover; /* 이미지가 박스에 맞게 잘림 */
+    border-radius: 5px; /* 이미지 모서리 둥글게 */
+    margin-bottom: 10px; /* 이미지와 텍스트 사이의 간격 */
+}
+
+/* 제목 스타일 */
+.space-title {
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+/* 버튼 컨테이너 스타일 */
+.button-container {
+    display: flex; /* 버튼을 가로로 정렬 */
+    justify-content: center; /* 버튼을 중앙에 정렬 */
+    gap: 5px; /* 버튼 간의 간격 */
+    margin-top: auto; /* 버튼 컨테이너를 카드 하단에 위치시킴 */
+}
+
+/* 수정 버튼 스타일 */
+.button {
+    background-color: #007bff; /* 파란색 버튼 배경색 */
+    border: none; /* 기본 테두리 제거 */
+    color: white; /* 글자 색상 */
+    padding: 10px 20px; /* 패딩 추가 */
+    text-align: center; /* 텍스트 정렬 */
+    text-decoration: none; /* 텍스트 장식 제거 */
+    display: inline-block; /* 인라인 블록으로 설정 */
+    font-size: 16px; /* 글자 크기 */
+    border-radius: 5px; /* 모서리 둥글게 */
+    cursor: pointer; /* 마우스 커서 포인터로 변경 */
+    transition: background-color 0.3s ease, transform 0.3s ease; /* 애니메이션 효과 */
+}
+
+.button:hover {
+    background-color: #0056b3; /* 호버 상태의 배경색 */
+    transform: scale(1.05); /* 호버 시 버튼 확대 효과 */
+}
+
+.button:active {
+    background-color: #004080; /* 클릭 시 배경색 */
+    transform: scale(0.95); /* 클릭 시 버튼 축소 효과 */
+}
+
+/* 삭제 버튼 스타일 */
+.button1 {
+    background-color: #dc3545; /* 빨간색 버튼 배경색 */
+    border: none; /* 기본 테두리 제거 */
+    color: white; /* 글자 색상 */
+    padding: 10px 20px; /* 패딩 추가 */
+    text-align: center; /* 텍스트 정렬 */
+    text-decoration: none; /* 텍스트 장식 제거 */
+    display: inline-block; /* 인라인 블록으로 설정 */
+    font-size: 16px; /* 글자 크기 */
+    border-radius: 5px; /* 모서리 둥글게 */
+    cursor: pointer; /* 마우스 커서 포인터로 변경 */
+    transition: background-color 0.3s ease, transform 0.3s ease; /* 애니메이션 효과 */
+}
+
+.button1:hover {
+    background-color: #c82333; /* 호버 상태의 배경색 */
+    transform: scale(1.05); /* 호버 시 버튼 확대 효과 */
+}
+
+.button1:active {
+    background-color: #a71d2a; /* 클릭 시 배경색 */
+    transform: scale(0.95); /* 클릭 시 버튼 축소 효과 */
+}
+
+/* 등록 버튼 스타일 */
+.register-button-container {
+    display: flex;
+    justify-content: center; /* 버튼을 수평으로 가운데 정렬 */
+    margin-bottom: 20px; /* 버튼과 아래 콘텐츠 사이의 간격 */
+    margin-top: 20px;
+}
+
+.register-button {
+    background-color: #007bff; /* 버튼 배경색 */
+    border: none; /* 기본 테두리 제거 */
+    color: white; /* 글자 색상 */
+    padding: 15px 30px; /* 버튼의 패딩 추가 (위아래 15px, 좌우 30px) */
+    text-align: center; /* 텍스트 정렬 */
+    text-decoration: none; /* 텍스트 장식 제거 */
+    display: inline-block; /* 인라인 블록으로 설정 */
+    font-size: 18px; /* 글자 크기 */
+    border-radius: 5px; /* 모서리 둥글게 */
+    cursor: pointer; /* 마우스 커서 포인터로 변경 */
+    transition: background-color 0.3s ease, transform 0.3s ease; /* 애니메이션 효과 */
+    margin: 0; /* 버튼과 주변 요소 사이의 기본 마진 제거 */
+}
+
+.register-button:hover {
+    background-color: #0056b3; /* 호버 상태의 배경색 */
+    transform: scale(1.05); /* 호버 시 버튼 확대 효과 */
+}
+
+.register-button:active {
+    background-color: #004080; /* 클릭 시 배경색 */
+    transform: scale(0.95); /* 클릭 시 버튼 축소 효과 */
+}

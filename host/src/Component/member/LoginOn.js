@@ -1,32 +1,45 @@
-// import React, { useEffect, useState } from 'react'
-// import { useSelector } from 'react-redux';
+import React, { useEffect, useState } from 'react'
+import { useDispatch, useSelector } from 'react-redux';
 // import MyInfo from './MyInfo';
 // import RecentReservation from './RecentReservation'
 // import SidebarMyInfo from './SidebarMyInfo'
+import LogoutButton from './LogoutButton';
+import { useNavigate } from 'react-router-dom';
+import { logoutAction } from '../../store/HostSlice';
+import { removeCookie } from '../../util/cookieUtil';
+import SidebarMyInfo from './SidebarMyInfo';
+import '../css/header.css';
 
-// function LoginOn() {
-//   let host = useSelector(state => state.host);
-//   let recent =useSelector(state => state.recent);
-//   const [recentReservationData , setRecentReservationData] = useState({});
-//   useEffect(() => {
-//     if (!recent.recentReserve) return;
-//     let recentrv = recent.recentReserve;
-//     setRecentReservationData({
-//       savefilename: recentrv.spaceimage[0]?.realName || '',
-//       title: recentrv.space?.title || '',
-//       count: recentrv.space?.personnal || 0,
-//       reservedate: recentrv.reservestart || '',
-//       weather : recent.weather || "",
-//     });
-//   }, [recent]); 
-//   return (
-//     <div className='logOn scrollbar'>
-//       {/* 상위 내정보 */}
-//       {/* <SidebarMyInfo username = {user.name} profileimg={user.profileimg} /> */}
-//       <RecentReservation rs={recentReservationData}/>
-//       <MyInfo host={host}/>
-//     </div>
-//   )
-// }
 
-// export default LoginOn
+function LoginOn() {
+    const navigate = useNavigate(); 
+    // const isLoggedIn = true;
+    const dispatch = useDispatch();
+    const host = useSelector(state => state.host);
+    const isLoggedIn = Boolean(host.hostid);
+
+  
+  
+    function onLogout(){
+      dispatch( logoutAction() );
+      removeCookie("host");
+      navigate('/'); 
+  }
+
+  return (
+    <div className='logOn scrollbar'>
+      {/* 상위 내정보 */}
+      {/* <RecentReservation rs={recentReservationData}/> */}
+          {isLoggedIn ? (
+               <div className='header-content'>
+               <SidebarMyInfo className="sidebar-info" username={host.nickname} />
+               <LogoutButton onLogout={onLogout} className='logoutbtn' />
+           </div>
+            ) : (
+                <button onClick={() => navigate('/login')} className='loginbtn' >로그인</button>
+            )}
+    </div>
+  )
+}
+
+export default LoginOn

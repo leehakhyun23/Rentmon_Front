@@ -1,12 +1,16 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useNavigate } from "react-router-dom";
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { setSpace } from '../../store/spaceSlice';
 import '../css/header.css';
 import '../css/cate.css';
+import '../css/reviewManage.css'
+import Header from '../HeaderFooter/Header'
+import Submenu from '../member/Submenu';
 
 
 function Post_cate() {
+    const host = useSelector(state => state.host);
     const dispatch = useDispatch();
     const navigate = useNavigate();
     const [cnum, setCnum] = useState("");  // 상태를 cnum으로 설정
@@ -23,9 +27,23 @@ function Post_cate() {
         navigate('/Post_basicInfo'); // 다음 페이지로 이동
     }
 
+    useEffect(() => {
+        // 정보를 수정할 때만 경고를 띄우도록 수정
+        if (host.hostid || host.provider !== 'kakao') {
+            if (!host.hostid) {
+                alert('로그인이 필요한 서비스입니다');
+                navigate('/');
+            }
+        }
+    }, [host, navigate]);
+
+
     return (
         <div>
-            <div className='header2'>공간 유형 선택</div>
+        <div className='rheader'>
+        <div className='logo3'>공간 유형 선택</div>
+        <div className='left'><Submenu /></div>
+        </div>
             <div className='content'>
                 11개의 공간 용도(파티룸, 연습실, 촬영스튜디오, 스터디룸, 공연장, 라이브방송, 세미나실, 악기연습실, 운동시설, 갤러리, 캠핑) 중 1개의 용도 안에서만 유형을 선택할 수 있습니다.<br />
                 선택한 공간 용도 안에서, 등록한 공간에 적합한 유형은 모두 선택이 가능합니다.<br />

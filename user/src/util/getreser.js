@@ -19,7 +19,7 @@ export const getReserveInfo= async(userid ,dispatch)=>{
     if(recentrerve.data){
       let space = recentrerve.data.space;
       dispatch(recentReserveAction({recentReserve: recentrerve.data}));
-      city = await getCoordinates(space.province + " " + space.town + " " + space.village);
+      city = await getCoordinates(space.address);
       
       if(!city){
         city = "Seoul";

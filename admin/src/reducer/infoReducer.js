@@ -1,6 +1,6 @@
 import React from 'react';
 
-const userReducer = () => {
+const infoReducer = () => {
     return (
         <div>
             
@@ -8,4 +8,4 @@ const userReducer = () => {
     );
 };
 
-export default userReducer;
+export default infoReducer;

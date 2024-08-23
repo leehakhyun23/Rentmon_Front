@@ -42,9 +42,9 @@ function SpaceList() {
   const [sortOption, setSortOption] = useState(0);
 
   // 카테고리 들고오기
-  useEffect(()=>{
+  useEffect(() => {
     getCategoryarr();
-},[]);
+  }, []);
 
   // 무한스크롤
   useEffect(() => {
@@ -60,6 +60,12 @@ function SpaceList() {
 
   // 검색값(지역)
   const regions = ['서울', '경기', '인천', '부산', '광주', '대구', '대전', '울산', '제주', '강원', '경남', '경북', '전남', '전북'];
+
+  const hours = [];
+  for (let i = 0; i < 24; i++) {
+    hours.push(i < 10 ? `0${i}` : `${i}`);
+  }
+
   let getCategoryarr = async () => {
     try {
       let result = await jaxios.get("/api/user/getCategoryList");
@@ -71,7 +77,7 @@ function SpaceList() {
 
 
   //검색(값입력) : 
-  const handleCategoryChange = (event)=>{
+  const handleCategoryChange = (event) => {
     setSearchCnum(event.target.value);
   }
 
@@ -84,6 +90,7 @@ function SpaceList() {
   }
   const handleStartTimeChange = (event) => {
     const time = event.target.value;
+    console.log()
     setStartTime(time);
     updateReservationTimes(searchDate, time, endTime);
   };
@@ -95,19 +102,11 @@ function SpaceList() {
 
   const updateReservationTimes = (date, startTime, endTime) => {
     if (date && startTime) {
-      setSearchRstart(`${date} ${startTime}:00`);
+      setSearchRstart(`${date} ${startTime}:00:00`);
     }
     if (date && endTime) {
-      setSearchRend(`${date} ${endTime}:00`);
+      setSearchRend(`${date} ${endTime}:00:00`);
     }
-  };
-
-
-  // 검색 했을 때(새롭게 GetSpaceList)
-  const handleSearch = () => {
-    setPage(0);
-    setSpaceList([]);
-    loadMoreSpaces();
   };
 
   // 필터링 : 
@@ -121,7 +120,7 @@ function SpaceList() {
     try {
       const params = {
         page,
-        cnum : searchCnum,
+        cnum: searchCnum,
         searchword: search.searchWord,
         province: searchRegion,
         reservestart: searchRstart,
@@ -131,7 +130,7 @@ function SpaceList() {
 
       const result = await jaxios.get(`/api/space/getSpaceList`, { params });
       console.log(result);
-    
+
       setSpaceList(prevSpaces => [...prevSpaces, ...result.data]);
       console.log(page);
 
@@ -166,52 +165,70 @@ function SpaceList() {
   return (
     <div className='spaceContainer innerContainer'>
       <div className="searchSection">
-        <div className="searchCategory">
-          <label htmlFor="category">카테고리 : </label>
-          <select id="category" value={searchCnum} onChange={handleCategoryChange}>
-            <option value="">카테고리를 선택하세요</option>
-            {category.map((category, index) => (
-              <option key={index} value={category.cnum}>{category.name}</option>
-            ))}
-          </select>
-        </div>
+        <div className="searchRow">
+          <div className="searchCategory">
+            <label htmlFor="category">카테고리 : </label>
+            <select id="category" value={searchCnum} onChange={handleCategoryChange}>
+              <option value="">카테고리를 선택하세요</option>
+              {category.map((category, index) => (
+                <option key={index} value={category.cnum}>{category.name}</option>
+              ))}
+            </select>
+          </div>
 
-        <div className="searchRegion">
-          <label htmlFor="region">지역:</label>
-          <select id="region" value={searchRegion} onChange={handleRegionChange}>
-            <option value="">지역을 선택하세요</option>
-            {regions.map((region, index) => (
-              <option key={index} value={region}>{region}</option>
-            ))}
-          </select>
-        </div>
+          <div className="searchRegion">
+            <label htmlFor="region">지역 : </label>
+            <select id="region" value={searchRegion} onChange={handleRegionChange}>
+              <option value="">지역을 선택하세요</option>
+              {regions.map((region, index) => (
+                <option key={index} value={region}>{region}</option>
+              ))}
+            </select>
+          </div>
 
-        <div className="searchTime">
-          <label htmlFor="calendar">예약일 : </label>
-          <input type="date" id="calendar" value={searchDate} onChange={handleRDateChange} />
-          <label htmlFor="calendar">시작시간 : </label>
+          <div className="spaceFilter">
+            <label htmlFor="sort">정렬 : </label>
+            <select id="sort" value={sortOption} onChange={handleSortChange}>
+              <option value="0">최신순</option>
+              <option value="1">가격순</option>
+              <option value="2">가격역순</option>
+              {/* <option value="3">찜순</option>
+            <option value="4">별점순</option> */}
+            </select>
+          </div>
+        </div>
+        <div className="searchRow">
+          <div className="searchTime">
+            <label htmlFor="calendar">예약일 : </label>
+            <input type="date" id="calendar" value={searchDate} onChange={handleRDateChange} />
+            {/* <label htmlFor="calendar">시작시간 : </label>
           <input type="time" id="getTime" value={startTime} onChange={handleStartTimeChange} />
           <label htmlFor="calendar">종료시간 : </label>
-          <input type="time" id="getTime" value={endTime} onChange={handleEndTimeChange} />
-        </div>
+          <input type="time" id="getTime" value={endTime} onChange={handleEndTimeChange} /> */}
+            <label htmlFor="startHour">시작시간 : </label>
+            <select id="startHour" value={startTime} onChange={handleStartTimeChange}>
+              <option value="">시간 선택</option>
+              {hours.map(hour => (
+                <option key={hour} value={hour}>{hour}</option>
+              ))}
+            </select>
 
-        <div className="spaceFilter">
-          <label htmlFor="sort"></label>
-          <select id="sort" value={sortOption} onChange={handleSortChange}>
-            <option value="0">최신순</option>
-            <option value="1">가격순</option>
-            <option value="2">가격역순</option>
-            {/* <option value="3">찜순</option>
-            <option value="4">별점순</option> */}
-          </select>
-        </div>
+            <label htmlFor="endHour">종료시간 : </label>
+            <select id="endHour" value={endTime} onChange={handleEndTimeChange}>
+              <option value="">시간 선택</option>
+              {hours.map(hour => (
+                <option key={hour} value={hour}>{hour}</option>
+              ))}
+            </select>
+          </div>
 
-        <button id="searchButton" onClick={async () => {
-          console.log(`검색:${search.searchCategory} ${search.searchWord}, ${searchRegion}, ${searchRstart}, ${searchRend}`)
-          searchSpaces();
-        }}>
-          검색
-        </button>
+          <button id="searchButton" onClick={async () => {
+            console.log(`검색:${search.searchCategory} ${search.searchWord}, ${searchRegion}, ${searchRstart}, ${searchRend}`)
+            searchSpaces();
+          }}>
+            검색
+          </button>
+        </div>
       </div>
 
       <div className="spaces">

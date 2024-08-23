@@ -1,0 +1,114 @@
+/* src/css/ReservationManage.css */
+
+/* 전체 컨테이너 스타일 */
+.reservationManageContainer {
+    padding: 20px;
+    background-color: #f9f9f9; /* 배경색 추가 */
+    border-radius: 8px; /* 모서리 둥글게 */
+    /* box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); 그림자 추가 */
+    width: 250px;
+    height: 50px;
+}
+
+/* 검색 및 드롭다운 컨테이너 스타일 */
+.searchAndFilterContainer {
+    margin-bottom: 20px;
+    display: flex;
+    flex-direction: column;
+}
+
+/* 검색 컨테이너 스타일 */
+.searchContainer {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+/* 검색 입력과 버튼 스타일 */
+.searchContainer input {
+    padding: 8px;
+    border: 2px solid #ddd;
+    border-radius: 4px;
+    font-size: 16px;
+    margin-right: 20px; /* 간격을 늘림 */
+    width: 250px;
+    box-sizing: border-box;
+    background-color: #fff;
+    color: #333;
+}
+
+.searchbutton {
+    padding: 8px 16px;
+    border: 2px solid #0090DF;
+    border-radius: 4px;
+    background-color: #0090DF;
+    color: #fff;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    box-sizing: border-box;
+}
+
+.searchbutton:hover {
+    background-color: #0057b3d8; /* 버튼 호버 색상 변경 */
+}
+
+/* 필터 드롭다운 스타일 */
+.filterContainer {
+    width: 200px; /* 너비를 더 넓게 설정 */
+    height: 50px; /* 높이 설정 */
+    display: flex;
+    align-items: center;
+    margin-left: auto; /* 오른쪽으로 밀어내기 */
+    margin-right: 20px;
+}
+
+/* 드롭다운 스타일 */
+.filterContainer select {
+    padding: 8px;
+    border: 2px solid #ddd;
+    border-radius: 4px;
+    font-size: 16px;
+    margin-left: 10px;
+    width: 200px;
+    box-sizing: border-box;
+    background-color: #fff;
+    color: #333;
+}
+
+/* 테이블 스타일 */
+.reservationTable {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px; /* 테이블 위 여백 추가 */
+}
+
+/* 테이블 헤더 및 데이터 스타일 */
+.reservationTable th,
+.reservationTable td {
+    border: 2px solid #ddd;
+    padding: 12px;
+    text-align: left;
+}
+
+.reservationTable th {
+    background-color: #0090DF;
+    color: #fff;
+    font-weight: bold;
+}
+
+/* 테이블 행 스타일 */
+.reservationTable tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+
+/* 테이블 행 호버 스타일 */
+.reservationTable tr:hover {
+    background-color: #ddd;
+}
+
+.hi {
+    width:200px;
+    height: 50px;
+    margin-left: 10px;
+}

@@ -1,14 +1,14 @@
 import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom';
 
-function MypagePaging({page ,url}) {
+function MypagePaging({page ,url, currentPage}) {
     const [pagerow , setPageRow] = useState([]);
     useEffect(()=>{
         setPageRow([]);
-       
         for(let i =page.firstnum; i<= page.lastnum; i++){
             setPageRow(prev=>[...prev, i]);
         }
+        console.log(page);
     },[page])
   return (
       <div className="pagenation-container">

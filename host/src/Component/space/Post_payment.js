@@ -2,34 +2,33 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { setSpace } from '../../store/spaceSlice'; // 경로 조정 필요
+import Header from '../HeaderFooter/Header'
+import '../css/reviewManage.css'
 import '../css/header.css';
 import '../css/payment.css';
 import axios from 'axios'; 
 import Cookies from 'js-cookie';
+import Submenu from '../member/Submenu';
 
 function Post_payment() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  
 
   // Redux 상태에서 현재 정보 가져오기
   const currentSpace = useSelector((state) => state.space);
-
+  const hostid = useSelector((state) => state.host.hostid);
   // 폼 입력을 위한 로컬 상태
   const [bank, setBank] = useState('');
   const [accountnum, setAccountnum] = useState('');
-  const [hostid, setHostid] = useState('');
+  const [localHostid, setLocalHostid] = useState('');
 
   useEffect(() => {
-    // 쿠키에서 hostid 가져오기
-    const hostidCookie = Cookies.get('hostid');
-    if (!hostidCookie || hostidCookie.trim() === '') {
-      console.log("쿠키 못받아왔움" );
-      // hostid가 존재하지 않거나 빈 문자열인 경우 처리
-      setHostid("q"); // 필요에 따라 적절한 값을 설정하세요
-    } else {
-      setHostid(hostidCookie);
+    // Redux에서 가져온 hostid를 로컬 상태로 설정
+    if (hostid) {
+      setLocalHostid(hostid);
     }
-  }, []);
+  }, [hostid]);
 
   // 입력 값 업데이트 핸들러
   const handleBankChange = (event) => {
@@ -60,6 +59,7 @@ function Post_payment() {
         address_detail: currentSpace.address_detail || '',
         starttime: currentSpace.starttime,
         endtime: currentSpace.endtime,
+        address: currentSpace.address,
       });
   
       // Extract sseq from response
@@ -97,12 +97,16 @@ function Post_payment() {
   };
 
   return (
+    <article>
+        <div className='rheader'>
+                <div className='logo3'>예약/정산 정보</div>
+                <div className='left'><Submenu /></div>
+            </div>
     <div className='form-container'>
-      <div className='header2'>예약/정산 정보</div>
       <div className='select-container'>
         <label className='option-label'>
           은행
-          <select value={bank} onChange={handleBankChange}>
+          <select className='selectbank' value={bank} onChange={handleBankChange}>
             <option value="">선택하세요</option>
             <option value="1">한국은행</option>
             <option value="2">신한은행</option>
@@ -142,6 +146,7 @@ function Post_payment() {
         <button className="but" onClick={onSubmit}>다음</button>
       </div>
     </div>
+    </article>
   );
 }
 

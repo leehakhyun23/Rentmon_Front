@@ -1,41 +1,58 @@
 /* 기본정보 페이지 스타일링 */
 .container {
-    max-width: 900px; /* 컨테이너의 최대 너비 설정 */
+    /* max-width: 900px; 컨테이너의 최대 너비 설정 */
     margin: 0 auto; /* 중앙 정렬 */
-    padding: 20px;
-    background-color: #f9f9f9; /* 배경색 설정 */
+    /* padding: 20px; */
+    background-color: white; /* 배경색 설정 */
     border-radius: 8px; /* 컨테이너의 모서리 둥글게 */
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* 컨테이너 그림자 */
-    
+    /* box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); 컨테이너 그림자 */
 }
-body{
+
+/* Header 고정 */
+.header2 {
+    background: #fff;
+    padding: 20px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1000;
+}
+
+/* 컨테이너 스타일 */
+.containerhak {
+    max-width: 900px;
+    margin: 80px auto 0; /* 헤더 높이만큼 마진을 추가하여 헤더가 컨텐츠에 영향을 미치지 않도록 설정 */
+    padding: 20px;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    /* box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); */
+}
+
+/* 필드 그룹을 두 개씩 같은 줄에 배치 */
+.field1, .field2 {
+    width: 500px; /* 필드의 너비를 500px로 설정 */
+    box-sizing: border-box; /* 테두리와 패딩을 포함한 박스 크기 조정 */
     margin-left: 20px;
+    margin-top: 30px;
 }
 
 /* 필드 그룹을 두 개씩 같은 줄에 배치 */
 .field-group {
     display: flex;
-    flex-wrap: wrap; /* 항목을 여러 줄로 배치 가능하게 함 */
-    gap: 20px; /* 항목 간의 간격 */
-    margin-bottom: 20px; /* 항목 간의 여백 */
+    flex-wrap: wrap;
+    gap: 20px;
+    margin-bottom: 20px;
 }
 
-/* 각 필드 */
-.field1 {
+/* 각 필드가 50%의 너비를 가지도록 설정 */
+.field1, .field2 {
     flex: 1 1 calc(50% - 20px); /* 두 개의 필드가 한 줄에 배치되도록 설정 */
-    box-sizing: border-box; /* 테두리와 패딩을 포함한 박스 크기 조정 */
-    margin-left: 20px;
-    font-size: 120%;
-}
-.field2 {
-    flex: 1 1 calc(50% - 20px); /* 두 개의 필드가 한 줄에 배치되도록 설정 */
-    box-sizing: border-box; /* 테두리와 패딩을 포함한 박스 크기 조정 */
-    margin-left: 20px;
-    margin-top: 30px;
 }
 /* 입력 요소 스타일 */
 input[type="text"], textarea {
-    width: 70%; /* 입력 요소의 너비를 100%로 설정 */
+    /* width: 70%; 입력 요소의 너비를 100%로 설정 */
     padding: 12px; /* 패딩 증가 */
     border: 2px solid #ddd;
     border-radius: 4px;
@@ -44,30 +61,38 @@ input[type="text"], textarea {
     font-size: 16px; /* 폰트 사이즈 조정 */
     font-family: "Noto Sans KR", sans-serif; /* 폰트 적용 */
 }
-
+/* 입력 요소 스타일 */
+input[type="text"], textarea {
+    width: 100%;
+    padding: 12px;
+    border: 2px solid #ddd;
+    border-radius: 4px;
+    box-sizing: border-box;
+    margin-top: 8px;
+    font-size: 16px;
+    font-family: "Noto Sans KR", sans-serif;
+}
 
 /* 이미지 스타일 */
 img {
     max-width: 100%;
     height: auto;
     display: block;
-    border-radius: 4px; /* 이미지 모서리 둥글게 */
-    margin-top: 10px; /* 상단 여백 추가 */
-}
-.binput{
-    margin-left: 30px;
-    margin-bottom: 10px;
+    border-radius: 4px;
+    margin-top: 10px;
 }
 
+/* 버튼 스타일 */
+.but2 {
+    display: flex; /* Flexbox 컨테이너로 설정 */
+    justify-content: center; /* 버튼들을 수평으로 가운데 정렬 */
+    gap: 15px; /* 버튼들 사이의 간격 (15px로 설정) */
+    margin-top: 20px; /* 버튼 그룹 상단 여백 */
+    margin-bottom: 20px; /* 버튼 그룹 하단 여백 */
+}
 /* 응답형 디자인 */
 @media (max-width: 768px) {
-    .field-group {
-        flex-direction: column; /* 화면이 좁을 때 필드를 세로로 배치 */
+    .field1, .field2 {
+        flex: 1 1 100%;
     }
-
-    .field1 {
-        flex: 1 1 100%; /* 필드가 100% 너비를 차지하도록 설정 */
-    }
-
-
 }
