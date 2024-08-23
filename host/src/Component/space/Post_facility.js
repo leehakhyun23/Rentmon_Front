@@ -5,6 +5,7 @@ import { setSpace } from '../../store/spaceSlice'; // Import your Redux slice
 import '../css/header.css';
 import '../css/facility.css';
 import Header from '../HeaderFooter/Header'
+import Submenu from '../member/Submenu';
 
 function Post_facility() {
   const navigate = useNavigate();
@@ -57,8 +58,11 @@ function Post_facility() {
 
   return (
     <div>
-      <Header />
-      <div className='header2'>시설 선택</div>
+      <div className='rheader'>
+        <div className='logo3'>시설 선택</div>
+        <div className='left'><Submenu /></div>
+
+      </div>
       <div className="facility-container">
         {[
           'TV/프로젝터',

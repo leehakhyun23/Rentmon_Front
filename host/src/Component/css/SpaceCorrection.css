@@ -49,7 +49,7 @@ input[type="text"] {
     border-radius: 4px;
     margin-bottom: 1rem;
     width: 100%;
-    max-width: 400px; /* 적당한 최대 너비 설정 */
+    /* max-width: 400px; 적당한 최대 너비 설정 */
 }
 
 /* 버튼 컨테이너 스타일 */

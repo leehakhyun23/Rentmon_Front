@@ -22,8 +22,8 @@ import Col_facility from "./Component/space/Col_facility";
 import Col_useInfo from "./Component/space/Col_useInfo";
 import LoginOn from "./Component/member/LoginOn";
 import LogoutButton from "./Component/member/LogoutButton";
-import ReviewManage from "./Component/space/ReviewManage";
 import Report from "./Component/space/Report";
+
 
 function App() {
   return (

@@ -8,6 +8,7 @@ import '../css/header.css';
 import '../css/payment.css';
 import axios from 'axios'; 
 import Cookies from 'js-cookie';
+import Submenu from '../member/Submenu';
 
 function Post_payment() {
   const navigate = useNavigate();
@@ -97,8 +98,10 @@ function Post_payment() {
 
   return (
     <div className='form-container'>
-      <Header />
-      <div className='header2'>예약/정산 정보</div>
+      <div className='rheader'>
+            <div className='logo3'>예약/정산</div>
+            <div className='left'><Submenu /></div>
+             </div>
       <div className='select-container'>
         <label className='option-label'>
           은행
