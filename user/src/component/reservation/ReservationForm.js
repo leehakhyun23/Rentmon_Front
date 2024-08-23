@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useSelector } from 'react-redux'
 import Calendar from "react-calendar";
-import 'react-calendar/dist/Calendar.css';
 
 import './style/reservation.css';
 import { useParams, useLocation, useNavigate } from 'react-router-dom';
@@ -23,11 +22,12 @@ const settings = {
 }
 
 function ReservationForm({ props }) {
-    
+
     // 기본자원
     let user = useSelector(state => state.user);
     const [space, setSpace] = useState({});
     const [host, setHost] = useState({});
+    const [reserveList, setReserveList] = useState([]);
 
 
     const navigate = useNavigate();
@@ -47,12 +47,61 @@ function ReservationForm({ props }) {
     const [reserveTime, setReserveTime] = useState();
 
 
-    // able 타임을 고려해서 리스트를 작성하는 것으로.... 변수명도 ableHours
-    const hours = Array.from({ length: 24 }, (_, i) => `${i}:00:00`);
+    // Space 조회
+    useEffect(
+        () => {
+            axios.get(`/api/space/getSpace/${sseq}`)
+                .then((result) => {
+                    setSpace(result.data.space);
+                    setHost(result.data.space.host);
+                })
+                .catch((err) => { console.error(err) });
+        }, []
+    )
+
+    const getReserveInfo = () => {
+        axios.get(`/api/reservation/getReservationListbyDate`, { params: { sseq, date } })
+            .then((result) => {
+                setReserveList(result.data.reservationList);
+            })
+            .catch((err) => { console.error(err) })
+    }
+
+    useEffect(() => {
+        if (date) {
+            getReserveInfo();
+        }
+    }, [date]);
+
+
+    // 영업시간에 맞는 시간 범위 생성
+    const generateHours = () => {
+        if (!space.starttime || !space.endtime) return [];
+        return Array.from({ length: space.endtime - space.starttime + 1 }, (_, i) => `${String(space.starttime + i).padStart(2, '0')}:00:00`);
+    };
+
+    const hours = generateHours();
 
     const [selectedPhase, setSelectedPhase] = useState("start"); // "start" 또는 "end" 상태 추적
 
+    // 예약된 시간대에 따라 비활성화된 시간을 반환하는 함수
+    const getDisabledHours = () => {
+        const disabledHours = new Set();
 
+        reserveList.forEach(reservation => {
+            const startHour = new Date(reservation.reservestart).getHours();
+            const endHour = new Date(reservation.reserveend).getHours();
+
+            for (let i = startHour; i < endHour; i++) {
+                disabledHours.add(`${String(i).padStart(2, '0')}:00:00`);
+            }
+        });
+
+        console.log("disabledHours");
+        console.log(disabledHours);
+
+        return disabledHours;
+    };
 
     const handleDateChange = (newDate) => {
         const year = newDate.getFullYear();
@@ -70,28 +119,11 @@ function ReservationForm({ props }) {
         setSelectedPhase("start");
     };
 
-    const handleStartTimeChange = (event) => {
-        setStartTime(event.target.value);
-        const timestamp = `${date} ${event.target.value}`;
-        setStartTimestamp(timestamp);
-
-
-    };
-
-    const handleEndTimeChange = (event) => {
-        setEndTime(event.target.value);
-        const timestamp = `${date} ${event.target.value}`;
-        setEndTimestamp(timestamp);
-        // 바로 예약 시간을 계산하고 결제 금액을 계산합니다.
-        const calculatedReserveTime = calculateTimeDifference(startTimestamp, endTimestamp);
-        const calculatedPayment = calculatedReserveTime * space.price;
-
-        setReserveTime(calculatedReserveTime);  // 필요하면 상태로도 저장
-        setPayment(calculatedPayment);          // 필요하면 상태로도 저장
-
-    };
+    const disabledHours = getDisabledHours();
 
     const handleTimeSlotClick = (time) => {
+        if (disabledHours.has(time)) return;  // 비활성화된 시간 클릭 방지
+    
         if (selectedPhase === "start") {
             setStartTime(time);
             setStartTimestamp(`${date} ${time}`);
@@ -101,6 +133,19 @@ function ReservationForm({ props }) {
                 alert("종료 시간은 시작 시간보다 늦어야 합니다. 다시 선택해주세요.");
                 return;
             }
+
+            // Check if any disabled hour exists between startTime and endTime
+            const startHour = new Date(startTimestamp).getHours();
+            const endHour = new Date(`${date} ${time}`).getHours();
+            const hasDisabledHour = Array.from({ length: endHour - startHour + 1 }, (_, i) => `${String(startHour + i).padStart(2, '0')}:00:00`).some(hour => disabledHours.has(hour));
+
+            if (hasDisabledHour) {
+                alert("선택한 시간 범위에 다른 예약된 시간이 포함되어 있습니다. 다른 시간을 선택해 주세요.");
+                return;
+            }
+
+
+
             setEndTime(time);
             setEndTimestamp(`${date} ${time}`);
             setSelectedPhase("start");
@@ -168,18 +213,6 @@ function ReservationForm({ props }) {
             });
     };
 
-    // Space 조회
-    useEffect(
-        () => {
-            axios.get(`/api/space/getSpace/${sseq}`)
-                .then((result) => {
-                    setSpace(result.data.space);
-                    setHost(result.data.space.host);
-                })
-                .catch((err) => { console.error(err) });
-        }, []
-    )
-
     return (
 
         <div className="reservationContainer">
@@ -204,38 +237,16 @@ function ReservationForm({ props }) {
                             <div className="time-buttons">
                                 {hours.map((hour, index) => (
                                     <button
-                                        key={index}
-                                        className={`time-button ${startTime === hour ? 'start-selected' : ''} ${endTime === hour ? 'end-selected' : ''}`}
-                                        onClick={() => handleTimeSlotClick(hour)}
-                                    >
+                                    key={index}
+                                    className={`time-button ${disabledHours.has(hour) ? 'disabled' : ''} ${startTime === hour ? 'start-selected' : ''} ${endTime === hour ? 'end-selected' : ''}`}
+                                    onClick={() => handleTimeSlotClick(hour)}
+                                    disabled={disabledHours.has(hour)}  // 비활성화된 시간 클릭 방지
+                                    style={disabledHours.has(hour) ? { backgroundColor: '#d3d3d3' } : {}}
+                                >
                                         {hour}
                                     </button>
                                 ))}
                             </div>
-
-
-                            {/* <div className="startTimeSelect">
-                                <label>예약 시작 시간 : </label>
-                                <select value={startTime} onChange={handleStartTimeChange}>
-                                    <option value="">예약시작시간</option>
-                                    {hours.map((hour, index) => (
-                                        <option key={index} value={hour}>
-                                            {hour}
-                                        </option>
-                                    ))}
-                                </select>
-                            </div>
-                            <div className="endTimeSelect">
-                                <label>예약 종료 시간 : </label>
-                                <select value={endTime} onChange={handleEndTimeChange}>
-                                    <option value="">예약 종료 시간</option>
-                                    {hours.map((hour, index) => (
-                                        <option key={index} value={hour}>
-                                            {hour}
-                                        </option>
-                                    ))}
-                                </select>
-                            </div> */}
                             <button onClick={handleSubmit}>Reserve</button>
                         </div>
                     )}
