@@ -17,6 +17,7 @@ import Qna from './component/mypage/Qna';
 import Updateuser from './component/mypage/Updateuser';
 import SerchPwd from './component/member/SerchPwd';
 import ResetPasswordUrl from './component/member/ResetPasswordUrl';
+import LoguoutAction from './component/main/LoguoutAction';
 
 function App() {
 
@@ -45,6 +46,7 @@ function App() {
         <Route path='qna/:currentPage' element={<Qna/>} />
         <Route path='updateuser' element={<Updateuser/>} />
       </Route>
+      <Route path='/logoutAction' element={<LoguoutAction/>}/>
     </Routes>
     <Footer />
 
