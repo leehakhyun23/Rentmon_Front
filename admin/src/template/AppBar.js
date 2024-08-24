@@ -34,7 +34,7 @@ const CustomAppBar = ({ open, handleDrawerOpen }) => {
           <MenuIcon />
         </IconButton>
         <Typography variant="h6" noWrap>
-          Admin
+          RentMon(Admin)
         </Typography>
       </Toolbar>
     </AppBarStyled>
