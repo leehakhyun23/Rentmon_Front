@@ -20,7 +20,7 @@ function RecommandSpace({user}) {
         try{
             
             let result
-            if(user.email){ result = await axios.post("/api/main/getRecommandSpace",user)}
+            if(user.name){ result = await axios.post("/api/main/getRecommandSpace",user)}
             else { result = await axios.post("/api/main/getRecommandSpace")}
             setRcList(result.data);
         }catch(err){console.error(err);}
