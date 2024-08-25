@@ -79,7 +79,8 @@ function MyInfo({mypagePopup , user , setMypagePopup}) {
       {(rctvw)&&(
 
       <div className='recentViewSpace'>
-      {/* <h3>최근 본 공간({rctvw.length})</h3> */}
+        {(recentview)&&(<h3>최근 본 공간({rctvw.length})</h3>)}
+      
           <Swiper
             slidesPerView={2.5}
             spaceBetween={12}
