@@ -40,7 +40,7 @@ export default function CouponModal({open, handleClose, userids}) {
     const handleIssued = () => {
         const issuedData = {
             userids: userids,
-            limitDate: limitDate,
+            limitDateTime: limitDate ? limitDate.toISOString() : null,
             discount: selectedValue,
             couponTitle: couponTitle,
         };

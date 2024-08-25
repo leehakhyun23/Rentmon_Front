@@ -4,20 +4,24 @@ import React, { useEffect, useState } from 'react';
 
 const CouponPage = () => {
     const [couponList, setCouponList] = useState([]);
-    const [paging, setPaging] = useState({});
+    // const [paging, setPaging] = useState({});
 
     useEffect(() => {
         axios.get("/api/admin/coupon")
         .then((res) => {
             if (res.status === 200) {
                 setCouponList(res.data.content);
-                setPaging(res.data.page);
+                // setPaging({ 
+                //     page: res.data.page.number, 
+                //     size: res.data.page.size, 
+                //     totalPages: res.data.page.totalPages 
+                // });
             }
         })
         .catch((err) => {
             console.log(err);
         })
-    }, [paging]);
+    }, []);
 
     return (
         <div>
@@ -31,7 +35,7 @@ const CouponPage = () => {
                 ))}
             </List>
             <Box sx={{display: 'flex', justifyContent: 'center'}}>
-                <Pagination count={paging.totalPages} page={paging.page + 1} /*onChange={handlePageChange}*/ color="primary"/>
+                {/* <Pagination count={paging.totalPages} page={paging.page + 1} onChange={handlePageChange} color="primary"/> */}
             </Box>
         </div>
     );

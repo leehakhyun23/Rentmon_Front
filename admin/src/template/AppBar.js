@@ -1,6 +1,7 @@
-import React from 'react';
-import { AppBar as MuiAppBar, Toolbar, IconButton, Typography } from '@mui/material';
+import React, { useState } from 'react';
+import { AppBar as MuiAppBar, Toolbar, IconButton, Typography, Box, Avatar, Menu, MenuItem } from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';
+import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import { styled } from '@mui/material/styles';
 
 const drawerWidth = 240;
@@ -20,7 +21,23 @@ const AppBarStyled = styled(MuiAppBar, { shouldForwardProp: (prop) => prop !== '
   }),
 }));
 
-const CustomAppBar = ({ open, handleDrawerOpen }) => {
+const CustomAppBar = ({ open, handleDrawerOpen, adminName }) => {
+  const [anchorEl, setAnchorEl] = useState(null);
+
+  const handleMenuOpen = (event) => {
+    setAnchorEl(event.currentTarget);
+  };
+
+  const handleMenuClose = () => {
+    setAnchorEl(null);
+  };
+
+  const handleLogout = () => {
+    handleMenuClose();
+  };
+
+  const openMenu = Boolean(anchorEl);
+  
   return (
     <AppBarStyled position="fixed" open={open}>
       <Toolbar>
@@ -33,9 +50,34 @@ const CustomAppBar = ({ open, handleDrawerOpen }) => {
         >
           <MenuIcon />
         </IconButton>
-        <Typography variant="h6" noWrap>
+        <Typography variant="h6" noWrap sx={{ flexGrow: 1 }}>
           RentMon(Admin)
         </Typography>
+        <Box sx={{ display: 'flex', alignItems: 'center' }}>
+          <IconButton onClick={handleMenuOpen} color="inherit">
+            <Avatar sx={{ mr: 2 }}>
+              <AccountCircleIcon />
+            </Avatar>
+            <Typography variant="body1">
+              {adminName}
+            </Typography>
+          </IconButton>
+          <Menu
+            anchorEl={anchorEl}
+            open={openMenu}
+            onClose={handleMenuClose}
+            anchorOrigin={{
+              vertical: 'top',
+              horizontal: 'right',
+            }}
+            transformOrigin={{
+              vertical: 'top',
+              horizontal: 'right',
+            }}
+          >
+            <MenuItem onClick={handleLogout}>로그아웃</MenuItem>
+          </Menu>
+        </Box>
       </Toolbar>
     </AppBarStyled>
   );

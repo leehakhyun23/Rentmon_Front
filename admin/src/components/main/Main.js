@@ -11,6 +11,8 @@ const MainStyled = styled('main', { shouldForwardProp: (prop) => prop !== 'open'
     duration: theme.transitions.duration.leavingScreen,
   }),
   marginLeft: `-${drawerWidth}px`,
+  backgroundColor: theme.palette.grey[100],
+  height: '100vh',
   ...(open && {
     transition: theme.transitions.create('margin', {
       easing: theme.transitions.easing.easeOut,
