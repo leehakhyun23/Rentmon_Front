@@ -9,7 +9,7 @@ const beforeReq = async(config)=>{
 }
 
 const requestFail = (err)=>{
-    window.location.href= "/logoutAction";
+    // window.location.href= "/logoutAction";
     console.error(err);
 }
 
@@ -24,7 +24,7 @@ const beforeRes = async(res)=>{
 
 const responseFail = (err) => {
     console.error(err);
-    window.location.href= "/logoutAction";
+    // window.location.href= "/logoutAction";
     return Promise.reject(err);
 };
 
