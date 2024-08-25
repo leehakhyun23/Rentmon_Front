@@ -5,8 +5,34 @@
 .spaceContainer {
   display: flex;
   flex-direction: column;
+  width:1200px;
   padding: 20px;
   background-color: #f9f9f9;
+  font-family: 'Arial', sans-serif; /* 세련된 폰트 */
+  color: #333; /* 텍스트 색상 */
+  line-height: 1.6; /* 읽기 편한 줄 간격 */
+}
+
+
+.spaceContentBlock {
+  margin-bottom: 20px; /* 각 블록 간격 */
+}
+
+.spaceTitle {
+  font-size: 24px; /* 제목 글자 크기 */
+  font-weight: bold; /* 제목을 두껍게 */
+  margin-bottom: 10px; /* 제목과 내용 사이의 간격 */
+  color: #1a73e8; /* 제목 색상 */
+}
+
+.spaceContent {
+  font-size: 18px; /* 내용 글자 크기 */
+  margin-bottom: 20px; /* 각 블록 간의 간격 */
+  padding-left: 15px; /* 내용의 좌측 패딩 */
+}
+
+.spaceContentBlock:last-child {
+  margin-bottom: 0; /* 마지막 블록에서 하단 여백 제거 */
 }
 
 /* 공간 메뉴 */
@@ -16,29 +42,59 @@
   background-color: #f0f0f0;
   padding: 10px;
   border-radius: 5px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   margin-bottom: 20px;
-  position : fixed;
+  position: fixed;
   top: 80px;
-  left: 0;
-  width: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 1200px;
   background-color: #fff;
   z-index: 1000;
+  border-bottom: 2px solid #e0e0e0; /* 메뉴 하단 경계선 */
+}
+.SpaceMenu-container.hidden {
+  display: none;
+}
+
+.spaceFacilities {
+  display: flex; /* Flexbox를 사용하여 가로 정렬 */
+  flex-wrap: wrap;
+  flex-direction: column;
+  gap: 20px; 
+  margin-top: 20px;
+  background-color: #ffffff;
+  border-radius: 8px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+}
+
+.spaceFacilities .FacilityList {
+  display:flex;
+  flex-direction: row;
+}
+
+.spaceFacilities .FacilityContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap:20px;
+  margin:15px;
+}
+
+.spaceFacilities .FacilityContainer .Facility img {
+  margin-top: 10px;
 }
 
 .SpaceMenu-item {
   padding: 10px 20px;
-  background-color: #e0e0e0;
-  border: 1px solid #d0d0d0;
   width: 18%;
-  border-radius: 4px;
   text-align: center;
   cursor: pointer;
   font-size: 14px;
-  cursor: pointer;
-  padding: 10px;
-  display: inline-block;
-  margin-right: 20px;
+  transition: background-color 0.3s, color 0.3s;
+  font-weight: bold;
+  border-bottom: 3px solid transparent; /* 하이라이트 초기화 */
 }
 
 .SpaceMenu-item:hover {
@@ -54,44 +110,34 @@
   padding: 20px;
 }
 
-.spaceTitle {
-  font-weight: bold;
-  margin-top: 10px;
-}
-
-.spaceContent {
-  margin-bottom: 15px;
-}
-
-/* 공간 시설 */
-.spaceFacilities {
-  margin-top: 20px;
-  background-color: #ffffff;
-  border-radius: 8px;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-  padding: 20px;
-}
-
-.spaceFacilities div {
-  margin-bottom: 10px;
-}
-
-.spaceFacilities div:last-child {
-  margin-bottom: 0;
-}
 
 /* 지도 */
 .spaceMap {
   margin-top: 20px;
 }
 
-#map {
+.spaceInfo .spaceImageContainer {
+  width: 1200px;
+  height: 800px;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.spaceInfo .spaceImageContainer .spaceImage {
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* cover로 설정하여 이미지가 잘리지 않고 요소를 덮도록 함 */
+}
+
+/* #map {
   width: 100%;
   height: 400px;
   border: 1px solid #ddd;
   border-radius: 8px;
   overflow: hidden;
-}
+} */
 
 /* 버튼 */
 .spaceButton {
@@ -164,6 +210,14 @@
   margin-bottom: 20px;
 }
 
+.searchRow {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px; 
+  width:100%;
+}
+
 .searchCategory, .searchRegion, .searchTime, .spaceFilter {
   flex: 1;
   margin-right: 10px;
@@ -188,7 +242,7 @@
   border-radius: 5px;
   font-size: 14px;
   outline: none;
-  width: 200px;
+  width: 120px;
 }
 
 .searchCategory select:focus, .searchRegion select:focus {
@@ -201,23 +255,44 @@
 /* 예약일 및 시간 입력 */
 .searchTime {
   display: flex;
-  flex-direction: column;
+  flex-direction: row; 
+  align-items: center;
+
   gap: 10px;
+}
+
+.searchReserve{
+  display: flex;
+  flex-direction: row; 
+  align-items: center;
+
+  gap: 10px;
+
+}
+.searchDate label {
+  font-size: 16px;
+  font-weight: bold;
+  margin-right: 5px;
+
 }
 
 .searchTime label {
   font-size: 16px;
   font-weight: bold;
+  margin-right: 5px;
+
 }
 
-.searchTime input[type="date"], .searchTime input[type="time"] {
+.searchDate input[type="date"], .searchTime input[type="time"] {
   padding: 10px;
   border: 1px solid #ddd;
   border-radius: 5px;
   font-size: 14px;
+  outline: none;
+  width: 120px;
 }
 
-.searchTime input[type="date"]:focus, .searchTime input[type="time"]:focus {
+.searchDate input[type="date"]:focus, .searchTime input[type="time"]:focus {
   border-color: #007bff;
   box-shadow: 0 0 0 2px rgba(0, 123, 255, 0.25);
 }
@@ -241,7 +316,7 @@
   border-radius: 5px;
   font-size: 14px;
   outline: none;
-  width: 200px;
+  width: 120px;
 }
 
 .spaceFilter select:focus {
@@ -251,11 +326,13 @@
 
 
 #searchButton {
-  padding: 10px 20px;
+  padding: 5px 10px;
   background-color: #007bff;
   color: white;
   border: none;
   cursor: pointer;
+  height: 100%;
+
 }
 
 #searchButton:hover {
@@ -274,7 +351,6 @@
   flex: 1 1 calc(33.333% - 20px);
   box-sizing: border-box;
   border: 1px solid #ddd;
-  padding: 15px;
   background-color: #f9f9f9;
 }
 
