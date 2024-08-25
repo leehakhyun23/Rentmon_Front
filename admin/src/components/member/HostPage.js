@@ -1,4 +1,4 @@
-import { Accordion, AccordionDetails, AccordionSummary, Box, List, ListItem, Pagination, Typography } from '@mui/material';
+import { Accordion, AccordionDetails, AccordionSummary, Box, Button, Checkbox, List, ListItem, Pagination, Paper, Typography } from '@mui/material';
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
@@ -36,61 +36,95 @@ const HostPage = () => {
     }, [])
 
     return (
-        <div>
-            <Typography variant="h6">호스트</Typography>
-            <List style={{ width: '100%', borderCollapse: 'collapse' }}>
-                <ListItem style={{ fontWeight: 'bold', borderBottom: '2px solid #ddd', padding: '10px' }}>
-                    아이디 닉네임 전화번호 이메일 공간 카테고리 주소 신고당한횟수 isDisplay
-                </ListItem>
-                {hostList.map((host, idx) => (
-                    <Accordion key={idx} style={{ marginBottom: '10px' }}>
-                        <AccordionSummary
-                            expandIcon={<ExpandMoreIcon />}
-                            aria-controls={`panel${idx}-content`}
-                            id={`panel${idx}-header`}
-                            style={{ backgroundColor: '#f1f1f1' }}
-                        >
-                            <Typography style={{ display: 'inline-block', width: '10%' }}>{host.hostid}</Typography>
-                            <Typography style={{ display: 'inline-block', width: '15%' }}>{host.nickname}</Typography>
-                            <Typography style={{ display: 'inline-block', width: '15%' }}>{host.phone === null ? "-" : host.phone}</Typography>
-                            <Typography style={{ display: 'inline-block', width: '20%' }}>{host.email === null ? "-" : host.email}</Typography>
-                            {/* 이 부분은 다른 정보들과 구분되도록 스타일링만 적용합니다 */}
-                            <Typography style={{ display: 'inline-block', width: '40%' }} />
-                        </AccordionSummary>
-                        <AccordionDetails>
-                            <List style={{ width: '100%' }}>
-                                {host.spaces.map((space, spaceIdx) => (
-                                    <ListItem
-                                        key={spaceIdx}
-                                        style={{
-                                            borderBottom: '1px solid #ddd',
-                                            padding: '10px',
-                                            backgroundColor: spaceIdx % 2 === 0 ? '#f9f9f9' : '#fff',
-                                        }}
-                                    >
-                                        <Typography style={{ display: 'inline-block', width: '10%' }}>{space.title}</Typography>
-                                        <Typography style={{ display: 'inline-block', width: '10%' }}>{space.category}</Typography>
-                                        <Typography style={{ display: 'inline-block', width: '15%' }}>
-                                            {`${space.province} ${space.town} ${space.village} ${space.addressdetail}`}
-                                        </Typography>
-                                        <Typography style={{ display: 'inline-block', width: '5%' }}>{space.declaCount}</Typography>
-                                        <Typography style={{ display: 'inline-block', width: '5%' }}>{space.disable === true ? "Show" : "Hide"}</Typography>
-                                    </ListItem>
-                                ))}
-                            </List>
-                        </AccordionDetails>
-                    </Accordion>
-                ))}
-            </List>
-            <Box sx={{ display: 'flex', justifyContent: 'center', marginTop: '20px' }}>
-                <Pagination
-                    count={paging.totalPages}
-                    page={paging.page + 1}
-                    onChange={handlePageChange}
-                    color="primary"
-                />
-            </Box>
-        </div>
+        <Box sx={{ padding: '20px' }}>
+            <Typography variant="h4" gutterBottom>
+                호스트 관리
+            </Typography>
+            <Paper sx={{paddingBottom: 3}}>
+                <List sx={{ width: '100%', borderCollapse: 'collapse' }}>
+                    <ListItem sx={{ fontWeight: 'bold', borderBottom: '2px solid #ddd', padding: '10px', backgroundColor: '#f5f5f5', textTransform: 'uppercase', letterSpacing: '0.05em', }}>
+                        <Typography variant="body2" sx={{ width: '22%', fontWeight: 'bold' }}>아이디</Typography>
+                        <Typography variant="body2" sx={{ width: '18%', fontWeight: 'bold' }}>닉네임</Typography>
+                        <Typography variant="body2" sx={{ width: '20%', fontWeight: 'bold' }}>전화번호</Typography>
+                        <Typography variant="body2" sx={{ width: '20%', fontWeight: 'bold' }}>이메일</Typography>
+                        <Typography variant="body2" sx={{ width: '8%', fontWeight: 'bold' }}>공간</Typography>
+                    </ListItem>
+                    {hostList.map((host, idx) => (
+                        <Accordion key={idx} sx={{ marginBottom: '10px', borderRadius: '4px', boxShadow: '0px 2px 4px rgba(0, 0, 0, 0.1)' }}>
+                            <AccordionSummary
+                                expandIcon={<ExpandMoreIcon />}
+                                aria-controls={`panel${idx}-content`}
+                                id={`panel${idx}-header`}
+                                sx={{ backgroundColor: '#fafafa' }}
+                            >
+                                <Typography sx={{ width: '22%' }}>{host.hostid}</Typography>
+                                <Typography sx={{ width: '18%' }}>{host.nickname}</Typography>
+                                <Typography sx={{ width: '20%' }}>{host.phone || '-'}</Typography>
+                                <Typography sx={{ width: '20%' }}>{host.email || '-'}</Typography>
+                                <Typography sx={{ width: '8%', fontWeight: 'bold' }}>
+                                    {host.spaces && host.spaces.length > 0 ? '있음' : '없음'}
+                                </Typography>
+                            </AccordionSummary>
+                            {host.spaces && host.spaces.length > 0 && (
+                                <AccordionDetails>
+                                    <List sx={{ width: '100%' }}>
+                                        <ListItem
+                                            sx={{
+                                                fontWeight: 'bold',
+                                                borderBottom: '2px solid #ddd',
+                                                backgroundColor: '#f5f5f5',
+                                                padding: '10px'
+                                            }}
+                                        >
+                                            <Typography sx={{ width: '25%' }}>공간명</Typography>
+                                            <Typography sx={{ width: '15%' }}>카테고리</Typography>
+                                            <Typography sx={{ width: '35%' }}>주소</Typography>
+                                            <Typography sx={{ width: '10%', textAlign: 'center' }}>신고당한횟수</Typography>
+                                            <Typography sx={{ width: '10%', textAlign: 'center' }}>공개</Typography>
+                                            <Checkbox />
+                                        </ListItem>
+
+                                        {host.spaces.map((space, spaceIdx) => (
+                                            <ListItem
+                                                key={spaceIdx}
+                                                sx={{
+                                                    borderBottom: '1px solid #ddd',
+                                                    padding: '10px',
+                                                    backgroundColor: spaceIdx % 2 === 0 ? '#f9f9f9' : '#fff',
+                                                }}
+                                            >
+                                                <Typography sx={{ width: '25%', textOverflow: 'ellipsis', overflow: 'hidden', whiteSpace: 'nowrap' }}>{space.title}</Typography>
+                                                <Typography sx={{ width: '15%' }}>{space.category}</Typography>
+                                                <Typography sx={{ width: '35%' }}>{`${space.province} ${space.town} ${space.village} ${space.addressdetail}`}</Typography>
+                                                <Typography sx={{ width: '10%', textAlign: 'center' }}>{space.declaCount}</Typography>
+                                                <Typography sx={{ width: '10%', textAlign: 'center' }}>{space.disable ? "Show" : "Hide"}</Typography>
+                                                <Checkbox />
+                                            </ListItem>
+                                        ))}
+                                    </List>
+                                </AccordionDetails>
+                            )}
+                        </Accordion>
+                    ))}
+                </List>
+                <Box sx={{ display: 'flex', justifyContent: 'center', marginTop: '20px' }}>
+                    <Pagination
+                        count={paging.totalPages}
+                        page={paging.page + 1}
+                        onChange={handlePageChange}
+                        color="primary"
+                    />
+                </Box>
+                <Box sx={{ display: 'flex', justifyContent: 'flex-end', marginTop: '20px', marginRight: 5, gap: 2 }}>
+                    <Button variant="contained" color="primary">
+                        변경
+                    </Button>
+                    <Button variant="contained" color="error">
+                        삭제
+                    </Button>
+                </Box>
+            </Paper>
+        </Box>
     );
 };
 
