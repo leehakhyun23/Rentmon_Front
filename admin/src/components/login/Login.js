@@ -6,6 +6,7 @@ const Login = () => {
     const defaultTheme = createTheme();
 
     return (
+        <>
         <ThemeProvider theme={defaultTheme}>
             <Grid container component="main" sx={{ height: '100vh' }}>
                 <CssBaseline />
@@ -76,6 +77,7 @@ const Login = () => {
                 </Grid>
             </Grid>
         </ThemeProvider>
+        </>
     );
 };
 

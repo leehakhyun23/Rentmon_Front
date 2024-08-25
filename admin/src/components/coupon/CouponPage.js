@@ -113,7 +113,7 @@ const CouponPage = () => {
                         ))
                     ) : (
                         <Typography variant="body1" textAlign="center" sx={{ padding: '20px' }}>
-                            해당 조건에 맞는 쿠폰이 없습니다.
+                            해당 조건에 맞는 쿠폰이 없습니다...
                         </Typography>
                     )}
                 </List>
