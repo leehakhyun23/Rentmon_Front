@@ -13,7 +13,7 @@ const MemberPieChart = ({ data }) => {
     return (
         <Box textAlign="center">
             <Typography variant="h6">
-                Total Members: {data.totalMember}
+                총 회원수: {data.totalMember}
             </Typography>
 
             <PieChart width={400} height={400}>

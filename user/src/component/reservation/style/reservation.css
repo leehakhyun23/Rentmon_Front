@@ -1,10 +1,13 @@
 .reservationContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  padding: 20px;
   max-width: 800px;
   margin: 0 auto;
-  padding: 20px;
   background-color: #f9f9f9;
-  border-radius: 8px;
-  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
 .reservationCalendar {
@@ -215,11 +218,111 @@
 }
 
 .time-button.start-selected {
-  background-color: #007bff; /* 파란색 */
+  background-color: #007bff; 
   color: white;
 }
 
 .time-button.end-selected {
-  background-color: #ffc107; /* 노란색 */
-  color: black;
+  background-color: #007bff; 
+  color: white;
+}
+
+
+/* 예약 정보 섹션 */
+.reservation-info {
+  background-color: #ffffff;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+}
+
+.reserveHead {
+  font-weight: bold;
+  font-size: 18px;
+  margin-bottom: 15px;
+}
+
+
+
+.reserveTitle {
+  font-weight: bold;
+  font-size: 16px;
+  margin-bottom: 5px;
+}
+
+.reserveContent {
+  font-size: 14px;
+  color: #333;
+  margin-bottom: 15px;
+}
+
+/* 예약자 정보 섹션 */
+.user-info {
+  background-color: #ffffff;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+}
+
+.user-info .reserveHead {
+  font-weight: bold;
+  font-size: 18px;
+  margin-bottom: 15px;
+}
+
+
+/* 결제 정보 섹션 */
+.payment-info {
+  background-color: #ffffff;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.payTitle {
+  font-weight: bold;
+  font-size: 16px;
+}
+
+.payContent {
+  font-size: 20px;
+  font-weight: bold;
+  color: #333;
+  margin-bottom: 15px;
+}
+
+.getCoupon-button {
+  align-self: flex-start;
+  padding: 10px 20px;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  align-self: flex-end; /* 버튼을 오른쪽 끝으로 정렬 */
+}
+
+.getCoupon-button:hover {
+  background-color: #007ACC;
+}
+
+/* 예약하기 버튼 */
+.submit-button {
+  margin-top: 20px;
+  padding: 12px 20px;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  font-size: 16px;
+  cursor: pointer;
+  width: 100%;
+}
+
+.submit-button:hover {
+  background-color: #007ACC;
+
 }
