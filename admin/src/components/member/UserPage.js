@@ -69,9 +69,15 @@ const UserPage = () => {
     const handleCheckboxChange = (userid) => {
         setChecked(prevChecked => {
             if (prevChecked.includes(userid)) {
-                return prevChecked.filter(id => id !== userid);
+                const updatedChecked = prevChecked.filter(id => id !== userid);
+                setSelectAll(false);
+                return updatedChecked;
             } else {
-                return [...prevChecked, userid];
+                const updatedChecked = [...prevChecked, userid];
+                if (updatedChecked.length === userList.length) {
+                    setSelectAll(true);
+                }
+                return updatedChecked;
             }
         });
     };
@@ -83,7 +89,7 @@ const UserPage = () => {
                 alert(`${res.data}명의 상태 변경 완료`);
                 setChecked([]);
                 setSelectAll(false);
-                setPaging(prev => ({ ...prev, page: 0 })); // 페이지를 초기화
+                setPaging(prev => ({ ...prev, page: 0 }));
             }
         })
         .catch((err) => {
@@ -100,12 +106,12 @@ const UserPage = () => {
     }
 
     const handleSearch = () => {
-        setPaging(prev => ({ ...prev, page: 0 }));  // 검색 시 페이지를 첫 페이지로 초기화
+        setPaging(prev => ({ ...prev, page: 0 }));
     }
 
     const handleKeyDown = (e) => {
         if (e.key === 'Enter') {
-            setPaging(prev => ({ ...prev, page: 0 }));  // 검색 시 페이지를 첫 페이지로 초기화
+            setPaging(prev => ({ ...prev, page: 0 }));
         }
     };
 
@@ -131,6 +137,11 @@ const UserPage = () => {
         setSortByDeclasCount(true);
         setIsLogin(null);
         setPaging(prev => ({ ...prev, page: 0 }));
+    };
+
+    const handleClearSelection = () => {
+        setChecked([]);
+        setSelectAll(false);
     };
 
     return (
@@ -237,7 +248,7 @@ const UserPage = () => {
                     </Box>
                 </Paper>
             </Box>
-            <CouponModal open={open} handleClose={handleClose} userids={checked} />
+            <CouponModal open={open} handleClose={handleClose} userids={checked} onIssued={handleClearSelection} />
         </div>
     );
 };

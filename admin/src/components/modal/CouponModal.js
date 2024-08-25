@@ -18,7 +18,7 @@ const style = {
     p: 4,
 };
 
-export default function CouponModal({open, handleClose, userids}) {
+export default function CouponModal({open, handleClose, userids, onIssued}) {
     const [limitDate, setLimitDate] = useState(null);
     const [selectedValue, setSelectedValue] = useState(null);
     const [couponTitle, setCouponTitle] = useState("");
@@ -49,6 +49,7 @@ export default function CouponModal({open, handleClose, userids}) {
         .then((res) => {
             if (res.status === 200) {
                 alert("발급완료");
+                onIssued();
             }
         })
         .catch((err) => {
