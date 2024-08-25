@@ -90,6 +90,7 @@ const UserPage = () => {
                 setChecked([]);
                 setSelectAll(false);
                 setPaging(prev => ({ ...prev, page: 0 }));
+                fetchUserList();
             }
         })
         .catch((err) => {
