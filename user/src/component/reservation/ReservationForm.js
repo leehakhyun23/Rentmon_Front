@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useSelector } from 'react-redux'
 import Calendar from "react-calendar";
-
 import './style/reservation.css';
 import { useParams, useLocation, useNavigate } from 'react-router-dom';
 import axios from 'axios';
@@ -22,6 +21,8 @@ const settings = {
 }
 
 function ReservationForm({ props }) {
+
+
 
     // 기본자원
     let user = useSelector(state => state.user);
@@ -46,6 +47,10 @@ function ReservationForm({ props }) {
     const [endTimestamp, setEndTimestamp] = useState();
     const [reserveTime, setReserveTime] = useState();
 
+    // 쿠폰처리
+    const [couponCode, setCouponCode] = useState('');
+    const [discount, setDiscount] = useState(0);
+
 
     // Space 조회
     useEffect(
@@ -53,7 +58,6 @@ function ReservationForm({ props }) {
             axios.get(`/api/space/getSpace/${sseq}`)
                 .then((result) => {
                     setSpace(result.data.space);
-                    // setHost(result.data.space.host);
                 })
                 .catch((err) => { console.error(err) });
         }, []
@@ -179,6 +183,31 @@ function ReservationForm({ props }) {
 
     }
 
+    
+        // 쿠폰 사용하기
+
+        const handleCouponChange = (event) => {
+            setCouponCode(event.target.value);
+          };
+
+
+        const useCoupon = () => {
+            axios.get('/api/reservation/useCoupon', { params: { userid: user.userid, couponstr: couponCode } })
+                .then((result) => {
+                    if (result.data !== null) {
+                        const discount = result.data.coupon.discount
+                        setPayment(prevPayment => Math.max(prevPayment - discount, 0)); // 할인 적용
+                        alert("쿠폰이 성공적으로 적용되었습니다.");
+                    } else {
+                        alert("유효하지 않은 쿠폰입니다.");
+                    }
+                })
+                .catch((error) => {
+                    console.error("쿠폰 적용 실패:", error);
+                    alert("쿠폰 적용에 실패했습니다.");
+                });
+        };
+
     const handleSubmit = () => {
         if (!date || !startTime || !endTime) {
             alert("예약 날짜와 시간을 지정해주세요.");
@@ -259,7 +288,7 @@ function ReservationForm({ props }) {
                                     </button>
                                 ))}
                             </div>
-
+                            <br></br>
                         </div>
                     )}
 
@@ -271,35 +300,44 @@ function ReservationForm({ props }) {
 
 
             <div className="reservation-info">
-                <h3>예약 정보</h3>
-                <p>예약 날짜: {date}</p>
-                <p>시작 시간: {startTime}</p>
-                <p>종료 시간: {endTime}</p>
-                <p>공간 주의 사항 : {space.caution}</p>
+                <div className="reserveHead">예약정보</div>
+                <div className="reserveTitle">에약날짜 : </div>
+                <div className="reserveContent">{date}</div>
+                <div className="reserveTitle">시작 시간 : </div>
+                <div className="reserveContent">{startTime}</div>
+                <div className="reserveTitle">종료 시간: </div>
+                <div className="reserveContent">{endTime}</div>
+                <div className="reserveTitle">공간 주의 사항 : </div>
+                <div className="reserveContent">{space.caution}</div>
             </div>
 
             <div className="user-info">
-                <h3>예약자 정보</h3>
-                <p>이름: {user.name}</p>
-                <p>이메일: {user.email}</p>
-                <p>전화번호: {user.phone}</p>
+            <div className="reserveHead">예약자 정보</div>
+            <div className="reserveTitle">이름 : </div>
+            <div className="reserveContent">{user.name}</div>
+            <div className="reserveTitle">이메일 : </div>
+            <div className="reserveContent">{user.email}</div>
+            <div className="reserveTitle">전화번호 : </div>
+            <div className="reserveContent">{user.phone}</div>
             </div>
 
-            {/* <div className="host-info">
-                <h3>호스트 정보</h3>
-                <p>이름 : {host.hostid}</p>
-                <p>연락처: {host.phone}</p>
-                <p>이메일 : {host.email}</p>
-            </div> */}
 
             <div className="payment-info">
-                <h3>결제 정보</h3>
-                <p>총 결제 금액: {payment}원</p>
+                <div className="payTitle">총 결제 금액 : </div>
+                <div className="payContent">{payment}원</div>
+      <input
+        type="text"
+        value={couponCode}
+        onChange={handleCouponChange}
+        placeholder="쿠폰 번호를 입력하세요"
+      />
+                <button className="getCoupon-button" onClick={useCoupon}>쿠폰 사용하기</button>
             </div>
 
-            <button className="getCoupon-button" >쿠폰 사용</button>
             <button className="submit-button" onClick={handleSubmit}>예약하기</button>
+
         </div>
+
     );
 }
 
