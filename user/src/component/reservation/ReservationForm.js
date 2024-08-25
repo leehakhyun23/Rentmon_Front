@@ -246,12 +246,17 @@ function ReservationForm({ props }) {
 
         <div className="reservationContainer">
 
-            <div className="space-info">
-                <Slider {...settings}>
-                    {space.spaceimage && space.spaceimage.map((image, idx) => (
-                        <img key={idx} src={`http://localhost:8070/space_images/${image.realName}`} alt={space.title} />
-                    ))}
-                </Slider>
+            
+
+<div className="spaceInfo">
+            <div className="spaceMainTitle"></div>
+            {<Slider {...settings}>
+              {space.spaceimage && space.spaceimage.map((image, idx) => (
+                <div key={idx} className="spaceImageContainer">
+                  <img className='spaceImage' src={`http://localhost:8070/space_images/${image.realName}`} alt={space.title} />
+                </div>
+              ))}
+            </Slider>}
                 <div className="spaceContentBlock">
                     <div className="spaceTitle">제목</div>
                     <div className="spaceContent">{space.sseq}. {space.title}</div>

@@ -59,21 +59,22 @@ function ReviewList({ sseq, reviewopen, setReviewopen }) {
                                             activeColor="#0090DF"
                                         />
                                         <br/>
-                                        <div className='content'><pre>{elem.content}</pre></div>
+                                        <div className='content'>    <pre style={{ whiteSpace: 'pre-wrap', wordBreak: 'break-word' }}>{elem.content}</pre>
+                                        </div>
                                         {elem.images && (
                                             elem.images.map((img, idx) => (
                                                 <div key={idx}>
                                                     <img
                                                         src={`http://localhost:8070/review_images/${img.realname}`}
                                                         alt={`리뷰 이미지 ${idx}`}
-                                                        style={{ width: '100px', height: '100px', objectFit: 'cover', marginRight: '10px', float: 'left' }}
+                                                        style={{ width: '300px', height: '300px', objectFit: 'cover', marginRight: '10px', float: 'left' }}
                                                     />
                                                 </div>
                                             ))
                                         )}
                                     </div>
                                     <div className='inquiryDate'>
-                                        {/* {dayFormat(elem.created_at)} */}
+                                        {dayFormat(elem.created_at)}
                                     </div>
 
 
