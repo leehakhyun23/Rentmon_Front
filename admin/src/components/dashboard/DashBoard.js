@@ -4,6 +4,7 @@ import { Box, FormControl, InputLabel, Select, MenuItem, Paper, Typography, Circ
 import MemberPieChart from '../chart/MemberPieChart';
 import CategoryPieChart from '../chart/CategoryPieChart';
 import ReservationLineChart from '../chart/ReservationChart';
+import VisitChart from '../chart/VisitChart';
 
 const DashBoard = () => {
     const [loading, setLoading] = useState(true);
@@ -12,12 +13,14 @@ const DashBoard = () => {
     const [pieData, setPieData] = useState(null);
     const [memberData, setMemberData] = useState(null);
     const [reservationData, setReservationData] = useState(null);
+    const [visitData, setVisitData] = useState(null);
 
     useEffect(() => {
         setLoading(true);
         axios.get(`/api/admin/main?period=${period}`)
         .then((res) => {
             if(res.status === 200) {
+                setVisitData(res.data.visit);
                 setPieData(res.data.category);
                 setMemberData(res.data.member);
                 setReservationData(res.data.reservation);
@@ -47,6 +50,12 @@ const DashBoard = () => {
                     <Box sx={{ display: 'flex', gap: 4 }}>
                         <Paper sx={{ flex: 1, padding: 2, boxShadow: 3 }}>
                             <Typography variant="h6" component="h2" gutterBottom>
+                                Visitor Trends
+                            </Typography>
+                            <VisitChart data={visitData} />
+                        </Paper>
+                        <Paper sx={{ flex: 1, padding: 2, boxShadow: 3 }}>
+                            <Typography variant="h6" component="h2" gutterBottom>
                                 Member Distribution
                             </Typography>
                             <MemberPieChart data={memberData} />
@@ -67,9 +76,9 @@ const DashBoard = () => {
                                 label="Period"
                                 onChange={handlePeriodChange}
                             >
-                                <MenuItem value="daily">Daily (Last 30 days)</MenuItem>
-                                <MenuItem value="weekly">Weekly (Last 15 weeks)</MenuItem>
-                                <MenuItem value="monthly">Monthly (Last 12 months)</MenuItem>
+                                <MenuItem value="daily">일 (최근 30일)</MenuItem>
+                                <MenuItem value="weekly">주 (최근 15주)</MenuItem>
+                                <MenuItem value="monthly">월 (최근 1년)</MenuItem>
                             </Select>
                         </FormControl>
                         <Paper sx={{ padding: 2, boxShadow: 3 }}>
