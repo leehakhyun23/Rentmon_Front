@@ -3,12 +3,13 @@ import { setCookie,getCookie } from "./cookieUtil";
 
 const jaxios = axios.create();
 
+
 const beforeReq = async(config)=>{
     return checkToken(config);
 }
 
 const requestFail = (err)=>{
-    
+    window.location.href= "/logoutAction";
     console.error(err);
 }
 
@@ -22,7 +23,8 @@ const beforeRes = async(res)=>{
 }
 
 const responseFail = (err) => {
-    console.error(err)
+    console.error(err);
+    window.location.href= "/logoutAction";
     return Promise.reject(err);
 };
 

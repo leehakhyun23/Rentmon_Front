@@ -180,7 +180,7 @@ function ReviewManage() {
             </div>
             <div>
               {/* 필터링된 결과를 테이블로 표시 */}
-              <table>
+              <table className='reviewtable'>
                 <thead>
                   <tr>
                     <th>예약 번호</th>
@@ -226,8 +226,8 @@ function ReviewManage() {
         {activeTab === 'qna' && (
           <div className='qnaa'>
             {/* Q&A 관련 콘텐츠 */}
-            <h2>Q&A 내용</h2>
-            <table>
+            <div className='qnatext'>Q&A 내용</div>
+            <table className='qnatable'>
               <thead>
                 <tr>
                   <th>문의번호</th>

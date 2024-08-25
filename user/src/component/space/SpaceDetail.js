@@ -226,6 +226,7 @@
           </div>
 
 
+
           <div className="spaceButton">
             <div className="spaceMainTitle"></div>
             <button onClick={() => { navigate(`/reservationForm/${space.sseq}`) }}>예약하기</button>

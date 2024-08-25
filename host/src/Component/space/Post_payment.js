@@ -97,15 +97,16 @@ function Post_payment() {
   };
 
   return (
-    <div className='form-container'>
-       <div className='rheader'>
+    <article>
+        <div className='rheader'>
                 <div className='logo3'>예약/정산 정보</div>
                 <div className='left'><Submenu /></div>
             </div>
+    <div className='form-container'>
       <div className='select-container'>
         <label className='option-label'>
           은행
-          <select className='select' value={bank} onChange={handleBankChange}>
+          <select className='selectbank' value={bank} onChange={handleBankChange}>
             <option value="">선택하세요</option>
             <option value="1">한국은행</option>
             <option value="2">신한은행</option>
@@ -145,6 +146,7 @@ function Post_payment() {
         <button className="but" onClick={onSubmit}>다음</button>
       </div>
     </div>
+    </article>
   );
 }
 
