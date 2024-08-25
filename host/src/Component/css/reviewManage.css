@@ -70,7 +70,6 @@
     background-color: white;
     border: none;
     width: 1000px;
-    height: 20px;
   }
   
   .dropdown-container {
@@ -104,7 +103,33 @@
     border-radius: 5px;
   }
 
+  th {
+    background-color: #f4f4f4;
+    color: #333;
+    padding: 12px 15px;
+}
 
+/* 테이블 데이터 셀 스타일 */
+td {
+    padding: 12px 15px;
+    border-bottom: 1px solid #ddd;
+}
 
+/* 테이블 행에 호버 효과 */
+tr:hover {
+    background-color: #f1f1f1;
+}
 
-  
+.qnatext{
+    font-size: 110%;
+}
+
+.qnatable{
+    margin-top: 20px;
+    width: 1000px;
+}
+
+.reviewtable{
+    width: 1000px;
+    margin-top: 20px;
+}

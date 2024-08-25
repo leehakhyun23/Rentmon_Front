@@ -20,7 +20,7 @@ function ReservModal({ modalon, setModalon, rerveData }) {
       try{
         setMessage("");
         if (modalon && rerveData.space) {
-          let assress = rerveData.space.province + " " + rerveData.space.town + " " + rerveData.space.village  + " " + rerveData.space.addressdetail;
+          let assress = rerveData.space.address;
           // 모달이 열리고 예약 데이터가 있을 때 지도 초기화
           let result = await getCoordinates(assress);
           setmap(result);
