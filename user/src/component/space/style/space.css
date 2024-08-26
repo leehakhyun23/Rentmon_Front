@@ -348,7 +348,7 @@
 
 
 .spaces > div {
-  flex: 1 1 calc(33.333% - 20px);
+  width: calc(33.333% - 20px);
   box-sizing: border-box;
   border: 1px solid #ddd;
   background-color: #f9f9f9;

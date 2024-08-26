@@ -179,7 +179,7 @@
 
 .mypageModal .modal-title { font-size: 20px; font-weight: bold; margin-bottom: 20px; }
 .mypageModal img { width: 500px; border-radius: 10px; max-height: 300px; object-fit: cover; }
-.mypageModal .modal-description { font-size: 15px; margin-top: 10px; }
+.mypageModal .modal-description { font-size: 15px; margin-top: 10px; max-width: 450px; }
 .mypageModal .modal-info {  margin-top: 30px;}
 .mypageModal .modal-info .info-item { margin-top: 10px;  }
 .mypageModal .modal-info .info-item.price { margin-top: 30px;  }
