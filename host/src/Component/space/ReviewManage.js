@@ -13,6 +13,8 @@ function ReviewManage() {
   // 현재 활성화된 탭을 관리하는 상태
   const [activeTab, setActiveTab] = useState('review'); // 'review' 또는 'qna'
   const [reviews, setReviews] = useState([]);
+  const [inquirys, setInquirys] = useState([]);
+  const [filteredInquirys, setFilteredInquirys] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [inqueryData, setInqueryData] = useState([]);
@@ -24,6 +26,7 @@ function ReviewManage() {
   const navigate = useNavigate();
   const [filteredReviews, setFilteredReviews] = useState([]);
   const [replyInput, setReplyInput] = useState({}); // 각 리뷰에 대한 답글 입력 상태
+  const [replyiInput, setReplyiInput] = useState({}); // 각 리뷰에 대한 답글 입력 상태
 
   const handleTabClick = (tab) => {
     setActiveTab(tab);
@@ -97,6 +100,22 @@ function ReviewManage() {
       setReviews(updatedReviews);
       setFilteredReviews(updatedReviews);
       setReplyInput({ ...replyInput, [rseq]: '' }); // 입력 필드 초기화
+    } catch (error) {
+      console.error("답글을 저장하는 데 문제가 발생했습니다.", error);
+    }
+  };
+
+  const handleReply = async (iseq) => {
+    try {
+      await jaxios.post(`/api/inquery/insertreply`, { iseq, reply: replyInput[iseq] });
+      // 서버에서 답글 저장 후 업데이트
+      const updatedInquirys = inquirys.map(inquiry =>
+        inquiry.iseq === iseq ? { ...inquiry, reply: replyInput[iseq] } : inquiry
+      );
+      setInquirys(updatedInquirys);
+      setFilteredInquirys(updatedInquirys);
+      setReplyiInput({ ...replyInput, [iseq]: '' }); // 입력 필드 초기화
+      console.log(updatedInquirys);
     } catch (error) {
       console.error("답글을 저장하는 데 문제가 발생했습니다.", error);
     }
@@ -236,6 +255,8 @@ function ReviewManage() {
                   <th>문의시간</th>
                   <th>장소명</th>
                   <th>문의자명</th>
+                  <th>답글</th>
+                  <th>답글작성</th>
                 </tr>
               </thead>
               <tbody>
@@ -247,6 +268,22 @@ function ReviewManage() {
                     <td>{new Date(inquiry.created_at).toLocaleString()}</td>
                     <td>{inquiry.space.sseq}</td>
                     <td>{inquiry.user.userid}</td>
+                    <td>{inquiry.reply ? inquiry.reply : '없음'}</td>
+                    <td>
+                        {inquiry.reply ? (
+                          <span></span>
+                        ) : (
+                          <>
+                            <input
+                              type="text"
+                              value={replyInput[inquiry.iseq] || ''}
+                              onChange={(e) => handleReplyChange(inquiry.iseq, e)}
+                              placeholder="답글 작성..."
+                            />
+                            <button onClick={() => handleReply(inquiry.iseq)}>답글 추가</button>
+                          </>
+                        )}
+                      </td>
                   </tr>
                 ))}
               </tbody>
