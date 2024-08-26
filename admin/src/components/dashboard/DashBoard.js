@@ -48,23 +48,29 @@ const DashBoard = () => {
                         Dashboard Overview
                     </Typography>
                     <Box sx={{ display: 'flex', gap: 4 }}>
-                        <Paper sx={{ flex: 1, padding: 2, boxShadow: 3 }}>
+                        <Paper sx={{ flex: 1, padding: 2, boxShadow: 3, display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
                             <Typography variant="h6" component="h2" gutterBottom>
                                 Visitor Trends
                             </Typography>
-                            <VisitChart data={visitData} />
+                            <Box sx={{ flex: 1, display: 'flex', justifyContent: 'center', alignItems: 'center', width: '100%' }}>
+                                <VisitChart data={visitData} />
+                            </Box>
                         </Paper>
-                        <Paper sx={{ flex: 1, padding: 2, boxShadow: 3 }}>
+                        <Paper sx={{ flex: 1, padding: 2, boxShadow: 3, display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
                             <Typography variant="h6" component="h2" gutterBottom>
                                 Member Distribution
                             </Typography>
-                            <MemberPieChart data={memberData} />
+                            <Box sx={{ flex: 1, display: 'flex', justifyContent: 'center', alignItems: 'center', width: '100%' }}>
+                                <MemberPieChart data={memberData} />
+                            </Box>
                         </Paper>
-                        <Paper sx={{ flex: 1, padding: 2, boxShadow: 3 }}>
+                        <Paper sx={{ flex: 1, padding: 2, boxShadow: 3, display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
                             <Typography variant="h6" component="h2" gutterBottom>
                                 Category Distribution
                             </Typography>
-                            <CategoryPieChart data={pieData} />
+                            <Box sx={{ flex: 1, display: 'flex', justifyContent: 'center', alignItems: 'center', width: '100%' }}>
+                                <CategoryPieChart data={pieData} />
+                            </Box>
                         </Paper>
                     </Box>
                     <Box sx={{ display: 'flex', flexDirection: 'column', gap: 2 }}>
