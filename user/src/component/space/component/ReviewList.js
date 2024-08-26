@@ -32,7 +32,13 @@ function ReviewList({ sseq, reviewopen, setReviewopen }) {
         } catch (err) { console.error(err); }
     }
 
-    let deleteReview = async (rseq) => { }
+    let deleteReview = async (rseq) => {
+        if(!window.confirm("정말 삭제하시겠습니까?")) return false;
+        try{
+            let result = await jaxios.get("/api/review/delete/"+rseq);
+            getList();
+        }catch(err){console.log(err)}
+     }
 
     return (
         <div className='inquiryList'>
@@ -66,7 +72,7 @@ function ReviewList({ sseq, reviewopen, setReviewopen }) {
                                                     <img
                                                         src={`http://localhost:8070/review_images/${img.realname}`}
                                                         alt={`리뷰 이미지 ${idx}`}
-                                                        style={{ width: '100px', height: '100px', objectFit: 'cover', marginRight: '10px', float: 'left' }}
+                                                        style={{ width: '300px', height: '300px', objectFit: 'cover', marginRight: '10px', float: 'left' }}
                                                     />
                                                 </div>
                                             ))
