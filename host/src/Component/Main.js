@@ -4,6 +4,7 @@ import Header from './HeaderFooter/Header';
 
 import { useNavigate } from 'react-router-dom';
 import './css/main.css'
+import Footer from './HeaderFooter/Footer';
 
 
 
@@ -29,8 +30,10 @@ function Main() {
           공간 호스트 시작하기
         </button>
       </div>
-
+      
+    <Footer />
     </div>
+  
   )
 }
 

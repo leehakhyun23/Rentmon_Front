@@ -67,7 +67,7 @@
 .recentresevation-component .recentresevation-wrapper .placeInfo > div img { width: 15px; position: relative; top: 2px; }
 .recentresevation-component .recentresevation-wrapper .placeInfo small { color: #999; font-size: 15px; }
 .recentresevation-component .recentresevation-wrapper .placeInfo span { display: block; }
-.recentresevation-component .recentresevation-wrapper .placeInfo span.content { margin-top: 13px; font-size: 14px; }
+.recentresevation-component .recentresevation-wrapper .placeInfo span.content { margin-top: 13px; font-size: 14px; width: 60%; }
 .recentresevation-component .recentresevation-wrapper .placeInfo span.price { color: #999; font-size: 14px; font-weight: 600; margin-top: 5px; }
 .recentresevation-component .yearContainer { display: flex; flex-direction: column; align-items: flex-end; }
 .recentresevation-component .yearContainer > div { text-align: right; }
@@ -278,7 +278,7 @@
 .usedSpace .recentresevation-component .reviewContianer {  }
 .usedSpace .recentresevation-component .reviewContianer > div { color: #0090DF; text-align: right; font-size: 15px; }
 .usedSpace .recentresevation-component .reviewContianer > div span { display: block; margin-bottom: 10px; }
-.usedSpace .recentresevation-component .reviewContianer > div p { display: block;margin-bottom: 20px; }
+.usedSpace .recentresevation-component .reviewContianer > div p { display: block;margin-bottom: 20px; white-space: nowrap; }
 .usedSpace .recentresevation-component .reviewContianer > div a { color: #0090DF; border: 1px solid #0090DF; border-radius: 50px; padding:10px 15px }
 
 
