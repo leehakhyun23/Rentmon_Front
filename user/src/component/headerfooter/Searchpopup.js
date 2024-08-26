@@ -53,7 +53,7 @@ function Searchpopup({searchshow, setSearchPopup ,searchWord ,setSearchWord}) {
     }
 
     let recentseqrchClick=(word)=>{
-        dispatch(SearchOnAction({word}));
+        dispatch(SearchOnAction({searchWord:word}));
         setSearchWord(word);
         navigate(`/spaceList`);
         setSearchPopup(false);
