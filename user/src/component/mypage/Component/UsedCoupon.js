@@ -32,7 +32,7 @@ function UsedCoupon({userid}) {
                 {(coupon) ?(
                     coupon.map((elem, key)=>(
                         <div className='row' key={key}>
-                            <UsedCouponComponent num={begin-key} title={elem.couponstr}  lastDate={elem.limitdate} useyn={elem.useyn} />
+                            <UsedCouponComponent num={begin-key} title={elem.couponTitle}  lastDate={elem.limitdate} useyn={elem.useyn} />
                         </div>
                     ))
                 ):""}
