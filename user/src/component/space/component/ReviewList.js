@@ -66,7 +66,7 @@ function ReviewList({ sseq, reviewopen, setReviewopen }) {
                                                     <img
                                                         src={`http://localhost:8070/review_images/${img.realname}`}
                                                         alt={`리뷰 이미지 ${idx}`}
-                                                        style={{ width: '100px', height: '100px', objectFit: 'cover', marginRight: '10px', float: 'left' }}
+                                                        style={{ width: '300px', height: '300px', objectFit: 'cover', marginRight: '10px', float: 'left' }}
                                                     />
                                                 </div>
                                             ))
