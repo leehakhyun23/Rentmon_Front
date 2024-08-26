@@ -21,10 +21,12 @@ const HostPage = () => {
                         totalPages: res.data.page.totalPages
                     });
                     setNoResults(false);
+                } else if (res.status === 204) {
+                    alert('검색 결과가 없습니다.');
                 }
             })
             .catch((err) => {
-                if (err.response && err.response.status === 204) {
+                if (err.response.status === 204) {
                     setHostList([]);
                     setPaging({ page: 0, size: 10, totalPages: 0 });
                     setNoResults(true);

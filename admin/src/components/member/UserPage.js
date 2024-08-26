@@ -49,7 +49,7 @@ const UserPage = () => {
     useEffect(() => {
         fetchUserList();
     // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [sortByDeclasCount, isLogin, paging.page, searchType]);
+    }, [sortByDeclasCount, isLogin, paging.page]);
 
     const handlePageChange = (e, value) => {
         setPaging(prev => ({ ...prev, page: value - 1 }));
@@ -108,11 +108,12 @@ const UserPage = () => {
 
     const handleSearch = () => {
         setPaging(prev => ({ ...prev, page: 0 }));
+        fetchUserList();
     }
 
     const handleKeyDown = (e) => {
         if (e.key === 'Enter') {
-            setPaging(prev => ({ ...prev, page: 0 }));
+            handleSearch(); // Trigger search on Enter key press
         }
     };
 
