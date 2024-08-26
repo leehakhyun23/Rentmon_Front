@@ -32,7 +32,13 @@ function ReviewList({ sseq, reviewopen, setReviewopen }) {
         } catch (err) { console.error(err); }
     }
 
-    let deleteReview = async (rseq) => { }
+    let deleteReview = async (rseq) => {
+        if(!window.confirm("정말 삭제하시겠습니까?")) return false;
+        try{
+            let result = await jaxios.get("/api/review/delete/"+rseq);
+            getList();
+        }catch(err){console.log(err)}
+     }
 
     return (
         <div className='inquiryList'>
