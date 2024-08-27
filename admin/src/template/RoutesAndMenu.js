@@ -7,6 +7,8 @@ import CouponPage from "../components/coupon/CouponPage";
 import CouponModal from "../components/modal/CouponModal";
 import { IconGiftCard, IconHome, IconReport, IconUser, IconUserFilled, IconUsers } from '@tabler/icons-react';
 import DashBoard from "../components/dashboard/DashBoard";
+import Chat from "../test/Chat";
+import TossPayment from "../test/TossPayment";
 
 const RoutesAndMenu = [
   {
@@ -61,6 +63,16 @@ const RoutesAndMenu = [
     id: "couponmodal",
     title: "Coupon Modal",
     element: <CouponModal />,
+  },
+  {
+    id: "chat",
+    title: "Chat",
+    element: <Chat />,
+  },
+  {
+    id: "tosspayment",
+    title: "Toss Payment",
+    element: <TossPayment />,
   },
 ];
 

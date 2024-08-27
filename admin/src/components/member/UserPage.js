@@ -98,6 +98,18 @@ const UserPage = () => {
         })
     };
 
+    const handleUserDelete = () => {
+        axios.delete('/api/admin/user', checked)
+        .then((res) => {
+            if (res.status === 200) {
+
+            }
+        })
+        .catch((err) => {
+            console.error(err);
+        })
+    }
+
     const handleSelectChange = (e) => {
         setSearchType(e.target.value);
     }
@@ -244,7 +256,7 @@ const UserPage = () => {
                         <Button onClick={handleIsLoginUpdate} variant="contained" color="secondary" sx={{ mr: 2 }}>
                             수정
                         </Button>
-                        <Button variant="contained" color="error">
+                        <Button onClick={handleUserDelete} variant="contained" color="error">
                             삭제
                         </Button>
                     </Box>
