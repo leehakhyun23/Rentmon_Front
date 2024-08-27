@@ -1,5 +1,6 @@
-import { styled } from '@mui/material/styles';
 import React from 'react';
+import { styled } from '@mui/material/styles';
+import FloatingActionButton from '../chat/FloatingActionButton';
 
 const drawerWidth = 240;
 
@@ -31,10 +32,15 @@ const DrawerHeader = styled('div')(({ theme }) => ({
 }));
 
 const Main = ({ open, children }) => {
+  const handleFabClick = () => {
+    
+  };
+
   return (
     <MainStyled open={open}>
       <DrawerHeader />
       {children}
+      <FloatingActionButton badgeContent={5} onClick={handleFabClick} />
     </MainStyled>
   );
 };

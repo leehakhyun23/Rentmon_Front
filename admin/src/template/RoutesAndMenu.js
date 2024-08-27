@@ -7,7 +7,7 @@ import CouponPage from "../components/coupon/CouponPage";
 import CouponModal from "../components/modal/CouponModal";
 import { IconGiftCard, IconHome, IconReport, IconUser, IconUserFilled, IconUsers } from '@tabler/icons-react';
 import DashBoard from "../components/dashboard/DashBoard";
-import Chat from "../test/Chat";
+import { Chat } from "@mui/icons-material";
 import TossPayment from "../test/TossPayment";
 
 const RoutesAndMenu = [
