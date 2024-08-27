@@ -193,6 +193,8 @@ function ReservationForm({ props }) {
 
     // 쿠폰 사용하기
 
+    
+
     const handleCouponChange = (event) => {
         setCouponCode(event.target.value);
     };
@@ -345,7 +347,7 @@ function ReservationForm({ props }) {
                 />
                 <div className="CouponSelect">
                     <label>쿠폰 선택 : </label>
-                    <select id="coupon" value={couponCode} onChange={()=>{}}>
+                    <select id="coupon" value={couponCode} onChange={handleCouponChange}>
                         <option value="">쿠폰 셀렉트</option>
                         {couponList.map((coupon, index) => (
                             <option key={index} value={coupon.couponstr}>{coupon.couponTitle}</option>
