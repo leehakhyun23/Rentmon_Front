@@ -13,6 +13,8 @@ const ChatListStyled = styled(List)(({ theme }) => ({
   bottom: theme.spacing(10),
   right: theme.spacing(2),
   width: '300px',
+  maxHeight: '400px',
+  overflowY: 'auto',
   backgroundColor: theme.palette.background.paper,
   boxShadow: theme.shadows[5],
   borderRadius: theme.shape.borderRadius,
@@ -20,34 +22,15 @@ const ChatListStyled = styled(List)(({ theme }) => ({
 }));
 
 const ChatList = ({ onSelectChat, chatRoomList }) => {
-  const chatList = [
-    {
-      id: 1,
-      name: 'Alice',
-      profileImage: 'https://example.com/alice.jpg',
-      message: 'Hello, how are you?',
-      time: '12:30 PM',
-      badgeContent: 2,
-    },
-    {
-      id: 2,
-      name: 'Bob',
-      profileImage: 'https://example.com/bob.jpg',
-      message: 'Are you coming to the meeting?',
-      time: '11:00 AM',
-      badgeContent: 1,
-    },
-  ];
-
   return (
     <ChatListStyled>
-      {chatList.map((chat) => (
-        <ListItem key={chat.id} alignItems="flex-start" button onClick={() => onSelectChat(chat.id)}>
+      {chatRoomList.map((chatRoom) => (
+        <ListItem key={chatRoom.crseq} alignItems="flex-start" button onClick={() => onSelectChat(chatRoom.crseq)}>
           <ListItemAvatar>
-            <Avatar alt={chat.name} src={chat.profileImage} />
+            <Avatar />
           </ListItemAvatar>
           <ListItemText
-            primary={chat.message}
+            primary={chatRoom.lastMessage}
             secondary={
               <>
                 <Typography
@@ -56,9 +39,9 @@ const ChatList = ({ onSelectChat, chatRoomList }) => {
                   variant="body2"
                   color="text.primary"
                 >
-                  {chat.time}
+                  {chatRoom.lastSendTime}
                 </Typography>
-                <Badge badgeContent={chat.badgeContent} color="secondary" sx={{ ml: 2 }} />
+                <Badge badgeContent={20} color="secondary" sx={{ ml: 2 }} />
               </>
             }
           />
