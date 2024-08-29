@@ -33,10 +33,13 @@ function Usesapce() {
             <h2>이용한 공간 ({page.recordAllcount})</h2>
         </div>
         <div className='content'>
-            {(list)&&(
+            {(list.length>0)&&(
                 list.map((elem, idx)=>{
                   return  <MypageUsedReservaion record={elem} num={begin-idx} key={begin-idx}/>
                 })
+            )}
+            {(list.length==0)&&(
+                (<p style={{fontSize:"15px",padding:"60px 20px", border:"1px solid #ddd", textAlign:"left", color:"#999" ,borderRadius:"9px" , margin:"50px 0"}}>사용했던 공간이 없습니다.</p>)
             )}
         </div>
         <div className='paganation'>
