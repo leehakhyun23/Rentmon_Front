@@ -193,7 +193,7 @@ function ReservationForm({ props }) {
 
     // 쿠폰 사용하기
 
-    
+
 
     const handleCouponChange = (event) => {
         setCouponCode(event.target.value);
@@ -255,17 +255,17 @@ function ReservationForm({ props }) {
 
         <div className="reservationContainer">
 
-            
 
-<div className="spaceInfo">
-            <div className="spaceMainTitle"></div>
-            {<Slider {...settings}>
-              {space.spaceimage && space.spaceimage.map((image, idx) => (
-                <div key={idx} className="spaceImageContainer">
-                  <img className='spaceImage' src={`http://localhost:8070/space_images/${image.realName}`} alt={space.title} />
-                </div>
-              ))}
-            </Slider>}
+
+            <div className="spaceInfo">
+                <div className="spaceMainTitle"></div>
+                {<Slider {...settings}>
+                    {space.spaceimage && space.spaceimage.map((image, idx) => (
+                        <div key={idx} className="spaceImageContainer">
+                            <img className='spaceImage' src={`http://localhost:8070/space_images/${image.realName}`} alt={space.title} />
+                        </div>
+                    ))}
+                </Slider>}
                 <div className="spaceContentBlock">
                     <div className="spaceTitle">제목</div>
                     <div className="spaceContent">{space.sseq}. {space.title}</div>
@@ -339,12 +339,6 @@ function ReservationForm({ props }) {
             <div className="payment-info">
                 <div className="payTitle">총 결제 금액 : </div>
                 <div className="payContent">{payment}원</div>
-                <input
-                    type="text"
-                    value={couponCode}
-                    onChange={handleCouponChange}
-                    placeholder="쿠폰 번호를 입력하세요"
-                />
                 <div className="CouponSelect">
                     <label>쿠폰 선택 : </label>
                     <select id="coupon" value={couponCode} onChange={handleCouponChange}>
@@ -352,6 +346,12 @@ function ReservationForm({ props }) {
                         {couponList.map((coupon, index) => (
                             <option key={index} value={coupon.couponstr}>{coupon.couponTitle}</option>
                         ))}
+                        <input
+                            type="text"
+                            value={couponCode}
+                            onChange={handleCouponChange}
+                            placeholder="쿠폰 번호를 입력하세요"
+                        />
                     </select>
                 </div>
                 <button className="getCoupon-button" onClick={useCoupon}>쿠폰 사용하기</button>
