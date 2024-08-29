@@ -13,10 +13,10 @@
 .infoDashBoard .container .left .userinfo .textbox .phone { margin-top: 3px;  }
 .infoDashBoard .container .left  p { margin-top: 30px; color: #B1B1B1; text-decoration: underline; cursor: pointer; font-size: 13px; }
 
-.infoDashBoard .container .right { display: flex; align-items: center; width: 60%; justify-content: flex-end;
+.infoDashBoard .container .right { display: flex; align-items: center; width: 67%; justify-content: flex-end;
 }
 .infoDashBoard .container .right .mypagemenu { display: flex; width: 100%; justify-content: flex-end; }
-.infoDashBoard .container .right .mypagemenu .icon { width: 10.3%; text-align: center; padding: 0 4.8%; position: relative; }
+.infoDashBoard .container .right .mypagemenu .icon { width: 10.3%; text-align: center; padding: 0 4.5%; position: relative; }
 .infoDashBoard .container .right .mypagemenu .icon:last-child { padding-right: 0; }
 
 .infoDashBoard .container .right .mypagemenu .icon::before { content: ""; display: block; width: 1px; height: 15%; background: #D4D4D4; position: absolute; top: 30%;  left: 0; }

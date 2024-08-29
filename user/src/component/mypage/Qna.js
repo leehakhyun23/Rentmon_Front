@@ -43,13 +43,14 @@ function Qna() {
                     <div className='reply'>답변유무</div>
                     </div>
                 </div>
-                {(list) ?(
+                {(list.length >0) ?(
                     list.map((elem, key)=>(
                         <div className='row' key={key}>
                             <QnaComponent num={begin-key} elem={elem} setIsOpen={setIsOpen} setPopup={setPopup}  />
                         </div>
                     ))
-                ):""}
+                ):(<p style={{fontSize:"15px", textAlign:"center", color:"#999"  , margin:"50px 0"}}>문의 내역이 없습니다.</p>)}
+                
             </div>
 
             <div className='paganation'>
