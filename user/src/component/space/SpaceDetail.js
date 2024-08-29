@@ -2,16 +2,12 @@
   import axios from "axios";
   import { useNavigate, useParams } from "react-router-dom";
   import { useSelector, useDispatch } from 'react-redux';
-  import ReactStars from 'react-rating-stars-component';
-  import { Box, Button, IconButton, TextField, Typography } from '@mui/material';
 
-  import AddIcon from '@mui/icons-material/Add';
   import { getCookie, setAuthoCookie } from '../../util/cookieUtil';
   import Slider from 'react-slick'
   import 'slick-carousel/slick/slick.css'
   import 'slick-carousel/slick/slick-theme.css'
   import KakaoMap from '../../util/KakaoMap';
-  import InqueryModal from './component/InqueryModal';
   import "./style/inquiry.css"
   import InquiryList from './component/InquiryList';
   import ReviewList from './component/ReviewList';

@@ -4,7 +4,6 @@ import { dayFormat } from '../../../util/formatDate';
 import jaxios from '../../../util/jwtUtil';
 import { RiDeleteBack2Line } from "react-icons/ri";
 import ReactStars from 'react-rating-stars-component';
-import axios from 'axios';
 
 import SapcePaging from './SapcePaging';
 import ReviewModal from './ReviewModal';
