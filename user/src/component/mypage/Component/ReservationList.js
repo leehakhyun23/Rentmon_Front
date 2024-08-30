@@ -32,6 +32,7 @@ function ReservationList() {
                 <h2>예약 리스트 ({page.recordAllcount})</h2>
             </div>
             <div className='content'>
+                {(list.length==0)&&(<p style={{fontSize:"15px",padding:"60px 20px", border:"1px solid #ddd", textAlign:"left", color:"#999" ,borderRadius:"9px" , margin:"50px 0"}}>예약내역이 없습니다.</p>)}
                 {(list.map((elem, key)=>(<ReseveListComponent record={elem} key={key} num ={page.lastnum-key} setReservData={ setReservData}  setModalon={setModalon}/>)))}
             </div>
             <div className='paganation'>

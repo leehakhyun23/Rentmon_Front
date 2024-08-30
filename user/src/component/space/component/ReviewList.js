@@ -4,7 +4,6 @@ import { dayFormat } from '../../../util/formatDate';
 import jaxios from '../../../util/jwtUtil';
 import { RiDeleteBack2Line } from "react-icons/ri";
 import ReactStars from 'react-rating-stars-component';
-import axios from 'axios';
 
 import SapcePaging from './SapcePaging';
 import ReviewModal from './ReviewModal';
@@ -32,7 +31,13 @@ function ReviewList({ sseq, reviewopen, setReviewopen }) {
         } catch (err) { console.error(err); }
     }
 
-    let deleteReview = async (rseq) => { }
+    let deleteReview = async (rseq) => {
+        if(!window.confirm("정말 삭제하시겠습니까?")) return false;
+        try{
+            let result = await jaxios.get("/api/review/delete/"+rseq);
+            getList();
+        }catch(err){console.log(err)}
+     }
 
     return (
         <div className='inquiryList'>
@@ -59,21 +64,22 @@ function ReviewList({ sseq, reviewopen, setReviewopen }) {
                                             activeColor="#0090DF"
                                         />
                                         <br/>
-                                        <div className='content'><pre>{elem.content}</pre></div>
+                                        <div className='content'>    <pre style={{ whiteSpace: 'pre-wrap', wordBreak: 'break-word' }}>{elem.content}</pre>
+                                        </div>
                                         {elem.images && (
                                             elem.images.map((img, idx) => (
                                                 <div key={idx}>
                                                     <img
                                                         src={`http://localhost:8070/review_images/${img.realname}`}
                                                         alt={`리뷰 이미지 ${idx}`}
-                                                        style={{ width: '100px', height: '100px', objectFit: 'cover', marginRight: '10px', float: 'left' }}
+                                                        style={{ width: '300px', height: '300px', objectFit: 'cover', marginRight: '10px', float: 'left' }}
                                                     />
                                                 </div>
                                             ))
                                         )}
                                     </div>
                                     <div className='inquiryDate'>
-                                        {/* {dayFormat(elem.created_at)} */}
+                                        {dayFormat(elem.created_at)}
                                     </div>
 
 

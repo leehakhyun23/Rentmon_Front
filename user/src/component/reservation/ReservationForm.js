@@ -29,6 +29,7 @@ function ReservationForm({ props }) {
     const [space, setSpace] = useState({});
     const [host, setHost] = useState({});
     const [reserveList, setReserveList] = useState([]);
+    const [couponList, setCouponList] = useState([]);
 
 
     const navigate = useNavigate();
@@ -58,6 +59,12 @@ function ReservationForm({ props }) {
             axios.get(`/api/space/getSpace/${sseq}`)
                 .then((result) => {
                     setSpace(result.data.space);
+                })
+                .catch((err) => { console.error(err) });
+
+            axios.get(`/api/reservation/getMyCoupon`, { params: { userid: user.userid } })
+                .then((result) => {
+                    setCouponList(result.data.couponList);
                 })
                 .catch((err) => { console.error(err) });
         }, []
@@ -183,30 +190,32 @@ function ReservationForm({ props }) {
 
     }
 
-    
-        // 쿠폰 사용하기
 
-        const handleCouponChange = (event) => {
-            setCouponCode(event.target.value);
-          };
+    // 쿠폰 사용하기
 
 
-        const useCoupon = () => {
-            axios.get('/api/reservation/useCoupon', { params: { userid: user.userid, couponstr: couponCode } })
-                .then((result) => {
-                    if (result.data !== null) {
-                        const discount = result.data.coupon.discount
-                        setPayment(prevPayment => Math.max(prevPayment - discount, 0)); // 할인 적용
-                        alert("쿠폰이 성공적으로 적용되었습니다.");
-                    } else {
-                        alert("유효하지 않은 쿠폰입니다.");
-                    }
-                })
-                .catch((error) => {
-                    console.error("쿠폰 적용 실패:", error);
-                    alert("쿠폰 적용에 실패했습니다.");
-                });
-        };
+
+    const handleCouponChange = (event) => {
+        setCouponCode(event.target.value);
+    };
+
+
+    const useCoupon = () => {
+        axios.get('/api/reservation/useCoupon', { params: { userid: user.userid, couponstr: couponCode } })
+            .then((result) => {
+                if (result.data !== null) {
+                    const discount = result.data.coupon.discount
+                    setPayment(prevPayment => Math.max(prevPayment - discount, 0)); // 할인 적용
+                    alert("쿠폰이 성공적으로 적용되었습니다.");
+                } else {
+                    alert("유효하지 않은 쿠폰입니다.");
+                }
+            })
+            .catch((error) => {
+                console.error("쿠폰 적용 실패:", error);
+                alert("쿠폰 적용에 실패했습니다.");
+            });
+    };
 
     const handleSubmit = () => {
         if (!date || !startTime || !endTime) {
@@ -246,12 +255,17 @@ function ReservationForm({ props }) {
 
         <div className="reservationContainer">
 
-            <div className="space-info">
-                <Slider {...settings}>
+
+
+            <div className="spaceInfo">
+                <div className="spaceMainTitle"></div>
+                {<Slider {...settings}>
                     {space.spaceimage && space.spaceimage.map((image, idx) => (
-                        <img key={idx} src={`http://localhost:8070/space_images/${image.realName}`} alt={space.title} />
+                        <div key={idx} className="spaceImageContainer">
+                            <img className='spaceImage' src={`http://localhost:8070/space_images/${image.realName}`} alt={space.title} />
+                        </div>
                     ))}
-                </Slider>
+                </Slider>}
                 <div className="spaceContentBlock">
                     <div className="spaceTitle">제목</div>
                     <div className="spaceContent">{space.sseq}. {space.title}</div>
@@ -312,25 +326,34 @@ function ReservationForm({ props }) {
             </div>
 
             <div className="user-info">
-            <div className="reserveHead">예약자 정보</div>
-            <div className="reserveTitle">이름 : </div>
-            <div className="reserveContent">{user.name}</div>
-            <div className="reserveTitle">이메일 : </div>
-            <div className="reserveContent">{user.email}</div>
-            <div className="reserveTitle">전화번호 : </div>
-            <div className="reserveContent">{user.phone}</div>
+                <div className="reserveHead">예약자 정보</div>
+                <div className="reserveTitle">이름 : </div>
+                <div className="reserveContent">{user.name}</div>
+                <div className="reserveTitle">이메일 : </div>
+                <div className="reserveContent">{user.email}</div>
+                <div className="reserveTitle">전화번호 : </div>
+                <div className="reserveContent">{user.phone}</div>
             </div>
 
 
             <div className="payment-info">
                 <div className="payTitle">총 결제 금액 : </div>
                 <div className="payContent">{payment}원</div>
-      <input
-        type="text"
-        value={couponCode}
-        onChange={handleCouponChange}
-        placeholder="쿠폰 번호를 입력하세요"
-      />
+                <div className="CouponSelect">
+                    <label>쿠폰 선택 : </label>
+                    <select id="coupon" value={couponCode} onChange={handleCouponChange}>
+                        <option value="">쿠폰 셀렉트</option>
+                        {couponList.map((coupon, index) => (
+                            <option key={index} value={coupon.couponstr}>{coupon.couponTitle}</option>
+                        ))}
+                        <input
+                            type="text"
+                            value={couponCode}
+                            onChange={handleCouponChange}
+                            placeholder="쿠폰 번호를 입력하세요"
+                        />
+                    </select>
+                </div>
                 <button className="getCoupon-button" onClick={useCoupon}>쿠폰 사용하기</button>
             </div>
 

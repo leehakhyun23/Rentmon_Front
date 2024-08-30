@@ -52,7 +52,10 @@ function Zzim() {
                     })
                 )}
             </div>
+            
             <div ref={observbox} style={{height:"10px"}}></div>
+
+            {(zzim.length == 0)&&(<p style={{fontSize:"15px",padding:"60px 20px", border:"1px solid #ddd", textAlign:"ce", color:"#999" ,borderRadius:"9px" , margin:"50px 0"}}>찜 목록이 없습니다.</p>)}
         </div>
     )
 }
