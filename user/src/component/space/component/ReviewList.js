@@ -4,7 +4,6 @@ import { dayFormat } from '../../../util/formatDate';
 import jaxios from '../../../util/jwtUtil';
 import { RiDeleteBack2Line } from "react-icons/ri";
 import ReactStars from 'react-rating-stars-component';
-import axios from 'axios';
 
 import SapcePaging from './SapcePaging';
 import ReviewModal from './ReviewModal';
@@ -65,7 +64,8 @@ function ReviewList({ sseq, reviewopen, setReviewopen }) {
                                             activeColor="#0090DF"
                                         />
                                         <br/>
-                                        <div className='content'><pre>{elem.content}</pre></div>
+                                        <div className='content'>    <pre style={{ whiteSpace: 'pre-wrap', wordBreak: 'break-word' }}>{elem.content}</pre>
+                                        </div>
                                         {elem.images && (
                                             elem.images.map((img, idx) => (
                                                 <div key={idx}>
@@ -79,7 +79,7 @@ function ReviewList({ sseq, reviewopen, setReviewopen }) {
                                         )}
                                     </div>
                                     <div className='inquiryDate'>
-                                        {/* {dayFormat(elem.created_at)} */}
+                                        {dayFormat(elem.created_at)}
                                     </div>
 
 
