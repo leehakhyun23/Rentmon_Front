@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useSelector } from 'react-redux'
 import Calendar from "react-calendar";
-
 import './style/reservation.css';
 import { useParams, useLocation, useNavigate } from 'react-router-dom';
 import axios from 'axios';
@@ -23,11 +22,14 @@ const settings = {
 
 function ReservationForm({ props }) {
 
+
+
     // 기본자원
     let user = useSelector(state => state.user);
     const [space, setSpace] = useState({});
     const [host, setHost] = useState({});
     const [reserveList, setReserveList] = useState([]);
+    const [couponList, setCouponList] = useState([]);
 
 
     const navigate = useNavigate();
@@ -46,6 +48,10 @@ function ReservationForm({ props }) {
     const [endTimestamp, setEndTimestamp] = useState();
     const [reserveTime, setReserveTime] = useState();
 
+    // 쿠폰처리
+    const [couponCode, setCouponCode] = useState('');
+    const [discount, setDiscount] = useState(0);
+
 
     // Space 조회
     useEffect(
@@ -53,7 +59,12 @@ function ReservationForm({ props }) {
             axios.get(`/api/space/getSpace/${sseq}`)
                 .then((result) => {
                     setSpace(result.data.space);
-                    // setHost(result.data.space.host);
+                })
+                .catch((err) => { console.error(err) });
+
+            axios.get(`/api/reservation/getMyCoupon`, { params: { userid: user.userid } })
+                .then((result) => {
+                    setCouponList(result.data.couponList);
                 })
                 .catch((err) => { console.error(err) });
         }, []
@@ -123,7 +134,7 @@ function ReservationForm({ props }) {
 
     const handleTimeSlotClick = (time) => {
         if (disabledHours.has(time)) return;  // 비활성화된 시간 클릭 방지
-    
+
         if (selectedPhase === "start") {
             setStartTime(time);
             setStartTimestamp(`${date} ${time}`);
@@ -150,7 +161,7 @@ function ReservationForm({ props }) {
             setEndTimestamp(`${date} ${time}`);
             setSelectedPhase("start");
         }
-    
+
         if (selectedPhase === "end" && startTimestamp) {
             const calculatedReserveTime = calculateTimeDifference(startTimestamp, `${date} ${time}`);
             setReserveTime(calculatedReserveTime);
@@ -178,6 +189,33 @@ function ReservationForm({ props }) {
         return differenceInHours;
 
     }
+
+
+    // 쿠폰 사용하기
+
+
+
+    const handleCouponChange = (event) => {
+        setCouponCode(event.target.value);
+    };
+
+
+    const useCoupon = () => {
+        axios.get('/api/reservation/useCoupon', { params: { userid: user.userid, couponstr: couponCode } })
+            .then((result) => {
+                if (result.data !== null) {
+                    const discount = result.data.coupon.discount
+                    setPayment(prevPayment => Math.max(prevPayment - discount, 0)); // 할인 적용
+                    alert("쿠폰이 성공적으로 적용되었습니다.");
+                } else {
+                    alert("유효하지 않은 쿠폰입니다.");
+                }
+            })
+            .catch((error) => {
+                console.error("쿠폰 적용 실패:", error);
+                alert("쿠폰 적용에 실패했습니다.");
+            });
+    };
 
     const handleSubmit = () => {
         if (!date || !startTime || !endTime) {
@@ -217,88 +255,112 @@ function ReservationForm({ props }) {
 
         <div className="reservationContainer">
 
-            <div className="space-info">
-                <Slider {...settings}>
+
+
+            <div className="spaceInfo">
+                <div className="spaceMainTitle"></div>
+                {<Slider {...settings}>
                     {space.spaceimage && space.spaceimage.map((image, idx) => (
-                        <img key={idx} src={`http://localhost:8070/space_images/${image.realName}`} alt={space.title} />
+                        <div key={idx} className="spaceImageContainer">
+                            <img className='spaceImage' src={`http://localhost:8070/space_images/${image.realName}`} alt={space.title} />
+                        </div>
                     ))}
-                </Slider>
-                <h2>{space.title}</h2>
-                <p>{space.content}</p>
-                <p>가격: {space.price}원/시간</p>
+                </Slider>}
+                <div className="spaceContentBlock">
+                    <div className="spaceTitle">제목</div>
+                    <div className="spaceContent">{space.sseq}. {space.title}</div>
+                </div>
+
+                <div className="spaceContentBlock">
+                    <div className="spaceTitle">부제목</div>
+                    <div className="spaceContent">{space.subtitle}</div>
+                </div>
+
+                <div className="spaceContentBlock">
+                    <div className="spaceTitle">내용</div>
+                    <div className="spaceContent">{space.content}</div>
+                </div>
             </div>
 
             <div className="reservationCalendar">
+                <div className="spaceTitle">예약 시간 확정</div>
                 <div>
                     <Calendar onChange={handleDateChange} value={date} tileDisabled={({ date }) => date < new Date()} />
+                    <br></br>
                     {date && (
                         <div className="timeSelect">
-                            <h4>{selectedPhase === "start" ? "예약 시작 시간을 선택해주세요!" : "예약 종료 시간을 선택해주세요!"}</h4>
                             <div className="time-buttons">
                                 {hours.map((hour, index) => (
                                     <button
-                                    key={index}
-                                    className={`time-button ${disabledHours.has(hour) ? 'disabled' : ''} ${startTime === hour ? 'start-selected' : ''} ${endTime === hour ? 'end-selected' : ''}`}
-                                    onClick={() => handleTimeSlotClick(hour)}
-                                    disabled={disabledHours.has(hour)}  // 비활성화된 시간 클릭 방지
-                                    style={disabledHours.has(hour) ? { backgroundColor: '#d3d3d3' } : {}}
-                                >
+                                        key={index}
+                                        className={`time-button ${disabledHours.has(hour) ? 'disabled' : ''} ${startTime === hour ? 'start-selected' : ''} ${endTime === hour ? 'end-selected' : ''}`}
+                                        onClick={() => handleTimeSlotClick(hour)}
+                                        disabled={disabledHours.has(hour)}  // 비활성화된 시간 클릭 방지
+                                        style={disabledHours.has(hour) ? { backgroundColor: '#d3d3d3' } : {}}
+                                    >
                                         {hour}
                                     </button>
                                 ))}
                             </div>
-                            <button onClick={handleSubmit}>Reserve</button>
+                            <br></br>
                         </div>
                     )}
+
+                    <label>요청 사항: <input type="text" value={request} onChange={(e) => setRequest(e.target.value)} /></label>
+
                 </div>
 
             </div>
 
 
             <div className="reservation-info">
-                <h3>예약 정보</h3>
-                <p>예약 날짜: {date}</p>
-                <p>시작 시간: {startTime}</p>
-                <p>종료 시간: {endTime}</p>
-                <p>공간 주의 사항 : {space.caution}</p>
+                <div className="reserveHead">예약정보</div>
+                <div className="reserveTitle">에약날짜 : </div>
+                <div className="reserveContent">{date}</div>
+                <div className="reserveTitle">시작 시간 : </div>
+                <div className="reserveContent">{startTime}</div>
+                <div className="reserveTitle">종료 시간: </div>
+                <div className="reserveContent">{endTime}</div>
+                <div className="reserveTitle">공간 주의 사항 : </div>
+                <div className="reserveContent">{space.caution}</div>
             </div>
 
             <div className="user-info">
-                <h3>예약자 정보</h3>
-                <p>이름: {user.name}</p>
-                <p>이메일: {user.email}</p>
-                <p>전화번호: {user.phone}</p>
-                <label>요청 사항: <input type="text" value={request} onChange={(e) => setRequest(e.target.value)} /></label>
+                <div className="reserveHead">예약자 정보</div>
+                <div className="reserveTitle">이름 : </div>
+                <div className="reserveContent">{user.name}</div>
+                <div className="reserveTitle">이메일 : </div>
+                <div className="reserveContent">{user.email}</div>
+                <div className="reserveTitle">전화번호 : </div>
+                <div className="reserveContent">{user.phone}</div>
             </div>
 
-            {/* <div className="host-info">
-                <h3>호스트 정보</h3>
-                <p>이름 : {host.hostid}</p>
-                <p>연락처: {host.phone}</p>
-                <p>이메일 : {host.email}</p>
-            </div> */}
 
             <div className="payment-info">
-                <h3>결제 정보</h3>
-                <p>총 결제 금액: {payment}원</p>;
-                <div>
-
-                    <label>결제 수단:
-                        <label><input type="radio" name="payment" value="card" /> 신용카드</label>
-                        <label><input type="radio" name="payment" value="paypal" /> PayPal</label>
-                    </label>
+                <div className="payTitle">총 결제 금액 : </div>
+                <div className="payContent">{payment}원</div>
+                <div className="CouponSelect">
+                    <label>쿠폰 선택 : </label>
+                    <select id="coupon" value={couponCode} onChange={handleCouponChange}>
+                        <option value="">쿠폰 셀렉트</option>
+                        {couponList.map((coupon, index) => (
+                            <option key={index} value={coupon.couponstr}>{coupon.couponTitle}</option>
+                        ))}
+                        <input
+                            type="text"
+                            value={couponCode}
+                            onChange={handleCouponChange}
+                            placeholder="쿠폰 번호를 입력하세요"
+                        />
+                    </select>
                 </div>
-                <div>
-                    <label>쿠폰 사용하기:
-                        <label><input type="radio" name="coupon" value="3000coupon" /> 3000원</label>
-                        <label><input type="radio" name="coupon" value="5000coupon" /> 5000원</label>
-                        <label><input type="radio" name="coupon" value="10000coupon" /> 10000원</label>
-                    </label>
-                </div>
+                <button className="getCoupon-button" onClick={useCoupon}>쿠폰 사용하기</button>
             </div>
 
             <button className="submit-button" onClick={handleSubmit}>예약하기</button>
+
         </div>
+
     );
 }
 

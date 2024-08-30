@@ -20,7 +20,7 @@ function RecommandSpace({user}) {
         try{
             
             let result
-            if(user.email){ result = await axios.post("/api/main/getRecommandSpace",user)}
+            if(user.name){ result = await axios.post("/api/main/getRecommandSpace",user)}
             else { result = await axios.post("/api/main/getRecommandSpace")}
             setRcList(result.data);
         }catch(err){console.error(err);}
@@ -32,7 +32,7 @@ function RecommandSpace({user}) {
         <h2>추천 공간</h2>
         <p>이런 공간은 어떠세요?</p>
       </div>
-      <Swiper slidesPerView={1.5} spaceBetween={10} grabCursor={true} 
+      <Swiper slidesPerView={1.2} spaceBetween={10} grabCursor={true} 
             scrollbar={{ hide: false }}
             modules={[Scrollbar]}
             breakpoints={{

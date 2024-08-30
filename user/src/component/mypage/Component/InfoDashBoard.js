@@ -33,6 +33,7 @@ function InfoDashBoard({user, menucount}) {
         </div>
         <div className='right'>
           <div className='mypagemenu'>
+            <MypageIconButton imglink = {"dashboardIcon.svg"}  text = {`데시보드`} goLink={"/mypage/dashboard"}/>
             <MypageIconButton imglink = {"couponicon2.svg"}  text = {`쿠폰(${menucount.couponCount})`} goLink={"/mypage/coupon/1"}/>
             <MypageIconButton imglink = {"calendaricon2.svg"}  text = {`예약(${menucount.reservCount})`} goLink={"/mypage/reservation/1"}/>
             <MypageIconButton imglink = {"boxicon2.svg"}  text = {`이용한 공간(${menucount.usesapceCount})`}  goLink={"/mypage/usesapce/1"}/>

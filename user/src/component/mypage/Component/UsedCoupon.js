@@ -29,13 +29,13 @@ function UsedCoupon({userid}) {
                 <div className='row title'>
                     <UsedCouponComponent num={"no."} title={"쿠폰 이름"} lastDate={"마감 날짜"} useyn={"사용 유무"} />
                 </div>
-                {(coupon) ?(
+                {(coupon.length>0) ?(
                     coupon.map((elem, key)=>(
                         <div className='row' key={key}>
-                            <UsedCouponComponent num={begin-key} title={elem.couponstr}  lastDate={elem.limitdate} useyn={elem.useyn} />
+                            <UsedCouponComponent num={begin-key} title={elem.couponTitle}  lastDate={elem.limitdate} useyn={elem.useyn} />
                         </div>
                     ))
-                ):""}
+                ):(<p style={{fontSize:"15px", textAlign:"center", color:"#999" , margin:"40px 0"}}>사용한 쿠폰이 없습니다.</p>)}
             </div>
             <div className='paganation'>
                 <MypagePaging page={page} url={"/mypage/coupon/"} currentPage= {currentPage} />

@@ -1,18 +1,26 @@
 import RoutesAndMenu from './RoutesAndMenu';
 
+const mapRoutesToMenuItems = (routes) => {
+  return routes
+    .filter(route => route.icon)
+    .map(route => {
+      const menuItem = {
+        id: route.id,
+        title: route.title,
+        type: route.subMenu ? "collapse" : "item",
+        url: route.url,
+        icon: route.icon,
+        breadcrumbs: false,
+        children: route.subMenu ? mapRoutesToMenuItems(route.subMenu) : [],
+      };
+      return menuItem;
+    });
+};
+
 const MainMenu = {
   id: "menuitems",
   type: "group",
-  children: RoutesAndMenu
-    .filter(route => route.icon)
-    .map(route => ({
-      id: route.id,
-      title: route.title,
-      type: "item",
-      url: route.url,
-      icon: route.icon,
-      breadcrumbs: false,
-    })),
+  children: mapRoutesToMenuItems(RoutesAndMenu),
 };
 
 export default MainMenu;

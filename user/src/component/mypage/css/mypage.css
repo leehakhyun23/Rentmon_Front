@@ -13,10 +13,10 @@
 .infoDashBoard .container .left .userinfo .textbox .phone { margin-top: 3px;  }
 .infoDashBoard .container .left  p { margin-top: 30px; color: #B1B1B1; text-decoration: underline; cursor: pointer; font-size: 13px; }
 
-.infoDashBoard .container .right { display: flex; align-items: center; width: 60%; justify-content: flex-end;
+.infoDashBoard .container .right { display: flex; align-items: center; width: 67%; justify-content: flex-end;
 }
 .infoDashBoard .container .right .mypagemenu { display: flex; width: 100%; justify-content: flex-end; }
-.infoDashBoard .container .right .mypagemenu .icon { width: 10.3%; text-align: center; padding: 0 4.8%; position: relative; }
+.infoDashBoard .container .right .mypagemenu .icon { width: 10.3%; text-align: center; padding: 0 4.5%; position: relative; }
 .infoDashBoard .container .right .mypagemenu .icon:last-child { padding-right: 0; }
 
 .infoDashBoard .container .right .mypagemenu .icon::before { content: ""; display: block; width: 1px; height: 15%; background: #D4D4D4; position: absolute; top: 30%;  left: 0; }
@@ -58,14 +58,16 @@
 .recentresevation-component { margin-top: 30px; border: 1px solid #DCDCDC; border-radius: 16px; display: flex; justify-content: space-between; padding: 34px 20px; }
 .recentresevation-component .recentresevation-wrapper { display: flex; }
 .recentresevation-component .recentresevation-wrapper .img-box { margin-right: 20px; }
-.recentresevation-component .recentresevation-wrapper .img-box img { width: 131px; border-radius: 2px; }
+.recentresevation-component .recentresevation-wrapper .img-box img { width: 131px; border-radius: 2px;
+    height: 90px;
+    object-fit: cover; }
 .recentresevation-component .recentresevation-wrapper .placeInfo {  }
-.recentresevation-component .recentresevation-wrapper .placeInfo > div {display: flex; align-items: center; }
+.recentresevation-component .recentresevation-wrapper .placeInfo > div {display: flex; align-items: center; flex-wrap: wrap; }
 .recentresevation-component .recentresevation-wrapper .placeInfo > div span { font-size: 18px; margin-right: 20px;  font-weight: 600;}
 .recentresevation-component .recentresevation-wrapper .placeInfo > div img { width: 15px; position: relative; top: 2px; }
 .recentresevation-component .recentresevation-wrapper .placeInfo small { color: #999; font-size: 15px; }
 .recentresevation-component .recentresevation-wrapper .placeInfo span { display: block; }
-.recentresevation-component .recentresevation-wrapper .placeInfo span.content { margin-top: 13px; font-size: 14px; }
+.recentresevation-component .recentresevation-wrapper .placeInfo span.content { margin-top: 13px; font-size: 14px; width: 60%; }
 .recentresevation-component .recentresevation-wrapper .placeInfo span.price { color: #999; font-size: 14px; font-weight: 600; margin-top: 5px; }
 .recentresevation-component .yearContainer { display: flex; flex-direction: column; align-items: flex-end; }
 .recentresevation-component .yearContainer > div { text-align: right; }
@@ -147,9 +149,9 @@
     .recentresevation-component { margin-top: 28px; border-radius: 16px; padding: 20px 15px; display: block; }
     .recentreservation .recentresevation-component .recentresevation-wrapper { display: block; }
     .recentreservation .recentresevation-component .recentresevation-wrapper .img-box { margin-right: 0px; }
-    .recentreservation .recentresevation-component .recentresevation-wrapper .img-box img { width: 100%; border-radius: 4px; }
+    .recentreservation .recentresevation-component .recentresevation-wrapper .img-box img { width: 100%; border-radius: 4px; height: 150px; }
     .recentreservation .recentresevation-component .recentresevation-wrapper .placeInfo { margin-top: 10px; }
-    .recentreservation .recentresevation-component .recentresevation-wrapper .placeInfo > div {display: flex; }
+    .recentreservation .recentresevation-component .recentresevation-wrapper .placeInfo > div {display: flex; flex-wrap: wrap;}
     .recentresevation-component .yearContainer { align-items: flex-start; margin-top: 10px; }
     .recentresevation-component .yearContainer > div { text-align: left; }
     .recentresevation-component .yearContainer > div > p { color: #0090DF; font-size: 13px; }
@@ -176,8 +178,8 @@
 
 
 .mypageModal .modal-title { font-size: 20px; font-weight: bold; margin-bottom: 20px; }
-.mypageModal img { width: 100%; border-radius: 10px; }
-.mypageModal .modal-description { font-size: 15px; margin-top: 10px; }
+.mypageModal img { width: 500px; border-radius: 10px; max-height: 300px; object-fit: cover; }
+.mypageModal .modal-description { font-size: 15px; margin-top: 10px; max-width: 450px; }
 .mypageModal .modal-info {  margin-top: 30px;}
 .mypageModal .modal-info .info-item { margin-top: 10px;  }
 .mypageModal .modal-info .info-item.price { margin-top: 30px;  }
@@ -269,14 +271,14 @@
 .usedSpace .recentresevation-container > div.top { font-size: 14px; display: flex; margin-bottom: 20px; }
 .usedSpace .recentresevation-container > div.top span { margin-right: 15px; font-weight: 600; }
 .usedSpace .recentresevation-container > div.top p { color: #999999; }
-.usedSpace .recentresevation-component .recentresevation-wrapper .img-box img { width: 225px; border-radius: 9px; }
+.usedSpace .recentresevation-component .recentresevation-wrapper .img-box img { width: 225px; border-radius: 9px; height: 150px; object-fit: cover; }
 .usedSpace .recentresevation-component .recentresevation-wrapper .placeInfo > div span { font-size: 15px; }
 .usedSpace .recentresevation-component .recentresevation-wrapper .placeInfo > div img { width: 12px; }
 .usedSpace .recentresevation-component .recentresevation-wrapper .placeInfo small { font-size: 13px; }
 .usedSpace .recentresevation-component .reviewContianer {  }
 .usedSpace .recentresevation-component .reviewContianer > div { color: #0090DF; text-align: right; font-size: 15px; }
 .usedSpace .recentresevation-component .reviewContianer > div span { display: block; margin-bottom: 10px; }
-.usedSpace .recentresevation-component .reviewContianer > div p { display: block;margin-bottom: 20px; }
+.usedSpace .recentresevation-component .reviewContianer > div p { display: block;margin-bottom: 20px; white-space: nowrap; }
 .usedSpace .recentresevation-component .reviewContianer > div a { color: #0090DF; border: 1px solid #0090DF; border-radius: 50px; padding:10px 15px }
 
 
@@ -285,7 +287,8 @@
     .usedSpace .recentresevation-container > div.top {display: block;}
     .usedSpace .recentresevation-container > div.top span { margin-bottom: 5px;display: block; }
     .recentresevation-component .recentresevation-wrapper { display: flex; }
-    .usedSpace .recentresevation-component .recentresevation-wrapper .img-box { width: 35%; margin-right: 20px; }
+    .usedSpace .recentresevation-wrapper { display: block; }
+    .usedSpace .recentresevation-component .recentresevation-wrapper .img-box { width: 35%; margin-right: 20px;  margin-bottom: 20px;}
     .usedSpace .recentresevation-component .recentresevation-wrapper .img-box img { width: 100%;  }
     .usedSpace .recentresevation-component .recentresevation-wrapper .placeInfo { margin-top: 0; }
     .usedSpace .recentresevation-component .reviewContianer > div { text-align: left; border-top: 1px solid #D9D9D9; margin: 19px -15px 0; padding: 19px 15px 0; font-size: 13px; }

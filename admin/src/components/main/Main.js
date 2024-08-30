@@ -1,5 +1,6 @@
-import { styled } from '@mui/material/styles';
 import React from 'react';
+import { styled } from '@mui/material/styles';
+import FloatingActionButton from '../chat/FloatingActionButton';
 
 const drawerWidth = 240;
 
@@ -11,6 +12,8 @@ const MainStyled = styled('main', { shouldForwardProp: (prop) => prop !== 'open'
     duration: theme.transitions.duration.leavingScreen,
   }),
   marginLeft: `-${drawerWidth}px`,
+  backgroundColor: theme.palette.grey[100],
+  height: '100%',
   ...(open && {
     transition: theme.transitions.create('margin', {
       easing: theme.transitions.easing.easeOut,
@@ -29,10 +32,15 @@ const DrawerHeader = styled('div')(({ theme }) => ({
 }));
 
 const Main = ({ open, children }) => {
+  const handleFabClick = () => {
+    
+  };
+
   return (
     <MainStyled open={open}>
       <DrawerHeader />
       {children}
+      <FloatingActionButton badgeContent={5} onClick={handleFabClick} />
     </MainStyled>
   );
 };

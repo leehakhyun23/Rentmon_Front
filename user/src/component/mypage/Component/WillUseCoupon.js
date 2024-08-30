@@ -66,7 +66,8 @@ function WillUseCoupon({userid}) {
                                 return <SwiperSlide key ={key}>
                                     <div className='innerSwiper'>
                                     <div><img src={couponImgColor(elem.discount)} alt='CouponImg'/><span>{new Intl.NumberFormat("Ko-kr").format(elem.discount)}원</span></div>
-                                    <p>{elem.coupontitle}</p>
+                                    <p>{elem.couponTitle}</p>
+                                    <p style={{color:"#9999"}}>{elem.couponstr}</p>
                                     {(getDate(elem.limitdate) <= nowplus)?(<span className='red'>~{dayFormat(elem.limitdate)}</span>):(<span>~{dayFormat(elem.limitdate)}</span>)}
                                 </div>
                                 </SwiperSlide>

@@ -1,46 +1,47 @@
 import React from "react";
-import MainPage from "../components/MainPage";
 import UserPage from "../components/member/UserPage";
 import HostPage from "../components/member/HostPage";
 import DeclarationPage from "../components/declaration/DeclarationPage";
 import DeclarationView from "../components/declaration/DeclarationView";
 import CouponPage from "../components/coupon/CouponPage";
 import CouponModal from "../components/modal/CouponModal";
-import { IconGiftCard, IconHome, IconReport, IconUser, IconUsers } from '@tabler/icons-react';
+import { IconGiftCard, IconHome, IconReport, IconUser, IconUserFilled, IconUsers } from '@tabler/icons-react';
 import DashBoard from "../components/dashboard/DashBoard";
+import { Chat } from "@mui/icons-material";
+import TossPayment from "../test/TossPayment";
 
 const RoutesAndMenu = [
   {
     id: "dashboard",
     title: "DashBoard",
-    url: "/",
+    url: "/dashboard",
     icon: IconHome,
     element: <DashBoard />,
   },
   {
-    id: "main",
-    title: "Main",
-    url: "/main",
-    icon: IconHome,
-    element: <MainPage />,
-  },
-  {
-    id: "userpage",
-    title: "User Page",
-    url: "/userpage",
-    icon: IconUser,
-    element: <UserPage />,
-  },
-  {
-    id: "hostpage",
-    title: "Host Page",
-    url: "/hostpage",
+    id: "member",
+    title: "회원관리",
     icon: IconUsers,
-    element: <HostPage />,
+    subMenu: [
+      {
+        id: "userpage",
+        title: "유저관리",
+        url: "/userpage",
+        icon: IconUser,
+        element: <UserPage />,
+      },
+      {
+        id: "hostpage",
+        title: "호스트(공간)관리",
+        url: "/hostpage",
+        icon: IconUserFilled,
+        element: <HostPage />,
+      },
+    ],
   },
   {
     id: "declaration",
-    title: "Declaration",
+    title: "신고관리",
     url: "/declaration",
     icon: IconReport,
     element: <DeclarationPage />,
@@ -53,7 +54,7 @@ const RoutesAndMenu = [
   },
   {
     id: "couponpage",
-    title: "Coupon Page",
+    title: "쿠폰관리",
     url: "/couponpage",
     icon: IconGiftCard,
     element: <CouponPage />,
@@ -62,6 +63,16 @@ const RoutesAndMenu = [
     id: "couponmodal",
     title: "Coupon Modal",
     element: <CouponModal />,
+  },
+  {
+    id: "chat",
+    title: "Chat",
+    element: <Chat />,
+  },
+  {
+    id: "tosspayment",
+    title: "Toss Payment",
+    element: <TossPayment />,
   },
 ];
 

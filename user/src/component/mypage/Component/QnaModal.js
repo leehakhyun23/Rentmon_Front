@@ -17,7 +17,7 @@ function QnaModal({isopen , setIsOpen , popup}) {
             </div>
             {(popup.reply)?(<div className='reply'>
                 <p>답변</p>
-                <div className='hostid'>{popup.space.host.hostid} : </div>
+                {/* <div className='hostid'>{popup.space.host.hostid} : </div> */}
                 <div className='content'>{popup.reply}</div>
                 <div className='replydate'>{popup.replydate}</div>
             </div>):(<div className='noreply'>미답변</div>)}
