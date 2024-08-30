@@ -7,12 +7,14 @@ import CouponPage from "../components/coupon/CouponPage";
 import CouponModal from "../components/modal/CouponModal";
 import { IconGiftCard, IconHome, IconReport, IconUser, IconUserFilled, IconUsers } from '@tabler/icons-react';
 import DashBoard from "../components/dashboard/DashBoard";
+import { Chat } from "@mui/icons-material";
+import TossPayment from "../test/TossPayment";
 
 const RoutesAndMenu = [
   {
     id: "dashboard",
     title: "DashBoard",
-    url: "/",
+    url: "/dashboard",
     icon: IconHome,
     element: <DashBoard />,
   },
@@ -61,6 +63,16 @@ const RoutesAndMenu = [
     id: "couponmodal",
     title: "Coupon Modal",
     element: <CouponModal />,
+  },
+  {
+    id: "chat",
+    title: "Chat",
+    element: <Chat />,
+  },
+  {
+    id: "tosspayment",
+    title: "Toss Payment",
+    element: <TossPayment />,
   },
 ];
 
