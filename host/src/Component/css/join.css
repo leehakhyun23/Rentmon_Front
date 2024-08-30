@@ -109,6 +109,47 @@ article {
 .joinform .field{
     margin: 10px 10px;
 }
+@media screen and (max-width: 1200px) {
+    .joinform {
+        padding: 20px 10px;
+    }
+
+}
+
+@media screen and (max-width: 768px) {
+    .joinheader {
+        height: auto; /* Adjust header height for smaller screens */
+        padding: 10px; /* Add padding for smaller screens */
+    }
+
+    .logo1 {
+        font-size: 1.2em; /* Reduce font size for smaller screens */
+    }
+
+    .joinform {
+        width: 100%; /* Full width on smaller screens */
+        padding: 15px;
+        margin-top: 20px; /* Reduce margin top */
+    }
 
 
+    .field [type="text"], .field [type="password"] {
+        height: 50px; /* Increase input height */
+    }
+}
 
+@media screen and (max-width: 480px) {
+    .logo1 {
+        font-size: 1em; /* Further reduce font size */
+    }
+
+    .joinform {
+        padding: 10px;
+        margin-top: 10px; /* Further reduce margin top */
+    }
+
+
+    .field [type="text"], .field [type="password"] {
+        height: 50px; /* Ensure adequate input height */
+    }
+}

@@ -72,7 +72,9 @@ function Login() {
               (e) => { setPwd(e.currentTarget.value) }
             } placeholder='비밀번호' /><br />
             <div className='alertmessage'><p>{loginMessage}</p></div>
+            {/* <div  onClick={() => { navigate('/SerchPwd') }}>비밀번호 찾기</div> */}
             <button className='loginbtn' onClick={() => { onLogin() }}>로그인</button>
+            <div className='spwd' onClick={() => { navigate('/SerchPwd') }}>비밀번호 찾기</div>
             <div className='join'>
               <div className='jointext'>아직 렌트몬 호스트가 아니신가요?</div>
               <div className='joinbtn' onClick={() => { navigate('/Join') }}>호스트 회원가입</div>
