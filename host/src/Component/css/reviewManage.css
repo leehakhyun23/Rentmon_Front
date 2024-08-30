@@ -132,3 +132,141 @@ tr:hover {
     width: 1000px;
     margin-top: 20px;
 }
+
+
+/* 반응형 디자인 */
+@media (max-width: 1200px) {
+    .rq {
+        width: 100%;
+    }
+
+    .tab-button {
+        width: 50%;
+        font-size: 90%;
+    }
+
+    .search {
+        width: 100%;
+    }
+
+    .container1,
+    .dropdown-container {
+        width: 100%;
+    }
+
+    .select-container {
+        width: auto;
+    }
+
+    .reviewtable,
+    .qnatable {
+        width: 100%;
+    }
+}
+
+@media (max-width: 992px) {
+    .rq {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .tab-button {
+        width: 100%;
+        margin-bottom: 10px;
+    }
+
+    .search {
+        flex-direction: column;
+        align-items: stretch;
+        width: 100%;
+    }
+
+    .search input[type="text"] {
+        margin-bottom: 10px;
+    }
+
+    .select-container {
+        width: 100%;
+        margin-top: 10px;
+    }
+
+    .reviewtable,
+    .qnatable {
+        font-size: 14px;
+    }
+
+    th, td {
+        padding: 8px;
+    }
+}
+
+@media (max-width: 768px) {
+    .rheader {
+        flex-direction: column;
+        height: auto;
+        padding: 10px;
+    }
+
+    .logo3 {
+        font-size: 1.2em;
+    }
+
+    .search button {
+        width: 100%;
+        height: 40px;
+    }
+
+    .select-container {
+        width: 100%;
+    }
+
+    .reviewtable,
+    .qnatable {
+        font-size: 12px;
+    }
+
+    th, td {
+        padding: 6px;
+    }
+
+    .search input[type="text"] {
+        font-size: 14px;
+    }
+}
+
+@media (max-width: 576px) {
+    .rheader {
+        padding: 5px;
+    }
+
+    .logo3 {
+        font-size: 1em;
+    }
+
+    .tab-button {
+        font-size: 14px;
+        height: 50px;
+    }
+
+    .search input[type="text"] {
+        font-size: 12px;
+    }
+
+    .search button {
+        font-size: 12px;
+        height: 35px;
+    }
+
+    .select-container {
+        width: auto;
+    }
+
+    .reviewtable,
+    .qnatable {
+        font-size: 10px;
+    }
+
+    th, td {
+        padding: 4px;
+    }
+}

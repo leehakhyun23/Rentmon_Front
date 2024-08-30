@@ -110,7 +110,11 @@ function ReservationManage() {
                     ))}
                 </select>
             </div>
-            <div>
+            <div style={{ 
+  display: 'flex', 
+  justifyContent: 'center', 
+  alignItems: 'center'
+}}>
             <div className='search'>
                 예약 정보 검색
                 <input type="text" value={searchTerm}  placeholder="고객명으로 검색"  onChange={handleSearchChange} />
