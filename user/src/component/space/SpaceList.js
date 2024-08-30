@@ -48,6 +48,12 @@ function SpaceList() {
     loadMoreSpaces();
   }, [page]);
 
+  useEffect(()=>{
+    console.log(search.searchWord);
+    searchSpaces();
+    
+  }, [search.searchWord])
+
   // 검색값(지역)
   const regions = [
     "서울",

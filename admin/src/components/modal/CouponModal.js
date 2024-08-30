@@ -1,7 +1,7 @@
 import { Box, Button, FormControl, FormControlLabel, FormLabel, Modal, Radio, RadioGroup, TextField, Typography } from '@mui/material';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
-import { DatePicker } from '@mui/x-date-pickers/DatePicker';
+import { StaticDatePicker } from '@mui/x-date-pickers/StaticDatePicker';
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import dayjs from 'dayjs';
@@ -13,12 +13,12 @@ const style = {
     transform: 'translate(-50%, -50%)',
     width: 400,
     bgcolor: 'background.paper',
-    border: '2px solid #000',
+    borderRadius: 2,
     boxShadow: 24,
     p: 4,
 };
 
-export default function CouponModal({open, handleClose, userids, onIssued}) {
+export default function CouponModal({ open, handleClose, userids, onIssued }) {
     const [limitDate, setLimitDate] = useState(null);
     const [selectedValue, setSelectedValue] = useState(null);
     const [couponTitle, setCouponTitle] = useState("");
@@ -46,63 +46,72 @@ export default function CouponModal({open, handleClose, userids, onIssued}) {
         };
 
         axios.post('/api/admin/issuedcoupon', issuedData)
-        .then((res) => {
-            if (res.status === 200) {
-                alert("발급완료");
-                onIssued();
-            }
-        })
-        .catch((err) => {
-            console.error(err);
-        })
-        
+            .then((res) => {
+                if (res.status === 200) {
+                    alert("발급완료");
+                    onIssued();
+                }
+            })
+            .catch((err) => {
+                console.error(err);
+            });
+
         setLimitDate(null);
         setSelectedValue(null);
         setCouponTitle("");
         handleClose();
-    }
+    };
 
     const couponTitleChange = (e) => {
         setCouponTitle(e.target.value);
-    }
+    };
 
     return (
-        <div>
-          <Modal open={open} onClose={handleClose}>
+        <Modal open={open} onClose={handleClose}>
             <Box sx={style}>
-                <Box>
-                    <Typography id="modal-modal-title" variant="h6" component="h2">쿠폰 발급</Typography>
-                    <Typography id="modal-modal-description" sx={{ mt: 2 }}>
-                    <FormControl>
-                        <FormLabel>Coupon</FormLabel>
-                        <RadioGroup name="radio-buttons-group" value={selectedValue} onChange={(e) => setSelectedValue(e.target.value)}>
-                            <FormControlLabel value="3000" control={<Radio />} label="3000원" />
-                            <FormControlLabel value="5000" control={<Radio />} label="5000원" />
-                            <FormControlLabel value="10000" control={<Radio />} label="10000원" />
-                        </RadioGroup>
-                    </FormControl>
+                <Typography id="modal-modal-title" variant="h6" component="h2" gutterBottom>
+                    쿠폰 발급
                 </Typography>
-                </Box>
-                <Box>
-                    <TextField label="쿠폰명" variant="outlined" value={couponTitle} onChange={couponTitleChange}/>
-                </Box>
-                <Box>
-                    <LocalizationProvider dateAdapter={AdapterDayjs}>
-                        <DatePicker
-                            label="Select date"
-                            value={limitDate}
-                            onChange={(limit) => {setLimitDate(limit);}}
-                            shouldDisableDate={disablePastDates}
-                            renderInput={(params) => <TextField {...params} />}
-                        />
-                    </LocalizationProvider>
-                </Box>
-                <Box>
-                    List : {userids.map((user, idx) => (`${user}, `))}
-                    <Button onClick={handleIssued}>발급하기</Button>
+                <FormControl component="fieldset" fullWidth sx={{ mb: 2 }}>
+                    <FormLabel component="legend">할인 금액 선택</FormLabel>
+                    <RadioGroup
+                        name="radio-buttons-group"
+                        value={selectedValue}
+                        onChange={(e) => setSelectedValue(e.target.value)}
+                        row
+                    >
+                        <FormControlLabel value="3000" control={<Radio />} label="3000원" />
+                        <FormControlLabel value="5000" control={<Radio />} label="5000원" />
+                        <FormControlLabel value="10000" control={<Radio />} label="10000원" />
+                    </RadioGroup>
+                </FormControl>
+                <TextField
+                    label="쿠폰명"
+                    variant="outlined"
+                    value={couponTitle}
+                    onChange={couponTitleChange}
+                    fullWidth
+                    sx={{ mb: 2 }}
+                />
+                <LocalizationProvider dateAdapter={AdapterDayjs}>
+                    <StaticDatePicker
+                        displayStaticWrapperAs="desktop"
+                        openTo="day"
+                        value={limitDate}
+                        onChange={(limit) => setLimitDate(limit)}
+                        shouldDisableDate={disablePastDates}
+                        renderInput={(params) => <TextField {...params} />}
+                    />
+                </LocalizationProvider>
+                <Box sx={{ mt: 2 }}>
+                    <Typography variant="body2" sx={{ mb: 1 }}>
+                        선택된 유저 목록: {userids.join(', ')}
+                    </Typography>
+                    <Button variant="contained" color="primary" onClick={handleIssued} fullWidth>
+                        발급하기
+                    </Button>
                 </Box>
             </Box>
-          </Modal>
-        </div>
+        </Modal>
     );
 }

@@ -4,6 +4,8 @@ import { fetchTitlesByHostid, fetchSseqByTitle } from './api'; // 수정된 API 
 import Header from '../HeaderFooter/Header'
 import '../css/ReseveListComponent.css'; // CSS 파일을 임포트
 import '../css/header.css';
+import '../css/reviewManage.css'
+import Submenu from '../member/Submenu';
 
 function ReservationManage() {
     // Redux에서 hostid 가져오기
@@ -95,8 +97,10 @@ function ReservationManage() {
 
     return (
         <div>
-            <Header />
-            <div className='header2'>예약 리스트 관리</div>
+            <div className='rheader'>
+            <div className='logo3'>예약 리스트 관리</div>
+            <div className='left'><Submenu /></div>
+      </div>
             <div>
                 <br />
                 <select className='hi' onChange={(e) => setSelectedTitle(e.target.value)}>
@@ -107,16 +111,21 @@ function ReservationManage() {
                 </select>
             </div>
             <div>
+            <div className='search'>
                 예약 정보 검색
                 <input type="text" value={searchTerm}  placeholder="고객명으로 검색"  onChange={handleSearchChange} />
                 <button className='searchbutton' onClick={handleSearch}>검색</button>
-                
+                <div className="container1">
+              <div className="select-container">
                 <select id="myDropdown" className='filterContainer' value={dropdownValue} onChange={handleDropdownChange}>
                     <option value="option1">최신순</option>
                     <option value="option2">오래된순</option>
                     <option value="option3">가격 높은 순</option>
                     <option value="option4">가격 낮은 순</option>
                 </select>
+                </div>
+                </div>
+                </div>
             </div>
             <div>
                 {filteredReservations.length > 0 ? (
