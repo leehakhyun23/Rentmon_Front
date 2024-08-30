@@ -29,16 +29,16 @@ function App() {
   return (
       
       <Routes>
-        <Route index element={<Main />} />
-        <Route path="Post_cate" element={<Post_cate />} />
-        <Route path="Post_basicInfo" element={<Post_basicInfo />} />
-        <Route path="Post_facility" element={<Post_facility />} />
-        <Route path="Post_payment" element={<Post_payment />} />
-        <Route path="Post_useInfo" element={<Post_useInfo />} />
-        <Route path="ReservationManage" element={<ReservationManage />} />
-        <Route path="ReviewManage" element={<ReviewManage />} />
-        <Route path="SpaceCorrection" element={<SpaceCorrection />} />
-        <Route path="SpaceManage" element={<SpaceManage />} />
+        <Route path="/" element={<Main />} />
+        <Route path="/Post_cate" element={<Post_cate />} />
+        <Route path="/Post_basicInfo" element={<Post_basicInfo />} />
+        <Route path="/Post_facility" element={<Post_facility />} />
+        <Route path="/Post_payment" element={<Post_payment />} />
+        <Route path="/Post_useInfo" element={<Post_useInfo />} />
+        <Route path="/ReservationManage" element={<ReservationManage />} />
+        <Route path="/ReviewManage" element={<ReviewManage />} />
+        <Route path="/SpaceCorrection" element={<SpaceCorrection />} />
+        <Route path="/SpaceManage" element={<SpaceManage />} />
         <Route path="/Login" element={<Login />} />
         <Route path="/Join" element={<Join />} />
         <Route path="/Update" element={<Update />} />
@@ -48,9 +48,9 @@ function App() {
         <Route path="/LogoutButton" element={<LogoutButton />} />
         <Route path="/Report" element={<Report />} />
         <Route path="/getsnshostinfo/:hostid/:provider" element={<Getsnshostinfo />} />
-        <Route path="Col_basicInfo" element={<Col_basicInfo />} />
-        <Route path="Col_facility" element={<Col_facility />} />
-        <Route path="Col_useInfo" element={<Col_useInfo />} />
+        <Route path="/Col_basicInfo" element={<Col_basicInfo />} />
+        <Route path="/Col_facility" element={<Col_facility />} />
+        <Route path="/Col_useInfo" element={<Col_useInfo />} />
         
 
       </Routes>
