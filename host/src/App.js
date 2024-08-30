@@ -23,6 +23,8 @@ import Col_useInfo from "./Component/space/Col_useInfo";
 import LoginOn from "./Component/member/LoginOn";
 import LogoutButton from "./Component/member/LogoutButton";
 import Report from "./Component/space/Report";
+import SerchPwd from "./Component/member/SerchPwd";
+import ResetPasswordUrl from "./Component/member/ResetPasswordUrl";
 
 
 function App() {
@@ -40,8 +42,10 @@ function App() {
         <Route path="SpaceCorrection" element={<SpaceCorrection />} />
         <Route path="SpaceManage" element={<SpaceManage />} />
         <Route path="/Login" element={<Login />} />
+        <Route path="/SerchPwd" element={<SerchPwd />} />
         <Route path="/Join" element={<Join />} />
         <Route path="/Update" element={<Update />} />
+        <Route path="/ResetPasswordUrl/:userid/:code" element={<ResetPasswordUrl />} />
         <Route path="/Submenu" element={<Submenu />} />
         <Route path="/LoginOn" element={<LoginOn />} />
         <Route path="/ReviewManage" element={<ReviewManage />} />
