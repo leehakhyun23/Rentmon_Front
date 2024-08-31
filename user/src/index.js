@@ -12,7 +12,7 @@ export let persistor = persistStore(store);
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
-  <BrowserRouter basename='/user'>
+  <BrowserRouter>
   <Provider store={store}>
     <PersistGate loading={null} persistor={persistor}>
       <App />

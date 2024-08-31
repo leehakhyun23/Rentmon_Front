@@ -18,7 +18,7 @@ function InfoDashBoard({user, menucount}) {
         <div className='left'>
         <div className='userinfo'>
           <div className='profileImg'>
-            {(user.profileimg)?(<img src={`https://final-kimminju.s3.ap-northeast-2.amazonaws.com/profile_images/${user.profileimg}`} alt={user.profileimg}/>):<img src='/img/no_profileimg.png' alt='no_profileimg.png'/>}
+            {(user.profileimg)?(<img src={`http://localhost:8070/profile_images/${user.profileimg}`} alt={user.profileimg}/>):<img src='/img/no_profileimg.png' alt='no_profileimg.png'/>}
             
           </div>
           <div className='textbox'>

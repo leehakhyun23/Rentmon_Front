@@ -33,7 +33,7 @@ function SpaceBoxComponent({record}) {
             <div className='imageWrap'>
                 <Swiper  navigation={true} modules={[Navigation]} className="spaceImgSwiper">
                     {(record.space.spaceimage.length > 0)&&(record.space.spaceimage.map((elem, key)=>(
-                        <SwiperSlide key={key}><img src={`https://final-kimminju.s3.ap-northeast-2.amazonaws.com/space_images/${elem.realName}`} alt='banner'/></SwiperSlide>
+                        <SwiperSlide key={key}><img src={`http://localhost:8070/space_images/${elem.realName}`} alt='banner'/></SwiperSlide>
                     )))}
                 </Swiper>
             </div>

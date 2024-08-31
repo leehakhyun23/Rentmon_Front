@@ -1,5 +1,6 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react'
+import jaxios from '../../../util/jwtUtil';
 import MyInterestModal from './MyInterestModal';
 
 function MyInterest({user ,updateUser}) {

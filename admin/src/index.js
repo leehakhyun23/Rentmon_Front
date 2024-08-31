@@ -10,7 +10,7 @@ import App from './App';
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <Provider store={store}>
-    <BrowserRouter basename='/admin'>
+    <BrowserRouter>
       <App />
     </BrowserRouter>
   </Provider>
