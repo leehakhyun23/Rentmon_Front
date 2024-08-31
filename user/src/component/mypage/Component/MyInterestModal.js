@@ -1,7 +1,6 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react'
 import Modal from 'react-modal';
-import jaxios from '../../../util/jwtUtil';
 import MyCategorySelector from './MyCategorySelector';
 import MyStationSelector from './MyStationSelector';
 
