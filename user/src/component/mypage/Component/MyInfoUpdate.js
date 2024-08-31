@@ -1,10 +1,8 @@
 import React from 'react'
-import { useDispatch } from 'react-redux'
 import jaxios from '../../../util/jwtUtil'
 import MyCardCommonent from './MyCardCommonent'
 import MyInfoCommonent from './MyInfoCommonent'
 function MyInfoUpdate({user ,updateUser}) {
-  const dispatch = useDispatch();
 
   let setFunction = async(url ,dname, data)=>{
     let datapost ={userid : user.userid }
