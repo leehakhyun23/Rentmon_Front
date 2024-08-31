@@ -22,7 +22,7 @@ function SpaceManage() {
         if (host.hostid || host.provider !== 'kakao') {
             if (!host.hostid) {
                 alert('로그인이 필요한 서비스입니다');
-                navigate('/');
+                navigate('/host/main');
             }
         }
     }, [host, navigate]);
@@ -54,7 +54,7 @@ function SpaceManage() {
     }
 
     const handleEditClick = (sseq, title, imageName) => {
-        navigate(`/SpaceCorrection?sseq=${sseq}&title=${encodeURIComponent(title)}&imageName=${encodeURIComponent(imageName)}`);
+        navigate(`/host/SpaceCorrection?sseq=${sseq}&title=${encodeURIComponent(title)}&imageName=${encodeURIComponent(imageName)}`);
     };
 
     const handleDeleteClick = async (sseq) => {

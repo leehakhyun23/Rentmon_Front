@@ -21,7 +21,7 @@ function Login() {
   useEffect(()=>{
     if(host.hostid){
       alert("이미 로그인 하셨습니다.");
-      navigate("/");
+      navigate("/host/main");
     }
   },[]);
 
@@ -45,7 +45,7 @@ function Login() {
         }
 
         alert('로그인이 완료되었습니다.');
-        navigate("/");
+        navigate("/host/main");
       }
     } catch (err) {
       console.error(err);
@@ -75,7 +75,7 @@ function Login() {
             <button className='loginbtn' onClick={() => { onLogin() }}>로그인</button>
             <div className='join'>
               <div className='jointext'>아직 렌트몬 호스트가 아니신가요?</div>
-              <div className='joinbtn' onClick={() => { navigate('/Join') }}>호스트 회원가입</div>
+              <div className='joinbtn' onClick={() => { navigate('/host/Join') }}>호스트 회원가입</div>
             </div>
             <div className='snsLogin'>
                 <span>SNS 로그인</span>
