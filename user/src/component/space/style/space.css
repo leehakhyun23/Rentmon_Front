@@ -232,7 +232,6 @@
   background-color: #fff;
   z-index: 2;
   border-bottom: 2px solid #e0e0e0; 
-
 }
 .SpaceMenu-container.hidden {
   display: none;
@@ -464,12 +463,6 @@
     padding: 10px;
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2); /* 고정된 메뉴에 그림자 추가 */
   }
-.spaces > div {
-  width: calc(33.333% - 20px);
-  box-sizing: border-box;
-  border: 1px solid #ddd;
-  background-color: #f9f9f9;
-}
 
   .SpaceMenu-item {
     width: 100%;
