@@ -54,7 +54,7 @@ function Post_facility() {
       address: currentSpace.address,
     }));
     console.log(select);
-    navigate('/Post_payment');
+    navigate('/host/Post_payment');
   };
 
   return (
@@ -124,7 +124,7 @@ function Post_facility() {
         ))}
       </div>
       <div className="but2">
-        <button className="but" onClick={() => navigate('/Post_useInfo')}>이전</button>
+        <button className="but" onClick={() => navigate('/host/Post_useInfo')}>이전</button>
         <button className="but" onClick={onSubmit}>다음</button>
       </div>
     </div>

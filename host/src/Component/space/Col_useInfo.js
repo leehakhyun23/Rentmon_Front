@@ -44,7 +44,7 @@ function Col_useInfo() {
     })
     .then(response => {
         console.log('공간 정보가 성공적으로 업데이트되었습니다.');
-        navigate('/SpaceManage'); // 업데이트 후 페이지 이동
+        navigate('/host/SpaceManage'); // 업데이트 후 페이지 이동
     })
     .catch(error => {
         console.error('공간 정보 업데이트 오류:', error);
@@ -86,7 +86,7 @@ function Col_useInfo() {
         </select>
       </div>
       <div className="but2">
-        <button className="but" onClick={() => navigate('/SpaceManage')}>이전</button>
+        <button className="but" onClick={() => navigate('/host/SpaceManage')}>이전</button>
         <button className="but" onClick={onSubmit}>다음</button>
       </div>
     </div>

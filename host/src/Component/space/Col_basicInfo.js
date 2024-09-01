@@ -103,7 +103,7 @@ function Col_basicInfo() {
             address
         })
         .then(() => {
-            navigate('/SpaceManage'); // Navigate to the next page or provide feedback
+            navigate('/host/SpaceManage'); // Navigate to the next page or provide feedback
         })
         .catch(error => {
             console.error('Error updating space data:', error);
@@ -186,7 +186,7 @@ function Col_basicInfo() {
             </div>
 
             <div className='but2'>
-                <button className="but" onClick={() => navigate('/SpaceManage')}>이전</button>
+                <button className="but" onClick={() => navigate('/host/SpaceManage')}>이전</button>
                 <button className="but" onClick={onSubmit}>저장</button>
             </div>
         </div>
