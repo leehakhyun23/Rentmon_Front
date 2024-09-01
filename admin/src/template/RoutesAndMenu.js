@@ -69,11 +69,6 @@ const RoutesAndMenu = [
     title: "Chat",
     element: <Chat />,
   },
-  {
-    id: "tosspayment",
-    title: "Toss Payment",
-    element: <TossPayment />,
-  },
 ];
 
 export default RoutesAndMenu;
