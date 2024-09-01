@@ -18,7 +18,7 @@ function ReservationComponent({space , rs}) {
         <>
           <div className='recentresevation-wrapper'>
             <div className='img-box'>
-                  <img src={"http://localhost:8070/space_images/"+rs.savefilename} alt={rs.savefilename}/>
+                  <img src={"https://final-kimminju.s3.ap-northeast-2.amazonaws.com/space_images/"+rs.savefilename} alt={rs.savefilename}/>
               </div>
               <div className='placeInfo'>
                    <div>
