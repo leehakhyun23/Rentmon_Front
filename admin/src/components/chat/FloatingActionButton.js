@@ -1,12 +1,12 @@
-import React, { useEffect, useState } from 'react';
-import Fab from '@mui/material/Fab';
-import Badge from '@mui/material/Badge';
-import MailIcon from '@mui/icons-material/Mail';
-import ChatList from './ChatList';
-import ChatRoom from './ChatRoom';
+import React, { useState, useEffect } from 'react';
 import { styled } from '@mui/material/styles';
+import { Fab, Badge } from '@mui/material';
+import MailIcon from '@mui/icons-material/Mail';
+import ChatList from './ChatList'; // ChatList 컴포넌트
+import ChatRoom from './ChatRoom'; // ChatRoom 컴포넌트
+import { Client } from '@stomp/stompjs';
+import SockJS from 'sockjs-client';
 import axios from 'axios';
-import { List } from '@mui/material';
 
 const FabStyled = styled(Fab)(({ theme }) => ({
   position: 'fixed',
@@ -14,45 +14,56 @@ const FabStyled = styled(Fab)(({ theme }) => ({
   right: theme.spacing(2),
 }));
 
-const ChatRoomStyled = styled('div')(({ theme }) => ({
-  padding: theme.spacing(2),
-  backgroundColor: theme.palette.background.paper,
-  borderRadius: theme.shape.borderRadius,
-  boxShadow: theme.shadows[5],
-}));
-
-const HeaderStyled = styled('div')(({ theme }) => ({
-  display: 'flex',
-  alignItems: 'center',
-  marginBottom: theme.spacing(2),
-}));
-
-const ChatListStyled = styled(List)(({ theme }) => ({
-  maxHeight: '300px',
-  overflowY: 'auto',
-}));
-
 const FloatingActionButton = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [currentView, setCurrentView] = useState('list');
   const [chatRoomList, setChatRoomList] = useState([]);
   const [selectedCrseq, setSelectedCrseq] = useState(null);
+  const [selectedNickName, setSelectedNickName] = useState('');
+  const [notificationCount, setNotificationCount] = useState(0);
 
   useEffect(() => {
-    axios.get("/api/admin/chatlist")
+    axios.get('/api/admin/chatlist')
       .then((res) => {
         setChatRoomList(res.data);
       })
       .catch((err) => {
         console.error(err);
       });
+
+    const client = new Client({
+      brokerURL: 'http://localhost:8070/ws',
+      connectHeaders: {
+        login: 'guest',
+        passcode: 'guest',
+      },
+      debug: (str) => console.log(str),
+      onConnect: () => {
+        client.subscribe('/topic/messages', (message) => {
+ 
+          setNotificationCount(prevCount => prevCount + 1);
+        });
+      },
+      onStompError: (frame) => {
+        console.error('STOMP error:', frame);
+      },
+      webSocketFactory: () => new SockJS('http://localhost:8070/ws'),
+    });
+
+    client.activate();
+
+    return () => client.deactivate();
   }, []);
 
   const handleFabClick = () => {
-    setIsOpen((prevOpen) => !prevOpen);
+    setIsOpen(prevOpen => !prevOpen);
   };
 
   const handleSelectChat = (crseq) => {
+    const selectedRoom = chatRoomList.find(room => room.crseq === crseq);
+    if (selectedRoom) {
+      setSelectedNickName(selectedRoom.nickName);
+    }
     setSelectedCrseq(crseq);
     setCurrentView('room');
   };
@@ -64,7 +75,7 @@ const FloatingActionButton = () => {
   return (
     <>
       <FabStyled color="primary" aria-label="messages" onClick={handleFabClick}>
-        <Badge badgeContent={3} color="secondary" overlap="circular">
+        <Badge badgeContent={notificationCount} color="secondary" overlap="circular">
           <MailIcon />
         </Badge>
       </FabStyled>
@@ -72,7 +83,7 @@ const FloatingActionButton = () => {
         currentView === 'list' ? (
           <ChatList onSelectChat={handleSelectChat} chatRoomList={chatRoomList} />
         ) : (
-          <ChatRoom onBack={handleBack} crseq={selectedCrseq} />
+          <ChatRoom onBack={handleBack} crseq={selectedCrseq} nickName={selectedNickName} />
         )
       )}
     </>
