@@ -41,7 +41,7 @@ const ChatList = ({ onSelectChat, chatRoomList }) => {
                 >
                   {chatRoom.lastSendTime}
                 </Typography>
-                <Badge badgeContent={20} color="secondary" sx={{ ml: 2 }} />
+                <Badge badgeContent={chatRoom.unreadCount} color="secondary" sx={{ ml: 2 }} />
               </>
             }
           />
