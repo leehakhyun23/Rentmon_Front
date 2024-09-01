@@ -262,7 +262,7 @@ function ReservationForm({ props }) {
                 {<Slider {...settings}>
                     {space.spaceimage && space.spaceimage.map((image, idx) => (
                         <div key={idx} className="spaceImageContainer">
-                            <img className='spaceImage' src={`http://localhost:8070/space_images/${image.realName}`} alt={space.title} />
+                            <img className='spaceImage' src={`http://rentmon-jb.s3.ap-northeast-2.amazonaws.com/space_images/${image.realName}`} alt={space.title} />
                         </div>
                     ))}
                 </Slider>}
