@@ -133,7 +133,7 @@ function SpaceDetail() {
   }, []);
 
   return (
-    <div className="spaceContainer innerContainer">
+    <div className="spaceContainer innerContainer spaceDetail">
       <div>
         {/* spaceMenu Part */}
         <div
@@ -141,6 +141,7 @@ function SpaceDetail() {
             inquiryopen || reviewopen || reportopen ? "hidden" : ""
           }`}
         >
+          <div>
           {" "}
           <div
             className="SpaceMenu-item"
@@ -178,11 +179,12 @@ function SpaceDetail() {
           >
             돌아가기
           </div>
+          </div>
         </div>
 
         {/* spaceInfo Part */}
+        <div className="spaceMainTitle" ref={spaceInfoRef}></div>
         <div className="spaceInfo">
-          <div className="spaceMainTitle" ref={spaceInfoRef}></div>
           {
             <Slider {...settings}>
               {space.spaceimage &&
@@ -198,6 +200,7 @@ function SpaceDetail() {
             </Slider>
           }
 
+          <div>
           <div className="spaceContentBlock">
             <div className="spaceTitle">제목</div>
             <div className="spaceContent">
@@ -247,6 +250,7 @@ function SpaceDetail() {
                 : null}
             </div>
           </div>
+          </div>
         </div>
 
         <div className="spaceFacilities">
@@ -260,7 +264,7 @@ function SpaceDetail() {
                     <img
                       src={`https://rentmon-jb.s3.ap-northeast-2.amazonaws.com/icon_images/${facil.facility.icon}`}
                       alt={`${facil.facility.name} 아이콘`}
-                      style={{ width: "100px", height: "100px" }}
+                      // style={{ width: "100px", height: "100px" }}
                     />
                   </div>
                   <div>{facil.facility.name}</div>

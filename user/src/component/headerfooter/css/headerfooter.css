@@ -199,4 +199,6 @@
 }
 
 
-.floatingchatIcon { position: fixed; bottom: 60px; right: 60px; cursor: pointer; }
+.floatingchatIcon { position: fixed; bottom: 60px; right: 60px; cursor: pointer; z-index: 3; }
+
+@media screen and (max-width: 1000px) { .floatingchatIcon {bottom: 20px; right: 20px; }  }

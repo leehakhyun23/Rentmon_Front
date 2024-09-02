@@ -305,7 +305,6 @@ function ReservationForm({ props }) {
 
 
             <div className="spaceInfo">
-                <div className="spaceMainTitle"></div>
                 {<Slider {...settings}>
                     {space.spaceimage && space.spaceimage.map((image, idx) => (
                         <div key={idx} className="spaceImageContainer">
@@ -313,19 +312,21 @@ function ReservationForm({ props }) {
                         </div>
                     ))}
                 </Slider>}
-                <div className="spaceContentBlock">
-                    <div className="spaceTitle">제목</div>
-                    <div className="spaceContent">{space.sseq}. {space.title}</div>
-                </div>
+                <div>
+                    <div className="spaceContentBlock">
+                        <div className="spaceTitle">제목</div>
+                        <div className="spaceContent">{space.sseq}. {space.title}</div>
+                    </div>
 
-                <div className="spaceContentBlock">
-                    <div className="spaceTitle">부제목</div>
-                    <div className="spaceContent">{space.subtitle}</div>
-                </div>
+                    <div className="spaceContentBlock">
+                        <div className="spaceTitle">부제목</div>
+                        <div className="spaceContent">{space.subtitle}</div>
+                    </div>
 
-                <div className="spaceContentBlock">
-                    <div className="spaceTitle">내용</div>
-                    <div className="spaceContent">{space.content}</div>
+                    <div className="spaceContentBlock">
+                        <div className="spaceTitle">내용</div>
+                        <div className="spaceContent">{space.content}</div>
+                    </div>
                 </div>
             </div>
 
