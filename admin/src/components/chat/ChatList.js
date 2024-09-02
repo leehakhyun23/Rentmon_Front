@@ -25,12 +25,36 @@ const ChatList = ({ onSelectChat, chatRoomList }) => {
   return (
     <ChatListStyled>
       {chatRoomList.map((chatRoom) => (
-        <ListItem key={chatRoom.crseq} alignItems="flex-start" button onClick={() => onSelectChat(chatRoom.crseq)}>
-          <ListItemAvatar>
+        <ListItem
+          key={chatRoom.crseq}
+          alignItems="center" // Change to "center" to align Avatar vertically
+          button
+          onClick={() => onSelectChat(chatRoom.crseq)}
+        >
+          <ListItemAvatar sx={{ minWidth: '40px', marginRight: 2 }}> {/* Adjust the minWidth to reduce the gap */}
             <Avatar />
           </ListItemAvatar>
           <ListItemText
-            primary={chatRoom.lastMessage}
+            primary={
+              <>
+                <Typography
+                  component="span"
+                  variant="body2"
+                  color="text.secondary" // Gray color for userid
+                  sx={{ fontWeight: 'bold' }} // Bold text for better readability
+                >
+                  {chatRoom.userid}
+                </Typography>
+                <br />
+                <Typography
+                  component="span"
+                  variant="body1"
+                  color="text.primary"
+                >
+                  {chatRoom.lastMessage}
+                </Typography>
+              </>
+            }
             secondary={
               <>
                 <Typography
