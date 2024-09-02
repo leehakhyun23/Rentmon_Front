@@ -2,8 +2,8 @@ import React, { useState, useEffect } from 'react';
 import { styled } from '@mui/material/styles';
 import { Fab, Badge } from '@mui/material';
 import MailIcon from '@mui/icons-material/Mail';
-import ChatList from './ChatList'; // ChatList 컴포넌트
-import ChatRoom from './ChatRoom'; // ChatRoom 컴포넌트
+import ChatList from './ChatList';
+import ChatRoom from './ChatRoom';
 import { Client } from '@stomp/stompjs';
 import SockJS from 'sockjs-client';
 import axios from 'axios';
@@ -22,10 +22,19 @@ const FloatingActionButton = () => {
   const [selectedNickName, setSelectedNickName] = useState('');
   const [notificationCount, setNotificationCount] = useState(0);
 
+  const refreshNotificationCount = () => {
+    const totalUnreadCount = chatRoomList.reduce(
+      (total, chatRoom) => total + chatRoom.unreadCount,
+      0
+    );
+    setNotificationCount(totalUnreadCount);
+  };
+
   useEffect(() => {
     axios.get('/api/admin/chatlist')
       .then((res) => {
         setChatRoomList(res.data);
+        refreshNotificationCount();
       })
       .catch((err) => {
         console.error(err);
@@ -39,9 +48,28 @@ const FloatingActionButton = () => {
       },
       debug: (str) => console.log(str),
       onConnect: () => {
-        client.subscribe('/topic/messages', (message) => {
- 
-          setNotificationCount(prevCount => prevCount + 1);
+        client.subscribe('/topic/admin/notifications', (message) => {
+          const newMessage = JSON.parse(message.body);
+          const crseq = newMessage.crseq;
+
+          setChatRoomList(prevList => {
+            return prevList.map(room => {
+              if (room.crseq === crseq) {
+                const isCurrentChatRoomOpen = selectedCrseq === crseq && currentView === 'room';
+                return {
+                  ...room,
+                  lastMessage: newMessage.message,
+                  lastSendTime: new Date().toLocaleString(),
+                  unreadCount: isCurrentChatRoomOpen ? room.unreadCount : room.unreadCount + 1
+                };
+              }
+              return room;
+            });
+          });
+
+          if (selectedCrseq !== crseq || currentView !== 'room') {
+            setNotificationCount(prevCount => prevCount + 1);
+          }
         });
       },
       onStompError: (frame) => {
@@ -53,7 +81,11 @@ const FloatingActionButton = () => {
     client.activate();
 
     return () => client.deactivate();
-  }, []);
+  }, [selectedCrseq, currentView]);
+
+  useEffect(() => {
+    refreshNotificationCount();
+  }, [chatRoomList]);
 
   const handleFabClick = () => {
     setIsOpen(prevOpen => !prevOpen);
@@ -66,6 +98,15 @@ const FloatingActionButton = () => {
     }
     setSelectedCrseq(crseq);
     setCurrentView('room');
+  };
+
+  const handleMessagesRead = (crseq) => {
+    setChatRoomList(prevList => 
+      prevList.map(room => 
+        room.crseq === crseq ? { ...room, unreadCount: 0 } : room
+      )
+    );
+    refreshNotificationCount();
   };
 
   const handleBack = () => {
@@ -83,7 +124,12 @@ const FloatingActionButton = () => {
         currentView === 'list' ? (
           <ChatList onSelectChat={handleSelectChat} chatRoomList={chatRoomList} />
         ) : (
-          <ChatRoom onBack={handleBack} crseq={selectedCrseq} nickName={selectedNickName} />
+          <ChatRoom
+            onBack={handleBack}
+            crseq={selectedCrseq}
+            nickName={selectedNickName}
+            onMessagesRead={handleMessagesRead}
+          />
         )
       )}
     </>

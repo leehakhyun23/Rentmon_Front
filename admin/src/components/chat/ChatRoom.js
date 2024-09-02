@@ -33,8 +33,8 @@ const MessagesContainer = styled('div')(({ theme }) => ({
   flex: 1,
   overflowY: 'auto',
   marginBottom: theme.spacing(2),
-  scrollbarWidth: 'thin', /* Firefox */
-  scrollbarColor: `${theme.palette.grey[400]} transparent`, /* Firefox */
+  scrollbarWidth: 'thin',
+  scrollbarColor: `${theme.palette.grey[400]} transparent`,
   '&::-webkit-scrollbar': {
     width: '6px',
   },
@@ -66,7 +66,7 @@ const MessageContent = styled('div')(({ theme, isAdmin }) => ({
   borderRadius: theme.shape.borderRadius,
 }));
 
-const ChatRoom = ({ onBack, crseq, nickName }) => {
+const ChatRoom = ({ onBack, crseq, nickName, onMessagesRead }) => {
   const [chatMessages, setChatMessages] = useState([]);
   const [message, setMessage] = useState('');
   const [stompClient, setStompClient] = useState(null);
@@ -83,42 +83,60 @@ const ChatRoom = ({ onBack, crseq, nickName }) => {
   };
 
   useEffect(() => {
+    let client;
+  
+    const connectWebSocket = () => {
+      client = new Client({
+        brokerURL: 'http://localhost:8070/ws',
+        connectHeaders: {
+          login: 'admin',
+          passcode: 'admin',
+        },
+        debug: (str) => console.log(str),
+        onConnect: () => {
+          client.subscribe(`/topic/chatroom/${crseq}`, (message) => {
+            const newMessage = JSON.parse(message.body);
+            setChatMessages((prevMessages) => [...prevMessages, newMessage]);
+          });
+        },
+        onStompError: (frame) => {
+          console.error('STOMP error:', frame);
+        },
+        webSocketFactory: () => new SockJS('http://localhost:8070/ws'),
+      });
+  
+      client.activate();
+      setStompClient(client);
+    };
+  
     if (crseq) {
       axios.get(`/api/admin/chatroom/${crseq}`)
         .then((res) => {
           if (res.status === 200 && res.data) {
             setChatMessages(res.data);
+
+            axios.post(`/api/admin/chatroom/${crseq}/markRead`)
+              .then(() => {
+                console.log(`Messages in chatroom ${crseq} marked as read`);
+                if (onMessagesRead) onMessagesRead(crseq);
+              })
+              .catch((err) => {
+                console.error(`Failed to mark messages as read: ${err}`);
+              });
           }
         })
         .catch((err) => {
           console.error(err);
         });
+  
+      connectWebSocket();
     }
-
-    const client = new Client({
-      brokerURL: 'http://localhost:8070/ws',
-      connectHeaders: {
-        login: 'guest',
-        passcode: 'guest',
-      },
-      debug: (str) => console.log(str),
-      onConnect: () => {
-        client.subscribe(`/topic/chatroom/${crseq}`, (message) => {
-          const newMessage = JSON.parse(message.body);
-          console.log(newMessage);
-          setChatMessages((prevMessages) => [...prevMessages, newMessage]);
-        });
-      },
-      onStompError: (frame) => {
-        console.error('STOMP error:', frame);
-      },
-      webSocketFactory: () => new SockJS('http://localhost:8070/ws'),
-    });
-
-    setStompClient(client);
-    client.activate();
-
-    return () => client.deactivate();
+  
+    return () => {
+      if (client) {
+        client.deactivate();
+      }
+    };
   }, [crseq]);
 
   const formatDateToTimestamp = (date) => {
