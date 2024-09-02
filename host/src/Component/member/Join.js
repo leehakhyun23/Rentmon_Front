@@ -29,7 +29,7 @@ function Join() {
     useEffect(()=>{
         if(host.hostid){
           alert("이미 회원가입 하셨습니다.");
-          navigate("/main");
+          navigate("/");
         }
       },[]);
 
@@ -53,7 +53,7 @@ function Join() {
             });
             if(result.data.msg === 'ok'){
                 alert('회원 가입이 완료되었습니다. 로그인하세요');
-                navigate('/main'); // 회원가입 후 로그인 페이지로 이동
+                navigate('/'); // 회원가입 후 로그인 페이지로 이동
             } else {
                 alert("회원가입 실패");
             }

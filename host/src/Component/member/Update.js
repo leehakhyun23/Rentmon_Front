@@ -46,7 +46,7 @@ function Update() {
         if (host.hostid || host.provider !== 'kakao') {
             if (!host.hostid) {
                 alert('로그인이 필요한 서비스입니다');
-                navigate('/main');
+                navigate('/');
             }
         }
     }, [host, navigate]);

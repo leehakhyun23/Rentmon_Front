@@ -32,7 +32,7 @@ function Post_cate() {
         if (host.hostid || host.provider !== 'kakao') {
             if (!host.hostid) {
                 alert('로그인이 필요한 서비스입니다');
-                navigate('/main');
+                navigate('/');
             }
         }
     }, [host, navigate]);
@@ -77,7 +77,7 @@ function Post_cate() {
                 ))}
             </div>
             <div className='but2'>
-                <button className="but" onClick={() => { navigate('/main') }}>이전</button>
+                <button className="but" onClick={() => { navigate('/') }}>이전</button>
                 <button className="but" onClick={onSubmit}>다음</button>
             </div>
         </div>

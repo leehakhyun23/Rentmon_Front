@@ -9,7 +9,7 @@ function LoginOff({setMypagePopup}) {
         <Link to="/login" onClick={()=>{setMypagePopup(false)}}>로그인 하러가기</Link>
       </div>
       <div className='goHost'>
-        <a href="/main">호스트 센터로 가기 &gt;</a>
+        <a href="/">호스트 센터로 가기 &gt;</a>
       </div>
     </div>
   )
