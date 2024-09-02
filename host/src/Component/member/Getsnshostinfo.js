@@ -34,7 +34,7 @@ function Getsnshostinfo() {
         }
         
         alert("로그인 완료됐습니다.");
-        navigate("/main");
+        navigate("/");
 
     }
   return (

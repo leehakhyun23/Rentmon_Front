@@ -99,7 +99,6 @@ function SpaceDetail() {
 
   const checkReviewAble = async ()=>{
     try{
-      console.log("전개")
       const result = await axios.get("/api/reservation/checkReservationStatus", {params:{userid : user.userid, sseq:sseq}})
       if(result.data === "OK"){
         setReviewopen(true);

@@ -21,7 +21,7 @@ function Login() {
   useEffect(()=>{
     if(host.hostid){
       alert("이미 로그인 하셨습니다.");
-      navigate("/main");
+      navigate("/");
     }
   },[]);
 
@@ -45,7 +45,7 @@ function Login() {
         }
 
         alert('로그인이 완료되었습니다.');
-        navigate("/main");
+        navigate("/");
       }
     } catch (err) {
       console.error(err);

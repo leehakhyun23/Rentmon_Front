@@ -89,7 +89,7 @@ function MyInfo({mypagePopup , user , setMypagePopup}) {
             className="mySwiper"
           >
             {(recentview)&&(recentview.map((elem, idx)=>(
-               <SwiperSlide key={idx}><Link value={idx} to={"spaceDetail/"+elem.sseq} onClick={()=>{setMypagePopup(false)}}>{(elem.spaceimage.length>0)&&(<img src={`https://final-kimminju.s3.ap-northeast-2.amazonaws.com/space_images/${elem.spaceimage[0].realName}`} alt='placeimg'/>)}<p>{elem.title}</p></Link></SwiperSlide>
+               <SwiperSlide key={idx}><Link value={idx} to={"spaceDetail/"+elem.sseq} onClick={()=>{setMypagePopup(false)}}>{(elem.spaceimage.length>0)&&(<img src={`http://rentmon-jb.s3.ap-northeast-2.amazonaws.com/space_images/${elem.spaceimage[0].realName}`} alt='placeimg'/>)}<p>{elem.title}</p></Link></SwiperSlide>
             )))}
          
         </Swiper>

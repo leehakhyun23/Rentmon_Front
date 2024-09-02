@@ -16,7 +16,7 @@ function LogoutButton() {
     dispatch(logoutAction());
 
     // 로그아웃 후 홈 페이지로 리다이렉트
-    navigate("/main");
+    navigate("/");
     alert("로그아웃이 완료되셨습니다.");
   };
 

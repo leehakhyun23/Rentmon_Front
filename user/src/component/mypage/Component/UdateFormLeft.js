@@ -11,7 +11,7 @@ function UdateFormLeft({user,updateUser}) {
   const [img, setImg] = useState("/img/no_profileimg.png");
 
   useEffect(()=>{
-    if(user.profileimg) setImg(`https://final-kimminju.s3.ap-northeast-2.amazonaws.com/profile_images/${user.profileimg}`);
+    if(user.profileimg) setImg(`http://rentmon-jb.s3.ap-northeast-2.amazonaws.com/profile_images/${user.profileimg}`);
   },[user]);
 
   useEffect(()=>{
@@ -59,7 +59,7 @@ function UdateFormLeft({user,updateUser}) {
   }
 
   const closepu = ()=>{
-    if(user.profileimg)setImg(`https://final-kimminju.s3.ap-northeast-2.amazonaws.com/profile_images/${user.profileimg}`);
+    if(user.profileimg)setImg(`http://rentmon-jb.s3.ap-northeast-2.amazonaws.com/profile_images/${user.profileimg}`);
     else {
       removeImage();
     }
@@ -70,7 +70,7 @@ function UdateFormLeft({user,updateUser}) {
   return (
     <>
         <div className='profileImg'>
-            {(user.profileimg)?(<img src={`https://final-kimminju.s3.ap-northeast-2.amazonaws.com/profile_images/${user.profileimg}`} alt={user.profileimg}/>):<img src='/img/no_profileimg.png' alt='no_profileimg.png'/>}
+            {(user.profileimg)?(<img src={`http://rentmon-jb.s3.ap-northeast-2.amazonaws.com/profile_images/${user.profileimg}`} alt={user.profileimg}/>):<img src='/img/no_profileimg.png' alt='no_profileimg.png'/>}
         </div>
         <div className='leftInfo'>
             <button onClick={()=>{setIsopen(true)}}>프로필 사진 변경</button>

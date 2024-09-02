@@ -23,7 +23,7 @@ function LoginOn() {
     function onLogout(){
       dispatch( logoutAction() );
       removeCookie("host");
-      navigate('/main'); 
+      navigate('/'); 
   }
 
   return (

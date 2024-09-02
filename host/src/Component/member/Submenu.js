@@ -16,7 +16,7 @@ function Submenu() {
       <span>Menu</span>
       <ul className={`sub ${isOpen ? 'open' : ''}`} ref={subBarRef}>
       <button className="close-btn" onClick={closeMenu}>×</button>
-        <li><a href="" onClick={() => { navigate('/main') }}>Home</a></li>
+        <li><a href="" onClick={() => { navigate('/') }}>Home</a></li>
         <li><a href="" onClick={() => { navigate('/ReservationManage') }}>예약/캘린더</a></li>
         <li><a href="" onClick={() => { navigate('/ReviewManage') }}>후기/Q&A</a></li>
         <li><a href="" onClick={() => { navigate('/SpaceManage') }}>공간관리</a></li>

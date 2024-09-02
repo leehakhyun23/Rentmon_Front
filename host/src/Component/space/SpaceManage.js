@@ -22,7 +22,7 @@ function SpaceManage() {
         if (host.hostid || host.provider !== 'kakao') {
             if (!host.hostid) {
                 alert('로그인이 필요한 서비스입니다');
-                navigate('/main');
+                navigate('/');
             }
         }
     }, [host, navigate]);
@@ -89,7 +89,7 @@ function SpaceManage() {
                     <ul className="space-list">
                         {spaces.map(space => {
                             const firstImage = space.spaceimage[0]?.realName; // 첫 번째 이미지의 realName
-                            const imageUrl = firstImage ? `http://localhost:8070/space_images/${firstImage}` : ''; // 이미지 URL 설정
+                            const imageUrl = firstImage ? `https://rentmon-jb.s3.ap-northeast-2.amazonaws.com/space_images/${firstImage}` : ''; // 이미지 URL 설정
                             
                             return (
                                 <li key={space.sseq} className="space-item">

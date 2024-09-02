@@ -72,7 +72,7 @@ function Post_basicInfo() {
 
         setImgsrc(prevImgsrc => {
             let newImgsrc = [...prevImgsrc];
-            newImgsrc[index] = `http://localhost:8070/space_images/${realname}`;
+            newImgsrc[index] = `https://rentmon-jb.s3.ap-northeast-2.amazonaws.com/space_images/${realname}`;
             return newImgsrc;
         });
 

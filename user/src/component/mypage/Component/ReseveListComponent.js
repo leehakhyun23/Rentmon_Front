@@ -28,7 +28,7 @@ function ReseveListComponent({record, num , setReservData , setModalon}) {
       {(dday !=="")&&(<div className='dday'>D-{dday}</div>)}
          <div className={`recentresevation-wrapper ${(dday !=="")&&("ddayplus")}`}  >
             <div className='img-box'>
-                {(record.space.spaceimage[0])&&(<img src={`https://final-kimminju.s3.ap-northeast-2.amazonaws.com/space_images/${record.space.spaceimage[0].realName}`} alt={record.space.spaceimage[0].realName}/>)}
+                {(record.space.spaceimage[0])&&(<img src={`http://rentmon-jb.s3.ap-northeast-2.amazonaws.com/space_images/${record.space.spaceimage[0].realName}`} alt={record.space.spaceimage[0].realName}/>)}
               </div>
               <div className='placeInfo'>
                    <div>
