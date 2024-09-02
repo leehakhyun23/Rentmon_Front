@@ -190,7 +190,7 @@ function SpaceDetail() {
                   <div key={idx} className="spaceImageContainer">
                     <img
                       className="spaceImage"
-                      src={`http://localhost:8070/space_images/${image.realName}`}
+                      src={`https://rentmon-jb.s3.ap-northeast-2.amazonaws.com/space_images/${image.realName}`}
                       alt={space.title}
                     />
                   </div>
@@ -258,7 +258,7 @@ function SpaceDetail() {
                 <div className="FacilityContainer" key={facil.facility.fnum}>
                   <div className="Facility">
                     <img
-                      src={`http://localhost:8070/icon_images/${facil.facility.icon}`}
+                      src={`https://rentmon-jb.s3.ap-northeast-2.amazonaws.com/icon_images/${facil.facility.icon}`}
                       alt={`${facil.facility.name} 아이콘`}
                       style={{ width: "100px", height: "100px" }}
                     />

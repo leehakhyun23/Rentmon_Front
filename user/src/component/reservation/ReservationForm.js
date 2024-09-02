@@ -9,6 +9,8 @@ import Slider from 'react-slick';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 
+<script src="https://cdm.iamport.kr/vl/iamport.js"/>
+
 
 // 이미지 슬릭을 위한 세팅
 const settings = {
@@ -21,7 +23,6 @@ const settings = {
 }
 
 function ReservationForm({ props }) {
-
 
 
     // 기본자원
@@ -56,6 +57,11 @@ function ReservationForm({ props }) {
     // Space 조회
     useEffect(
         () => {
+            // 포트원 결제 초기화
+            const IMP = window.IMP;
+            IMP.init('imp73476126'); // 여기서 가맹점 식별 코드를 넣어주세요.
+
+
             axios.get(`/api/space/getSpace/${sseq}`)
                 .then((result) => {
                     setSpace(result.data.space);
@@ -83,7 +89,6 @@ function ReservationForm({ props }) {
             getReserveInfo();
         }
     }, [date]);
-
 
     // 영업시간에 맞는 시간 범위 생성
     const generateHours = () => {
@@ -192,9 +197,6 @@ function ReservationForm({ props }) {
 
 
     // 쿠폰 사용하기
-
-
-
     const handleCouponChange = (event) => {
         setCouponCode(event.target.value);
     };
@@ -234,22 +236,67 @@ function ReservationForm({ props }) {
             space: { sseq: space.sseq } // 올바른 형식의 객체로 감싸기
         };
 
-        console.log(reservationData);
-
-        axios.post(`/api/reservation/InsertReservation`, reservationData, {
-            headers: {
-                "Content-Type": "application/json"
+        const IMP = window.IMP;
+        IMP.request_pay({
+            pg: 'html5_inicis', 
+            pay_method: 'card', 
+            merchant_uid: `merchant_${new Date().getTime()}`, 
+            name: space.title,
+            amount: payment,
+            buyer_email: user.email,
+            buyer_name: user.name,
+            buyer_tel: user.phone,
+            buyer_addr: user.address, 
+            buyer_postcode: user.zipnum, 
+        }, (rsp) => {
+            // 콜백 함수
+            if (rsp.success) {
+                axios.post(`/api/reservation/InsertReservation`, reservationData, {
+                    headers: {
+                        "Content-Type": "application/json"
+                    }
+                })
+                    .then(response => {
+                        alert('예약에 성공했습니다.');
+                        navigate(`/mypage/reservation/1`);  // 예약 성공 후 이동할 페이지
+                    })
+                    .catch(error => {
+                        console.log(space);
+                        console.error('예약에 실패했습니다.', error);
+                    });
+            } else {
+                alert(`결제 실패: ${rsp.error_msg}`);
             }
-        })
-            .then(response => {
-                alert('예약에 성공했습니다.');
-                navigate(`/mypage/reservation/1`);  // 예약 성공 후 이동할 페이지
-            })
-            .catch(error => {
-                console.log(space);
-                console.error('예약에 실패했습니다.', error);
-            });
+        });
+
     };
+
+    const handlePayment = () => {
+        const IMP = window.IMP;
+        IMP.request_pay({
+            pg: 'html5_inicis', 
+            pay_method: 'card', 
+            merchant_uid: `merchant_${new Date().getTime()}`, 
+            name: space.title,
+            amount: payment,
+            buyer_email: user.email,
+            buyer_name: user.name,
+            buyer_tel: user.phone,
+            buyer_addr: user.address, 
+            buyer_postcode: user.zipnum, 
+        }, (rsp) => {
+            // 콜백 함수
+            if (rsp.success) {
+                // 결제 성공 데이터를 서버로 전송
+                // 예: axios.post('/api/payment/complete', rsp)
+            } else {
+                alert(`결제 실패: ${rsp.error_msg}`);
+            }
+        });
+    };
+
+
+
 
     return (
 
@@ -358,7 +405,7 @@ function ReservationForm({ props }) {
             </div>
 
             <button className="submit-button" onClick={handleSubmit}>예약하기</button>
-
+            {/* <button id="iamportPayment" onClick={handlePayment}>결제 테스트</button> */}
         </div>
 
     );
