@@ -43,7 +43,7 @@ function Post_useInfo() {
             address : currentSpace.address,
         }));
 
-        navigate('/host/Post_facility');
+        navigate('/Post_facility');
     };
 
     return (
@@ -81,7 +81,7 @@ function Post_useInfo() {
                 </select>
             </div>
             <div className="but2">
-                <button className="but" onClick={() => navigate('/host/Post_basicInfo')}>이전</button>
+                <button className="but" onClick={() => navigate('/Post_basicInfo')}>이전</button>
                 <button className="but" onClick={onSubmit}>다음</button>
             </div>
         </div>

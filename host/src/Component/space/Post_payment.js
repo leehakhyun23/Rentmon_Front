@@ -142,7 +142,7 @@ function Post_payment() {
         </label>
       </div>
       <div className="but2">
-        <button className="but" onClick={() => navigate('/host/Post_facility')}>이전</button>
+        <button className="but" onClick={() => navigate('/Post_facility')}>이전</button>
         <button className="but" onClick={onSubmit}>다음</button>
       </div>
     </div>

@@ -223,7 +223,6 @@
   background-color: #f0f0f0;
   padding: 10px;
   border-radius: 5px;
-  margin-bottom: 20px;
   position: fixed;
   top: 80px;
   left: 50%;
@@ -303,6 +302,7 @@
 .spaceFacilities .FacilityList {
   display:flex;
   flex-direction: row;
+  flex-wrap: wrap;
 }
 
 .spaceFacilities .FacilityContainer {
@@ -454,19 +454,21 @@
 
 @media (max-width: 1000px) {
   .SpaceMenu-container {
-    flex-direction: column;
-    width: 20%; /* 반응형에서 width를 20%로 고정 */
-    top: 600px; /* 상단 여백을 조정하여 우측 상단에 고정 */
-    right: 50px; /* 우측 고정 위치 설정 */
-    left: auto; /* 기존 left 속성 무효화 */
-    transform: none; /* translateX를 제거하여 우측 상단에 고정 */
-    padding: 10px;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2); /* 고정된 메뉴에 그림자 추가 */
+    flex-direction: row; 
+    width: 100%; 
+    top: 60px; 
+    left: 50%; 
+    transform: translateX(-50%); 
+    padding: 5px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+    cursor: grab;
   }
 
   .SpaceMenu-item {
     width: 100%;
-    margin-bottom: 10px;
+    margin-bottom: 0px;
+    font-size: 12px;
+
   }
 
   .spaceInfo .spaceImageContainer,
