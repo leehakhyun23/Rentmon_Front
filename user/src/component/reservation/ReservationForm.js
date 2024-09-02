@@ -236,27 +236,9 @@ function ReservationForm({ props }) {
             space: { sseq: space.sseq } // 올바른 형식의 객체로 감싸기
         };
 
-        console.log(reservationData);
-
-        axios.post(`/api/reservation/InsertReservation`, reservationData, {
-            headers: {
-                "Content-Type": "application/json"
-            }
-        })
-            .then(response => {
-                alert('예약에 성공했습니다.');
-                navigate(`/mypage/reservation/1`);  // 예약 성공 후 이동할 페이지
-            })
-            .catch(error => {
-                console.log(space);
-                console.error('예약에 실패했습니다.', error);
-            });
-    };
-
-    const handlePayment = () => {
         const IMP = window.IMP;
         IMP.request_pay({
-            pg: 'inicis', 
+            pg: 'html5_inicis', 
             pay_method: 'card', 
             merchant_uid: `merchant_${new Date().getTime()}`, 
             name: space.title,
@@ -269,12 +251,45 @@ function ReservationForm({ props }) {
         }, (rsp) => {
             // 콜백 함수
             if (rsp.success) {
-                // 결제 성공 시 처리
-                alert('결제 성공!');
+                axios.post(`/api/reservation/InsertReservation`, reservationData, {
+                    headers: {
+                        "Content-Type": "application/json"
+                    }
+                })
+                    .then(response => {
+                        alert('예약에 성공했습니다.');
+                        navigate(`/mypage/reservation/1`);  // 예약 성공 후 이동할 페이지
+                    })
+                    .catch(error => {
+                        console.log(space);
+                        console.error('예약에 실패했습니다.', error);
+                    });
+            } else {
+                alert(`결제 실패: ${rsp.error_msg}`);
+            }
+        });
+
+    };
+
+    const handlePayment = () => {
+        const IMP = window.IMP;
+        IMP.request_pay({
+            pg: 'html5_inicis', 
+            pay_method: 'card', 
+            merchant_uid: `merchant_${new Date().getTime()}`, 
+            name: space.title,
+            amount: payment,
+            buyer_email: user.email,
+            buyer_name: user.name,
+            buyer_tel: user.phone,
+            buyer_addr: user.address, 
+            buyer_postcode: user.zipnum, 
+        }, (rsp) => {
+            // 콜백 함수
+            if (rsp.success) {
                 // 결제 성공 데이터를 서버로 전송
                 // 예: axios.post('/api/payment/complete', rsp)
             } else {
-                // 결제 실패 시 처리
                 alert(`결제 실패: ${rsp.error_msg}`);
             }
         });
