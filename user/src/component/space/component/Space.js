@@ -36,7 +36,7 @@ function Space(props) {
                     (space.spaceimage) ? (
                         space.spaceimage.map((image, idx) => {
                             return (
-                                <img key={idx} src={`http://rentmon-jb.s3.ap-northeast-2.amazonaws.com/space_images/${image.realName}`} alt={props.space.title} onClick={() => { navigate(`/spaceDetail/${props.space.sseq}`) }}/>
+                                <img key={idx} src={`https://final-kimminju.s3.ap-northeast-2.amazonaws.com/space_images/${image.realName}`} alt={props.space.title} onClick={() => { navigate(`/spaceDetail/${props.space.sseq}`) }}/>
                             )
                         })
                     ) : (null)
