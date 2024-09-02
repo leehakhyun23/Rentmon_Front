@@ -22,7 +22,7 @@ function Submenu() {
         <li><a href="" onClick={() => { navigate('/host/SpaceManage') }}>공간관리</a></li>
         {/* <li><a href="#None" onClick={() => { navigate('/') }}>1:1문의</a></li> */}
         {/* <li><a href="#None" onClick={() => { navigate('/') }}>공지사항</a></li> */}
-        <li><a href="" onClick={() => { navigate('/host/Report') }}>운영지표</a></li>
+        {/* <li><a href="#None" onClick={() => { navigate('/Report') }}>운영지표</a></li> */}
         {/* <li><a href="#None" onClick={() => { navigate('/') }}>정산</a></li> */}
         <li><a href="" onClick={() => { navigate('/host/Update') }}>정보수정</a></li>
       </ul>

@@ -50,7 +50,7 @@ function ReviewList({ sseq, reviewopen, setReviewopen }) {
                         <div className='row' key={key}>
                             <div className='userWrap'>
                                 <div className='userinfo'>
-                                    <div className='userimg'><img src={`${(elem.user.profileimg) ? "http://localhost:8070/profile_images/" + elem.user.profileimg : "/img/no_profileimg.png"}`} /></div>
+                                    <div className='userimg'><img src={`${(elem.user.profileimg) ? "http://rentmon-jb.s3.ap-northeast-2.amazonaws.com/profile_images/" + elem.user.profileimg : "/img/no_profileimg.png"}`} /></div>
                                 </div>
                                 <div className='right'>
                                     <div className='username'>{elem.user.userid}</div>
@@ -70,7 +70,7 @@ function ReviewList({ sseq, reviewopen, setReviewopen }) {
                                             elem.images.map((img, idx) => (
                                                 <div key={idx}>
                                                     <img
-                                                        src={`http://localhost:8070/review_images/${img.realname}`}
+                                                        src={`http://rentmon-jb.s3.ap-northeast-2.amazonaws.com/review_images/${img.realname}`}
                                                         alt={`리뷰 이미지 ${idx}`}
                                                         style={{ width: '300px', height: '300px', objectFit: 'cover', marginRight: '10px', float: 'left' }}
                                                     />

@@ -23,34 +23,38 @@ import Col_useInfo from "./Component/space/Col_useInfo";
 import LoginOn from "./Component/member/LoginOn";
 import LogoutButton from "./Component/member/LogoutButton";
 import Report from "./Component/space/Report";
+import SerchPwd from "./Component/member/SerchPwd";
+import ResetPasswordUrl from "./Component/member/ResetPasswordUrl";
 
 
 function App() {
   return (
       
       <Routes>
-        <Route index path="/host/main" element={<Main />} />
-        <Route path="/host/Post_cate" element={<Post_cate />} />
-        <Route path="/host/Post_basicInfo" element={<Post_basicInfo />} />
-        <Route path="/host/Post_facility" element={<Post_facility />} />
-        <Route path="/host/Post_payment" element={<Post_payment />} />
-        <Route path="/host/Post_useInfo" element={<Post_useInfo />} />
-        <Route path="/host/ReservationManage" element={<ReservationManage />} />
-        <Route path="/host/ReviewManage" element={<ReviewManage />} />
-        <Route path="/host/SpaceCorrection" element={<SpaceCorrection />} />
-        <Route path="/host/SpaceManage" element={<SpaceManage />} />
-        <Route path="/host/Login" element={<Login />} />
-        <Route path="/host/Join" element={<Join />} />
-        <Route path="/host/Update" element={<Update />} />
-        <Route path="/host/Submenu" element={<Submenu />} />
-        <Route path="/host/LoginOn" element={<LoginOn />} />
-        <Route path="/host/ReviewManage" element={<ReviewManage />} />
-        <Route path="/host/LogoutButton" element={<LogoutButton />} />
-        <Route path="/host/Report" element={<Report />} />
-        <Route path="/host/getsnshostinfo/:hostid/:provider" element={<Getsnshostinfo />} />
-        <Route path="/host/Col_basicInfo" element={<Col_basicInfo />} />
-        <Route path="/host/Col_facility" element={<Col_facility />} />
-        <Route path="/host/Col_useInfo" element={<Col_useInfo />} />
+        <Route index element={<Main />} />
+        <Route path="Post_cate" element={<Post_cate />} />
+        <Route path="Post_basicInfo" element={<Post_basicInfo />} />
+        <Route path="Post_facility" element={<Post_facility />} />
+        <Route path="Post_payment" element={<Post_payment />} />
+        <Route path="Post_useInfo" element={<Post_useInfo />} />
+        <Route path="ReservationManage" element={<ReservationManage />} />
+        <Route path="ReviewManage" element={<ReviewManage />} />
+        <Route path="SpaceCorrection" element={<SpaceCorrection />} />
+        <Route path="SpaceManage" element={<SpaceManage />} />
+        <Route path="/Login" element={<Login />} />
+        <Route path="/SerchPwd" element={<SerchPwd />} />
+        <Route path="/Join" element={<Join />} />
+        <Route path="/Update" element={<Update />} />
+        <Route path="/ResetPasswordUrl/:userid/:code" element={<ResetPasswordUrl />} />
+        <Route path="/Submenu" element={<Submenu />} />
+        <Route path="/LoginOn" element={<LoginOn />} />
+        <Route path="/ReviewManage" element={<ReviewManage />} />
+        <Route path="/LogoutButton" element={<LogoutButton />} />
+        <Route path="/Report" element={<Report />} />
+        <Route path="/getsnshostinfo/:hostid/:provider" element={<Getsnshostinfo />} />
+        <Route path="Col_basicInfo" element={<Col_basicInfo />} />
+        <Route path="Col_facility" element={<Col_facility />} />
+        <Route path="Col_useInfo" element={<Col_useInfo />} />
         
 
       </Routes>

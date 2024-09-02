@@ -44,7 +44,7 @@ function ReservModal({ modalon, setModalon, rerveData }) {
                     {rerveData.space && (
                         <div className="modal-content scrollbar">
                             <h2 className="modal-title">{rerveData.space.title}</h2>
-                            {(rerveData.space.spaceimage[0])&&(<img src={`http://localhost:8070/space_images/${rerveData.space.spaceimage[0].realName}`} alt='savefilename'/>)}
+                            {(rerveData.space.spaceimage[0])&&(<img src={`https://final-kimminju.s3.ap-northeast-2.amazonaws.com/space_images/${rerveData.space.spaceimage[0].realName}`} alt='savefilename'/>)}
                             <p className="modal-description">{rerveData.space.content}</p>
                             <div className="modal-info">
                                 <div className="info-item">

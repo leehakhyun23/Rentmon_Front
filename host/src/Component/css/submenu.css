@@ -55,7 +55,7 @@
 }
 
 .menu>.sub.open {
-  height: 330px;
+  height: 325px;
   opacity: 1; /* Make the menu visible */
   transform: translateX(0); /* Reset the offset */
 }
@@ -65,7 +65,7 @@
   padding: 0; /* Remove padding */
   padding-top: 5px;
   margin: 0; /* Remove margin */
-  height: 50px;
+  height: 60px;
 }
 
 .menu>.sub li:last-child {
