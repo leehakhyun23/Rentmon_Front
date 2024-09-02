@@ -84,6 +84,7 @@
     border-radius: 4px;
     color: white;
     cursor: pointer;
+    white-space: nowrap;
 }
 
 .chatroom-input .send-button:hover {

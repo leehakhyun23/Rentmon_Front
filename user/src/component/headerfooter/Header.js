@@ -129,10 +129,7 @@ function Header() {
                     <div className='left'>
                         <div>
                             <div className='pc'>{(searchPopup) ? (null) : <SearchInputClick searchWord={searchWord} setSearchPopup={setSearchPopup} />}</div>
-                            {/* 채팅 뱃지 표시 */}
-                            <Badge count={unreadMessages}>
-                                <Iconbutton src={"/img/chatIcon.svg"} click={openChatRoom} />
-                            </Badge>
+                       
                             <Iconbutton src={"/img/peopleIcon.svg"} click={() => setMypagePopup(true)} />
                             {(user.name) && (<ListIconButton click={() => navigate("/mypage/reservation/1")} listcount={listcount} />)}
                         </div>
@@ -143,6 +140,15 @@ function Header() {
             <Searchpopup searchshow={searchshow} searchWord={searchWord} setSearchWord={setSearchWord} setSearchPopup={setSearchPopup} />
             {/* 마이페이지 사이드바 메뉴 */}
             <MypageSidebar mypagePopup={mypagePopup} loginOn={(user.name) ? (true) : (false)} mypageShow={mypageShow} setMypagePopup={setMypagePopup} mypageBlack={mypageBlack} />
+
+            {/* 채팅 뱃지 표시 */}
+            {(user.name) &&(
+                <div className="floatingchatIcon">
+                    <Badge count={unreadMessages} >
+                        <img src="/img/chatIcon.png" alt="chatIcon.png" onClick={openChatRoom} />
+                    </Badge>
+                </div>
+            )}
             {/* 채팅방 팝업 */}
             {chatRoomOpen && (
                 <ChatRoom user={user} closeChatRoom={closeChatRoom} />
