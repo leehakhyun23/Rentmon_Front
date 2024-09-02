@@ -82,9 +82,9 @@ function Login() {
             <div className='snsLogin'>
                 <span>SNS 로그인</span>
                 <div className='snsbtncontainer'>
-                  <a href="http://localhost:8070/host/sns/googlestart"><img src='/img/google.png' alt='google'/></a>
-                  <a href="http://localhost:8070/host/sns/kakaostart"><img src='/img/kakao.png' alt='kakao'/></a>
-                  <a href="http://localhost:8070/host/sns/naverstart"><img src='/img/naver.png' alt='naver' /></a>
+                  <a href="http://3.24.74.142/host/sns/googlestart"><img src='/img/google.png' alt='google'/></a>
+                  <a href="http://3.24.74.142/host/sns/kakaostart"><img src='/img/kakao.png' alt='kakao'/></a>
+                  <a href="http://3.24.74.142/host/sns/naverstart"><img src='/img/naver.png' alt='naver' /></a>
                 </div>
             </div>
           </div>

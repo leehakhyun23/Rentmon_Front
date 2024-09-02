@@ -41,7 +41,7 @@ const FloatingActionButton = () => {
       });
 
     const client = new Client({
-      brokerURL: 'http://localhost:8070/ws',
+      brokerURL: 'http://3.24.74.142/ws',
       connectHeaders: {
         login: 'guest',
         passcode: 'guest',
@@ -75,7 +75,7 @@ const FloatingActionButton = () => {
       onStompError: (frame) => {
         console.error('STOMP error:', frame);
       },
-      webSocketFactory: () => new SockJS('http://localhost:8070/ws'),
+      webSocketFactory: () => new SockJS('http://3.24.74.142/ws'),
     });
 
     client.activate();

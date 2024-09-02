@@ -65,7 +65,7 @@ function Header() {
     // WebSocket 연결 함수
     const connectWebSocket = (crseq) => {
         const client = new Client({
-            brokerURL: 'ws://localhost:8070/ws',
+            brokerURL: 'ws://3.24.74.142/ws',
             connectHeaders: {
                 login: 'guest',
                 passcode: 'guest',
@@ -86,7 +86,7 @@ function Header() {
             onStompError: (frame) => {
                 console.error('STOMP error:', frame);
             },
-            webSocketFactory: () => new SockJS('http://localhost:8070/ws'),
+            webSocketFactory: () => new SockJS('http://3.24.74.142/ws'),
         });
 
         client.activate();
