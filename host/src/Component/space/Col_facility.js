@@ -38,7 +38,7 @@ function Col_facility() {
 
       if (response.status === 200) {
         console.log('Facilities updated successfully');
-        navigate('/host/SpaceManage');
+        navigate('/SpaceManage');
       } else {
         console.error('Failed to update facilities');
       }
@@ -114,7 +114,7 @@ function Col_facility() {
         ))}
       </div>
       <div className="but2">
-        <button className="but" onClick={() => navigate('/host/SpaceManage')}>이전</button>
+        <button className="but" onClick={() => navigate('/SpaceManage')}>이전</button>
         <button className="but" onClick={onSubmit}>다음</button>
       </div>
     </div>

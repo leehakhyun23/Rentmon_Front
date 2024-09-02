@@ -133,7 +133,7 @@ function SpaceDetail() {
   }, []);
 
   return (
-    <div className="spaceContainer innerContainer">
+    <div className="spaceContainer innerContainer spaceDetail">
       <div>
         {/* spaceMenu Part */}
         <div
@@ -141,6 +141,7 @@ function SpaceDetail() {
             inquiryopen || reviewopen || reportopen ? "hidden" : ""
           }`}
         >
+          <div>
           {" "}
           <div
             className="SpaceMenu-item"
@@ -164,25 +165,26 @@ function SpaceDetail() {
             className="SpaceMenu-item"
             onClick={() => scrollToSection(inquiryListRef)}
           >
-            문의 리스트
+            문의
           </div>
           <div
             className="SpaceMenu-item"
             onClick={() => scrollToSection(reviewListRef)}
           >
-            리뷰 리스트
+            리뷰
           </div>
           <div
             className="SpaceMenu-item"
             onClick={() => navigate("/spaceList")}
           >
-            다른공간 보러가기
+            돌아가기
+          </div>
           </div>
         </div>
 
         {/* spaceInfo Part */}
+        <div className="spaceMainTitle" ref={spaceInfoRef}></div>
         <div className="spaceInfo">
-          <div className="spaceMainTitle" ref={spaceInfoRef}></div>
           {
             <Slider {...settings}>
               {space.spaceimage &&
@@ -190,7 +192,7 @@ function SpaceDetail() {
                   <div key={idx} className="spaceImageContainer">
                     <img
                       className="spaceImage"
-                      src={`http://localhost:8070/space_images/${image.realName}`}
+                      src={`https://rentmon-jb.s3.ap-northeast-2.amazonaws.com/space_images/${image.realName}`}
                       alt={space.title}
                     />
                   </div>
@@ -198,6 +200,7 @@ function SpaceDetail() {
             </Slider>
           }
 
+          <div>
           <div className="spaceContentBlock">
             <div className="spaceTitle">제목</div>
             <div className="spaceContent">
@@ -247,6 +250,7 @@ function SpaceDetail() {
                 : null}
             </div>
           </div>
+          </div>
         </div>
 
         <div className="spaceFacilities">
@@ -258,9 +262,9 @@ function SpaceDetail() {
                 <div className="FacilityContainer" key={facil.facility.fnum}>
                   <div className="Facility">
                     <img
-                      src={`http://localhost:8070/icon_images/${facil.facility.icon}`}
+                      src={`https://rentmon-jb.s3.ap-northeast-2.amazonaws.com/icon_images/${facil.facility.icon}`}
                       alt={`${facil.facility.name} 아이콘`}
-                      style={{ width: "100px", height: "100px" }}
+                      // style={{ width: "100px", height: "100px" }}
                     />
                   </div>
                   <div>{facil.facility.name}</div>

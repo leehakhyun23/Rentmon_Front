@@ -137,7 +137,7 @@ function Post_basicInfo() {
         }));
         console.log("rList:", rList);
         console.log("oList:", oList);
-        navigate('/host/Post_useInfo');
+        navigate('/Post_useInfo');
     };
 
     return (
@@ -220,7 +220,7 @@ function Post_basicInfo() {
                 </div>
             ))}
             <div className='but2'>
-                <button className="but" onClick={() => navigate('/host/Post_cate')}>이전</button>
+                <button className="but" onClick={() => navigate('/Post_cate')}>이전</button>
                 <button className="but" onClick={onSubmit}>다음</button>
             </div>
         </div>

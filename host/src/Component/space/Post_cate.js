@@ -24,7 +24,7 @@ function Post_cate() {
         // Redux 슬라이스에 선택된 cnum 저장
         dispatch(setSpace({ cnum })); // cnum을 객체 형태로 디스패치
         console.log(cnum); // 현재 상태 확인
-        navigate('/host/Post_basicInfo'); // 다음 페이지로 이동
+        navigate('/Post_basicInfo'); // 다음 페이지로 이동
     }
 
     useEffect(() => {
@@ -32,7 +32,7 @@ function Post_cate() {
         if (host.hostid || host.provider !== 'kakao') {
             if (!host.hostid) {
                 alert('로그인이 필요한 서비스입니다');
-                navigate('/host/main');
+                navigate('/');
             }
         }
     }, [host, navigate]);
@@ -77,7 +77,7 @@ function Post_cate() {
                 ))}
             </div>
             <div className='but2'>
-                <button className="but" onClick={() => { navigate('/host/main') }}>이전</button>
+                <button className="but" onClick={() => { navigate('/') }}>이전</button>
                 <button className="but" onClick={onSubmit}>다음</button>
             </div>
         </div>

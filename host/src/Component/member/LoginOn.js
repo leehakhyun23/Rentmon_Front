@@ -23,7 +23,7 @@ function LoginOn() {
     function onLogout(){
       dispatch( logoutAction() );
       removeCookie("host");
-      navigate('/host/main'); 
+      navigate('/'); 
   }
 
   return (
@@ -36,7 +36,7 @@ function LoginOn() {
                <LogoutButton onLogout={onLogout} className='logoutbtn' />
            </div>
             ) : (
-                <button onClick={() => navigate('/host/login')} className='loginbtn' >로그인</button>
+                <button onClick={() => navigate('/login')} className='loginbtn' >로그인</button>
             )}
     </div>
   )

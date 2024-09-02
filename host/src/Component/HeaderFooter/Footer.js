@@ -8,7 +8,7 @@ function Footer() {
     <div className='footer'>
     <div className='innerContainer'>
       <div className='left'>
-          <div className='logo' onClick={()=>{navigate("/host/main")}}><h2>RENTMON</h2></div>
+          <div className='logo' onClick={()=>{navigate("/")}}><h2>RENTMON</h2></div>
           <div className='text'><p>최고의 공간대여 플랫폼</p></div>
       </div>
       <div className='right'>

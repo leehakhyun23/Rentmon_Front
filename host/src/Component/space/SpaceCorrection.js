@@ -42,9 +42,9 @@ function SpaceCorrection() {
                 {/* 기타 수정할 입력 필드를 추가할 수 있습니다. */}
             </form>
             <div className="button-container1">
-                <button onClick={() => handleButtonClick('/host/Col_basicInfo')}>기본 정보</button>
-                <button onClick={() => handleButtonClick('/host/Col_facility')}>시설 정보</button>
-                <button onClick={() => handleButtonClick('/host/Col_useInfo')}>이용 안내</button>
+                <button onClick={() => handleButtonClick('/Col_basicInfo')}>기본 정보</button>
+                <button onClick={() => handleButtonClick('/Col_facility')}>시설 정보</button>
+                <button onClick={() => handleButtonClick('/Col_useInfo')}>이용 안내</button>
                 
             </div>
         </div>

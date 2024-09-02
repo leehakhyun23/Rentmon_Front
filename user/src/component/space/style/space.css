@@ -4,9 +4,9 @@
 .spaceContainer {
   display: flex;
   flex-direction: column;
-  width:1200px;
-  padding: 20px;
-  background-color: #f9f9f9;
+  /* width:1200px; */
+  /* padding: 20px; */
+  /* background-color: #f9f9f9; */
   font-family: 'Arial', sans-serif;
   color: #333;
   line-height: 1.6; 
@@ -15,10 +15,13 @@
 /* spaceList_검색 */
 .spaceContainer .searchSection {
   display: flex;
-  align-items: center;
-  flex-direction:row;
-  margin-bottom: 20px;
-  gap : 10px;
+    align-items: center;
+    flex-direction: row;
+    margin-bottom: 50px;
+    gap: 10px;
+    border: 1px solid #ddd;
+    padding: 20px;
+    border-radius: 5px;
 }
 
 .spaceContainer .searchSection .searchRow {
@@ -27,14 +30,12 @@
   flex-direction : row;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 10px; 
   width:100%;
   gap: 10px;
 }
 
 .searchCategory, .searchRegion, .spaceFilter {
   flex: 2;
-  margin: 5px;
 }
 
 .searchDate{
@@ -59,7 +60,9 @@
   border-radius: 5px;
   font-size: 14px;
   outline: none;
-  width: 120px;
+  width: 30%;
+  margin-right: 10px;
+  height: auto;
 }
 
 .searchCategory select:focus, .searchRegion select:focus {
@@ -92,6 +95,7 @@
   font-size: 14px;
   outline: none;
   width: 120px;
+  height: auto;
 }
 
 .searchDate input[type="date"]:focus, .searchTime input[type="time"]:focus {
@@ -119,6 +123,7 @@
   font-size: 14px;
   outline: none;
   width: 120px;
+  height: auto;
 }
 
 .spaceFilter select:focus {
@@ -128,26 +133,34 @@
 
 
 #searchButton {
-  padding: 5px 10px;
+  padding: 10px 25px;
   background-color: #007bff;
   color: white;
   border: none;
   cursor: pointer;
   height: 100%;
-  margin : 20px;
+  border-radius: 5px;
+  /* margin : 20px; */
 
 }
 
 #searchButton:hover {
   background-color: #0056b3;
 }
+.searchTime select { height: auto; padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  font-size: 14px;
+  outline: none;
+  width: 120px;
+  height: auto;}
+
 
 /* 반응형 */
 @media (max-width: 1000px) {
   .spaceContainer {
-    width: 95%;
-    padding: 10px;
-    margin : 10px;
+    margin-top: 0;
+    padding-top: 0;
   }
   .spaceContainer .searchSection {
     flex-direction: column; /* 세로 정렬로 변경 */
@@ -170,6 +183,7 @@
     flex : 1;
     margin: 10px; /* 항목 사이 간격 */
   }
+ 
 
   #searchButton {
     width: 20%; /* 버튼이 전체 너비를 차지하도록 */
@@ -178,7 +192,7 @@
   }
 
   .searchCategory label, .searchDate label {
-    display:none;
+    /* display:none; */
   }
 
   .spaces {
@@ -188,7 +202,7 @@
 
   .spaces > div {
     flex: 1 1 100%; /* 한 줄에 하나씩 표시 */
-    margin-bottom : 20px;
+    margin-bottom : 30px;
   }
 }
 
@@ -197,6 +211,7 @@
   display: flex;
   flex-wrap: wrap;
   gap: 20px;
+  row-gap: 50px;
   margin-top: 20px;
 }
 
@@ -223,22 +238,22 @@
   background-color: #f0f0f0;
   padding: 10px;
   border-radius: 5px;
-  margin-bottom: 20px;
   position: fixed;
-  top: 80px;
+  top: 79px;
   left: 50%;
   transform: translateX(-50%);
-  width: 1200px;
+  width: 100%;
   background-color: #fff;
-  z-index: 2;
-  border-bottom: 2px solid #e0e0e0; 
+  z-index: 3;
+  border-bottom: 1px solid #e0e0e0; 
 }
+.SpaceMenu-container > div { max-width: 1200px; margin: 0 auto; display: flex; width: 100%; }
 .SpaceMenu-container.hidden {
   display: none;
 }
 
 .SpaceMenu-item {
-  padding: 10px 20px;
+  padding: 10px 0px;
   width: 18%;
   text-align: center;
   cursor: pointer;
@@ -256,25 +271,27 @@
 
 
 .spaceContentBlock {
-  margin-bottom: 20px; 
+  margin: 20px 0 50px; 
+
 }
+.spaceInfo .spaceContentBlock { margin:0; }
 
 .spaceTitle {
-  font-size: 24px; 
+  font-size: 18px; 
   font-weight: bold; 
   margin-bottom: 10px; 
   color: #1a73e8; 
 }
+/* .spaceDetail .spaceTitle { margin-top: 20px;} */
 
 .spaceContent {
-  font-size: 18px; 
+  font-size: 14px; 
   margin-bottom: 20px; 
-  padding-left: 15px; 
+  padding-left: 0px; 
 }
 
 .spaceInfo .spaceImageContainer {
-  width: 1200px;
-  height: 800px;
+  height:400px;
   overflow: hidden;
   display: flex;
   justify-content: center;
@@ -292,17 +309,17 @@
   display: flex; 
   flex-wrap: wrap;
   flex-direction: column;
-  gap: 20px; 
+  /* gap: 20px;  */
   margin-top: 20px;
   background-color: #ffffff;
   border-radius: 8px;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-  padding: 20px;
 }
 
 .spaceFacilities .FacilityList {
   display:flex;
   flex-direction: row;
+  flex-wrap: wrap;
+  gap: 20px;
 }
 
 .spaceFacilities .FacilityContainer {
@@ -311,21 +328,32 @@
   align-items: center;
   text-align: center;
   gap:20px;
-  margin:15px;
+  width: 80px;
 }
 
 .spaceFacilities .FacilityContainer .Facility img {
   margin-top: 10px;
+  width: 80px;
+  height: 80px;
 }
-
+.spaceFacilities .FacilityContainer div { font-size: 13px; }
+/* .spaceInfo .slick-slider { max-width: 800px; } */
 
 .spaceInfo {
-  margin-top: 20px;
-  background-color: #ffffff;
+  margin-bottom: 20px;
+  /* background-color: #ffffff; */
   border-radius: 8px;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-  padding: 20px;
+  /* box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); */
+  padding: 0px;
+  /* max-width: 800px; */
+  display: flex;
+  
+  justify-content: space-between;
 }
+.spaceInfo { margin-bottom: 80px; padding-bottom: 80px; border-radius: 0;  border-bottom: 1px solid #ddd; }
+
+.spaceInfo > div:first-child { width: 44%; }
+.spaceInfo > div:last-child { width: 50%; }
 
 .spaceMap {
   margin-top: 20px;
@@ -450,23 +478,32 @@
   width: 100%;
   height: 100%;
 }
-
+.reservationContainer .spaceInfo { padding-top: 80px; }
+.reservationContainer .spaceInfo .spaceImageContainer { max-height: 300px; min-height: 150px; }
 
 @media (max-width: 1000px) {
+.spaceDetail { padding-top: 100px !important; }
+  .spaceInfo { display: block; }
+  .spaceInfo > div { width: 100% !important; }
   .SpaceMenu-container {
-    flex-direction: column;
-    width: 20%; /* 반응형에서 width를 20%로 고정 */
-    top: 600px; /* 상단 여백을 조정하여 우측 상단에 고정 */
-    right: 50px; /* 우측 고정 위치 설정 */
-    left: auto; /* 기존 left 속성 무효화 */
-    transform: none; /* translateX를 제거하여 우측 상단에 고정 */
-    padding: 10px;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2); /* 고정된 메뉴에 그림자 추가 */
+    flex-direction: row; 
+    width: 100%; 
+    top: 60px; 
+    left: 50%; 
+    transform: translateX(-50%); 
+    padding: 5px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+    cursor: grab;
+    overflow: auto;
   }
+  .SpaceMenu-container > div { min-width: 460px; padding: 0 15px; }
 
   .SpaceMenu-item {
     width: 100%;
-    margin-bottom: 10px;
+    margin-bottom: 0px;
+    padding: 12px 0;
+    font-size: 12px;
+
   }
 
   .spaceInfo .spaceImageContainer,
@@ -474,4 +511,19 @@
     width: 100%;
     height: auto;
   }
+
+  .spaceContainer .searchSection .searchRow { display: block; }
+  .searchCategory, .searchRegion, .spaceFilter { display: flex; gap: 10px; }
+  .searchDate, .searchTime { margin: 0; }
+
+  .spaceFilter select,
+  .searchCategory select, .searchRegion select { margin: 0; width: 40%;}
+  .searchDate input[type="date"], .searchTime input[type="time"] { width: calc(100% - 20px); margin: 10px 0 5px; }
+
+  .searchTime select { width: 100%; margin: 5px 0; }
+  #searchButton { margin: 20px 0 0; width: calc(100% - 0px); }
+
+
+  .spaceContainer .searchSection { margin: 40px 0 30px; }
+
 }

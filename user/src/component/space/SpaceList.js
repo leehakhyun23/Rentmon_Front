@@ -181,9 +181,6 @@ function SpaceList() {
                 </option>
               ))}
             </select>
-          </div>
-
-          <div className="searchRegion">
             <select
               id="region"
               value={searchRegion}
@@ -197,6 +194,10 @@ function SpaceList() {
               ))}
             </select>
           </div>
+
+          {/* <div className="searchRegion">
+           
+          </div> */}
 
           <div className="spaceFilter">
             <label htmlFor="category">필터 : </label>

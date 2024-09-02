@@ -197,3 +197,8 @@
     .logOn .myInfo .mypagemenu .icon a img { width: 40px; }
     .logOn .myInfo .mypagemenu .icon a p { font-size: 12px;  margin: 0;}
 }
+
+
+.floatingchatIcon { position: fixed; bottom: 60px; right: 60px; cursor: pointer; z-index: 3; }
+
+@media screen and (max-width: 1000px) { .floatingchatIcon {bottom: 20px; right: 20px; }  }
