@@ -90,3 +90,14 @@
 .chatroom-input .send-button:hover {
     background-color: #0056b3;
 }
+
+.floatingchatIcon span { 
+    padding: 0 !important;
+    width: 25px;
+    height: 25px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 15px !important;
+    background: #CE4B41;
+}
