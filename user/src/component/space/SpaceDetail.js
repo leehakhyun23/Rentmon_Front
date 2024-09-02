@@ -164,19 +164,19 @@ function SpaceDetail() {
             className="SpaceMenu-item"
             onClick={() => scrollToSection(inquiryListRef)}
           >
-            문의 리스트
+            문의
           </div>
           <div
             className="SpaceMenu-item"
             onClick={() => scrollToSection(reviewListRef)}
           >
-            리뷰 리스트
+            리뷰
           </div>
           <div
             className="SpaceMenu-item"
             onClick={() => navigate("/spaceList")}
           >
-            다른공간 보러가기
+            돌아가기
           </div>
         </div>
 
