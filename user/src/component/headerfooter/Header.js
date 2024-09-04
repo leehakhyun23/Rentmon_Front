@@ -56,44 +56,14 @@ function Header() {
     const chatRoomOpenRef = useRef(chatRoomOpen); // 최신 상태를 참조할 ref 생성
     const [unreadMessages, setUnreadMessages] = useState(0);
     const [crseq, setCrseq] = useState(null);
-    const [stompClient, setStompClient] = useState(null);
+    // const [stompClient, setStompClient] = useState(null);
+    const stompClientRef = useRef(null);
 
     useEffect(() => {
         chatRoomOpenRef.current = chatRoomOpen; // 상태 변경 시 ref 업데이트
     }, [chatRoomOpen]);
 
     // WebSocket 연결 함수
-    const connectWebSocket = (crseq) => {
-        const client = new Client({
-            brokerURL: 'ws://localhost:8070/ws',
-            connectHeaders: {
-                login: 'guest',
-                passcode: 'guest',
-            },
-            onConnect: () => {
-                client.subscribe(`/topic/chatroom/${crseq}`, (message) => {
-                    const newMessage = JSON.parse(message.body);
-
-                    if (newMessage.senderType === "admin") {
-                        if (!chatRoomOpenRef.current) { // ref를 사용하여 최신 상태 확인
-                            setUnreadMessages(prev => prev + 1);
-                        } else {
-                            axios.post(`/api/chat/markAsRead/${crseq}`)
-                        }
-                    }
-                });
-            },
-            onStompError: (frame) => {
-                console.error('STOMP error:', frame);
-            },
-            webSocketFactory: () => new SockJS('http://localhost:8070/ws'),
-        });
-
-        client.activate();
-        setStompClient(client);
-    };
-
-    // 사용자의 채팅방 구독
     useEffect(() => {
         if (user && user.userid) {
             jaxios.get('/api/user/getCrseq', { params: { userid: user.userid } })
@@ -102,7 +72,34 @@ function Header() {
                         const { crseq, unreadMessages } = res.data;
                         setUnreadMessages(unreadMessages);
                         setCrseq(crseq);
-                        connectWebSocket(crseq);
+
+                        const client = new Client({
+                            brokerURL: 'http://localhost:8070/ws',
+                            connectHeaders: {
+                                login: 'guest',
+                                passcode: 'guest',
+                            },
+                            onConnect: () => {
+                                client.subscribe(`/topic/chatroom/${crseq}`, (message) => {
+                                    const newMessage = JSON.parse(message.body);
+
+                                    if (newMessage.senderType === "admin") {
+                                        if (!chatRoomOpenRef.current) {
+                                            setUnreadMessages(prev => prev + 1);
+                                        } else {
+                                            jaxios.post(`/api/chat/markAsRead/${crseq}`);
+                                        }
+                                    }
+                                });
+                            },
+                            onStompError: (frame) => {
+                                console.error('STOMP error:', frame);
+                            },
+                            webSocketFactory: () => new SockJS('http://localhost:8070/ws'),
+                        });
+
+                        stompClientRef.current = client;
+                        client.activate();
                     }
                 })
                 .catch((err) => console.error(err));
@@ -151,7 +148,7 @@ function Header() {
             )}
             {/* 채팅방 팝업 */}
             {chatRoomOpen && (
-                <ChatRoom user={user} closeChatRoom={closeChatRoom} />
+                <ChatRoom user={user} closeChatRoom={closeChatRoom} stompClient={stompClientRef.current} crseq={crseq} />
             )}
         </>
     );

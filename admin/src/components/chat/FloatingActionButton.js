@@ -30,15 +30,18 @@ const FloatingActionButton = () => {
     setNotificationCount(totalUnreadCount);
   };
 
-  useEffect(() => {
+  const refresChatRoomList = () => {
     axios.get('/api/admin/chatlist')
-      .then((res) => {
-        setChatRoomList(res.data);
-        refreshNotificationCount();
-      })
-      .catch((err) => {
-        console.error(err);
-      });
+    .then((res) => {
+      setChatRoomList(res.data);
+    })
+    .catch((err) => {
+      console.error(err);
+    });
+  }
+
+  useEffect(() => {
+    refresChatRoomList();
 
     const client = new Client({
       brokerURL: 'http://localhost:8070/ws',
@@ -63,6 +66,8 @@ const FloatingActionButton = () => {
                   unreadCount: isCurrentChatRoomOpen ? room.unreadCount : room.unreadCount + 1
                 };
               }
+              refresChatRoomList();
+              refreshNotificationCount();
               return room;
             });
           });
