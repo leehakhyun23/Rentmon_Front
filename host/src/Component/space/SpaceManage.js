@@ -89,7 +89,7 @@ function SpaceManage() {
                     <ul className="space-list">
                         {spaces.map(space => {
                             const firstImage = space.spaceimage[0]?.realName; // 첫 번째 이미지의 realName
-                            const imageUrl = firstImage ? `http://localhost:8070/space_images/${firstImage}` : ''; // 이미지 URL 설정
+                            const imageUrl = firstImage ? `http://3.24.74.142/host/space_images/${firstImage}` : ''; // 이미지 URL 설정
                             
                             return (
                                 <li key={space.sseq} className="space-item">

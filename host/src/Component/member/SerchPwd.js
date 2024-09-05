@@ -33,7 +33,7 @@ function SerchPwd() {
         try{
             let code=getRandomNumbersString(6,1,100);
             setAuthoCookie("resetPwd",code,5);
-            let resetPasswordUrl = "http://localhost:3001/resetPasswordUrl/"+userid+"/"+code;
+            let resetPasswordUrl = "http://3.24.74.142/host/resetPasswordUrl/"+userid+"/"+code;
             let result = await axios.post("/api/host/searchPwd",null,{params:{userid, email ,resetPasswordUrl}});
             setMessage(result.data);
             document.querySelector(".messageani").classList.add("on");

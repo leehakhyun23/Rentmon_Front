@@ -72,7 +72,7 @@ function Post_basicInfo() {
 
         setImgsrc(prevImgsrc => {
             let newImgsrc = [...prevImgsrc];
-            newImgsrc[index] = `http://localhost:8070/space_images/${realname}`;
+            newImgsrc[index] = `http://3.24.74.142/host/space_images/${realname}`;
             return newImgsrc;
         });
 

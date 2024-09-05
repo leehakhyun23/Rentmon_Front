@@ -28,7 +28,7 @@ function SpaceCorrection() {
             <div>
                 {imageName && (
                     <img 
-                        src={`http://localhost:8070/space_images/${imageName}`} 
+                        src={`http://3.24.74.142:8070/space_images/${imageName}`} 
                         alt={title} 
                         className="space-image" 
                     />
