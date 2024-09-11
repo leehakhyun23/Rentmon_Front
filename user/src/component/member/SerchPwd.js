@@ -31,7 +31,7 @@ function SerchPwd() {
         try{
             let code=getRandomNumbersString(6,1,100);
             setAuthoCookie("resetPwd",code,5);
-            let resetPasswordUrl = "http://localhost:3000/resetPasswordUrl/"+userid+"/"+code;
+            let resetPasswordUrl = "https://magracarta.pe.kr/user/resetPasswordUrl/"+userid+"/"+code;
             let result = await axios.post("/api/main/searchPwd",null,{params:{userid, email ,resetPasswordUrl}});
             setMessage(result.data);
             document.querySelector(".messageani").classList.add("on");

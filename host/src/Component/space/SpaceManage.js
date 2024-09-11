@@ -78,7 +78,7 @@ function SpaceManage() {
         <div>
             <div className='rheader'>
                 <div className='logo3'>내 장소 관리</div>
-                <div className='left'><Submenu /></div>
+                {/* <div className='left'><Submenu /></div> */}
             </div>
             <div className='register-button-container'>
                 <button className='register-button' onClick={() => navigate('/Post_cate')}>장소 등록</button>
@@ -89,7 +89,7 @@ function SpaceManage() {
                     <ul className="space-list">
                         {spaces.map(space => {
                             const firstImage = space.spaceimage[0]?.realName; // 첫 번째 이미지의 realName
-                            const imageUrl = firstImage ? `http://localhost:8070/space_images/${firstImage}` : ''; // 이미지 URL 설정
+                            const imageUrl = firstImage ? `https://final-kimminju.s3.ap-northeast-2.amazonaws.com/space_images/${firstImage}` : ''; // 이미지 URL 설정
                             
                             return (
                                 <li key={space.sseq} className="space-item">

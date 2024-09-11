@@ -30,18 +30,21 @@ const FloatingActionButton = () => {
     setNotificationCount(totalUnreadCount);
   };
 
-  useEffect(() => {
+  const refresChatRoomList = () => {
     axios.get('/api/admin/chatlist')
-      .then((res) => {
-        setChatRoomList(res.data);
-        refreshNotificationCount();
-      })
-      .catch((err) => {
-        console.error(err);
-      });
+    .then((res) => {
+      setChatRoomList(res.data);
+    })
+    .catch((err) => {
+      console.error(err);
+    });
+  }
+
+  useEffect(() => {
+    refresChatRoomList();
 
     const client = new Client({
-      brokerURL: 'http://52.78.197.165:8070/ws',
+      brokerURL: 'https://magracarta.pe.kr/ws',
       connectHeaders: {
         login: 'guest',
         passcode: 'guest',
@@ -63,6 +66,8 @@ const FloatingActionButton = () => {
                   unreadCount: isCurrentChatRoomOpen ? room.unreadCount : room.unreadCount + 1
                 };
               }
+              refresChatRoomList();
+              refreshNotificationCount();
               return room;
             });
           });
@@ -75,7 +80,7 @@ const FloatingActionButton = () => {
       onStompError: (frame) => {
         console.error('STOMP error:', frame);
       },
-      webSocketFactory: () => new SockJS('http://52.78.197.165:8070/ws'),
+      webSocketFactory: () => new SockJS('https://magracarta.pe.kr/ws'),
     });
 
     client.activate();

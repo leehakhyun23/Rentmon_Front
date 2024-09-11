@@ -101,7 +101,7 @@
 
 @media screen and (max-width: 1000px) {
 
-    .searchPopup-container { top: 62px; }
+    .searchPopup-container { top: 60px; }
     .searchPopup-container .bottom { margin-top: 30px; display: block; }
     .searchPopup-container .bottom > div { width: 100%; padding: 0; }
     .searchPopup-container .bottom .recent-search { margin-bottom: 46px; }

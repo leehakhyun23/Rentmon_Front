@@ -51,7 +51,7 @@ function Col_facility() {
     <div>
           <div className='rheader'>
                 <div className='logo3'>시설 선택</div>
-                <div className='left'><Submenu /></div>
+                {/* <div className='left'><Submenu /></div> */}
             </div>
       <div className="facility-container">
         {[

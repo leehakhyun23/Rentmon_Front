@@ -16,13 +16,14 @@
 
 @media (max-width: 756px){ 
     
-    
+    .recommnadConatiner { margin: 0 -20px;  }
+    .recommnadConatiner > div { padding: 0 20px;  }
     .main .mainSlide { margin: -80px -15px 0; border-radius: 0; overflow: hidden; }
     .main .mainSlide img { width: 100%; height: 130px; object-fit: cover; }
     
     .main .mainSlide .swiper-button-prev, .main .mainSlide .swiper-button-next { display: none; }
 
-    .recommandSection { padding: 60px 0 80px; }
+    .recommandSection { padding: 60px 0 80px;  }
     .recommandSection .recommna { text-align: left; }
     .recommandSection .recommna > p {margin-bottom: 40px; margin-top: 10px; }
 

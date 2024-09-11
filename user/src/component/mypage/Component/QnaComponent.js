@@ -8,7 +8,7 @@ function QnaComponent({num,elem ,setIsOpen,setPopup}) {
     }}>
         <div className='num'>{num}</div>
         <div className='title'>{elem.title}</div>
-        <div className='lastDate'>{elem.lastDate}</div>
+        {/* <div className='lastDate'>{elem.lastDate}</div> */}
         <div className='reply'>{(elem.reply)?("답변완료"):("미답변")}</div>
     </div>
   )

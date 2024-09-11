@@ -7,6 +7,7 @@ import { RiDeleteBack2Line } from "react-icons/ri";
 
 import SapcePaging from './SapcePaging';
 import InqueryModal from './InqueryModal';
+import axios from 'axios';
 
 
 function InquiryList({sseq , inquiryopen , setInquiryopen}) {
@@ -22,7 +23,7 @@ function InquiryList({sseq , inquiryopen , setInquiryopen}) {
 
     let getList=async()=>{
         try{
-            let result = await jaxios.get("/api/inquery/getInqueryListToHost/"+sseq,{params:{page:currentPage}});
+            let result = await axios.get("/api/inquery/getInqueryListToHost/"+sseq,{params:{page:currentPage}});
             console.log(result.data);
             setList(result.data.list);
             setPage(result.data.paging);
@@ -48,7 +49,7 @@ function InquiryList({sseq , inquiryopen , setInquiryopen}) {
                         <div className='row' key={key}>
                            <div className='userWrap'>
                                 <div className='userinfo'>
-                                    <div className='userimg'><img src={`${(elem.user.profileimg)?"http://localhost:8070/profile_images/"+elem.user.profileimg:"/img/no_profileimg.png"}`} /></div>
+                                    <div className='userimg'><img src={`${(elem.user.profileimg)?"https://final-kimminju.s3.ap-northeast-2.amazonaws.com/profile_images/"+elem.user.profileimg:"/img/no_profileimg.png"}`} /></div>
                                 </div>
                                 <div className='right'>
                                     <div className='username'>{elem.user.userid}</div>
@@ -84,7 +85,7 @@ function InquiryList({sseq , inquiryopen , setInquiryopen}) {
             </div>
 
             <div className='paganation'>
-                <SapcePaging  page={page} SapcePaging={SapcePaging} />
+                <SapcePaging  page={page} SapcePaging={setCurrentPage} />
             </div>
 
             <InqueryModal inquiryopen={inquiryopen} setInquiryopen= {setInquiryopen} getList={getList} />

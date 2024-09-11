@@ -55,7 +55,7 @@ function Col_useInfo() {
     <div>
       <div className='rheader'>
             <div className='logo3'>이용 안내 수정</div>
-            <div className='left'><Submenu /></div>
+            {/* <div className='left'><Submenu /></div> */}
              </div>
       <div className='time-container'>
         <span className='time-label'>이용 시간</span>

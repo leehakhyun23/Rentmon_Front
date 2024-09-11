@@ -101,6 +101,12 @@
 @media (max-width: 700px){
 .updateForm .right .myinfo > div .userinfo > div p { padding:0 15px 0; }
 .updateForm .right .myinfo > div .userinfo > div span { padding:5px 15px 0; }
+
+.updateForm .right .myinfo > div input { width: 70%; }
+.updateForm .right .myinfo > div .updateButtonwrap { width: auto; }
+
+.profileImage .imgContainer .img_input { flex-direction: column;}
+.profileImage .imgContainer .buttonContainer { margin-left: 0; margin-top: 20px; }
 }
 
 /* 팝업카드키 */

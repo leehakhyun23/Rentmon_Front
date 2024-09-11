@@ -25,13 +25,18 @@ import LogoutButton from "./Component/member/LogoutButton";
 import Report from "./Component/space/Report";
 import SerchPwd from "./Component/member/SerchPwd";
 import ResetPasswordUrl from "./Component/member/ResetPasswordUrl";
+import Header from "./Component/HeaderFooter/Header";
+import Footer from "./Component/HeaderFooter/Footer";
+
 
 
 function App() {
   return (
-      
+    <>
+    <Header/>
       <Routes>
-        <Route index element={<Main />} />
+        <Route path="/" index element={<Main />} />
+        <Route path="/main" index element={<Main />} />
         <Route path="Post_cate" element={<Post_cate />} />
         <Route path="Post_basicInfo" element={<Post_basicInfo />} />
         <Route path="Post_facility" element={<Post_facility />} />
@@ -56,8 +61,9 @@ function App() {
         <Route path="Col_facility" element={<Col_facility />} />
         <Route path="Col_useInfo" element={<Col_useInfo />} />
         
-
       </Routes>
+        <Footer />
+      </>
   );
 }
 

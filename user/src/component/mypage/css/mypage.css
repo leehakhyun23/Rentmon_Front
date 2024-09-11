@@ -36,7 +36,7 @@
     .infoDashBoard .container .left  p { margin-top: 9px; }
 
     .infoDashBoard .container .right { width: auto; margin: 40px -15px 0; overflow: auto; justify-content: flex-start; padding-bottom: 5px;  }
-    .infoDashBoard .container .right .mypagemenu { min-width: 450px; width: 450px; padding: 0 15px; }
+    .infoDashBoard .container .right .mypagemenu { min-width: 570px; width: 570px; padding: 0 15px; }
     .infoDashBoard .container .right .mypagemenu .icon { width: 25%; padding: 0 13px; }
     .infoDashBoard .container .right .mypagemenu .icon a img { width: 90%; }
     .infoDashBoard .container .right .mypagemenu .icon::before { display: none; }
@@ -137,7 +137,7 @@
     .recentreservation .react-calendar .react-calendar__navigation .react-calendar__navigation__arrow.react-calendar__navigation__prev-button::after { display: none; }
     
 
-    .calendarContainer  .react-calendar__viewContainer { width: 100%; overflow: auto; margin: 0 -20px; padding: 0 20px; padding-bottom: 30px; }
+    .calendarContainer  .react-calendar__viewContainer { overflow: auto; margin: 0 -15px; padding: 0 20px; padding-bottom: 30px; }
     .calendarContainer  .react-calendar__month-view { width: 600px; }
     .calendarContainer .react-calendar__month-view__days__day{ height: 111px; padding: 8px; }
     .calendarContainer .react-calendar__month-view__days__day > div > div { font-size: 10px; }
@@ -198,6 +198,8 @@
 
 
 @media (max-width: 700px){
+    .mypageModal img {  width: 100%; }
+    .mypageModal .modal-content { padding: 30px 20px; }
 .reservationList .content { margin-top: 0; }
 .ReactModal__Overlay .ReactModal__Content { width: 80%;  }
 .mypageModal {  }
@@ -368,10 +370,10 @@
 .zzimContainer h2 { text-align: center; font-size: 25px; font-weight: 600; }
 
 .zzimList { display: flex; flex-wrap: wrap; gap: 30px; margin-top: 60px; }
-.zzimList .zzimcomp { width: calc(33.3333% - 30px); border: 1px solid #D8D8D8; border-radius: 9px; transform: translate(0 , 0px); transition: all .3s;}
+.zzimList .zzimcomp { width: calc(33.3333% - 30px); border: 1px solid #D8D8D8; border-radius: 9px; transform: translate(0 , 0px); transition: all .3s; overflow: hidden; }
 .zzimList .zzimcomp:hover { transform: translate(0 , -20px); }
 .zzimList .zzimcomp .imgcontainer {  }
-.zzimList .zzimcomp .imgcontainer img { width: 100%; }
+.zzimList .zzimcomp .imgcontainer img { width: 110%; height: 280px; object-fit: cover; }
 .zzimList .zzimcomp .content { padding: 15px; }
 .zzimList .zzimcomp .content .title { margin-bottom: 5px; display: flex; justify-content: space-between; align-items: center;}
 .zzimList .zzimcomp .content .title span { font-size: 15px; font-weight: 600; }
@@ -385,6 +387,7 @@
 @media (max-width: 700px){
     .zzimList { display: block; gap: 0px; margin-top: 40px; }
     .zzimList .zzimcomp { width: 100%; margin-bottom: 35px; }
+    .zzimList .zzimcomp .imgcontainer img {  height: 300px; }
 }
 
 
@@ -395,10 +398,10 @@
 .qna .qnaList .row { padding: 20px 30px; border-bottom: 1px solid #F1F1F1; }
 .qna .qnaList .row.title { background: #F1F1F1; }
 .qna .qnaList .row > div { display: flex; width: 100%; align-items: center;}
-.qna .qnaList .row  .num { width: 10%;  }
-.qna .qnaList .row  .title { width: 50%; }
-.qna .qnaList .row  .lastDate {width: 25%; text-align: center;  }
-.qna .qnaList .row  .reply { width: 15%; text-align: center; color: #8D8D8D; }
+.qna .qnaList .row .num { width: 10%;  }
+.qna .qnaList .row .title { width: 50%; }
+.qna .qnaList .row .lastDate {width: 25%; text-align: center;  }
+.qna .qnaList .row .reply { width: 15%; text-align: center; color: #8D8D8D; }
 .qna .qnaList .row.title div { color: #8D8D8D; }
 
 @media (max-width: 700px){
@@ -406,10 +409,10 @@
 .qna { margin-top: 0px; }
 .qna .qnaList { margin-top: 30px;  }
 .qna .qnaList .row { padding: 15px 15px; }
-.qna .qnaList .row  .num { width: 9%;  }
-.qna .qnaList .row  .title { width: 30%; }
-.qna .qnaList .row  .lastDate {width: 40%;   }
-.qna .qnaList .row  .useyn { width: 20%; }
+.qna .qnaList .row .num { width: 9%;  }
+.qna .qnaList .row .title { width: 60%; }
+/* .qna .qnaList .row .lastDate {width: 40%;   } */
+.qna .qnaList .row .reply { width: 30%; }
 }
 
 
@@ -434,6 +437,8 @@
 .modal .spaceInfo .spaceName span { font-size: 15px; color: #999;   }
 .modal .spaceInfo a { margin: 20px -20px 0 ; display: block; background: #0090DF; color: #fff; text-align: center; padding: 20px 0; }
 .modal .spaceInfo a svg { margin-left: 10px; }
+
+.qnamodal .spaceInfo { flex-direction: column;}
 
 
 

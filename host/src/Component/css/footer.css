@@ -1,0 +1,39 @@
+/* 푸터 */
+.footer { background: #EBEBEB; padding: 60px 0; margin-top: 50px; }
+.footer .innerContainer { display: flex; justify-content: space-between; padding-top: 0; padding-bottom: 0; }
+.footer .innerContainer .left { margin-left: 0; display: block; }
+.footer .innerContainer .left .logo { cursor: pointer; }
+.footer .innerContainer .left .logo h2 { font-size: 30px; font-weight: bold; }
+.footer .innerContainer .left .text { font-size: 14px; margin-top: 8px; }
+
+.footer .innerContainer .right {  }
+.footer .innerContainer .right .footer-nav {  }
+.footer .innerContainer .right .footer-nav ul { display: flex; }
+.footer .innerContainer .right .footer-nav ul li { padding:0 25px; position: relative; }
+
+.footer .innerContainer .right .footer-nav ul li:nth-child(2)::before ,
+.footer .innerContainer .right .footer-nav ul li:nth-child(2)::after {  content: ""; display: block; width: 1px; height: 8px; position: absolute; left: 0; top: 50%; transform: translate(0 , -25%); background: #858585; opacity: 0.5;}
+.footer .innerContainer .right .footer-nav ul li:nth-child(2)::before { left: auto; right: 0;}
+.footer .innerContainer .right .footer-nav ul li:last-child { padding-right: 0; }
+.footer .innerContainer .right .footer-nav ul li a { font-size: 13px; color: #000; }
+.footer .innerContainer .right p { text-align: right; margin-top: 60px; color: #626262; font-size: 13px; }
+
+@media screen and (max-width: 1000px) {
+
+    .header .innerContainer .logo h2 { font-size: 20px}
+    .header .innerContainer .logo {  position: absolute; left: 50%; top: 50%; transform: translate(-50% , -50%); }  
+
+
+    .footer .innerContainer { display: block; }
+    .footer .innerContainer .left .logo h2 { font-size: 20px; }
+
+    
+    .footer {  padding: 40px 0; }
+    .footer .innerContainer .right .footer-nav { margin-top: 30px; }
+    .footer .innerContainer .right .footer-nav ul { justify-content: center;}
+    .footer .innerContainer .right .footer-nav ul li:last-child { padding-right: 25px; }
+    .footer .innerContainer .right p { text-align: left; margin-top: 50px;}
+
+    .header .innerContainer .left > div .iconbutton { margin-right: 5px; }
+    .header .innerContainer .left > div .iconbutton > div .countbox { right: -8px; }
+}

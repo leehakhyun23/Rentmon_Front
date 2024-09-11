@@ -1,11 +1,11 @@
 .header {
     display: flex;
     align-items: center; /* 수직 정렬 (중앙 정렬) */
-    padding: 10px 30px; /* 필요에 따라 여백 추가 */
     background-color: #f8f8f8; /* 배경색 (원하는 색으로 변경) */
     border-bottom: 1px solid #ddd; /* 하단 경계선 (필요시 추가) */
     height: 50px;
 }
+.header .innerContainer { display: flex; justify-content: space-between; align-items: center; padding-top: 0; padding-bottom: 0; width: 100%; position: relative; }
 .header2{
     display: flex;
     justify-content: center; /* 수평 가운데 정렬 */
@@ -104,8 +104,9 @@
     display: flex;
     align-items: center; /* Center items vertically */
     gap: 10px; /* Space between items, adjust as needed */
-    width: 200px;
+    /* width: 200px; */
 }
+.header-content .loginbtn { width: auto; }
 
 .sidebar-info {
     white-space: nowrap; /* 텍스트가 줄 바꿈 없이 한 줄로 표시되도록 설정 */
@@ -120,3 +121,11 @@
 /* .logoutbtn {
     
 } */
+
+@media screen and (max-width: 1000px) {
+
+    .header .innerContainer .logo { display: none; }
+    
+    /* .header { height: auto; padding: 10px 0; } */
+/* .header .left { display: block; } */
+}

@@ -185,10 +185,10 @@ useEffect(() => {
   }
 
   return (
-    <article>
+    <article className='rsvm'>
       <div className='rheader'>
         <div className='logo3'>이용 후기 관리</div>
-        <div className='left'><Submenu /></div>
+        {/* <div className='left'><Submenu /></div> */}
       </div>
       <div className='rq'>
         <button

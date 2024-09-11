@@ -14,7 +14,7 @@ function SidebarMyInfo({username}) {
       <div className='profileImg'>
       </div>
       <div className='textbox'>
-        <div className='text'>안녕하세요. {username}님</div>
+        <div className='text'>{username}님</div>
       </div>
       </div>
   )

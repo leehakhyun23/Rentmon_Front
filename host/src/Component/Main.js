@@ -1,10 +1,8 @@
 import React from 'react'
-import Header from './HeaderFooter/Header';
 
 
 import { useNavigate } from 'react-router-dom';
 import './css/main.css'
-import Footer from './HeaderFooter/Footer';
 
 
 
@@ -14,24 +12,20 @@ function Main() {
 
   return (
     <div>
-      <Header/>
-
       <div className='detail'>
         공간대여
       </div>
-      <div className='field'>
+      <div className='field mainfirst'>
         <div>공간비지니스를 시작해보세요!</div>
         <div><button className='btn1' onClick={() => navigate('/Post_cate')}>공간 등록하기</button></div>
         <div>등록 가능 공간 | 촬영 · 스터디 · 공연 · 운동 · 캠핑시설까지</div>
       </div>
 
-      <div className='field'>
+      <div className='field mainsecond'>
         <button className='btn2' onClick={()=>{navigate('/Join')}}>
           공간 호스트 시작하기
         </button>
       </div>
-      
-    <Footer />
     </div>
   
   )

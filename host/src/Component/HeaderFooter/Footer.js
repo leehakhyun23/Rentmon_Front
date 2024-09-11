@@ -14,9 +14,9 @@ function Footer() {
       <div className='right'>
           <div className='footer-nav'>
               <ul>
-                  <li><Link to="">공간관리</Link></li>
-                  <li><Link to="">예약리스트</Link></li>
-                  <li><Link to="">마이페이지</Link></li>
+                  <li><Link to="/ReservationManage">예약/캘린더</Link></li>
+                  <li><Link to="/SpaceManage">공간관리</Link></li>
+                  <li><Link to="/ReviewManage">후기/Q&A</Link></li>
               </ul>
           </div>
           <p>Copyright 1조 All Rights Reserved.</p>

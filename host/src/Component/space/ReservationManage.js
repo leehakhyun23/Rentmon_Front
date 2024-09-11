@@ -96,10 +96,10 @@ function ReservationManage() {
     const sortedReservations = sortReservations(filteredReservations);
 
     return (
-        <div>
+        <div className='rsvm'>
             <div className='rheader'>
             <div className='logo3'>예약 리스트 관리</div>
-            <div className='left'><Submenu /></div>
+            {/* <div className='left'><Submenu /></div> */}
       </div>
             <div>
                 <br />
@@ -158,7 +158,7 @@ function ReservationManage() {
                         </tbody>
                     </table>
                 ) : (
-                    <div>검색 결과가 없습니다.</div>
+                    <div className='noresearch'>검색 결과가 없습니다.</div>
                 )}
             </div>
         </div>

@@ -1,12 +1,15 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react'
+import { useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
+import { SearchOnAction } from '../../../store/SearchSlice';
 import SpaceBoxComponent from './SpaceBoxComponent';
 
 function CategorySpace() {
     const [category, setCategory] = useState([]);
     const [list, setList] = useState([]);
     const [cnum , setCnum] = useState(0);
+    const dispatch = useDispatch();
     useEffect(()=>{
         getCategoryarr();
     },[]);
@@ -44,7 +47,7 @@ function CategorySpace() {
                 <SpaceBoxComponent  key={key} record={elem} />
             ))))}
         </div>
-        <div className='moreSpace'><Link to={"/spaceList"}>공간 더보기</Link></div>
+        <div className='moreSpace' onClick={()=>{ dispatch(SearchOnAction({searchWord : ""}));}}><Link to={"/spaceList"}>공간 더보기</Link></div>
     </div>
   )
 }

@@ -27,6 +27,8 @@ function App() {
       <Route path='/login' element={<Login />} />
       <Route path='/serchPwd' element={<SerchPwd />} />
       <Route path='/resetPasswordUrl/:userid/:code' element={<ResetPasswordUrl />} />
+      <Route element={<Main/>} />
+      <Route path='/main' element={<Main/>} />
       <Route path='/' element={<Main/>} />
       <Route path='/spaceList' element={<SpaceList />} />
       <Route path='/spaceDetail/:sseq' element={<SpaceDetail />} />

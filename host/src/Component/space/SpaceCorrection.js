@@ -23,12 +23,12 @@ function SpaceCorrection() {
         <div className="container">
               <div className='rheader'>
                 <div className='logo3'>공간 수정</div>
-                <div className='left'><Submenu /></div>
+                {/* <div className='left'><Submenu /></div> */}
             </div>
             <div>
                 {imageName && (
                     <img 
-                        src={`http://localhost:8070/space_images/${imageName}`} 
+                        src={`https://final-kimminju.s3.ap-northeast-2.amazonaws.com/space_images/${imageName}`} 
                         alt={title} 
                         className="space-image" 
                     />

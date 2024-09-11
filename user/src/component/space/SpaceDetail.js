@@ -262,7 +262,7 @@ function SpaceDetail() {
                 <div className="FacilityContainer" key={facil.facility.fnum}>
                   <div className="Facility">
                     <img
-                      src={`http://localhost:8070/icon_images/${facil.facility.icon}`}
+                      src={`https://final-kimminju.s3.ap-northeast-2.amazonaws.com/icon_images/${facil.facility.icon}`}
                       alt={`${facil.facility.name} 아이콘`}
                       // style={{ width: "100px", height: "100px" }}
                     />

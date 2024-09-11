@@ -13,10 +13,6 @@ function Getsnshostinfo() {
 
     useEffect(()=>{ snsLogin();},[]);
 
-    // const API_KEY = 'aded7a236492c4b574347a7dc6f3a1db';
-    // const city = "Seoul";
-    // let url = `https://api.openweathermap.org/data/2.5/forecast?q=${city}&appid=${API_KEY}&units=metric&lang=kr`;
-
     let snsLogin=async()=>{
         let usernameWithRole =hostid+":host";
         let result = await axios.post("/api/member/login",null,{params:{usernameWithRole,password:provider}});

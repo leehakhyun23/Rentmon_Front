@@ -112,7 +112,7 @@ function Update() {
         <article>
         <div className='rheader'>
         <div className='logo3'>정보 수정</div>
-        <div className='left'><Submenu /></div>
+        {/* <div className='left'><Submenu /></div> */}
       </div>
             <div className='updateform'>
                 <div className="box">

@@ -39,7 +39,7 @@ function Qna() {
                     <div>
                     <div className='num'>no.</div>
                     <div className='title'>제목</div>
-                    <div className='lastDate'>질문 날짜</div>
+                    {/* <div className='lastDate'>질문 날짜</div> */}
                     <div className='reply'>답변유무</div>
                     </div>
                 </div>

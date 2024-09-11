@@ -7,6 +7,7 @@ import ReactStars from 'react-rating-stars-component';
 
 import SapcePaging from './SapcePaging';
 import ReviewModal from './ReviewModal';
+import axios from 'axios';
 
 
 
@@ -23,7 +24,7 @@ function ReviewList({ sseq, reviewopen, setReviewopen }) {
 
     let getList = async () => {
         try {
-            let result = await jaxios.get(`/api/review/GetReviewList/${sseq}`, { params: { page: currentPage } })
+            let result = await axios.get(`/api/review/GetReviewList/${sseq}`, { params: { page: currentPage } })
             console.log(result.data);
             setList(result.data.list);
             setPage(result.data.paging);
@@ -72,7 +73,7 @@ function ReviewList({ sseq, reviewopen, setReviewopen }) {
                                                     <img
                                                         src={`https://final-kimminju.s3.ap-northeast-2.amazonaws.com/review_images/${img.realname}`}
                                                         alt={`리뷰 이미지 ${idx}`}
-                                                        style={{ width: '300px', height: '300px', objectFit: 'cover', marginRight: '10px', float: 'left' }}
+                                                        style={{ width: '150px', height: '150px', objectFit: 'cover', marginRight: '10px', float: 'left' }}
                                                     />
                                                 </div>
                                             ))
@@ -108,7 +109,7 @@ function ReviewList({ sseq, reviewopen, setReviewopen }) {
             </div>
 
             <div className='paganation'>
-                <SapcePaging page={page} SapcePaging={SapcePaging} />
+                <SapcePaging page={page} SapcePaging={setCurrentPage} />
             </div>
 
             <ReviewModal reviewopen={reviewopen} setReviewopen={setReviewopen} getList={getList} />

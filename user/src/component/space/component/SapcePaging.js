@@ -12,15 +12,15 @@ function SapcePaging({page ,SapcePaging}) {
     },[page])
   return (
       <div className="pagenation-container">
-		{(page.prev == true) &&(<Link className="prevBtn" onClick={()=>{SapcePaging(page.firstnum-1)}}><img src='/img/pageArrow.svg'/></Link>) }
+		{(page.prev == true) &&(<div className="prevBtn cursor" onClick={()=>{SapcePaging(page.firstnum-1)}}><img src='/img/pageArrow.svg'/></div>) }
 		<div className="pagenation-wrapper">
            {   pagerow.map((elem, key)=>{
                     if(page.currentPage === elem) return <span  key={"page"+key}>{elem}</span>
-                    return  <div  key={"page"+key}><Link onClick={()=>{SapcePaging(elem)}} >{elem}</Link></div>
+                    return  <div  key={"page"+key}><div className='cursor' onClick={()=>{SapcePaging(elem)}} >{elem}</div></div>
                })
             }
 		</div>
-		{(page.next == true) &&(<Link  className="nextBtn"  onClick={()=>{SapcePaging(page.lastnum+1)}} ><img src='/img/pageArrow.svg'/></Link>)}
+		{(page.next == true) &&(<div  className="nextBtn cursor"  onClick={()=>{SapcePaging(page.lastnum+1)}} ><img src='/img/pageArrow.svg'/></div>)}
 		
 	</div>
   )

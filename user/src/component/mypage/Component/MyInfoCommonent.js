@@ -28,6 +28,19 @@ function MyInfoCommonent({name, content, setFunction , userdata}) {
       }
     }
     
+    if(userdata.dname==="email"){
+      const regex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+      if(data && regex.test(data)){
+        setMessage("");
+        setIstrue(true);
+      }else if(data){
+        setMessage("* 이메일 형식에 맞게 작성 해주세요.");
+        setIstrue(false);
+      }else{
+        setMessage("");
+      }
+    }
+
     if(userdata.dname ==='password'){
       const regex = /^(?=.*[A-Za-z])(?=.*\d|.*[^A-Za-z0-9])[A-Za-z\d!@#$%^&*(),.?":{}|<>]{8,30}$|^(?=.*\d)(?=.*[A-Za-z]|.*[^A-Za-z0-9])[A-Za-z\d!@#$%^&*(),.?":{}|<>]{8,30}$|^(?=.*[^A-Za-z0-9])(?=.*[A-Za-z]|.*\d)[A-Za-z\d!@#$%^&*(),.?":{}|<>]{8,30}$/;
       if(data && regex.test(data)){

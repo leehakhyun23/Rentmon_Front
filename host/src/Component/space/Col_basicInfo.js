@@ -114,7 +114,7 @@ function Col_basicInfo() {
         <div className='container'>
                 <div className='rheader'>
                 <div className='logo3'>기본 정보 수정</div>
-                <div className='left'><Submenu /></div>
+                {/* <div className='left'><Submenu /></div> */}
             </div>
             <div className='field2'>
                 <input className='binput' type="text" value={title} onChange={(e) => setTitle(e.currentTarget.value)} placeholder='공간명'/>

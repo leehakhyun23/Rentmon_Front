@@ -4,11 +4,11 @@ import SockJS from 'sockjs-client';
 import axios from 'axios';
 import './css/chatroom.css'
 
-const ChatRoom = ({ user, closeChatRoom }) => {
+const ChatRoom = ({ user, closeChatRoom, stompClient, crseq }) => {
     const [message, setMessage] = useState('');
     const [messages, setMessages] = useState([]);
-    const [stompClient, setStompClient] = useState(null);
-    const [crseq, setCrseq] = useState(null);
+    // const [stompClient, setStompClient] = useState(null);
+    // const [crseq, setCrseq] = useState(null);
     const messagesEndRef = useRef(null);
 
     useEffect(() => {
@@ -22,40 +22,29 @@ const ChatRoom = ({ user, closeChatRoom }) => {
     };
 
     useEffect(() => {
-        axios.get(`/api/chat/chatroom/${user.userid}`)
-        .then((res) => {
-            if (res.status === 200) {
-                setMessages(res.data);
-                if (res.data.length > 0) {
-                    setCrseq(res.data[0].chatroom.crseq);
-                }
-            }
-        })
-        .catch(err => console.error(err));
+        if (crseq) {
+            axios.get(`/api/chat/chatroom/${user.userid}`)
+                .then((res) => {
+                    if (res.status === 200) {
+                        setMessages(res.data);
+                    }
+                })
+                .catch(err => console.error(err));
+        }
+    }, [user.userid, crseq]);
 
-        const client = new Client({
-            brokerURL: 'http://52.78.197.165:8070/ws',
-            connectHeaders: {
-                login: 'guest',
-                passcode: 'guest',
-            },
-            onConnect: () => {
-                client.subscribe(`/topic/chatroom/${crseq}`, (message) => {
-                    const newMessage = JSON.parse(message.body);
-                    setMessages((prevMessages) => [...prevMessages, newMessage]);
-                });
-            },
-            onStompError: (frame) => {
-                console.error('STOMP error:', frame);
-            },
-            webSocketFactory: () => new SockJS('http://52.78.197.165:8070/ws'),
-        });
+    useEffect(() => {
+        if (stompClient && crseq) {
+            const subscription = stompClient.subscribe(`/topic/chatroom/${crseq}`, (message) => {
+                const newMessage = JSON.parse(message.body);
+                setMessages((prevMessages) => [...prevMessages, newMessage]);
+            });
 
-        setStompClient(client);
-        client.activate();
-
-        return () => client.deactivate();
-    }, [crseq, user.userid]);
+            return () => {
+                if (subscription) subscription.unsubscribe();
+            };
+        }
+    }, [stompClient, crseq]);
 
     const handleSendMessage = () => {
         if (message.trim() === '' || !crseq || !stompClient || !stompClient.connected) return;

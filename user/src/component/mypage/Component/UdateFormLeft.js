@@ -74,7 +74,7 @@ function UdateFormLeft({user,updateUser}) {
         </div>
         <div className='leftInfo'>
             <button onClick={()=>{setIsopen(true)}}>프로필 사진 변경</button>
-            <p>rmfoal1996@naver.com</p>
+            <p>{user.email}</p>
         </div>
        <Modal  isOpen={isopen} onRequestClose={()=>{setIsopen(false); closepu()}}> 
         <div className='profileImage'>

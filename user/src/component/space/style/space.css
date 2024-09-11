@@ -201,7 +201,7 @@
   }
 
   .spaces > div {
-    flex: 1 1 100%; /* 한 줄에 하나씩 표시 */
+    /* flex: 1 1 100%;  */
     margin-bottom : 30px;
   }
 }
@@ -217,10 +217,10 @@
 
 
 .spaces > div {
-  flex: 1 1 calc(33.333% - 20px);
+  width:calc(33.333% - 20px);
   box-sizing: border-box;
   border: 1px solid #ddd;
-  background-color: #f9f9f9;
+  /* background-color: #f9f9f9; */
 } 
 }
 
@@ -432,7 +432,9 @@
 
 .review-image-upload-section {
   margin-top: 16px;
+  margin: 20px;
 }
+.cursor { cursor: pointer; }
 
 .review-mage-container {
   display: flex;
@@ -482,6 +484,17 @@
 .reservationContainer .spaceInfo .spaceImageContainer { max-height: 300px; min-height: 150px; }
 
 @media (max-width: 1000px) {
+
+  /* 버튼 */
+.spaceButton {
+  flex-wrap: wrap;
+}
+
+.spaceButton button {
+  flex: none;
+  width: calc(33.333% - 12px);
+  margin: 5px 6px;
+}
 .spaceDetail { padding-top: 100px !important; }
   .spaceInfo { display: block; }
   .spaceInfo > div { width: 100% !important; }

@@ -13,7 +13,7 @@ const RoutesAndMenu = [
   {
     id: "dashboard",
     title: "DashBoard",
-    url: "/dashboard",
+    url: "/",
     icon: IconHome,
     element: <DashBoard />,
   },

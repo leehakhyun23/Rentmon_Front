@@ -31,7 +31,6 @@ function Searchpopup({searchshow, setSearchPopup ,searchWord ,setSearchWord}) {
         if( searchWord == ''){
             dispatch(SearchOutAction());
         }
-        console.log(recentSearchList);
     }
 
     let enterSpaceList = (e)=>{

@@ -16,6 +16,7 @@ function MyInfoUpdate({user ,updateUser}) {
             <div className='userinfo'>
               <MyInfoCommonent name={"이름"} content={user.name} setFunction={setFunction} userdata={{url:"/api/user/updatename", dname:"name"}}/>
               <MyInfoCommonent name={"전화번호"} content={user.phone} setFunction={setFunction} userdata={{url:"/api/user/updatephone", dname:"phone"}}/>
+              <MyInfoCommonent name={"이메일"} content={user.email} setFunction={setFunction} userdata={{url:"/api/user/updateemail", dname:"email"}}/>
               {(!user.snsid)&&( <MyInfoCommonent name={"비밀번호"} content={"*******"} setFunction={setFunction}  userdata={{url:"/api/user/updatepwd", dname:"password"}}/>)}
              
             </div>

@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { useSelector, useDispatch } from "react-redux";
-import jaxios from "../../util/jwtUtil";
 
 import "./style/space.css";
 
@@ -37,6 +36,11 @@ function SpaceList() {
   useEffect(() => {
     getCategoryarr();
   }, []);
+  useEffect(() => {
+    setSpaceList([]);
+    loadMoreSpaces();
+    setPage(0);
+  }, [search]);
 
   // 무한스크롤
   useEffect(() => {
@@ -73,7 +77,7 @@ function SpaceList() {
 
   let getCategoryarr = async () => {
     try {
-      let result = await jaxios.get("/api/user/getCategoryList");
+      let result = await axios.get("/api/user/getCategoryList");
       setCategory(result.data);
     } catch (err) {
       console.error(err);
@@ -131,7 +135,7 @@ function SpaceList() {
         sortOption: sortOption,
       };
 
-      const result = await jaxios.get(`/api/space/getSpaceList`, { params });
+      const result = await axios.get(`/api/space/getSpaceList`, { params });
       console.log(result);
 
       setSpaceList((prevSpaces) => [...prevSpaces, ...result.data]);
